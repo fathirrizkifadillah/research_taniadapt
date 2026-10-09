@@ -1,0 +1,5 @@
+titik,sel_lat,sel_lon,hujan_mm,hari>=1mm,hari>=50mm,tmax,tmean,tmin,urutan_ok_%
+Tasikmalaya,-7.3,108.2,4737,327,12,26.8,23.2,20.6,100.0
+Bandung,-6.9,107.6,3979,291,4,26.5,22.2,18.8,100.0
+Karawang,-6.3,107.3,2295,280,2,31.1,26.9,23.9,100.0
+Pangandaran,-7.7,108.7,3868,330,8,27.6,26.6,25.4,100.0
