@@ -110,8 +110,9 @@ research_taniAdapt/
 │   │   └── download_log.txt                 # Log proses akuisisi
 │   └── dataset_audit/
 │       ├── dataset_audit_summary.csv        # Tabel ringkasan 12 dimensi audit
+│       ├── cross_dataset_linking_matrix.csv # Matriks kelayakan linking spasial-temporal
 │       ├── dataset_audit_dashboard.xlsx     # Workbook Excel konsolidasi multi-sheet
-│       ├── audit_artifact_manifest.csv      # Manifest 27 artifak hasil audit
+│       ├── audit_artifact_manifest.csv      # Manifest artifak hasil audit terverifikasi
 │       ├── index.html                       # Dashboard visual laporan audit statis
 │       ├── 01_audit_agera5.md               # Laporan audit mendalam AgERA5
 │       ├── 02_audit_bangladesh_rice_panel.md# Laporan audit mendalam Bangladesh Rice
@@ -119,6 +120,7 @@ research_taniAdapt/
 │       ├── 04_audit_indonesia_agroclimatic.md
 │       ├── 05_audit_subang_maize_productivity.md
 │       ├── 06_audit_west_java_horticulture_productivity.md
+│       ├── 07_audit_cross_dataset_linking_feasibility.md # Sintesis kelayakan linking data
 │       └── figures/                         # Visualisasi diagnostik audit (PNG)
 │           ├── ds01_agera5_plausibility.png
 │           ├── ds02_rice_panel_missingness.png

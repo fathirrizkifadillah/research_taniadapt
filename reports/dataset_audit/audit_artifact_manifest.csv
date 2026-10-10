@@ -26,3 +26,5 @@ notebooks/dataset_workflows/DS03_west_java_rice_productivity_discovery_acquisiti
 notebooks/dataset_workflows/DS04_indonesia_agroclimatic_discovery_acquisition_audit.ipynb,DS04,IPYNB,Workflow notebook for Indonesia Agroclimatic Dataset,GENERATED,VERIFIED
 notebooks/dataset_workflows/DS05_subang_maize_productivity_discovery_acquisition_audit.ipynb,DS05,IPYNB,Workflow notebook for Subang Maize Productivity,GENERATED,VERIFIED
 notebooks/dataset_workflows/DS06_west_java_horticulture_discovery_acquisition_audit.ipynb,DS06,IPYNB,Workflow notebook for West Java Horticulture SBS,GENERATED,VERIFIED
+reports/dataset_audit/cross_dataset_linking_matrix.csv,ALL,CSV,Machine-readable cross-dataset spatial-temporal linking matrix,GENERATED,VERIFIED
+reports/dataset_audit/07_audit_cross_dataset_linking_feasibility.md,ALL,MD,Comprehensive cross-dataset linking feasibility audit report,GENERATED,VERIFIED
