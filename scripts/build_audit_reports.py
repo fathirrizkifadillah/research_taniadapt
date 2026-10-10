@@ -269,12 +269,12 @@ artifacts = [
     ("reports/dataset_audit/06_audit_west_java_horticulture_productivity.md", "DS06", "MD", "Detailed quality audit report for West Java Horticulture SBS", "GENERATED", "VERIFIED"),
     
     # Audit figures (PNG)
-    ("reports/dataset_audit/figures/ds01_agera5_plausibility.png", "DS01", "PNG", "Daily temperature plausibility (Tmin <= Tmean <= Tmax)", "GENERATED", "VERIFIED"),
-    ("reports/dataset_audit/figures/ds02_rice_panel_missingness.png", "DS02", "PNG", "Bangladesh rice observations by crop season (2015-2024)", "GENERATED", "VERIFIED"),
-    ("reports/dataset_audit/figures/ds03_rice_coverage.png", "DS03", "PNG", "West Java mean annual rice productivity (2015-2020)", "GENERATED", "VERIFIED"),
-    ("reports/dataset_audit/figures/ds04_agroclimate_grid_map.png", "DS04", "PNG", "Indonesia nationwide 612 grid points map", "GENERATED", "VERIFIED"),
-    ("reports/dataset_audit/figures/ds05_maize_coverage.png", "DS05", "PNG", "Maize productivity comparison: West Java vs Subang", "GENERATED", "VERIFIED"),
-    ("reports/dataset_audit/figures/ds06_chili_commodities.png", "DS06", "PNG", "West Java large chili and bird's-eye chili productivity trends", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds01_agera5_plausibility.png", "DS01", "PNG", "Daily temperature plausibility (Tmin <= Tmean <= Tmax)", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds02_rice_panel_missingness.png", "DS02", "PNG", "Bangladesh rice observations by crop season (2015-2024)", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds03_rice_coverage.png", "DS03", "PNG", "West Java mean annual rice productivity (2015-2020)", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds04_agroclimate_grid_map.png", "DS04", "PNG", "Indonesia nationwide 612 grid points map", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds05_maize_coverage.png", "DS05", "PNG", "Maize productivity comparison: West Java vs Subang", "GENERATED", "VERIFIED"),
+    ("reports/figures/ds06_chili_commodities.png", "DS06", "PNG", "West Java large chili and bird's-eye chili productivity trends", "GENERATED", "VERIFIED"),
     
     # Workflows Notebooks
     ("notebooks/dataset_workflows/DS01_agera5_discovery_acquisition_audit.ipynb", "DS01", "IPYNB", "Discovery, acquisition, and audit workflow for AgERA5", "GENERATED", "VERIFIED"),

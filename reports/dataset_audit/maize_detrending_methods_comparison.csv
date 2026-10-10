@@ -1,0 +1,4 @@
+metode,formula,n_params,ss_res,r2_model,cv_residual_pct,variasi_cuaca_tersisa
+(i) Linear Trend per Kabupaten,y_it = alpha_i + beta_i * t + e_it,54,64801.55,0.6107,36.7,Variasi antar-tahun & antar-kabupaten di luar tren linier lokal. Kelemahan: mengasumsikan teknologi linier mulus.
+(ii) Two-Way Fixed Effects (Kab FE + Year FE),y_it = alpha_i + gamma_t + e_it,28,78333.79,0.5294,37.46,HANYA variasi cuaca SPASIAL antar-kabupaten dalam tahun yang sama. Guncangan makro iklim seprovinsi (ENSO El Nino/La Nina) TERSERAP HABIS oleh Year FE.
+(iii) Kab FE + Provincial Trend,y_it = alpha_i + beta * prov_mean_t + e_it,28,59850.15,0.6404,32.74,Variasi deviasi lokal kabupaten dari rata-rata provinsi. Menjaga sebagian sinyal tahunan tanpa mengorbankan derajat kebebasan sebanyak Year FE.

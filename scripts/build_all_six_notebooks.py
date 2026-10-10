@@ -43,9 +43,9 @@ c01 = [
 **Fase:** Phase 3 (Dataset Discovery & Clean Acquisition) + Phase 4 (Dataset Quality Audit)
 
 - **Sumber Resmi:** [Copernicus Climate Data Store (AgERA5 Time-Series)](https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators-timeseries)
-- **Cakupan Lokasi:** 7 Wilayah Pertanian Jawa Barat (Bandung, Karawang, Tasikmalaya, Sukabumi, Cirebon, Purwakarta, Bekasi)
-- **Variabel:** 24 variabel agroklimat resmi harian (suhu min/mean/max, presipitasi, RH diurnal & derived, radiasi, VPD, ET0, angin)
-- **Arsitektur:** Menggunakan endpoint OpenAPI Time-Series resmi Copernicus CDS (CSV multivariat harian)
+- **Cakupan Lokasi Saat Ini:** 7 Wilayah Pertanian Jawa Barat (Bandung, Karawang, Tasikmalaya, Sukabumi, Cirebon, Purwakarta, Bekasi)
+- **Variabel:** 24 variabel agroklimat resmi harian (suhu min/mean/max, presipitasi, RH diurnal & derived, radiasi, VPD, ET0, angin, dew point)
+- **Status Audit Integrasi:** 7 titik ini berpasangan langsung dengan 7 kabupaten di Jabar (padi $N=42$, jagung $N=56$). Koordinat 20 kabupaten lainnya (termasuk Subang) telah dipetakan di `reports/dataset_audit/jabar_27_kabkota_centroids.csv`.
 """),
     make_cell("code", """from pathlib import Path
 import os, sys
@@ -53,12 +53,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Deteksi root project otomatis (bekerja baik dari root maupun folder notebook/)
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS01_agera5"
-REPORTS_DIR = PROJECT_ROOT / "reports" / "dataset_audit"
-FIGURES_DIR = REPORTS_DIR / "figures"
+REPORTS_DIR = PROJECT_ROOT / "reports"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 print("Project Root:", PROJECT_ROOT)
@@ -130,7 +129,7 @@ print(f"4. VPD non-negatif (>=0) : {'[PASSED]' if vpd_rule else '[FAILED]'}")
 print("="*50)
 """),
     make_cell("markdown", """## Visualisasi Diagnostik Multi-Panel (Suhu Bandung & Komparasi Presipitasi 7 Lokasi)
-Menampilkan plausibilitas suhu Bandung 2024 dan komparasi curah hujan tahunan antar wilayah Jawa Barat.
+Menampilkan runtun waktu suhu Bandung 2024 dan komparasi curah hujan tahunan antar 7 lokasi Jawa Barat.
 """),
     make_cell("code", """fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 4.5), gridspec_kw={'width_ratios': [2, 1.2]})
 
@@ -174,6 +173,7 @@ Ringkasan metrik audit kualitas dataset AgERA5 untuk pengambilan keputusan di Ta
     {"Dimensi Audit": "Cakupan Temporal", "Hasil & Evaluasi": "10 Tahun Kalender Penuh (2015-01-01 s.d. 2024-12-31 = 3.653 Hari)"},
     {"Dimensi Audit": "Kelengkapan Nilai", "Hasil & Evaluasi": "100% Lengkap (0 Missing Values di seluruh 7 lokasi)"},
     {"Dimensi Audit": "Plausibilitas Fisis", "Hasil & Evaluasi": "PASSED (Memenuhi hukum batas suhu, presipitasi >= 0, RH 0-100%, VPD >= 0)"},
+    {"Dimensi Audit": "Sampel Linking Riil", "Hasil & Evaluasi": "N_eff = 42 baris pada Padi (DS03) dan 56 baris pada Jagung (DS05)"},
     {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Primary Weather & Agroclimatic Backbone"},
     {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Layak sebagai tulang punggung iklim mikro)"},
     {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Data reanalisis grid spasial 0,1° (~10 km); bukan sensor stasiun on-farm."}
@@ -205,7 +205,7 @@ import matplotlib.pyplot as plt
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS02_bangladesh_rice_panel"
-FIGURES_DIR = PROJECT_ROOT / "reports" / "dataset_audit" / "figures"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 print("Project Root:", PROJECT_ROOT)
@@ -304,6 +304,7 @@ c03 = [
 - **Sumber Resmi:** Dinas Tanaman Pangan dan Hortikultura (Distanhor) Jawa Barat / Galura Data Jabar
 - **Cakupan Wilayah:** 27 Kabupaten/Kota di Jawa Barat (2015–2020)
 - **Varian Komoditas:** Padi Total, Padi Sawah (Wetland), dan Padi Ladang (Dryland)
+- **Catatan Granularitas Kritis:** Data luaran bersifat **tahunan murni** (tidak ada pemisahan per musim tanam MH/MK di dataset resmi). Pasangan cuaca saat ini berjumlah **42 baris** (7 kabupaten AgERA5 x 6 tahun).
 """),
     make_cell("code", """from pathlib import Path
 import os, sys
@@ -314,7 +315,7 @@ import matplotlib.pyplot as plt
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS03_west_java_rice_productivity"
-FIGURES_DIR = PROJECT_ROOT / "reports" / "dataset_audit" / "figures"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 print("Project Root:", PROJECT_ROOT)
@@ -339,6 +340,12 @@ print("\\n" + "="*50)
 print(f"KELENGKAPAN MATRIKS (27 kab/kota x 6 tahun = {expected_rows} baris): {is_complete}")
 print("STATUS INTEGRITAS     :", "[PASSED]" if is_complete else "[FAILED]")
 print("Satuan Resmi          :", df_total['satuan'].iloc[0])
+
+# Cek sampel efektif terhadap 7 titik AgERA5 saat ini
+locs_agera5 = ["BANDUNG", "KARAWANG", "TASIKMALAYA", "SUKABUMI", "CIREBON", "PURWAKARTA", "BEKASI"]
+kab_matched = [f"KABUPATEN {loc}" for loc in locs_agera5]
+n_eff = len(df_total[df_total['nama_kabupaten_kota'].isin(kab_matched)])
+print(f"Sampel Efektif (Matching 7 Titik AgERA5 Saat Ini): N_eff = {n_eff} baris (7 kab x 6 tahun)")
 print("="*50)
 """),
     make_cell("markdown", """## Statistik Produktivitas Tahunan (Kuintal/Hektar)
@@ -391,10 +398,11 @@ print(f"Gambar PNG berhasil disimpan ke: {png_out}")
     {"Dimensi Audit": "Rentang Periode", "Hasil & Evaluasi": "2015 s.d. 2020 (6 Tahun Observasi Penuh)"},
     {"Dimensi Audit": "Varian Komoditas", "Hasil & Evaluasi": "Padi Total, Padi Sawah (Wetland), Padi Ladang (Dryland)"},
     {"Dimensi Audit": "Kelengkapan Matriks", "Hasil & Evaluasi": "PASSED (162 baris per varian, 0 missing value)"},
+    {"Dimensi Audit": "Sampel Efektif Saat Ini", "Hasil & Evaluasi": "N_eff = 42 baris berpasangan dengan 7 titik cuaca AgERA5"},
     {"Dimensi Audit": "Satuan Resmi", "Hasil & Evaluasi": "Kuintal / Hektar (1 Kuintal = 100 kg = 0,1 ton)"},
     {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Regional Rice Outcome Target"},
     {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Target hasil panen padi lokal resmi)"},
-    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Granularitas waktu tahunan; memerlukan agregasi cuaca harian per musim tanam saat linking."}
+    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Outcome murni tahunan; tidak ada data terpisah MH/MK di dataset resmi."}
 ])
 
 display(scorecard)
@@ -413,6 +421,7 @@ c04 = [
 - **Sumber Resmi:** [Mendeley Data DOI: 10.17632/3pfbdbzfff.1](https://doi.org/10.17632/3pfbdbzfff.1)
 - **Basis Data:** Open-Meteo Historical Weather / ERA5-Seamless (612 grid points, 2016–2025)
 - **Peran di TaniAdapt:** Referensi pembanding indikator agroklimat ekstrem (CDD, CWD, GDD).
+- **Catatan Validasi Ilmiah:** Korelasi tinggi terhadap AgERA5 (r=0.85 presipitasi, r=0.76 suhu) adalah bukti **konsistensi sesama turunan ECMWF ERA5**, bukan validasi terhadap observasi stasiun darat BMKG (ground truth).
 """),
     make_cell("code", """from pathlib import Path
 import os, sys
@@ -423,7 +432,7 @@ import matplotlib.pyplot as plt
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS04_indonesia_agroclimatic"
-FIGURES_DIR = PROJECT_ROOT / "reports" / "dataset_audit" / "figures"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 print("Project Root:", PROJECT_ROOT)
@@ -478,7 +487,7 @@ print(f"Gambar PNG berhasil disimpan ke: {png_out}")
     {"Dimensi Audit": "Indikator Kunci", "Hasil & Evaluasi": "Consecutive Dry Days (CDD), CWD, Rainfall 7d/30d/90d, Temperature Range"},
     {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Agroclimate Reference & Comparison Backbone"},
     {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Referensi indikator iklim ekstrem nasional)"},
-    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Resolusi spasial 0,5° (~55 km) lebih kasar dibanding AgERA5 0,1° (~10 km)."}
+    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Bukan ground-truth observasi stasiun; merupakan sesama reanalisis turunan ERA5."}
 ])
 
 display(scorecard)
@@ -496,7 +505,9 @@ c05 = [
 
 - **Sumber Resmi:** Dinas Tanaman Pangan dan Hortikultura Jawa Barat / Galura Data Jabar
 - **Cakupan Wilayah:** 27 Kabupaten/Kota di Jawa Barat (2015–2022) termasuk fokus utama Kabupaten Subang
-- **Catatan Sumber:** Endpoint sub-kecamatan Subang mengalami HTTP 502 Bad Gateway di server pemerintah; fallback terakuisisi pada level kabupaten resmi.
+- **Temuan Kritis Audit:**
+  1. Kabupaten Subang **belum memiliki titik cuaca AgERA5 langsung** di repo saat ini (jarak ke Purwakarta ~35 km, Karawang ~58 km).
+  2. Kenaikan produktivitas Subang dari 57,23 ke 89,49 ku/ha pada 2020–2022 (+56,4%) mencerminkan **Patahan Struktural (Structural Break)** akibat metodologi statistik BPS (Kerangka Sampel Area) atau intensifikasi benih hibrida, bukan murni variabilitas cuaca.
 """),
     make_cell("code", """from pathlib import Path
 import os, sys
@@ -507,7 +518,7 @@ import matplotlib.pyplot as plt
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS05_subang_maize_productivity"
-FIGURES_DIR = PROJECT_ROOT / "reports" / "dataset_audit" / "figures"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 print("Project Root:", PROJECT_ROOT)
@@ -524,20 +535,43 @@ print("Missing Values Produktivitas:", df_maize['produktivitas_jagung'].isnull()
 subang_data = df_maize[df_maize['nama_kabupaten_kota'].str.contains('SUBANG', case=False, na=False)].sort_values('tahun')
 print(f"Data Spesifik Kabupaten Subang Ditemukan: {len(subang_data)} tahun (2015–2022)")
 display(subang_data[['tahun', 'nama_kabupaten_kota', 'produktivitas_jagung', 'satuan']])
+
+# Analisis Lonjakan (Structural Break Check)
+x_sub = subang_data['tahun'].values
+y_sub = subang_data['produktivitas_jagung'].values
+p_sub = np.polyfit(x_sub, y_sub, 1)
+y_pred_sub = np.polyval(p_sub, x_sub)
+resid_sub = y_sub - y_pred_sub
+cv_raw = np.std(y_sub) / np.mean(y_sub) * 100
+cv_resid = np.std(resid_sub) / np.mean(y_sub) * 100
+
+print("\\n" + "="*50)
+print(f"ANALISIS TREN & DETRENDING JAGUNG SUBANG:")
+print(f"  Slope Kenaikan Linier : +{p_sub[0]:.2f} ku/ha per tahun")
+print(f"  CV Raw (Sebelum Detrend): {cv_raw:.2f}%")
+print(f"  CV Residual (Sinyal Sisa): {cv_resid:.2f}% (Porsi variasi yang bisa dijelaskan cuaca)")
+print("="*50)
 """),
-    make_cell("markdown", """## Visualisasi Diagnostik Multi-Panel (Subang vs Jabar & Ranking Top-5 Kabupaten)
-Membandingkan tren runtun waktu Kab. Subang vs provinsi, serta memetakan posisi Subang dalam ranking produktivitas jagung tahun 2022.
+    make_cell("markdown", """## Visualisasi Diagnostik Multi-Panel (Subang Structural Jump & Ranking Top-5 Kabupaten)
+Panel 1 menampilkan runtun waktu Subang vs Jabar dengan garis tren patahan; Panel 2 menampilkan ranking Top-5 sentra jagung tahun 2022.
 """),
     make_cell("code", """fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 4.5), gridspec_kw={'width_ratios': [1.3, 1]})
 
-# Panel 1: Runtun Waktu Subang vs Rata-rata Jabar
+# Panel 1: Runtun Waktu Subang vs Rata-rata Jabar + Garis Tren
 mean_jabar = df_maize.groupby('tahun')['produktivitas_jagung'].mean()
 ax1.plot(mean_jabar.index, mean_jabar.values, marker='o', label='Rata-rata Jawa Barat', color='steelblue', linewidth=2)
-ax1.plot(subang_data['tahun'], subang_data['produktivitas_jagung'], marker='s', label='Kabupaten Subang', color='darkorange', linewidth=2.5)
+ax1.plot(subang_data['tahun'], subang_data['produktivitas_jagung'], marker='s', label='Kabupaten Subang (Realisasi)', color='darkorange', linewidth=2.5)
+ax1.plot(x_sub, y_pred_sub, linestyle='--', color='red', alpha=0.7, label=f'Tren Linier (+{p_sub[0]:.2f} ku/ha/thn)')
+
+# Anotasi Structural Break
+ax1.annotate('Lonjakan KSA/Hibrida\\n(+56.4% dlm 2 thn)', xy=(2022, 89.49), xytext=(2018.5, 80),
+             arrowprops=dict(facecolor='black', shrink=0.08, width=1, headwidth=6),
+             fontsize=9, fontweight='bold', bbox=dict(boxstyle="round,pad=0.3", fc="yellow", alpha=0.5))
+
 ax1.set_title("DS05 Produktivitas Jagung: Jawa Barat vs Kab. Subang (2015–2022)")
 ax1.set_xlabel("Tahun")
 ax1.set_ylabel("Produktivitas (Kuintal / Hektar)")
-ax1.legend()
+ax1.legend(loc='upper left')
 ax1.grid(True, linestyle='--', alpha=0.5)
 
 # Panel 2: Ranking Top-5 Kabupaten (Tahun 2022) vs Subang
@@ -568,10 +602,10 @@ print(f"Gambar PNG berhasil disimpan ke: {png_out}")
     {"Dimensi Audit": "Cakupan Wilayah", "Hasil & Evaluasi": "27 Kabupaten/Kota (Fokus Utama Kabupaten Subang)"},
     {"Dimensi Audit": "Rentang Periode", "Hasil & Evaluasi": "2015 s.d. 2022 (8 Tahun Observasi Lengkap)"},
     {"Dimensi Audit": "Kelengkapan Nilai", "Hasil & Evaluasi": "PASSED (216 baris penuh, 0 missing value)"},
-    {"Dimensi Audit": "Data Kabupaten Subang", "Hasil & Evaluasi": "8 Nilai Tahunan (Meningkat dari 45.75 ke 89.49 kuintal/ha)"},
+    {"Dimensi Audit": "Matching Cuaca Riil", "Hasil & Evaluasi": "Subang Unmatched pada 7 titik AgERA5 saat ini (Perlu ekstraksi koordinat centroid)"},
     {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Regional Maize Outcome Target"},
     {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Target hasil panen jagung regional valid)"},
-    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Endpoint sub-kecamatan Subang mengalami HTTP 502 upstream server; fallback kabupaten digunakan."}
+    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "Lonjakan tajam 2021-2022 mencerminkan perubahan metodologi BPS KSA/benih hibrida; sinyal cuaca berada pada residu detrending ~11%."}
 ])
 
 display(scorecard)
@@ -589,7 +623,11 @@ c06 = [
 
 - **Sumber Resmi:** Dinas Tanaman Pangan dan Hortikultura Jawa Barat / Galura Data Jabar
 - **Fokus Komoditas Hortikultura:** Cabai Besar dan Cabai Rawit (2017–2024)
-- **AUDIT KRITIS TARGET OUTCOME:** Dataset ini berisi angka produktivitas statistik hasil panen agregat, BUKAN data insidensi atau label penyakit tanaman (disease incidence).
+- **AUDIT KRITIS TARGET OUTCOME & DISPOSISI METODOLOGI:**
+  1. Dataset ini murni berupa **angka produktivitas hasil panen agregat tingkat provinsi (N=8 baris)**, BUKAN level kabupaten.
+  2. Data ini **TIDAK MEMILIKI LABEL PENYAKIT/OPT LAPANGAN**.
+  3. Angka threshold sembarangan ("RH > 88%") resmi **DITOLAK (EVIDENCE INSUFFICIENT)**.
+  4. Modul penyakit cabai di TaniAdapt didefinisikan sebagai **Index of Favorable Weather Condition (IFWC)** berbasis proksi kebasahan daun fisika atmosfer: $T - T_d$ (suhu minus titik embun) dan RH maksimum.
 """),
     make_cell("code", """from pathlib import Path
 import os, sys
@@ -600,7 +638,7 @@ import matplotlib.pyplot as plt
 CWD = Path.cwd().resolve()
 PROJECT_ROOT = CWD.parent if CWD.name.lower() == "notebook" else CWD
 RAW_DIR = PROJECT_ROOT / "data" / "raw" / "DS06_west_java_horticulture"
-FIGURES_DIR = PROJECT_ROOT / "reports" / "dataset_audit" / "figures"
+FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 print("Project Root:", PROJECT_ROOT)
@@ -613,15 +651,15 @@ Membaca file statistik produktivitas Sayuran Buah Semusim (SBS) Jawa Barat.
 cabai_besar = df_sbs[df_sbs['komoditi'] == 'CABAI BESAR'].sort_values('tahun')
 cabai_rawit = df_sbs[df_sbs['komoditi'] == 'CABAI RAWIT'].sort_values('tahun')
 
-print("Observasi Cabai Besar:", len(cabai_besar), "| Tahun:", cabai_besar['tahun'].min(), "s.d.", cabai_besar['tahun'].max())
-print("Observasi Cabai Rawit:", len(cabai_rawit), "| Tahun:", cabai_rawit['tahun'].min(), "s.d.", cabai_rawit['tahun'].max())
+print("Observasi Cabai Besar (Provinsi):", len(cabai_besar), "| Tahun:", cabai_besar['tahun'].min(), "s.d.", cabai_besar['tahun'].max())
+print("Observasi Cabai Rawit (Provinsi):", len(cabai_rawit), "| Tahun:", cabai_rawit['tahun'].min(), "s.d.", cabai_rawit['tahun'].max())
 print("Satuan Resmi:", cabai_besar['satuan'].iloc[0])
 """),
     make_cell("markdown", """## Audit Kritis Validitas Target Outcome & Gap Analysis Variabel
 Pemeriksaan ketat apakah dataset ini dapat digunakan untuk melatih model deteksi penyakit tanaman.
 """),
     make_cell("code", """gap_analysis = pd.DataFrame([
-    {"Variabel Agronomi": "Produktivitas Hasil Panen (Kuintal/Ha)", "Status Ketersediaan": "TERSEDIA (8 Tahun)", "Keterangan": "Target luaran hasil panen valid"},
+    {"Variabel Agronomi": "Produktivitas Hasil Panen (Kuintal/Ha)", "Status Ketersediaan": "TERSEDIA (8 Tahun Provinsi)", "Keterangan": "Target luaran hasil panen makro valid"},
     {"Variabel Agronomi": "Volume Produksi (Kuintal / Ton)", "Status Ketersediaan": "TERSEDIA (8 Tahun)", "Keterangan": "Tercatat di dataset produksi sayuran"},
     {"Variabel Agronomi": "Luas Panen / Tanam (Ha)", "Status Ketersediaan": "TERSEDIA (8 Tahun)", "Keterangan": "Bisa diturunkan dari produksi / produktivitas"},
     {"Variabel Agronomi": "Insidensi / Label Penyakit (OPT)", "Status Ketersediaan": "TIDAK TERSEDIA (ABSEN)", "Keterangan": "TIDAK BISA untuk supervised ML penyakit"},
@@ -631,9 +669,10 @@ Pemeriksaan ketat apakah dataset ini dapat digunakan untuk melatih model deteksi
 print("\\n" + "="*60)
 print("HASIL AUDIT TARGET OUTCOME (YIELD vs DISEASE):")
 print("="*60)
-print("1. Apakah dataset ini berisi angka hasil panen (Yield)? -> YA (VALID)")
+print("1. Apakah dataset ini berisi angka hasil panen (Yield)? -> YA (VALID TINGKAT PROVINSI)")
 print("2. Apakah dataset ini berisi label penyakit tanaman?     -> TIDAK (ABSEN)")
 print("KESIMPULAN: Jangan latih ML klasifikasi penyakit dari dataset ini!")
+print("PENDEKATAN VALID: Advisory berbasis Indeks Kondisi Cuaca Mendukung (IFWC)")
 print("="*60 + "\\n")
 display(gap_analysis)
 """),
@@ -680,12 +719,13 @@ print(f"Gambar PNG berhasil disimpan ke: {png_out}")
     {"Dimensi Audit": "Dataset Identifier", "Hasil & Evaluasi": "DS06 — West Java SBS Horticulture (Chili) Productivity"},
     {"Dimensi Audit": "Penerbit & Sumber", "Hasil & Evaluasi": "Distanhor Jabar / Galura Open Data Jabar"},
     {"Dimensi Audit": "Fokus Komoditas", "Hasil & Evaluasi": "Cabai Besar dan Cabai Rawit (Sayuran Buah Semusim)"},
-    {"Dimensi Audit": "Rentang Periode", "Hasil & Evaluasi": "2017 s.d. 2024 (8 Tahun Observasi)"},
+    {"Dimensi Audit": "Cakupan Wilayah", "Hasil & Evaluasi": "Level Provinsi Jawa Barat (Bukan level kabupaten)"},
+    {"Dimensi Audit": "Rentang Periode", "Hasil & Evaluasi": "2017 s.d. 2024 (8 Tahun Observasi, N_eff = 8)"},
     {"Dimensi Audit": "Kelengkapan Nilai", "Hasil & Evaluasi": "PASSED (0 missing value pada komoditas cabai)"},
     {"Dimensi Audit": "Satuan Resmi", "Hasil & Evaluasi": "Kuintal / Hektar"},
-    {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Regional Horticulture Outcome Target"},
-    {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Target hasil panen hortikultura cabai valid)"},
-    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "TIDAK BISA untuk model deteksi penyakit (disease label absen). Rekomendasi: gunakan rule-based weather threshold."}
+    {"Dimensi Audit": "Peran di TaniAdapt", "Hasil & Evaluasi": "Regional Horticulture Outcome Target & Advisory Framework"},
+    {"Dimensi Audit": "Status Disposisi", "Hasil & Evaluasi": "PASS (Valid sebagai target hasil panen agregat makro)"},
+    {"Dimensi Audit": "Batasan Kritis", "Hasil & Evaluasi": "TIDAK BISA untuk model ML deteksi penyakit (label penyakit absen). Wajib gunakan Indeks Kondisi Cuaca (IFWC) berbasis proksi T - Td."}
 ])
 
 display(scorecard)
@@ -693,4 +733,4 @@ display(scorecard)
 ]
 save_notebook("06_west_java_horticulture_productivity.ipynb", c06)
 
-print("\nSemua 6 notebook berhasil diperkaya dan diperbarui 100%!")
+print("\nSemua 6 notebook berhasil diperbarui dengan hasil revisi ilmiah 100%!")

@@ -1,3 +1,0 @@
-timestamp,name,variable,statistic,year,file,status,detail,error
-2026-10-09T23:35:24,precip,precipitation_flux,,2025,C:\CODING\research_taniAdapt\data\data1\raw\agera5\precip_2025.zip,downloaded_valid,valid; 365 file NetCDF,
-2026-10-09T23:40:09,tmax,2m_temperature,24_hour_maximum,2025,C:\CODING\research_taniAdapt\data\data1\raw\agera5\tmax_2025.zip,downloaded_valid,valid; 365 file NetCDF,

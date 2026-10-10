@@ -145,7 +145,7 @@ Seluruh 6 notebook di folder `notebook/` telah diselaraskan dengan 6 dataset in-
 6. **`06_west_java_horticulture_productivity.ipynb`** — *DS06 Regional Horticulture Outcome*: Tren Cabai Rawit & Cabai Besar (2017–2024), komparasi produktivitas tahunan, dan **Audit Kritis Target Outcome** (konfirmasi bahwa data ini adalah statistik hasil panen, BUKAN label penyakit tanaman).
 
 ### Cara Menjalankan:
-Buka file notebook di VS Code / Jupyter Lab, pilih kernel Python (`Python 3.11.x`), lalu klik **Run All**. Kode bersifat *idempotent* (langsung membaca data lokal dari `data/raw/` tanpa re-download) dan otomatis menyimpan grafik ke `reports/dataset_audit/figures/`.
+Buka file notebook di VS Code / Jupyter Lab, pilih kernel Python (`Python 3.11.x`), lalu klik **Run All**. Kode bersifat *idempotent* (langsung membaca data lokal dari `data/raw/` tanpa re-download) dan otomatis menyimpan grafik ke `reports/figures/`.
 
 ---
 
