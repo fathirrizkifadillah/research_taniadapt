@@ -1,0 +1,28 @@
+artifact_path,dataset_id,type,purpose,generation_status,verification_status
+reports/dataset_discovery/dataset_catalog.csv,ALL,CSV,Comprehensive catalog of in-scope datasets DS01-DS06,GENERATED,VERIFIED
+reports/dataset_discovery/dataset_sources.json,ALL,JSON,Machine-readable source specifications,GENERATED,VERIFIED
+reports/dataset_discovery/dataset_acquisition_manifest.csv,ALL,CSV,Full file-level acquisition manifest with hashes and sizes,GENERATED,VERIFIED
+reports/dataset_discovery/agera5_variable_inventory.csv,DS01,CSV,27 cataloged variables for AgERA5 with exact API IDs,GENERATED,VERIFIED
+reports/dataset_discovery/variable_inventory_by_dataset.csv,ALL,CSV,51 variables mapped across the 7 TaniAdapt variable groups,GENERATED,VERIFIED
+reports/dataset_discovery/download_log.txt,ALL,TXT,Acquisition timestamps and status logging,GENERATED,VERIFIED
+reports/dataset_discovery/agera5_clean_start_note.md,DS01,MD,Documentation of intentional clean start and architecture,GENERATED,VERIFIED
+reports/dataset_audit/dataset_audit_summary.csv,ALL,CSV,Consolidated 12-dimension quality audit metrics,GENERATED,VERIFIED
+reports/dataset_audit/dataset_audit_dashboard.xlsx,ALL,XLSX,Multi-sheet consolidated Excel workbook,GENERATED,VERIFIED
+reports/dataset_audit/01_audit_agera5.md,DS01,MD,Detailed quality audit report for AgERA5 Time-Series,GENERATED,VERIFIED
+reports/dataset_audit/02_audit_bangladesh_rice_panel.md,DS02,MD,Detailed quality audit report for Bangladesh Rice Panel,GENERATED,VERIFIED
+reports/dataset_audit/03_audit_west_java_rice_productivity.md,DS03,MD,Detailed quality audit report for West Java Rice Productivity,GENERATED,VERIFIED
+reports/dataset_audit/04_audit_indonesia_agroclimatic.md,DS04,MD,Detailed quality audit report for Indonesia Agroclimatic Dataset,GENERATED,VERIFIED
+reports/dataset_audit/05_audit_subang_maize_productivity.md,DS05,MD,Detailed quality audit report for Subang Maize Productivity,GENERATED,VERIFIED
+reports/dataset_audit/06_audit_west_java_horticulture_productivity.md,DS06,MD,Detailed quality audit report for West Java Horticulture SBS,GENERATED,VERIFIED
+reports/dataset_audit/figures/ds01_agera5_plausibility.png,DS01,PNG,Daily temperature plausibility (Tmin <= Tmean <= Tmax),GENERATED,VERIFIED
+reports/dataset_audit/figures/ds02_rice_panel_missingness.png,DS02,PNG,Bangladesh rice observations by crop season (2015-2024),GENERATED,VERIFIED
+reports/dataset_audit/figures/ds03_rice_coverage.png,DS03,PNG,West Java mean annual rice productivity (2015-2020),GENERATED,VERIFIED
+reports/dataset_audit/figures/ds04_agroclimate_grid_map.png,DS04,PNG,Indonesia nationwide 612 grid points map,GENERATED,VERIFIED
+reports/dataset_audit/figures/ds05_maize_coverage.png,DS05,PNG,Maize productivity comparison: West Java vs Subang,GENERATED,VERIFIED
+reports/dataset_audit/figures/ds06_chili_commodities.png,DS06,PNG,West Java large chili and bird's-eye chili productivity trends,GENERATED,VERIFIED
+notebooks/dataset_workflows/DS01_agera5_discovery_acquisition_audit.ipynb,DS01,IPYNB,"Discovery, acquisition, and audit workflow for AgERA5",GENERATED,VERIFIED
+notebooks/dataset_workflows/DS02_bangladesh_rice_panel_discovery_acquisition_audit.ipynb,DS02,IPYNB,Workflow notebook for Bangladesh Rice Panel,GENERATED,VERIFIED
+notebooks/dataset_workflows/DS03_west_java_rice_productivity_discovery_acquisition_audit.ipynb,DS03,IPYNB,Workflow notebook for West Java Rice Productivity,GENERATED,VERIFIED
+notebooks/dataset_workflows/DS04_indonesia_agroclimatic_discovery_acquisition_audit.ipynb,DS04,IPYNB,Workflow notebook for Indonesia Agroclimatic Dataset,GENERATED,VERIFIED
+notebooks/dataset_workflows/DS05_subang_maize_productivity_discovery_acquisition_audit.ipynb,DS05,IPYNB,Workflow notebook for Subang Maize Productivity,GENERATED,VERIFIED
+notebooks/dataset_workflows/DS06_west_java_horticulture_discovery_acquisition_audit.ipynb,DS06,IPYNB,Workflow notebook for West Java Horticulture SBS,GENERATED,VERIFIED

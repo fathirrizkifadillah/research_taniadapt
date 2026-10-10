@@ -1,1 +1,38 @@
+# Data directories (keep large raw/processed research data local)
 /data
+data/
+
+# Environment variables, credentials, and secrets
+.env
+.env.*
+.cdsapirc
+*.key
+*.token
+credentials.json
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE, Editor, and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary logs
+*.tmp
