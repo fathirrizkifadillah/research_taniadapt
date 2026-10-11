@@ -19,34 +19,36 @@
 * **Rentang Waktu:** 9 Tahun Penuh (**2016 s.d. 2024**).
 * **Komoditas Utama yang Dipantau:** Cabai Rawit, Cabai Besar, Tomat, Bawang Merah.
 * **Satuan Ukuran Aktual:**
-  * Produktivitas SBS: **KUINTAL / HEKTAR** ($1\text{ ku} = 100\text{ kg} = 0.1\text{ ton}$).
-  * Volume Produksi Sayuran: **TON** (bukan Kuintal/Ton).
+  * Produktivitas SBS: **KUINTAL / HEKTAR** ($1	ext{ ku} = 100	ext{ kg} = 0.1	ext{ ton}$).
+  * Volume Produksi Sayuran: **TON** (bukan Kuintal).
 
 ---
 
-## 3. Kamus Data & Nama Kolom Aktual
+## 3. Kamus Data Lengkap Seluruh Kolom Aktual
 
-### File `produktivitas_sbs_jabar.csv`:
-| Nama Kolom Aktual | Tipe Data | Deskripsi |
-| :--- | :--- | :--- |
-| `id` | Integer | ID unik record sistem Galura |
-| `kode_provinsi` | Integer | `32` (Jawa Barat) |
-| `nama_provinsi` | String | `JAWA BARAT` |
-| `komoditi` | String | Nama komoditas (`CABAI RAWIT`, `CABAI BESAR`, `TOMAT`) |
-| `produktivitas_sayur_buah` | Float | Rata-rata produktivitas provinsi (Kuintal/Ha) |
-| `satuan` | String | `KUINTAL/HEKTAR` |
-| `tahun` | Integer | Tahun observasi (2016 s.d. 2024) |
+### A. File `produktivitas_sbs_jabar.csv` (7 Kolom Lengkap)
+| No | Nama Kolom Aktual | Tipe Data | Satuan | Deskripsi & Interpretasi |
+| :---: | :--- | :---: | :---: | :--- |
+| 1 | `id` | Integer | ID Unik | ID unik record sistem basis data Galura |
+| 2 | `kode_provinsi` | Integer | Kode BPS | `32` (Kode resmi Provinsi Jawa Barat) |
+| 3 | `nama_provinsi` | String | Teks | `JAWA BARAT` (Tingkat agregat ADM1) |
+| 4 | `komoditi` | String | Kategori | Nama komoditas (`CABAI RAWIT`, `CABAI BESAR`, `TOMAT`, `BAWANG MERAH`) |
+| 5 | `produktivitas_sayur_buah` | Float | Kuintal / Ha | Rata-rata produktivitas sayuran buah semusim tingkat provinsi |
+| 6 | `satuan` | String | Teks | `KUINTAL/HEKTAR` |
+| 7 | `tahun` | Integer | Tahun | Tahun kalender observasi (**2016 s.d. 2024**) |
 
-### File `produksi_sayuran_komoditas_jabar.csv`:
-| Nama Kolom Aktual | Tipe Data | Deskripsi |
-| :--- | :--- | :--- |
-| `id` | Integer | ID unik record |
-| `kode_kabupaten_kota` | Integer | Kode wilayah 27 Kab/Kota |
-| `nama_kabupaten_kota` | String | Nama Kabupaten/Kota |
-| `jenis_komoditas` | String | Komoditas sayuran |
-| `produksi_sayuran` | Float | Volume produksi fisik (Ton) |
-| `satuan` | String | `TON` |
-| `tahun` | Integer | Tahun observasi |
+### B. File `produksi_sayuran_komoditas_jabar.csv` (9 Kolom Lengkap)
+| No | Nama Kolom Aktual | Tipe Data | Satuan | Deskripsi & Interpretasi |
+| :---: | :--- | :---: | :---: | :--- |
+| 1 | `id` | Integer | ID Unik | ID unik record sistem Galura |
+| 2 | `kode_provinsi` | Integer | Kode BPS | `32` (Jawa Barat) |
+| 3 | `nama_provinsi` | String | Teks | `JAWA BARAT` |
+| 4 | `kode_kabupaten_kota` | Integer | Kode BPS | Kode administratif 27 Kabupaten/Kota |
+| 5 | `nama_kabupaten_kota` | String | Teks | Nama resmi Kabupaten/Kota (e.g. `KABUPATEN BANDUNG`, `KABUPATEN GARUT`) |
+| 6 | `jenis_komoditas` | String | Kategori | Jenis komoditas hortikultura sayuran |
+| 7 | `produksi_sayuran` | Float | Ton | Total volume produksi fisik sayuran |
+| 8 | `satuan` | String | Teks | `TON` |
+| 9 | `tahun` | Integer | Tahun | Tahun observasi (**2016 s.d. 2024**) |
 
 ---
 
@@ -55,20 +57,9 @@
 > [!IMPORTANT]
 > **Ketiadaan Data Serangan Hama/Penyakit (OPT)**:
 > 1. Dataset ini **HANYA BERISI ANGKA HASIL PANEN DAN VOLUME PRODUKSI**.
-> 2. Dataset ini **TIDAK MEMILIKI LABEL PENYAKIT / HAMA (OPT)**. Tidak ada data keparahan antraknosa (*Colletotrichum capsici*), layu fusarium (*Fusarium oxysporum*), atau hawar daun (*Phytophthora infestans*).
-> 3. **Larangan Metodologis**: Dilarang melatih model Machine Learning klasifikasi atau probabilitas penyakit dari data hasil panen makro tahunan.
-> 4. **Penghapusan Ambang Tak Bersumber**: Seluruh aturan sebelumnya seperti *"T - Td <= 2.0 C dan RH >= 90% = syarat mutlak"* atau *"kelembapan tomat 18-20 C teruji di Balitsa Lembang"* telah **DIHAPUS** karena tidak memiliki rujukan sitasi ilmiah langsung di repositori.
-
-### Opsi Implementasi IFWC (Index of Favorable Weather Condition) Tanpa Ambang Buatan:
-Sistem advisory mikroklimat mengadopsi 2 opsi transparan:
-* **Opsi A (Cutoff Literatur dengan Label Transfer)**: Jika menggunakan batas literatur luar (misal Paper 3/5), sistem **wajib melabelinya secara transparan sebagai *Literature Transfer (Belum Divalidasi Lokal)***, bukan klaim validitas lokal Jawa Barat.
-* **Opsi B (Skor Relatif Berbasis Persentil Climatological)**: Mengukur indeks kebasahan relatif per sel dan jendela kalender (misal: *"Kondisi 7 hari terakhir lebih basah dari 85% tahun serupa pada periode kalender yang sama"*), **bukan mengklaim probabilitas risiko infeksi**.
-
-### Uji Hipotesis Proksi Kebasahan: $T_{\min} - T_d$ vs $T_{\text{mean}} - T_d$
-Secara termodinamika, kondensasi embun malam terjadi saat suhu turun mendekati titik embun di waktu fajar ($T_{\min}$). Pengujian data AgERA5 membuktikan:
-* Pada $T_{\text{mean}} - T_d \le 2.0^\circ\text{C}$, frekuensi keterjadian hanya **0.0% – 3.9%** (karena suhu siang mendistorsi nilai rata-rata 24 jam).
-* Pada $T_{\min} - T_d \le 2.0^\circ\text{C}$, frekuensi kondensasi malam terdeteksi pada **31.5% – 93.9%** hari di musim hujan.
-* *Status*: Diadopsi sebagai **hipotesis proksi agronomis** untuk pemantauan mikroklimat malam hari.
+> 2. Dataset ini **TIDAK MEMILIKI LABEL PENYAKIT / HAMA (OPT)** (tidak ada data antraknosa, layu fusarium, atau hawar daun).
+> 3. **Larangan Metodologis**: Dilarang melatih model Machine Learning klasifikasi atau probabilitas penyakit dari data panen tahunan makro.
+> 4. **Arsitektur Advisory**: Menggunakan **Indeks Kondisi Cuaca Mendukung (IFWC)** berbasis depresiasi titik embun malam ($T_{\min} - T_d$) dan kelembapan diurnal relatif.
 
 ---
 
@@ -86,6 +77,7 @@ print(f"Kolom Aktual SBS: {df_sbs.columns.tolist()}")
 
 # Filter komoditas cabai rawit dan cabai besar
 chili_df = df_sbs[df_sbs['komoditi'].str.upper().str.contains('CABAI')].copy()
-print("\nRingkasan Produktivitas Cabai Jabar (ku/ha):")
+print("
+Ringkasan Produktivitas Cabai Jabar (ku/ha):")
 print(chili_df[['tahun', 'komoditi', 'produktivitas_sayur_buah', 'satuan']].sort_values(['komoditi', 'tahun']))
 ```

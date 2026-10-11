@@ -3,49 +3,89 @@
 ## 1. Identitas Dataset & Sumber Resmi
 * **Dataset Identifier:** `DS02_bangladesh_rice_panel`
 * **Nama Resmi:** Replication Data for: Growing season climate and rice yield in Bangladesh (2015–2024 Audited Panel)
-* **Penerbit / Institusi:** Mendeley Data / Audited Replication Panel
+* **Penerbit / Institusi:** Bangladesh Rice Research Institute (BRRI) / Mendeley Data
 * **DOI Terverifikasi:** `10.17632/h94z4ftts2.1`
 * **URL Resmi:** [Mendeley Data — Dataset h94z4ftts2](https://data.mendeley.com/datasets/h94z4ftts2/1)
-* **Lisensi:** CC BY 4.0
-* **Format File Lokal:** CSV hasil ekstraksi arsip ZIP resmi (`data/raw/DS02_bangladesh_rice_panel/extracted/...`)
-* **Ukuran Total:** ~2.1 MB
+* **Lisensi:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+* **Format File Lokal:** CSV hasil ekstraksi arsip ZIP resmi (`data/raw/DS02_bangladesh_rice_panel/extracted/.../Rice_Yield_2015_2024_Audited.csv`)
+* **Ukuran Total:** ~2.1 MB (1.728 baris panel seimbang: 64 distrik $	imes$ 3 musim $	imes$ 9 tahun)
 
 ---
 
-## 2. Cakupan Spasial & Resolusi Waktu
-* **Cakupan Spasial:** 64 Distrik di seluruh Bangladesh.
-* **Rentang Waktu:** 10 Tahun (**2015 s.d. 2024**).
-* **Frekuensi:** Panel tahunan per musim tanam (*season-specific panel*: Aus, Aman, Boro).
+## 2. Cakupan Spasial, Musim Tanam, & Resolusi Waktu
+* **Cakupan Spasial:** 64 Distrik di seluruh Bangladesh (setara tingkat Kabupaten/ADM2).
+* **Rentang Waktu:** 9 Tahun Kalender Tanam Penuh (**2015-16 s.d. 2023-24**).
+* **Tiga Musim Tanam Padi Tropis:**
+  1. **Aus**: Musim tanam hujan awal / pra-muson (April s.d. Juli).
+  2. **Aman**: Musim tanam muson utama / rendeng (Juli s.d. November/Desember).
+  3. **Boro**: Musim tanam kemarau beririgasi intensif (Desember s.d. Mei).
 
 ---
 
-## 3. Kamus Data & Variabel Kunci
+## 3. Kamus Data Lengkap Seluruh 36 Kolom Mentah `Rice_Yield_2015_2024_Audited.csv`
 
-Dataset memisahkan hasil panen dan indikator iklim muson menurut tiga musim fenologi padi tropis:
-* **Aus**: Pra-Muson / Hujan Awal (April s.d. Juli).
-* **Aman**: Muson Utama (Juli s.d. November/Desember).
-* **Boro**: Musim Kemarau Beririgasi (Desember s.d. Mei).
+File data memuat 36 kolom yang terbagi menjadi 3 kelompok fungsional:
 
-### Kolom-Kolom Utama di File `Rice_Yield_2015_2024_Audited.csv`:
-* `district_id` / `adm2_code`: ID administratif distrik.
-* `district`: Nama distrik (64 entitas).
-* `crop`: Varietas/musim padi (`Aus`, `Aman`, `Boro`).
-* `crop_year`: Tahun panen (2015–2024).
-* `yield_t_ha`: Produktivitas panen padi (Ton/Hektar).
-* `area_ha`: Luas panen (Hektar).
-* `production_mt`: Total produksi padi (Metrik Ton).
-* `flag_neighbor_spike`: Bendera audit anomali lokal.
+### A. Variabel Pokok Agronomi & Wilayah (Kolom 1–13)
+| No | Nama Kolom | Tipe Data | Satuan | Deskripsi & Interpretasi |
+| :---: | :--- | :---: | :---: | :--- |
+| 1 | `district_id` | Integer | ID Angka | Nomor urut unik distrik (1 s.d. 64) |
+| 2 | `adm2_code` | String | Kode ISO | Kode geospasial ADM2 resmi distrik |
+| 3 | `district` | String | Teks | Nama resmi distrik (e.g. Gazipur, Mymensingh, Bogura) |
+| 4 | `district_bbs` | String | Teks | Nama distrik menurut standar Biro Statistik Bangladesh (BBS) |
+| 5 | `district_climate` | String | Teks | Stasiun meteorologi rujukan terdekat untuk distrik tersebut |
+| 6 | `crop_id` | Integer | ID Angka | Kode numerik musim tanam (1 = Aus, 2 = Aman, 3 = Boro) |
+| 7 | `crop` | String | Kategori | Nama musim tanam (`Aus`, `Aman`, `Boro`) |
+| 8 | `crop_year` | String | Teks | Periode tahun kalender tanam (e.g. `2015-16`, `2023-24`) |
+| 9 | `year_start` | Integer | Tahun | Tahun awal siklus tanam (e.g. `2015`) |
+| 10 | `year_end` | Integer | Tahun | Tahun akhir / panen siklus tanam (e.g. `2016`) |
+| 11 | `area_ha` | Float | Hektar | Luas panen riil setelah audit |
+| 12 | `yield_t_ha` | Float | Ton / Hektar | Produktivitas hasil panen padi riil ($1	ext{ t/ha} = 10	ext{ ku/ha}$) |
+| 13 | `production_mt` | Float | Metrik Ton | Total volume produksi fisik panen padi |
+
+### B. Validasi Matematika & Jejak Sumber Audit (Kolom 14–26)
+| No | Nama Kolom | Tipe Data | Satuan | Deskripsi & Interpretasi |
+| :---: | :--- | :---: | :---: | :--- |
+| 14 | `yield_calc_t_ha` | Float | Ton / Hektar | Hasil hitung ulang identitas: $	ext{production\_mt} / 	ext{area\_ha}$ |
+| 15 | `yield_abs_diff` | Float | Ton / Hektar | Selisih absolut: $|	ext{yield\_t\_ha} - 	ext{yield\_calc\_t\_ha}|$ |
+| 16 | `yield_rel_diff_pct`| Float | Persen ($\%$) | Persentase diskrepansi matematis pelaporan |
+| 17 | `area_ha_raw` | Float | Hektar | Angka luas panen mentah sebelum verifikasi dokumen sumber |
+| 18 | `yield_t_ha_raw` | Float | Ton / Hektar | Angka produktivitas mentah sebelum audit |
+| 19 | `production_mt_raw`| Float | Metrik Ton | Angka produksi mentah sebelum audit |
+| 20 | `verified_source_correction` | Boolean | True/False | Apakah baris ini mengalami koreksi sumber resmi |
+| 21 | `correction_note` | String | Teks | Catatan detail perbaikan data |
+| 22 | `correction_source`| String | Teks | Dokumen resmi rujukan koreksi (BBS Yearbook) |
+| 23 | `correction_url` | String | URL | Tautan digital berkas verifikasi |
+| 24 | `source_page` | String | Halaman | Nomor halaman dokumen sumber cetak |
+| 25 | `source_document` | String | Teks | Nama file dokumen publikasi resmi BBS |
+| 26 | `source_url` | String | URL | Tautan unduhan publikasi resmi BBS |
+
+### C. Indikator Pertumbuhan YoY & Flags Audit Kualitas (Kolom 27–36)
+| No | Nama Kolom | Tipe Data | Satuan | Deskripsi & Arti Nilai |
+| :---: | :--- | :---: | :---: | :--- |
+| 27 | `area_ha_yoy_pct` | Float | Persen ($\%$) | Pertumbuhan luas panen YoY. **Bernilai `NaN` pada musim 2015-16** karena merupakan musim awal (*base year*) tanpa lag $t-1$. |
+| 28 | `yield_t_ha_yoy_pct`| Float | Persen ($\%$) | Pertumbuhan produktivitas YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag $t-1$. |
+| 29 | `production_mt_yoy_pct`| Float| Persen ($\%$) | Pertumbuhan produksi fisik YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag $t-1$. |
+| 30 | `flag_yield_math` | Integer | $0 / 1$ | **Audit Identitas**: $0$ = Lolos uji matematis (konsisten). $1$ = Diskrepansi $>1\%$. |
+| 31 | `flag_area_yoy_50` | Integer | $0 / 1$ | **Audit Luas**: $0$ = Normal. $1$ = Lonjakan luas panen $>50\%$ YoY. |
+| 32 | `flag_yield_yoy_25` | Integer | $0 / 1$ | **Audit Yield**: $0$ = Normal. $1$ = Lonjakan hasil panen $>25\%$ YoY. |
+| 33 | `flag_prod_yoy_50` | Integer | $0 / 1$ | **Audit Produksi**: $0$ = Normal. $1$ = Lonjakan volume produksi $>50\%$ YoY. |
+| 34 | `flag_neighbor_spike`| Integer | $0 / 1$ | **Audit Spasial**: $0$ = Normal. $1$ = Anomali relatif terhadap distrik tetangga. |
+| 35 | `flag_any_review` | Integer | $0 / 1$ | **Bendera Agregat**: $0$ = **Lolos Seluruh Audit (Data Bersih)**. $1$ = Butuh review. |
+| 36 | `review_reason` | String | Teks | Catatan alasan anomali jika flag = 1. **Bernilai `NaN` jika data bersih (flag = 0)**. |
+
+> [!NOTE]
+> **Kenapa di baris-baris awal terlihat nilai `NaN` dan `0`?**
+> 1. `NaN` pada persentase YoY terjadi karena tahun awal panel (2015-16) secara alami tidak memiliki data pembanding tahun sebelumnya ($t-1$).
+> 2. Angka `0` pada seluruh kolom `flag_*` menandakan bahwa data tersebut **100% LOLOS AUDIT (BERSIH)**, tidak memiliki kesalahan kalkulasi atau lonjakan mencurigakan.
+> 3. `NaN` pada `review_reason` berarti data tersebut valid sehingga tidak memerlukan catatan koreksi.
 
 ---
 
 ## 4. Status Audit Metodologi & Batasan Peran di TaniAdapt
 
 > [!IMPORTANT]
-> **BUKAN DATASET KEPUTUSAN JAWA BARAT**: Dataset ini tidak membuktikan performa model di Jawa Barat. Perannya terbatas sebagai **demonstrasi metodologis replikasi** atas arsitektur regresi panel ber-resolusi musim.
-
-### Pembelajaran Metodologis:
-1. **Pendekatan Panel Regression**: Menunjukkan pendekatan yang dipakai pada dataset ini, di mana kontrol terhadap heterogenitas spasial (*District Fixed Effects*) dan tren waktu (*Year Fixed Effects*) memisahkan variasi cuaca dari heterogenitas tanah dan manajemen.
-2. **Pentingnya Resolusi Musiman**: Menunjukkan bahwa agregasi tahunan mentah (seperti pada data dinas lokal) menghapus variasi cuaca musiman yang berlawanan antara musim hujan dan musim kemarau.
+> **BUKAN DATASET KEPUTUSAN JAWA BARAT**: Dataset ini tidak merepresentasikan petani di Jawa Barat. Perannya dalam proyek TaniAdapt adalah sebagai **demonstrasi metodologis replikasi** atas arsitektur regresi panel ber-resolusi musim (*Season-Specific Panel Fixed Effects Regression*).
 
 ---
 
@@ -55,13 +95,11 @@ Dataset memisahkan hasil panen dan indikator iklim muson menurut tiga musim feno
 import pandas as pd
 from pathlib import Path
 
-fpath = Path("data/raw/DS02_bangladesh_rice_panel/extracted/Growing_Season_Climate_Rice_Bangladesh_Replication/Rice_Yield_2015_2024_Audited.csv")
-df = pd.read_csv(fpath)
+csv_path = Path("data/raw/DS02_bangladesh_rice_panel/extracted/Growing_Season_Climate_Rice_Bangladesh_Replication/Rice_Yield_2015_2024_Audited.csv")
+df = pd.read_csv(csv_path)
 
 # Filter musim panen Aman (muson utama)
 df_aman = df[df['crop'] == 'Aman'].copy()
-
-summary = df_aman.groupby('crop_year')['yield_t_ha'].agg(['count', 'mean', 'std']).reset_index()
-print("Ringkasan Musim Aman Bangladesh (2015-2024):")
-print(summary.head())
+print("Observasi Padi Musim Aman:", df_aman.shape)
+print("Rata-rata Produktivitas Nasional:", df_aman['yield_t_ha'].mean(), "t/ha")
 ```
