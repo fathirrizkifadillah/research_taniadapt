@@ -135,17 +135,21 @@ research_taniAdapt/
 
 ## 🚀 Panduan Eksekusi Notebook (`notebook/`)
 
-Seluruh 6 notebook di folder `notebook/` telah diselaraskan dengan 6 dataset in-scope, dilengkapi **Visualisasi Multi-Panel** dan **Executive Audit Scorecard**:
+Seluruh 10 notebook di folder `notebook/` telah diselaraskan dengan dataset in-scope, hasil audit rekonsiliasi, dan visualisasi diagnostik EDA:
 
-1. **`01_AgERA5.ipynb`** — *DS01 Primary Weather Backbone*: Validasi 24 variabel cuaca harian (2015–2024) di 7 lokasi Jabar, uji hukum fisika atmosfer, grafik suhu Bandung 2024, serta komparasi curah hujan tahunan 7 lokasi.
+1. **`01_AgERA5.ipynb`** — *DS01 Primary Weather Backbone*: Validasi 24 variabel cuaca harian (2015–2024) di 27 Kab/Kota Jabar, uji hukum fisika atmosfer, grafik suhu, serta komparasi curah hujan tahunan.
 2. **`02_bangladesh_rice_panel.ipynb`** — *DS02 Rice Panel Benchmark*: Replikasi BRRI/Elsevier 64 distrik (2015–2024), uji keunikan kunci panel, stacked bar observasi per musim, dan boxplot variabilitas hasil panen (*yield* t/ha).
-3. **`03_west_java_rice_productivity.ipynb`** — *DS03 Regional Rice Outcome*: Data resmi 27 Kab/Kota (2015–2020), matriks lengkap 162 baris Padi Total, Sawah, dan Ladang, grafik tren rata-rata, serta disparitas produktivitas sawah vs ladang.
-4. **`04_indonesia_agroclimatic.ipynb`** — *DS04 Extreme Indicators Reference*: 612 grid points nasional (14 titik Jabar), kamus 12 indikator agroklimat ekstrem (CDD, CWD, GDD), dan peta sebaran spasial Indonesia.
-5. **`05_subang_maize_productivity.ipynb`** — *DS05 Regional Maize Outcome*: Data jagung 27 Kab/Kota (2015–2022), isolasi runtun waktu Kabupaten Subang, komparasi tren Subang vs Jawa Barat, dan ranking Top-5 sentra jagung Jabar 2022.
-6. **`06_west_java_horticulture_productivity.ipynb`** — *DS06 Regional Horticulture Outcome*: Tren Cabai Rawit & Cabai Besar (2017–2024), komparasi produktivitas tahunan, dan **Audit Kritis Target Outcome** (konfirmasi bahwa data ini adalah statistik hasil panen, BUKAN label penyakit tanaman).
+3. **`03_west_java_rice_productivity.ipynb`** — *DS03 Regional Rice Outcome*: Rekonsiliasi B1 Padi 27 Kab/Kota (2015–2020), konfirmasi area-weighted baseline pre-KSA cocok 100% dengan BPS resmi, dan isolasi artefak 2019.
+4. **`04_indonesia_agroclimatic.ipynb`** — *DS04 Extreme Indicators Reference*: 612 grid points nasional (12 titik poligon resmi Jabar / 14 titik bbox), kamus 12 indikator agroklimat ekstrem, dan penghapusan ambang batas hari absolut (diganti persentil empiris).
+5. **`05_subang_maize_productivity.ipynb`** — *DS05 Regional Maize Outcome*: Data jagung 27 Kab/Kota (2015–2022), deteksi imputasi seragam 2022, isolasi runtun waktu Subang, dan evaluasi detrending linear vs piecewise break.
+6. **`06_west_java_horticulture_productivity.ipynb`** — *DS06 Regional Horticulture Outcome*: Tren Cabai Rawit & Cabai Besar (2017–2024), koreksi CV empiris sejati (4.49% & 5.71%), dan modul aturan mikroklimat IFWC berbasis persentil $P_{10}$ lokal.
+7. **`07_soybean_and_spatial_geoboundaries.ipynb`** — *DS07 Spatial Geoboundaries & Kedelai*: 17 kabupaten sentra kedelai aktif, centroid resmi 27 Kab/Kota, dan audit elevasi DEM SRTM.
+8. **`08_production_and_harvest_area.ipynb`** — *DS08 Volume Produksi & Luas Panen*: Dekomposisi logaritma $\Delta \ln(\text{Prod}) = \Delta \ln(\text{Area}) + \Delta \ln(\text{Yield})$ membuktikan 98.4% lonjakan Subang didorong perluasan luas panen.
+9. **`09_climate_covariates_and_chirps.ipynb`** — *DS09 Iklim Makro ONI/DMI & Validasi CHIRPS*: Korelasi anomali deseasonalized $r \approx 0.73$, bias orografis Bandung Raya (+33% s.d. +61%), dan koreksi Tasikmalaya sebagai rata-rata 3 tahun benchmark.
+10. **`10_phase6_exploratory_data_analysis.ipynb`** — *Phase 6 Pre-Registered EDA Synthesis*: Notebook eksekutif yang mengeksekusi seluruh pengujian Bagian B (B1: Integritas Outcome, B2: Validasi Cuaca Spasial, B3: Matching Cuaca-Outcome dengan MDE dan LOO Forest Plot, B4: Hortikultura Mikroklimat Tier B).
 
 ### Cara Menjalankan:
-Buka file notebook di VS Code / Jupyter Lab, pilih kernel Python (`Python 3.11.x`), lalu klik **Run All**. Kode bersifat *idempotent* (langsung membaca data lokal dari `data/raw/` tanpa re-download) dan otomatis menyimpan grafik ke `reports/figures/`.
+Buka file notebook di VS Code / Jupyter Lab, pilih kernel Python (`Python 3.11.x`), lalu klik **Run All**. Kode bersifat *idempotent* (langsung membaca data lokal dari `data/raw/` tanpa re-download) dan otomatis menyimpan grafik ke `reports/figures/` dan `reports/eda/`.
 
 ---
 
