@@ -14,12 +14,12 @@
 
 ## 2. Cakupan Spasial, Komoditas, & Rentang Waktu
 * **Cakupan Spasial:**
-  * `produktivitas_sbs_jabar.csv`: **Tingkat Agregat Provinsi Jawa Barat** ($N=9$ baris observasi per komoditas, 2016–2024).
+  * `produktivitas_sbs_jabar.csv`: **Tingkat Agregat Provinsi Jawa Barat** (N = 9 baris observasi per komoditas, 2016–2024).
   * `produksi_sayuran_komoditas_jabar.csv`: **Tingkat Kabupaten/Kota** (volume produksi sayuran, 2016–2024).
 * **Rentang Waktu:** 9 Tahun Penuh (**2016 s.d. 2024**).
 * **Komoditas Utama yang Dipantau:** Cabai Rawit, Cabai Besar, Tomat, Bawang Merah.
 * **Satuan Ukuran Aktual:**
-  * Produktivitas SBS: **KUINTAL / HEKTAR** ($1	ext{ ku} = 100	ext{ kg} = 0.1	ext{ ton}$).
+  * Produktivitas SBS: **KUINTAL / HEKTAR** (1 ku = 100 kg = 0,1 ton).
   * Volume Produksi Sayuran: **TON** (bukan Kuintal).
 
 ---
@@ -59,7 +59,7 @@
 > 1. Dataset ini **HANYA BERISI ANGKA HASIL PANEN DAN VOLUME PRODUKSI**.
 > 2. Dataset ini **TIDAK MEMILIKI LABEL PENYAKIT / HAMA (OPT)** (tidak ada data antraknosa, layu fusarium, atau hawar daun).
 > 3. **Larangan Metodologis**: Dilarang melatih model Machine Learning klasifikasi atau probabilitas penyakit dari data panen tahunan makro.
-> 4. **Arsitektur Advisory**: Menggunakan **Indeks Kondisi Cuaca Mendukung (IFWC)** berbasis depresiasi titik embun malam ($T_{\min} - T_d$) dan kelembapan diurnal relatif.
+> 4. **Arsitektur Advisory**: Menggunakan **Indeks Kondisi Cuaca Mendukung (IFWC)** berbasis depresiasi titik embun malam (T_min - T_dew) dan kelembapan diurnal relatif.
 
 ---
 
@@ -77,7 +77,6 @@ print(f"Kolom Aktual SBS: {df_sbs.columns.tolist()}")
 
 # Filter komoditas cabai rawit dan cabai besar
 chili_df = df_sbs[df_sbs['komoditi'].str.upper().str.contains('CABAI')].copy()
-print("
-Ringkasan Produktivitas Cabai Jabar (ku/ha):")
+print("\nRingkasan Produktivitas Cabai Jabar (ku/ha):")
 print(chili_df[['tahun', 'komoditi', 'produktivitas_sayur_buah', 'satuan']].sort_values(['komoditi', 'tahun']))
 ```

@@ -8,8 +8,8 @@ Repositori ini memuat **9 Dataset Utama (DS01 s.d. DS09)** yang terverifikasi se
 
 | ID | Nama Dataset | Penerbit / Portal Sumber Resmi | Cakupan Spasial | Cakupan Waktu & N_eff | Total Kolom | Status Disposisi Audit |
 | :---: | :--- | :--- | :--- | :--- | :---: | :---: |
-| **DS01** | **AgERA5 Agrometeorological Indicators** | Copernicus CDS (ECMWF / EU) | **27 Kab/Kota Se-Jawa Barat** | 2015–2024 (Harian, $98.631$ baris) | **27 kolom** | **PASS** (Backbone Cuaca) |
-| **DS02** | **Bangladesh Rice Climate-Yield Panel** | Mendeley Data / BRRI | 64 Distrik Bangladesh | 2015–2024 (3 Musim, $1.728$ baris) | **36 kolom** | **BENCHMARK** (Replikasi Panel) |
+| **DS01** | **AgERA5 Agrometeorological Indicators** | Copernicus CDS (ECMWF / EU) | **27 Kab/Kota Se-Jawa Barat** | 2015–2024 (Harian, 98.631 baris) | **27 kolom** | **PASS** (Backbone Cuaca) |
+| **DS02** | **Bangladesh Rice Climate-Yield Panel** | Mendeley Data / BRRI | 64 Distrik Bangladesh | 2015–2024 (3 Musim, 1.728 baris) | **36 kolom** | **BENCHMARK** (Replikasi Panel) |
 | **DS03** | **Produktivitas Padi Jawa Barat** | Distanhor / Open Data Jabar | **27 Kab/Kota Se-Jawa Barat** | 2015–2020 (Tahunan, 162 baris) | **8 kolom** | **PASS** (Artefak 2019 Terisolasi) |
 | **DS04** | **Indonesia Nationwide Agroclimatic** | Elsevier / Mendeley Data | 612 Titik Grid (14 di Jabar) | 2016–2025 (Harian) | **23 kolom** | **PASS** (Validasi Silang Grid) |
 | **DS05** | **Produktivitas Jagung Jawa Barat** | Distanhor / Open Data Jabar | **27 Kab/Kota Se-Jawa Barat** | 2015–2022 (Tahunan, 216 baris) | **8 kolom** | **PASS** (Target Jagung Regional) |

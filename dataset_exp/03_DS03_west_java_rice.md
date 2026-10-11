@@ -10,7 +10,7 @@
 * **Penerbit:** Dinas Tanaman Pangan dan Hortikultura Provinsi Jawa Barat
 * **Lisensi:** Open Data Pemerintah Provinsi Jawa Barat (Bebas Riset)
 * **Format File Lokal:** CSV dan JSON di `data/raw/DS03_west_java_rice_productivity/`
-* **Ukuran Total:** ~11 KB per file (162 baris panel seimbang: 27 kabupaten/kota $	imes$ 6 tahun)
+* **Ukuran Total:** ~11 KB per file (162 baris panel seimbang: 27 kabupaten/kota × 6 tahun)
 
 ---
 
@@ -18,7 +18,7 @@
 * **Cakupan Spasial:** **27 Kabupaten/Kota Se-Jawa Barat** (18 Kabupaten Sentra Pertanian + 9 Kota Administrasi).
 * **Rentang Waktu:** 6 Tahun Penuh (**2015 s.d. 2020**).
 * **Frekuensi:** Tahunan (*annual aggregate*).
-* **Jumlah Observasi:** 162 baris per kategori padi ($27 	ext{ kab/kota} 	imes 6 	ext{ tahun}$).
+* **Jumlah Observasi:** 162 baris per kategori padi (27 kab/kota × 6 tahun).
 
 ---
 
@@ -34,7 +34,7 @@ Ketiga berkas CSV (`produktivitas_padi_jabar.csv`, `produktivitas_padi_sawah_jab
 | 4 | `kode_kabupaten_kota`| Integer | Kode BPS | Kode administratif 27 Kabupaten/Kota (e.g. `3204` Kab. Bandung) | Kunci relasi ADM2 |
 | 5 | `nama_kabupaten_kota`| String | Teks | Nama resmi Kabupaten atau Kota (e.g. `KABUPATEN BANDUNG`, `KOTA BANDUNG`) | 18 Kab & 9 Kota |
 | 6 | `produktivitas_padi2` / `produktivitas_padi` | Float | Kuintal / Ha | Rata-rata produktivitas padi hasil panen per hektar | **Kolom di file total bernama `produktivitas_padi2`, sedangkan di sawah & ladang bernama `produktivitas_padi`** |
-| 7 | `satuan` | String | Teks | Satuan resmi pengukuran: `KUINTAL/HEKTAR` | $1	ext{ ku} = 100	ext{ kg} = 0.1	ext{ ton}$ |
+| 7 | `satuan` | String | Teks | Satuan resmi pengukuran: `KUINTAL/HEKTAR` | 1 ku = 100 kg = 0.1 ton |
 | 8 | `tahun` | Integer | Tahun | Tahun kalender pencatatan data (**2015 s.d. 2020**) | Rentang 6 tahun |
 
 ---
@@ -45,7 +45,7 @@ Ketiga berkas CSV (`produktivitas_padi_jabar.csv`, `produktivitas_padi_sawah_jab
 > **TEMUAN ARTEFAK SERI DATA (BLOCKER B1)**: 
 > Data DS03 mencatat lonjakan produktivitas rata-rata provinsi dari **55,39 ku/ha (2018)** melonjak drastis ke **68,55 ku/ha (2019)** (+23,7%), lalu anjlok kembali ke **54,22 ku/ha (2020)** (-20,9%). Lonjakan ini terjadi serentak di 27 dari 27 Kabupaten/Kota.
 > 
-> Investigasi membuktikan bahwa angka 2019 pada portal Galura merupakan **data Gabah Kering Panen (GKP) mentah** sebelum konversi Gabah Kering Giling (GKG). Rasio lonjakannya ($pprox 1,19$) identik dengan faktor susut konversi GKP ke GKG. Data riil BPS KSA mencatat produktivitas 2019 sesungguhnya stabil di $57,69	ext{ ku/ha}$.
+> Investigasi membuktikan bahwa angka 2019 pada portal Galura merupakan **data Gabah Kering Panen (GKP) mentah** sebelum konversi Gabah Kering Giling (GKG). Rasio lonjakannya (≈ 1.19) identik dengan faktor susut konversi GKP ke GKG. Data riil BPS KSA mencatat produktivitas 2019 sesungguhnya stabil di 57.69 ku/ha.
 
 ---
 
@@ -63,7 +63,6 @@ print(f"Kolom Aktual: {df.columns.tolist()}")
 
 # Rata-rata produktivitas per tahun
 annual = df.groupby('tahun')['produktivitas_padi2'].agg(['count', 'mean', 'std']).reset_index()
-print("
-Trayektori Produktivitas Padi Total Jabar (ku/ha):")
+print("\nTrayektori Produktivitas Padi Total Jabar (ku/ha):")
 print(annual)
 ```

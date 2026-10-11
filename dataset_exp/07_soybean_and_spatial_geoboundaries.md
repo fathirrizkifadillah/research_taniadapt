@@ -16,8 +16,8 @@
 ## 2. Cakupan Spasial & Resolusi Waktu
 * **Cakupan Spasial:** **27 Kabupaten/Kota Se-Jawa Barat** (dengan visualisasi poligon batas provinsi dan titik centroid 27 wilayah).
 * **Rentang Waktu:** 8 Tahun (**2015 s.d. 2022**).
-* **Jumlah Observasi:** 216 baris ($27	ext{ kab/kota} 	imes 8	ext{ tahun}$).
-  * 156 baris bernilai positif ($>0	ext{ ku/ha}$), 60 baris bernilai nol (terkonsentrasi pada 9 Kota non-pertanian).
+* **Jumlah Observasi:** 216 baris (27 kab/kota × 8 tahun).
+  * 156 baris bernilai positif (> 0 ku/ha), 60 baris bernilai nol (terkonsentrasi pada 9 Kota non-pertanian).
 
 ---
 
@@ -42,14 +42,14 @@
 | 2 | `tipe_wilayah` | String | Kategori | `KABUPATEN` (18 wilayah) atau `KOTA` (9 wilayah) |
 | 3 | `true_centroid_lat` | Float | Derajat Desimal | Lintang geografis centroid poligon ADM2 geoBoundaries |
 | 4 | `true_centroid_lon` | Float | Derajat Desimal | Bujur geografis centroid poligon ADM2 geoBoundaries |
-| 5 | `luas_approx_km2` | Float | $	ext{km}^2$ | Estimasi luas wilayah poligon dalam kilometer persegi |
-| 6 | `n_sel_agera5_0_1deg` | Integer | Jumlah Sel | Jumlah sel grid AgERA5 ($0.1^\circ 	imes 0.1^\circ$) yang berada di dalam wilayah |
+| 5 | `luas_approx_km2` | Float | km² | Estimasi luas wilayah poligon dalam kilometer persegi |
+| 6 | `n_sel_agera5_0_1deg` | Integer | Jumlah Sel | Jumlah sel grid AgERA5 (0.1° × 0.1°) yang berada di dalam wilayah |
 | 7 | `shape_name_geoboundaries`| String | Teks | Nama wilayah padanan pada database geoBoundaries global |
 | 8 | `shape_type` | String | Teks | Tipe entitas administrasi (`Regency`, `City`, `County`) |
 
 ### C. File Geospasial `jawa_barat_provinsi.geojson`
 * **Format:** GeoJSON RFC 7946 / EPSG:4326.
-* **Geometri:** `MultiPolygon` resmi batas daratan dan kepulauan Provinsi Jawa Barat (Bounds: $106.37^\circ - 108.83^\circ	ext{ BT}, -7.82^\circ - -5.92^\circ	ext{ LS}$).
+* **Geometri:** `MultiPolygon` resmi batas daratan dan kepulauan Provinsi Jawa Barat (Bounds: 106.37° – 108.83° BT, 7.82° – 5.92° LS).
 * **Fungsi:** Membentuk siluet visual peta wilayah Provinsi Jawa Barat yang akurat saat diplot di notebook.
 
 ---
@@ -59,7 +59,7 @@
 | Dimensi Evaluasi | Kedelai (DS07) | Tomat (DS06) | Implikasi bagi Sistem TaniAdapt |
 | :--- | :--- | :--- | :--- |
 | **Resolusi Spasial** | Tingkat Kabupaten (ADM2) | Tingkat Provinsi (ADM1 agregat) | Kedelai memiliki variasi lokal antar-kabupaten |
-| **Total Observasi** | 216 baris (156 positif) | 9 baris ($N=9$ tahun) | Kedelai memiliki sampel 24x lebih besar |
+| **Total Observasi** | 216 baris (156 positif) | 9 baris (N = 9 tahun) | Kedelai memiliki sampel 24x lebih besar |
 | **Sentra Runtun Penuh**| 14 kabupaten penuh 8 thn | 0 (data kabupaten tidak ada) | Kedelai layak untuk ekonometrika panel |
 | **Dukungan Literatur** | Paper 13 & 14 di repo | Tidak ada paper spesifik tomat | Kedelai didukung literatur empiris repo |
 | **Arsitektur Advisory** | **Tier A (Panel Regression)**| **Tier B (IFWC Mikroklimat)**| Tomat berbagi modul kelembapan dengan Cabai |

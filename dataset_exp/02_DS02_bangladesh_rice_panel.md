@@ -8,7 +8,7 @@
 * **URL Resmi:** [Mendeley Data — Dataset h94z4ftts2](https://data.mendeley.com/datasets/h94z4ftts2/1)
 * **Lisensi:** Creative Commons Attribution 4.0 International (CC BY 4.0)
 * **Format File Lokal:** CSV hasil ekstraksi arsip ZIP resmi (`data/raw/DS02_bangladesh_rice_panel/extracted/.../Rice_Yield_2015_2024_Audited.csv`)
-* **Ukuran Total:** ~2.1 MB (1.728 baris panel seimbang: 64 distrik $	imes$ 3 musim $	imes$ 9 tahun)
+* **Ukuran Total:** ~2.1 MB (1.728 baris panel seimbang: 64 distrik × 3 musim × 9 tahun)
 
 ---
 
@@ -40,15 +40,15 @@ File data memuat 36 kolom yang terbagi menjadi 3 kelompok fungsional:
 | 9 | `year_start` | Integer | Tahun | Tahun awal siklus tanam (e.g. `2015`) |
 | 10 | `year_end` | Integer | Tahun | Tahun akhir / panen siklus tanam (e.g. `2016`) |
 | 11 | `area_ha` | Float | Hektar | Luas panen riil setelah audit |
-| 12 | `yield_t_ha` | Float | Ton / Hektar | Produktivitas hasil panen padi riil ($1	ext{ t/ha} = 10	ext{ ku/ha}$) |
+| 12 | `yield_t_ha` | Float | Ton / Hektar | Produktivitas hasil panen padi riil (1 t/ha = 10 ku/ha) |
 | 13 | `production_mt` | Float | Metrik Ton | Total volume produksi fisik panen padi |
 
 ### B. Validasi Matematika & Jejak Sumber Audit (Kolom 14–26)
 | No | Nama Kolom | Tipe Data | Satuan | Deskripsi & Interpretasi |
 | :---: | :--- | :---: | :---: | :--- |
-| 14 | `yield_calc_t_ha` | Float | Ton / Hektar | Hasil hitung ulang identitas: $	ext{production\_mt} / 	ext{area\_ha}$ |
-| 15 | `yield_abs_diff` | Float | Ton / Hektar | Selisih absolut: $|	ext{yield\_t\_ha} - 	ext{yield\_calc\_t\_ha}|$ |
-| 16 | `yield_rel_diff_pct`| Float | Persen ($\%$) | Persentase diskrepansi matematis pelaporan |
+| 14 | `yield_calc_t_ha` | Float | Ton / Hektar | Hasil hitung ulang identitas: `production_mt / area_ha` |
+| 15 | `yield_abs_diff` | Float | Ton / Hektar | Selisih absolut: `|yield_t_ha - yield_calc_t_ha|` |
+| 16 | `yield_rel_diff_pct`| Float | Persen (%) | Persentase diskrepansi matematis pelaporan |
 | 17 | `area_ha_raw` | Float | Hektar | Angka luas panen mentah sebelum verifikasi dokumen sumber |
 | 18 | `yield_t_ha_raw` | Float | Ton / Hektar | Angka produktivitas mentah sebelum audit |
 | 19 | `production_mt_raw`| Float | Metrik Ton | Angka produksi mentah sebelum audit |
@@ -63,20 +63,20 @@ File data memuat 36 kolom yang terbagi menjadi 3 kelompok fungsional:
 ### C. Indikator Pertumbuhan YoY & Flags Audit Kualitas (Kolom 27–36)
 | No | Nama Kolom | Tipe Data | Satuan | Deskripsi & Arti Nilai |
 | :---: | :--- | :---: | :---: | :--- |
-| 27 | `area_ha_yoy_pct` | Float | Persen ($\%$) | Pertumbuhan luas panen YoY. **Bernilai `NaN` pada musim 2015-16** karena merupakan musim awal (*base year*) tanpa lag $t-1$. |
-| 28 | `yield_t_ha_yoy_pct`| Float | Persen ($\%$) | Pertumbuhan produktivitas YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag $t-1$. |
-| 29 | `production_mt_yoy_pct`| Float| Persen ($\%$) | Pertumbuhan produksi fisik YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag $t-1$. |
-| 30 | `flag_yield_math` | Integer | $0 / 1$ | **Audit Identitas**: $0$ = Lolos uji matematis (konsisten). $1$ = Diskrepansi $>1\%$. |
-| 31 | `flag_area_yoy_50` | Integer | $0 / 1$ | **Audit Luas**: $0$ = Normal. $1$ = Lonjakan luas panen $>50\%$ YoY. |
-| 32 | `flag_yield_yoy_25` | Integer | $0 / 1$ | **Audit Yield**: $0$ = Normal. $1$ = Lonjakan hasil panen $>25\%$ YoY. |
-| 33 | `flag_prod_yoy_50` | Integer | $0 / 1$ | **Audit Produksi**: $0$ = Normal. $1$ = Lonjakan volume produksi $>50\%$ YoY. |
-| 34 | `flag_neighbor_spike`| Integer | $0 / 1$ | **Audit Spasial**: $0$ = Normal. $1$ = Anomali relatif terhadap distrik tetangga. |
-| 35 | `flag_any_review` | Integer | $0 / 1$ | **Bendera Agregat**: $0$ = **Lolos Seluruh Audit (Data Bersih)**. $1$ = Butuh review. |
+| 27 | `area_ha_yoy_pct` | Float | Persen (%) | Pertumbuhan luas panen YoY. **Bernilai `NaN` pada musim 2015-16** karena merupakan musim awal (*base year*) tanpa lag t-1. |
+| 28 | `yield_t_ha_yoy_pct`| Float | Persen (%) | Pertumbuhan produktivitas YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag t-1. |
+| 29 | `production_mt_yoy_pct`| Float| Persen (%) | Pertumbuhan produksi fisik YoY. **Bernilai `NaN` pada musim 2015-16** karena tidak ada lag t-1. |
+| 30 | `flag_yield_math` | Integer | 0 / 1 | **Audit Identitas**: 0 = Lolos uji matematis (konsisten). 1 = Diskrepansi > 1%. |
+| 31 | `flag_area_yoy_50` | Integer | 0 / 1 | **Audit Luas**: 0 = Normal. 1 = Lonjakan luas panen > 50% YoY. |
+| 32 | `flag_yield_yoy_25` | Integer | 0 / 1 | **Audit Yield**: 0 = Normal. 1 = Lonjakan hasil panen > 25% YoY. |
+| 33 | `flag_prod_yoy_50` | Integer | 0 / 1 | **Audit Produksi**: 0 = Normal. 1 = Lonjakan volume produksi > 50% YoY. |
+| 34 | `flag_neighbor_spike`| Integer | 0 / 1 | **Audit Spasial**: 0 = Normal. 1 = Anomali relatif terhadap distrik tetangga. |
+| 35 | `flag_any_review` | Integer | 0 / 1 | **Bendera Agregat**: 0 = **Lolos Seluruh Audit (Data Bersih)**. 1 = Butuh review. |
 | 36 | `review_reason` | String | Teks | Catatan alasan anomali jika flag = 1. **Bernilai `NaN` jika data bersih (flag = 0)**. |
 
 > [!NOTE]
 > **Kenapa di baris-baris awal terlihat nilai `NaN` dan `0`?**
-> 1. `NaN` pada persentase YoY terjadi karena tahun awal panel (2015-16) secara alami tidak memiliki data pembanding tahun sebelumnya ($t-1$).
+> 1. `NaN` pada persentase YoY terjadi karena tahun awal panel (2015-16) secara alami tidak memiliki data pembanding tahun sebelumnya (t-1).
 > 2. Angka `0` pada seluruh kolom `flag_*` menandakan bahwa data tersebut **100% LOLOS AUDIT (BERSIH)**, tidak memiliki kesalahan kalkulasi atau lonjakan mencurigakan.
 > 3. `NaN` pada `review_reason` berarti data tersebut valid sehingga tidak memerlukan catatan koreksi.
 
@@ -98,8 +98,8 @@ from pathlib import Path
 csv_path = Path("data/raw/DS02_bangladesh_rice_panel/extracted/Growing_Season_Climate_Rice_Bangladesh_Replication/Rice_Yield_2015_2024_Audited.csv")
 df = pd.read_csv(csv_path)
 
-# Filter musim panen Aman (muson utama)
-df_aman = df[df['crop'] == 'Aman'].copy()
-print("Observasi Padi Musim Aman:", df_aman.shape)
-print("Rata-rata Produktivitas Nasional:", df_aman['yield_t_ha'].mean(), "t/ha")
+print(f"Dimensi Data Padi Bangladesh: {df.shape}")
+print(f"Musim Tanam Tersedia: {df['crop'].unique().tolist()}")
+print(f"Total Distrik: {df['district'].nunique()}")
+print(f"Tingkat Kelulusan Audit Identitas Matematika: {(df['flag_yield_math'] == 0).mean()*100:.1f}%")
 ```

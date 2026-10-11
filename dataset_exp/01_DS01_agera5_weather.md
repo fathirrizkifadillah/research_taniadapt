@@ -56,39 +56,39 @@ Setiap file CSV di `data/raw/DS01_agera5/` memuat **27 kolom mentah lengkap** ta
 | No | Nama Kolom Aktual di CSV | Tipe Data | Satuan Asli | Konversi Agronomis | Fungsi dalam Engine TaniAdapt |
 | :---: | :--- | :---: | :---: | :---: | :--- |
 | 1 | `valid_time` | String | Tanggal Kalender | `YYYY-MM-DD` | Kunci pencocokan deret waktu harian |
-| 2 | `latitude` | Float | Derajat Desimal | $-90^\circ 	ext{ s.d. } +90^\circ$ | Lintang geografis centroid wilayah |
-| 3 | `longitude` | Float | Derajat Desimal | $-180^\circ 	ext{ s.d. } +180^\circ$ | Bujur geografis centroid wilayah |
-| 4 | `Temperature_Air_2m_Mean_24h` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Perhitungan Growing Degree Days (GDD) & akumulasi termal |
-| 5 | `Temperature_Air_2m_Min_24h` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Deteksi suhu dingin malam & depresiasi titik embun |
-| 6 | `Temperature_Air_2m_Max_24h` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Pemantauan cekaman panas (*heat stress*) saat anthesis |
-| 7 | `Precipitation_Flux` | Float | $	ext{mm/hari}$ | Natively $	ext{mm/hari}$ | Akumulasi hujan, awal musim tanam, deteksi kekeringan/banjir |
-| 8 | `Solar_Radiation_Flux` | Float | $J/m^2$ | Bagi $10^6 ightarrow MJ/m^2/	ext{hari}$ | Radiasi fotosintesis aktif (PAR) pembentukan biomassa |
-| 9 | `Dew_Point_Temperature_2m_Mean_24h` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Menghitung depresiasi embun malam ($T_{\min} - T_d$) |
-| 10 | `Derived_Relative_Humidity_2m_Max_24h` | Float | Persen ($\%$) | $0 - 100\%$ | Indikator kebasahan malam & risiko infeksi spora jamur |
-| 11 | `Derived_Relative_Humidity_2m_Min_24h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan minimum siang hari / potensi evapotranspirasi |
-| 12 | `Vapour_Pressure_Deficit_at_Maximum_Temperature`| Float | $hPa$ | Bagi $10 ightarrow kPa$ | Cekaman kekeringan atmosfer dan pembukaan stomata daun |
-| 13 | `ReferenceET_PenmanMonteith_FAO56` | Float | $	ext{mm/hari}$ | $	ext{mm/hari}$ | Evapotranspirasi acuan FAO-56 untuk neraca air irigasi |
-| 14 | `Wind_Speed_10m_Mean_24h` | Float | $m/s$ | $m/s$ | Kecepatan angin rata-rata, aerodinamika kanopi daun |
-| 15 | `Cloud_Cover_Mean_24h` | Float | Fraksi ($0-1$) | $0 - 100\%$ | Proporsi tutupan awan harian |
-| 16 | `Relative_Humidity_2m_06h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan relatif pukul 06:00 UTC (13:00 WIB / siang) |
-| 17 | `Relative_Humidity_2m_09h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan relatif pukul 09:00 UTC (16:00 WIB / sore) |
-| 18 | `Relative_Humidity_2m_12h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan relatif pukul 12:00 UTC (19:00 WIB / awal malam) |
-| 19 | `Relative_Humidity_2m_15h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan relatif pukul 15:00 UTC (22:00 WIB / tengah malam) |
-| 20 | `Relative_Humidity_2m_18h` | Float | Persen ($\%$) | $0 - 100\%$ | Kelembapan relatif pukul 18:00 UTC (01:00 WIB / dini hari) |
-| 21 | `Temperature_Air_2m_Max_Day_Time` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Suhu udara maksimum spesifik fase siang hari |
-| 22 | `Temperature_Air_2m_Mean_Day_Time` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Suhu udara rata-rata fase siang hari |
-| 23 | `Temperature_Air_2m_Mean_Night_Time`| Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Suhu udara rata-rata fase malam hari |
-| 24 | `Temperature_Air_2m_Min_Night_Time` | Float | Kelvin ($K$) | Kurangi $273.15 ightarrow ^\circ	ext{C}$ | Suhu udara minimum malam hari (waktu fajar) |
-| 25 | `Precipitation_Rain_Duration_Fraction` | Float | Fraksi ($0-1$) | Jam/24 | Proporsi durasi kejadian hujan air dalam 24 jam |
-| 26 | `Precipitation_Duration_Fraction` | Float | Fraksi ($0-1$) | Jam/24 | Proporsi durasi presipitasi total dalam 24 jam |
-| 27 | `Vapour_Pressure_Mean_24h` | Float | $hPa$ | Bagi $10 ightarrow kPa$ | Tekanan uap jenuh aktual rata-rata atmosfer |
+| 2 | `latitude` | Float | Derajat Desimal | -90° s.d. +90° | Lintang geografis centroid wilayah |
+| 3 | `longitude` | Float | Derajat Desimal | -180° s.d. +180° | Bujur geografis centroid wilayah |
+| 4 | `Temperature_Air_2m_Mean_24h` | Float | Kelvin (K) | K - 273.15 → °C | Perhitungan Growing Degree Days (GDD) & akumulasi termal |
+| 5 | `Temperature_Air_2m_Min_24h` | Float | Kelvin (K) | K - 273.15 → °C | Deteksi suhu dingin malam & depresiasi titik embun |
+| 6 | `Temperature_Air_2m_Max_24h` | Float | Kelvin (K) | K - 273.15 → °C | Pemantauan cekaman panas (*heat stress*) saat anthesis |
+| 7 | `Precipitation_Flux` | Float | mm/hari | mm/hari | Akumulasi hujan, awal musim tanam, deteksi kekeringan/banjir |
+| 8 | `Solar_Radiation_Flux` | Float | J/m² | Bagi 10⁶ → MJ/m²/hari | Radiasi fotosintesis aktif (PAR) pembentukan biomassa |
+| 9 | `Dew_Point_Temperature_2m_Mean_24h` | Float | Kelvin (K) | K - 273.15 → °C | Menghitung depresiasi embun malam (T_min - T_dew) |
+| 10 | `Derived_Relative_Humidity_2m_Max_24h` | Float | Persen (%) | 0 – 100% | Indikator kebasahan malam & risiko infeksi spora jamur |
+| 11 | `Derived_Relative_Humidity_2m_Min_24h` | Float | Persen (%) | 0 – 100% | Kelembapan minimum siang hari / potensi evapotranspirasi |
+| 12 | `Vapour_Pressure_Deficit_at_Maximum_Temperature`| Float | hPa | Bagi 10 → kPa | Cekaman kekeringan atmosfer dan pembukaan stomata daun |
+| 13 | `ReferenceET_PenmanMonteith_FAO56` | Float | mm/hari | mm/hari | Evapotranspirasi acuan FAO-56 untuk neraca air irigasi |
+| 14 | `Wind_Speed_10m_Mean_24h` | Float | m/s | m/s | Kecepatan angin rata-rata, aerodinamika kanopi daun |
+| 15 | `Cloud_Cover_Mean_24h` | Float | Fraksi (0–1) | 0 – 100% | Proporsi tutupan awan harian |
+| 16 | `Relative_Humidity_2m_06h` | Float | Persen (%) | 0 – 100% | Kelembapan relatif pukul 06:00 UTC (13:00 WIB / siang) |
+| 17 | `Relative_Humidity_2m_09h` | Float | Persen (%) | 0 – 100% | Kelembapan relatif pukul 09:00 UTC (16:00 WIB / sore) |
+| 18 | `Relative_Humidity_2m_12h` | Float | Persen (%) | 0 – 100% | Kelembapan relatif pukul 12:00 UTC (19:00 WIB / awal malam) |
+| 19 | `Relative_Humidity_2m_15h` | Float | Persen (%) | 0 – 100% | Kelembapan relatif pukul 15:00 UTC (22:00 WIB / tengah malam) |
+| 20 | `Relative_Humidity_2m_18h` | Float | Persen (%) | 0 – 100% | Kelembapan relatif pukul 18:00 UTC (01:00 WIB / dini hari) |
+| 21 | `Temperature_Air_2m_Max_Day_Time` | Float | Kelvin (K) | K - 273.15 → °C | Suhu udara maksimum spesifik fase siang hari |
+| 22 | `Temperature_Air_2m_Mean_Day_Time` | Float | Kelvin (K) | K - 273.15 → °C | Suhu udara rata-rata fase siang hari |
+| 23 | `Temperature_Air_2m_Mean_Night_Time`| Float | Kelvin (K) | K - 273.15 → °C | Suhu udara rata-rata fase malam hari |
+| 24 | `Temperature_Air_2m_Min_Night_Time` | Float | Kelvin (K) | K - 273.15 → °C | Suhu udara minimum malam hari (waktu fajar) |
+| 25 | `Precipitation_Rain_Duration_Fraction` | Float | Fraksi (0–1) | Jam / 24 | Proporsi durasi kejadian hujan air dalam 24 jam |
+| 26 | `Precipitation_Duration_Fraction` | Float | Fraksi (0–1) | Jam / 24 | Proporsi durasi presipitasi total dalam 24 jam |
+| 27 | `Vapour_Pressure_Mean_24h` | Float | hPa | Bagi 10 → kPa | Tekanan uap jenuh aktual rata-rata atmosfer |
 
 ---
 
 ## 4. Hasil Audit Fisis & Validasi Independen Hujan
 
-1. **Konsistensi Termodinamika:** $T_{\min} \le T_{	ext{mean}} \le T_{\max}$ konsisten di seluruh 98.631 baris (0 pelanggaran).
-2. **Presipitasi Non-Negatif:** Seluruh nilai $\ge 0	ext{ mm/hari}$.
+1. **Konsistensi Termodinamika:** T_min ≤ T_mean ≤ T_max konsisten di seluruh 98.631 baris (0 pelanggaran).
+2. **Presipitasi Non-Negatif:** Seluruh nilai presipitasi ≥ 0 mm/hari.
 3. **Temuan Curah Hujan Tasikmalaya:** AgERA5 mencatat curah hujan tahunan di Tasikmalaya mencapai 4.215 mm/tahun (rata-rata 10 tahun) dengan puncak 4.760 mm (2016). Nilai ini **konsisten dengan efek orografis lereng selatan Galunggung** dan telah dikonfirmasi secara independen oleh observasi satelit-gauge CHIRPS v2 (CHIRPS mencatat rata-rata 4.466 mm/tahun dan puncak 2016 sebesar 5.818 mm).
 
 ---

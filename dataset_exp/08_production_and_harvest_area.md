@@ -34,7 +34,7 @@ Seluruh berkas memiliki skema kolom seragam 8 kolom:
 | 4 | `kode_kabupaten_kota` | Integer | Kode BPS | Kode administratif 27 Kabupaten/Kota |
 | 5 | `nama_kabupaten_kota` | String | Teks | Nama resmi Kabupaten/Kota |
 | 6 | `produksi_padi` / `produksi_jagung` / `produksi_kedelai` | Float | **TON** | Total volume produksi fisik hasil panen gabah/pipilan/biji kering |
-| 7 | `satuan` | String | Teks | `TON` ($1	ext{ Ton} = 1.000	ext{ kg} = 10	ext{ Kuintal}$) |
+| 7 | `satuan` | String | Teks | `TON` (1 Ton = 1.000 kg = 10 Kuintal) |
 | 8 | `tahun` | Integer | Tahun | Tahun kalender observasi |
 
 ### B. Berkas Luas Panen Fisik (`luas_panen_jagung_jabar.csv`, `luas_panen_kedelai_jabar.csv`)
@@ -46,7 +46,7 @@ Seluruh berkas memiliki skema kolom seragam 8 kolom:
 | 4 | `kode_kabupaten_kota` | Integer | Kode BPS | Kode administratif 27 Kabupaten/Kota |
 | 5 | `nama_kabupaten_kota` | String | Teks | Nama resmi Kabupaten/Kota |
 | 6 | `luas_panen` | Float | **HEKTAR** | Total luas lahan yang berhasil dipanen |
-| 7 | `satuan` | String | Teks | `HEKTAR` ($1	ext{ Ha} = 10.000	ext{ m}^2$) |
+| 7 | `satuan` | String | Teks | `HEKTAR` (1 Ha = 10.000 m²) |
 | 8 | `tahun` | Integer | Tahun | Tahun kalender observasi |
 
 ---
@@ -54,11 +54,12 @@ Seluruh berkas memiliki skema kolom seragam 8 kolom:
 ## 4. Pengujian Identitas Matematika Agronomi
 
 Dalam statistik pertanian resmi Indonesia (BPS dan Kementerian Pertanian):
-$$\text{Produktivitas (Kuintal/Hektar)} = \frac{\text{Produksi (Ton)} \times 10}{\text{Luas Panen (Hektar)}}$$
+
+> **Produktivitas (Kuintal/Hektar) = (Produksi (Ton) × 10) / Luas Panen (Hektar)**
 
 ### Hasil Uji Konsistensi Numerik di Seluruh Jawa Barat:
-1. **Jagung (2015–2022):** Konsisten 100% pada seluruh 194 observasi dengan $\text{Luas Panen} > 0$ (selisih mutlak $\le 0,05\text{ ku/ha}$).
-2. **Kedelai (2015–2022):** Konsisten 100% pada seluruh 151 observasi aktif (selisih mutlak $< 0,01\text{ ku/ha}$).
+1. **Jagung (2015–2022):** Konsisten 100% pada seluruh 194 observasi dengan Luas Panen > 0 (selisih mutlak ≤ 0,05 ku/ha).
+2. **Kedelai (2015–2022):** Konsisten 100% pada seluruh 151 observasi aktif (selisih mutlak < 0,01 ku/ha).
 
 ---
 
