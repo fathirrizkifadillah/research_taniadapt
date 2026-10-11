@@ -1,0 +1,4 @@
+metode,rumus,dof_residual,std_residual_log,cv_residual_pct,variasi_cuaca_yang_tersisa
+1. Tren Linier per Kabupaten,ln(Y_it) = alpha_i + beta_i * t + eps_it,127.0,0.3721241047433914,37.212410474339144,Variasi temporal non-linier spesifik kabupaten (menyisakan variasi cuaca bersama & lokal)
+2. Kabupaten FE + Tren Linier Provinsi,ln(Y_it) = alpha_i + beta_prov * t + eps_it,153.0,0.3882024976699508,38.82024976699508,Variasi temporal lintas tahun (baik bersama maupun deviasi antar-kabupaten)
+3. Two-Way FE (Kabupaten FE + Year FE),ln(Y_it) = alpha_i + gamma_t + eps_it,147.0,0.3694624494679145,36.94624494679145,HANYA deviasi cuaca lokal antar-kabupaten dalam tahun yang sama; menghapus 100% variasi cuaca bersama tahunan (misal El Nino / La Nina)

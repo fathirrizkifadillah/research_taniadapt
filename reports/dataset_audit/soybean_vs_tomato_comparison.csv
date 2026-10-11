@@ -1,0 +1,11 @@
+dimensi,kedelai,tomat,keunggulan_komparatif
+Resolusi Administratif,Tingkat Kabupaten/Kota (ADM2),Tingkat Provinsi Jawa Barat (ADM1 agregat),Kedelai memiliki variasi spasial lokal antar-kabupaten
+Total Baris Data,216 baris,9 baris,Kedelai memiliki observasi jauh lebih masif (rasio 24x lipat)
+Observasi Positif (> 0),156 baris (72.2%),9 baris (100.0%),Tomat lengkap di tingkat provinsi; Kedelai memiliki 156 observasi empiris di kabupaten
+Kabupaten Aktif >= 6 Tahun,18 kabupaten/kota,0 (data kabupaten tidak tersedia di DS06),Kedelai memenuhi syarat pembentukan panel ekonometrika mikro
+Sentra Penuh 8 Tahun (2015-2022),14 kabupaten sentra utama,N/A (hanya runtun waktu provinsi N=8),14 sentra kedelai memiliki deret waktu penuh tanpa celah
+Koefisien Variasi Mentah (Raw CV),23.18%,3.84%,Kedelai mencerminkan variabilitas riil di lapangan antar-wilayah
+Koefisien Variasi Residual (Detrended CV),22.98%,2.83%,Variasi residual kedelai (~22%) memadai untuk pengujian anomali cuaca
+Dukungan Literatur di Repositori,"Paper 13 (Heino et al., 2023) & Paper 14 (Hu et al., 2024)",Tidak ada paper spesifik tomat (diduga keselarasan famili Solanaceae dg cabai),Kedelai secara eksplisit diteliti dalam Paper 13 & 14
+Modul Engine yang Digunakan,Panel Regression Statistical Engine (Tier A),IFWC Rule-Based Microclimate Moisture Engine (Tier B),Tomat berbagi modul mikroklimat kelembapan dengan Cabai
+Rekomendasi Penempatan Tier,TIER A (Uji Empiris di Phase 6 EDA; gugurkan jika sinyal nol),TIER B (Aturan Literatur & Transfer Mikroklimat; tanpa regresi yield),Memisahkan komoditas berbasis bukti panel vs komoditas berbasis transfer aturan

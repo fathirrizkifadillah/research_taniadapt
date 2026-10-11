@@ -4,6 +4,7 @@ import pandas as pd
 
 PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 AUDIT_DIR = PROJECT_ROOT / "reports"
+AUDIT_DIR.mkdir(parents=True, exist_ok=True)
 
 citation_records = [
     {
@@ -13,7 +14,9 @@ citation_records = [
         "lokasi_di_paper": "Kovilpatti, Tamil Nadu, India (black-soil)",
         "kesesuaian_tanaman_dan_lokasi": "TIDAK SAMA (Kapas di India)",
         "kutipan_asli_paper": "Forewarning system for pests and diseases in cotton (Thrips, Leafhopper, Spodoptera, Stem weevil, Bollworm, Root rot) using microclimate temperature, rainfall, and RH.",
-        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN & LOKASI LAIN"
+        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN & LOKASI LAIN",
+        "yang_boleh_diklaim": "Mikroklimat (suhu, curah hujan, RH) terbukti secara metodologis dapat dipakai membangun model peringatan dini hama/penyakit tanaman di iklim tropis.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim nilai ambang batas numerik kapas di India berlaku mutlak untuk cabai atau tanaman hortikultura di Jawa Barat."
     },
     {
         "klaim_di_taniadapt": "LINK_03: STRONG on microclimate disease (Paper 3 & 5) & Ulasan algoritma prediksi penyakit",
@@ -22,7 +25,9 @@ citation_records = [
         "lokasi_di_paper": "Global / Systematic Review",
         "kesesuaian_tanaman_dan_lokasi": "TIDAK SAMA (Review algoritma multi-tanaman, bukan studi empiris cabai)",
         "kutipan_asli_paper": "Explorative study on algorithms predicting plant/crop diseases. Highlighting fungal diseases relation to temperature and leaf wetness duration.",
-        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN & LOKASI LAIN"
+        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN & LOKASI LAIN",
+        "yang_boleh_diklaim": "Algoritma machine learning dan durasi kebasahan daun (leaf wetness duration) lazim dipakai dalam literatur global untuk prediksi infeksi jamur patogen.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim algoritma dalam paper ini telah terkalibrasi atau teruji akurasinya untuk antraknosa cabai di Jawa Barat."
     },
     {
         "klaim_di_taniadapt": "Ambang batas pola hari hujan & curah hujan antraknosa (Paper 6)",
@@ -31,7 +36,9 @@ citation_records = [
         "lokasi_di_paper": "PTP VII Bergen, Lampung, Indonesia",
         "kesesuaian_tanaman_dan_lokasi": "TIDAK SAMA (Karet di Lampung)",
         "kutipan_asli_paper": "Pengaruh pola hari hujan terhadap perkembangan penyakit gugur daun Corynespora pada tanaman karet.",
-        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN"
+        "status_verifikasi": "TRANSFER DARI TANAMAN LAIN (Tahun publikasi terverifikasi 2020, bukan 2008)",
+        "yang_boleh_diklaim": "Pola hari hujan berturut-turut memicu lonjakan spora jamur daun pada perkebunan tropis di Sumatera/Indonesia.",
+        "yang_dilarang_diklaim": "Dilarang mentransfer angka ambang curah hujan/hari hujan jamur karet Corynespora secara mentah menjadi ambang Colletotrichum cabai."
     },
     {
         "klaim_di_taniadapt": "LINK_03: Bukti statistik cuaca terhadap yield cabai di Indonesia belum cukup signifikan pada skala tahunan",
@@ -40,25 +47,31 @@ citation_records = [
         "lokasi_di_paper": "Indonesia (Kabupaten/Kota penghasil komoditas, 100 stasiun BMKG)",
         "kesesuaian_tanaman_dan_lokasi": "SESUAI UNTUK CABAI RAWIT DI INDONESIA",
         "kutipan_asli_paper": "Untuk cabai rawit, bukti statistik bahwa meteorologi memengaruhi hasil panen (yield) dinilai belum cukup dalam paper ini (data tahunan 2018–2024).",
-        "status_verifikasi": "SESUAI (Secara eksplisit menyatakan bukti statistik cuaca -> yield cabai rawit belum cukup pada data tahunan)"
+        "status_verifikasi": "SESUAI (Secara eksplisit menyatakan bukti statistik cuaca -> yield cabai rawit belum cukup pada data tahunan)",
+        "yang_boleh_diklaim": "Pada data agregat tahunan level kabupaten di Indonesia, sinyal cuaca stasiun BMKG terhadap hasil panen cabai rawit belum terbukti signifikan secara statistik.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim bahwa cuaca harian/mingguan tidak berpengaruh pada cabai (paper hanya menguji data agregasi tahunan)."
     },
     {
         "klaim_di_taniadapt": "Brief Padi: Kenaikan suhu ekstrim dan banjir menurunkan hasil padi di Jawa Barat (Paper 12)",
         "paper_ref": "Paper 12 (Hosokawa et al., 2023)",
         "tanaman_di_paper": "Padi (Rice - multi-rice cropping)",
         "lokasi_di_paper": "Asia Selatan & Asia Tenggara (6 negara: Bangladesh, Indonesia, Malaysia, Myanmar, Filipina, Thailand, grid 0.5°)",
-        "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI LOKASI LAIN / REGIONAL ASIA (Bukan studi spesifik Jawa Barat)",
+        "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI REGIONAL ASIA (Bukan studi spesifik Jawa Barat). Angka R=0.994 adalah ARTEFAK LEAKAGE.",
         "kutipan_asli_paper": "Contrasting area and yield responses to extreme climate (CDD, CWD, R10mm, R95pTOT). Out-of-sample R yield = 0.994 di 6 negara via Elastic Net.",
-        "status_verifikasi": "TRANSFER DARI LOKASI LAIN (Klaim R2 < 0.1 di Jawa Barat berasal dari regresi data DS03 lokal di repo, bukan dari teks Paper 12)"
+        "status_verifikasi": "JANGAN DIJADIKAN BUKTI KEMAMPUAN PREDIKSI IKLIM (Kebocoran data / dominasi variasi mean cross-sectional antar-negara)",
+        "yang_boleh_diklaim": "Paper 12 menunjukkan kerangka respons luas panen (area) vs hasil (yield) terhadap indeks iklim ekstrem (CDD, CWD, R10mm) di Asia Tenggara.",
+        "yang_dilarang_diklaim": "DILARANG mengklaim model indeks iklim memiliki akurasi R=0.994 untuk memprediksi hasil panen padi. Angka R=0.994 muncul akibat evaluasi pooled panel cross-country yang merefleksikan baseline antar-negara (spatial mean differences), bukan prediksi anomali iklim tahunan."
     },
     {
         "klaim_di_taniadapt": "Brief Padi: Dampak perubahan iklim terhadap produksi padi di Jawa Barat (Paper 15)",
         "paper_ref": "Paper 15 (Ansari et al., 2021)",
         "tanaman_di_paper": "Padi (Ciherang)",
         "lokasi_di_paper": "Gemawang, Girimarto, Kabupaten Wonogiri, JAWA TENGAH",
-        "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI LOKASI LAIN (Wonogiri Jawa Tengah, bukan Jawa Barat)",
+        "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI LOKASI LAIN (Wonogiri Jawa Tengah, DAS Keduang, bukan Jawa Barat)",
         "kutipan_asli_paper": "Evaluating and adapting climate change impacts on rice production in Keduang Subwatershed, Wonogiri, Central Java using CropSyst model.",
-        "status_verifikasi": "TRANSFER DARI LOKASI LAIN"
+        "status_verifikasi": "TRANSFER DARI LOKASI LAIN",
+        "yang_boleh_diklaim": "Simulasi biofisik CropSyst menunjukkan varietas Ciherang di Jawa responsif terhadap pergeseran tanggal tanam dan ketersediaan air irigasi.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim hasil kalibrasi parameter DAS Keduang Wonogiri mewakili seluruh agro-ekosistem sawah di Jawa Barat."
     },
     {
         "klaim_di_taniadapt": "Brief Jagung: Expected signal STRONG (Paper 13)",
@@ -67,7 +80,9 @@ citation_records = [
         "lokasi_di_paper": "GLOBAL (20.000 political units, grid 0.5°)",
         "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI LOKASI LAIN (Kajian global lintang sedang/dunia)",
         "kutipan_asli_paper": "Compound hot and dry extremes during growing season reduce global crop yields. Kenaikan suhu 1 C menurunkan yield jagung ~7.5% secara global.",
-        "status_verifikasi": "TRANSFER DARI LOKASI LAIN (Kuat secara global, belum terbukti untuk tropis Jawa Barat)"
+        "status_verifikasi": "TRANSFER DARI LOKASI LAIN (Global temperate dominance)",
+        "yang_boleh_diklaim": "Secara global, cekaman gabungan panas dan kering (compound hot-dry) secara konsisten mereduksi hasil panen jagung pada musim tanam.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim sensitivitas -7.5%/°C berlaku persis untuk jagung tropis basah Jawa Barat sebelum diestimasi dengan data lokal."
     },
     {
         "klaim_di_taniadapt": "Brief Jagung: Expected signal STRONG (Paper 14)",
@@ -76,30 +91,35 @@ citation_records = [
         "lokasi_di_paper": "GLOBAL (50% studi di AS & Eropa, 10% China, 8% India)",
         "kesesuaian_tanaman_dan_lokasi": "TRANSFER DARI LOKASI LAIN (Didominasi iklim sedang)",
         "kutipan_asli_paper": "Review of empirical findings and statistical crop models. Dominasi literatur berada di wilayah iklim sedang.",
-        "status_verifikasi": "TRANSFER DARI LOKASI LAIN"
+        "status_verifikasi": "TRANSFER DARI LOKASI LAIN",
+        "yang_boleh_diklaim": "Metode panel regression dengan fixed effects dan nonlinear degree days merupakan standar baku empiris pemodelan iklim-tanaman.",
+        "yang_dilarang_diklaim": "Dilarang mengklaim konsensus literatur jagung global membuktikan adanya sinyal statistik yang kuat di tingkat kabupaten Jawa Barat."
     },
     {
         "klaim_di_taniadapt": "Brief Cabai: Jamur antraknosa (Colletotrichum) sensitif terhadap kelembaban jenuh",
         "paper_ref": "Paper di Repo (Paper 1 s.d. 15)",
         "tanaman_di_paper": "Tidak ada paper tentang antraknosa cabai di repo",
         "lokasi_di_paper": "Tidak ada",
-        "kesesuaian_tanaman_dan_lokasi": "TIDAK ADA DI PAPER",
+        "kesesuaian_tanaman_dan_lokasi": "TIDAK ADA DI PAPER REPO",
         "kutipan_asli_paper": "Tidak ditemukan penyebutan antraknosa atau Colletotrichum dalam 15 paper riset repo.",
-        "status_verifikasi": "PENGETAHUAN UMUM, BUKAN EVIDENCE REPO"
+        "status_verifikasi": "EVIDENCE INSUFFICIENT DI REPO (Pengetahuan agronomi umum, belum bersumber spesifik)",
+        "yang_boleh_diklaim": "Biologi spora Colletotrichum secara umum membutuhkan air bebas / kelembapan tinggi untuk perkecambahan (pengetahuan biologi patogen umum).",
+        "yang_dilarang_diklaim": "DILARANG menetapkan rule biner 'T - Td <= 2.0 C dan RH >= 90% = syarat mutlak' sebagai aturan yang terbukti dari evidence repo."
     },
     {
         "klaim_di_taniadapt": "Brief Bawang Merah: Rentan genangan air & penyakit layu moler (Fusarium oxysporum)",
         "paper_ref": "Paper di Repo (Paper 1 s.d. 15)",
         "tanaman_di_paper": "Tidak ada paper tentang bawang merah di repo",
         "lokasi_di_paper": "Tidak ada",
-        "kesesuaian_tanaman_dan_lokasi": "TIDAK ADA DI PAPER",
+        "kesesuaian_tanaman_dan_lokasi": "TIDAK ADA DI PAPER REPO",
         "kutipan_asli_paper": "Tidak ditemukan penyebutan bawang merah atau Fusarium cepae dalam 15 paper riset repo.",
-        "status_verifikasi": "PENGETAHUAN UMUM, BUKAN EVIDENCE REPO"
+        "status_verifikasi": "EVIDENCE INSUFFICIENT DI REPO",
+        "yang_boleh_diklaim": "Bawang merah secara agronomis peka terhadap drainase buruk dan genangan air berlebih.",
+        "yang_dilarang_diklaim": "Dilarang membuat model kuantitatif penyakit moler bawang merah atas nama bukti riset yang ada di repositori saat ini."
     }
 ]
 
 df_citations = pd.DataFrame(citation_records)
 out_csv = AUDIT_DIR / "citation_audit_matrix.csv"
 df_citations.to_csv(out_csv, index=False)
-print(f"Berhasil membuat tabel audit sitasi: {out_csv}")
-print(df_citations[['paper_ref', 'tanaman_di_paper', 'status_verifikasi']].to_string(index=False))
+print(f"Berhasil memperbarui {out_csv} dengan kolom 'yang_boleh_diklaim' dan 'yang_dilarang_diklaim'!")

@@ -127,6 +127,19 @@ print(f"2. Presipitasi >= 0 mm   : {'[PASSED]' if p_rule else '[FAILED]'}")
 print(f"3. RH dalam rentang 0-100%: {'[PASSED]' if rh_rule else '[FAILED]'}")
 print(f"4. VPD non-negatif (>=0) : {'[PASSED]' if vpd_rule else '[FAILED]'}")
 print("="*50)
+
+# Tampilkan 10 baris pertama tabel cuaca Bandung dengan konversi Celcius
+df_bandung['Tmean_degC'] = (df_bandung['Temperature_Air_2m_Mean_24h'] - 273.15).round(2)
+df_bandung['Tmin_degC'] = (df_bandung['Temperature_Air_2m_Min_24h'] - 273.15).round(2)
+df_bandung['Tmax_degC'] = (df_bandung['Temperature_Air_2m_Max_24h'] - 273.15).round(2)
+df_bandung['Rainfall_mm'] = df_bandung['Precipitation_Flux'].round(2)
+df_bandung['RH_max_pct'] = df_bandung['Derived_Relative_Humidity_2m_Max_24h'].round(1)
+
+print("\\n📋 TAMPILAN LANGSUNG 10 BARIS PERTAMA DATASET CUACA (AgERA5 Bandung):")
+display(df_bandung[['valid_time', 'Tmean_degC', 'Tmin_degC', 'Tmax_degC', 'Rainfall_mm', 'RH_max_pct', 'ReferenceET_PenmanMonteith_FAO56']].head(10))
+
+print("\\n📊 RINGKASAN STATISTIK DESKRIPTIF DATASET CUACA BANDUNG (2015–2024):")
+display(df_bandung[['Tmean_degC', 'Tmin_degC', 'Tmax_degC', 'Rainfall_mm', 'RH_max_pct', 'ReferenceET_PenmanMonteith_FAO56']].describe().round(2))
 """),
     make_cell("markdown", """## Visualisasi Diagnostik Multi-Panel (Suhu Bandung & Komparasi Presipitasi 7 Lokasi)
 Menampilkan runtun waktu suhu Bandung 2024 dan komparasi curah hujan tahunan antar 7 lokasi Jawa Barat.
@@ -239,8 +252,11 @@ print(f"UJI DUPLIKASI KUNCI PANEL (district x crop x crop_year): {dup_count} (HA
 print("STATUS KEUNIKAN KUNCI :", "[PASSED]" if dup_count == 0 else "[FAILED]")
 print("="*50)
 
-print("\\nStatistik Ringkas Variabel Target:")
-display(df_rice[['area_ha', 'yield_t_ha', 'production_mt']].describe())
+print("\\n📋 TAMPILAN LANGSUNG 10 BARIS PERTAMA DATASET PADI BANGLADESH:")
+display(df_rice.head(10))
+
+print("\\n📊 RINGKASAN STATISTIK DESKRIPTIF DATASET PADI BANGLADESH:")
+display(df_rice[['area_ha', 'yield_t_ha', 'production_mt']].describe().round(2))
 """),
     make_cell("markdown", """## Visualisasi Diagnostik Multi-Panel (Observasi Musim & Boxplot Distribusi Yield)
 Distribusi jumlah observasi distrik per musim tanam dan sebaran variabilitas produktivitas (t/ha) per musim tanam.
@@ -347,6 +363,15 @@ kab_matched = [f"KABUPATEN {loc}" for loc in locs_agera5]
 n_eff = len(df_total[df_total['nama_kabupaten_kota'].isin(kab_matched)])
 print(f"Sampel Efektif (Matching 7 Titik AgERA5 Saat Ini): N_eff = {n_eff} baris (7 kab x 6 tahun)")
 print("="*50)
+
+print("\\n📋 TAMPILAN LANGSUNG 10 BARIS PERTAMA PADI TOTAL JABAR (2015–2020):")
+display(df_total.head(10))
+
+print("\\n📋 TAMPILAN LANGSUNG 5 BARIS PERTAMA PADI SAWAH JABAR:")
+display(df_sawah.head(5))
+
+print("\\n📋 TAMPILAN LANGSUNG 5 BARIS PERTAMA PADI LADANG JABAR:")
+display(df_ladang.head(5))
 """),
     make_cell("markdown", """## Statistik Produktivitas Tahunan (Kuintal/Hektar)
 """),
@@ -456,6 +481,22 @@ print(f"\\nJumlah Titik Grid Melingkupi Jawa Barat: {len(df_jabar_grid)} titik")
 Daftar indikator agroklimat harian yang dikalkulasikan untuk pemodelan stres iklim.
 """),
     make_cell("code", """display(df_def[["variable", "unit", "description"]])
+
+print("\\n📋 TAMPILAN LANGSUNG 10 TITIK GRID DARATAN INDONESIA:")
+display(df_grid.head(10))
+
+# Membaca data harian riil
+parquet_file = RAW_DIR / "agroclimate_with_indicators.parquet"
+if not parquet_file.exists():
+    parquet_file = RAW_DIR / "agroclimate_2024.parquet"
+
+df_daily = pd.read_parquet(parquet_file)
+show_cols = [c for c in ['grid_id', 'date', 'temperature_2m_mean', 'precipitation_sum', 'rainfall_30d', 'consecutive_dry_days', 'water_balance'] if c in df_daily.columns]
+print(f"\\n📋 TAMPILAN LANGSUNG DATA AGROKLIMAT HARIAN RIIL ({parquet_file.name}):")
+display(df_daily[show_cols].head(10))
+
+print("\\n📊 RINGKASAN STATISTIK DESKRIPTIF INDIKATOR AGROKLIMAT:")
+display(df_daily[show_cols[2:]].describe().round(2))
 """),
     make_cell("markdown", """## Visualisasi Diagnostik & Peta Sebaran Spasial (PNG)
 Memetakan sebaran 612 titik grid terestrial Indonesia dengan penanda khusus 14 titik di wilayah daratan Jawa Barat.
@@ -531,10 +572,16 @@ Membaca dataset resmi jagung Jawa Barat (216 baris = 27 wilayah x 8 tahun) dan m
 print("Dimensi Data Jagung Jabar:", df_maize.shape)
 print("Missing Values Produktivitas:", df_maize['produktivitas_jagung'].isnull().sum())
 
+print("📋 TAMPILAN LANGSUNG 10 BARIS PERTAMA DATASET PRODUKTIVITAS JAGUNG JABAR:")
+display(df_maize.head(10))
+
 # Filter Kabupaten Subang
 subang_data = df_maize[df_maize['nama_kabupaten_kota'].str.contains('SUBANG', case=False, na=False)].sort_values('tahun')
-print(f"Data Spesifik Kabupaten Subang Ditemukan: {len(subang_data)} tahun (2015–2022)")
+print(f"\\n📋 RUNTUN WAKTU LENGKAP PRODUKTIVITAS JAGUNG KABUPATEN SUBANG (2015–2022):")
 display(subang_data[['tahun', 'nama_kabupaten_kota', 'produktivitas_jagung', 'satuan']])
+
+print("\\n📋 TOP-10 SENTRA PRODUKTIVITAS JAGUNG JAWA BARAT (TAHUN 2022):")
+display(df_maize[df_maize['tahun'] == 2022].sort_values('produktivitas_jagung', ascending=False)[['nama_kabupaten_kota', 'produktivitas_jagung', 'satuan']].head(10))
 
 # Analisis Lonjakan (Structural Break Check)
 x_sub = subang_data['tahun'].values
@@ -654,6 +701,13 @@ cabai_rawit = df_sbs[df_sbs['komoditi'] == 'CABAI RAWIT'].sort_values('tahun')
 print("Observasi Cabai Besar (Provinsi):", len(cabai_besar), "| Tahun:", cabai_besar['tahun'].min(), "s.d.", cabai_besar['tahun'].max())
 print("Observasi Cabai Rawit (Provinsi):", len(cabai_rawit), "| Tahun:", cabai_rawit['tahun'].min(), "s.d.", cabai_rawit['tahun'].max())
 print("Satuan Resmi:", cabai_besar['satuan'].iloc[0])
+
+print("\\n📋 TAMPILAN LANGSUNG SELURUH TABEL PRODUKTIVITAS SAYURAN BUAH SEMUSIM (SBS):")
+display(df_sbs.head(15))
+
+df_prod = pd.read_csv(RAW_DIR / "produksi_sayuran_komoditas_jabar.csv")
+print("\\n📋 TAMPILAN LANGSUNG 10 BARIS PERTAMA VOLUME PRODUKSI SAYURAN PER KABUPATEN/KOTA:")
+display(df_prod.head(10))
 """),
     make_cell("markdown", """## Audit Kritis Validitas Target Outcome & Gap Analysis Variabel
 Pemeriksaan ketat apakah dataset ini dapat digunakan untuk melatih model deteksi penyakit tanaman.
@@ -733,4 +787,4 @@ display(scorecard)
 ]
 save_notebook("06_west_java_horticulture_productivity.ipynb", c06)
 
-print("\nSemua 6 notebook berhasil diperbarui dengan hasil revisi ilmiah 100%!")
+print("\\nSemua 6 notebook berhasil diperbarui dengan hasil revisi ilmiah 100%!")
