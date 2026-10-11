@@ -42,3 +42,5 @@ scripts/test_*.py
 scripts/search_*.py
 scripts/fetch_*.py
 scripts/verify_correlation_*.py
+
+.agents

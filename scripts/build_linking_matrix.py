@@ -17,13 +17,13 @@ linking_records = [
         "outcome_period": "2015 s.d. 2020",
         "overlap_temporal_years": 6,
         "overlap_period": "2015–2020",
-        "weather_spatial_grain": "Grid 0,1° (~10 km) 7 Sentra Jabar",
+        "weather_spatial_grain": "Grid 0,1° (~10 km) Seluruh 27 Kab/Kota Se-Jawa Barat",
         "outcome_spatial_grain": "27 Kabupaten/Kota Se-Jawa Barat",
-        "overlap_spatial_status": "PARTIALLY MATCHED (7 dari 27 kab beririsan langsung; 20 kab lainnya perlu ekstraksi CDS)",
-        "effective_n_matched": 42,
+        "overlap_spatial_status": "100% MATCHED (Seluruh 27 Kab/Kota Jawa Barat lengkap AgERA5 harian 2015–2024)",
+        "effective_n_matched": 162,
         "grain_gap": "Daily Weather vs Annual Productivity (Tidak ada kolom musim MH/MK di data target)",
-        "linking_feasibility_rating": "MODERATE (HIGH jika 20 centroid diekstraksi; saat ini N_eff = 42)",
-        "feature_engineering_strategy": "Agregasi cuaca tahun kalender penuh atau indikator kumulatif 2 musim untuk luaran tahunan; regresi terpisah MH vs MK gugur.",
+        "linking_feasibility_rating": "HIGH (162 baris observasi lintas 27 Kab/Kota; 108 baris di 18 sentra pertanian)",
+        "feature_engineering_strategy": "Agregasi cuaca tahun kalender penuh atau indikator kumulatif 2 musim untuk luaran tahunan; Fixed Baseline Area WLS diterapkan untuk mitigasi noise luas panen.",
         "key_risk_factor": "Waterlogging/banjir fase seedling dan heat stress fase flowering/reproduktif."
     },
     {
@@ -35,13 +35,13 @@ linking_records = [
         "outcome_period": "2015 s.d. 2022",
         "overlap_temporal_years": 8,
         "overlap_period": "2015–2022",
-        "weather_spatial_grain": "Grid 0,1° (~10 km) 7 Sentra Jabar (Subang belum ada titik langsung)",
+        "weather_spatial_grain": "Grid 0,1° (~10 km) Seluruh 27 Kab/Kota (Termasuk Subang -6.4830°, 107.7322°)",
         "outcome_spatial_grain": "Kabupaten Subang & 27 Kab/Kota",
-        "overlap_spatial_status": "UNMATCHED untuk Subang Lokal (N_eff = 0 pada 7 titik cuaca saat ini; N_eff = 56 untuk 7 kab lain)",
-        "effective_n_matched": 0,
+        "overlap_spatial_status": "100% MATCHED (Subang memiliki agera5_kab_subang_2015_2024.csv; 27 kab/kota lengkap)",
+        "effective_n_matched": 216,
         "grain_gap": "Daily Weather vs Annual Productivity + Structural Break BPS KSA/Hibrida",
-        "linking_feasibility_rating": "MODERATE (Perlu detrending slope +4.93 ku/ha/thn; sinyal cuaca pada residu CV 11.42%)",
-        "feature_engineering_strategy": "Detrending produktivitas sebelum regresi iklim. Ekstraksi koordinat centroid Subang (-6.5686°S, 107.7619°E). Akumulasi GDD dan Water Stress Index (WSI/VPD).",
+        "linking_feasibility_rating": "HIGH-MODERATE (216 baris matched; detrending slope +4.93 ku/ha/thn di Subang; sinyal cuaca pada residu CV 11.42%)",
+        "feature_engineering_strategy": "Detrending produktivitas sebelum regresi iklim. Koordinat centroid Subang (-6.4830°S, 107.7322°E, 18 sel grid). Akumulasi GDD dan Water Stress Index (WSI/VPD).",
         "key_risk_factor": "Drought stress (CDD tinggi) dan kelembaban ekstrem saat pengisian biji."
     },
     {
@@ -53,13 +53,13 @@ linking_records = [
         "outcome_period": "2017 s.d. 2024",
         "overlap_temporal_years": 8,
         "overlap_period": "2017–2024",
-        "weather_spatial_grain": "Grid 0,1° (~10 km) Sentra Jabar (Bandung/Sukabumi/Tasikmalaya/Cirebon)",
+        "weather_spatial_grain": "Grid 0,1° (~10 km) Seluruh 27 Kab/Kota Jawa Barat",
         "outcome_spatial_grain": "Provinsi Jawa Barat (Agregat Provinsi, N_eff = 8 baris per varian)",
-        "overlap_spatial_status": "PROVINCIAL ONLY (Tidak ada rincian kabupaten pada produktivitas SBS; label penyakit absen)",
+        "overlap_spatial_status": "PROVINCIAL ONLY (Produktivitas SBS tingkat provinsi; produksi sayuran komoditas tersedia 26 kab/kota)",
         "effective_n_matched": 8,
         "grain_gap": "Daily Weather vs Annual Provincial Productivity (No field disease labels)",
         "linking_feasibility_rating": "MODERATE untuk Yield Makro; RULE-BASED IFWC untuk Peringatan Penyakit",
-        "feature_engineering_strategy": "Yield: Korelasi makro tren provinsi. Penyakit (OPT): Index of Favorable Weather Condition (IFWC) berbasis proksi fisika kebasahan daun (T - Td dan RH max), BUKAN supervised ML dan BUKAN threshold buatan.",
+        "feature_engineering_strategy": "Yield: Korelasi makro tren provinsi. Penyakit (OPT): Index of Favorable Weather Condition (IFWC) berbasis proksi fisika kebasahan daun (Tmin - Td dan RH max), BUKAN supervised ML dan BUKAN threshold buatan.",
         "key_risk_factor": "Penyakit antraknosa (patek) dan busuk buah saat periode mikroklimat basah berkepanjangan."
     },
     {
@@ -131,20 +131,20 @@ Tantangan utama dalam pemodelan agro-advisory adalah **Kesenjangan Granularitas 
 - Data luaran hasil panen tersedia pada resolusi **Tahunan (*Annual*)** dan spasial **Kabupaten/Kota atau Provinsi**.
 
 Berdasarkan audit verifikasi empiris yang ketat:
-1. **Padi (DS03):** Sampel berpasangan efektif saat ini adalah $N_{\\text{eff}} = 42$ baris (7 kabupaten beririsan dengan AgERA5 $\\times$ 6 tahun). Menghubungkan 27 kabupaten ($N=162$) memerlukan ekstraksi 20 koordinat centroid tersisa via CDS API.
-2. **Jagung Subang (DS05):** Kabupaten Subang **belum memiliki titik AgERA5 langsung** di repo saat ini ($N_{\\text{eff}} = 0$ untuk Subang lokal; $N=56$ untuk 7 kabupaten lain). Menggunakan Purwakarta (~35 km) atau Karawang (~58 km) menimbulkan proksi bias elevasi (35–110m). Koordinat centroid Subang ($-6.5686^\\circ\\text{S}, 107.7619^\\circ\\text{E}$) telah disiapkan untuk diunduh. Selain itu, kenaikan produktivitas Subang pada 2020–2022 (+56,4%) mencerminkan **Patahan Struktural (Structural Break)** akibat BPS KSA/benih hibrida; sinyal cuaca berada pada residu detrending ($CV_{\\text{resid}} = 11,42\\%$).
+1. **Padi (DS03):** Seluruh 27 Kabupaten/Kota Jawa Barat kini **100% MATCHED** dengan AgERA5 ($N = 162$ baris observasi, atau $N_{\text{eff}} = 108$ baris untuk 18 sentra kabupaten pertanian).
+2. **Jagung Subang (DS05):** Kabupaten Subang kini **100% MATCHED** dengan AgERA5 (`agera5_kab_subang_2015_2024.csv`, centroid $-6.4830^\circ\text{S}, 107.7322^\circ\text{E}$, 18 sel grid). Kenaikan produktivitas Subang pada 2020–2022 (+56,4%) mencerminkan **Patahan Struktural (Structural Break)** akibat BPS KSA/benih hibrida; sinyal cuaca dievaluasi pada residu detrending ($CV_{\text{resid}} = 11,42\%$).
 3. **Target Musiman MH/MK:** Kolom target produktivitas di DS03 dan DS05 bersifat **tahunan murni**. Tidak ada data pemisahan MH/MK di publikasi resmi. Regresi terpisah MH vs MK terhadap angka tahunan resmi dibatalkan; strategi yang valid adalah agregasi kalender tahunan atau indikator kumulatif 2 musim.
-4. **Hortikultura Cabai (DS06):** Granularitas geografis adalah **Tingkat Provinsi Jawa Barat ($N=8$ baris)** tanpa rincian kabupaten, dan **TIDAK MEMILIKI LABEL PENYAKIT/OPT**. Ambang batas buatan ("RH > 88%") resmi dinyatakan **EVIDENCE INSUFFICIENT**. Modul penyakit cabai dialihkan menjadi **Index of Favorable Weather Condition (IFWC)** berbasis proksi fisika kebasahan daun ($T - T_d$ dan RH maksimum).
-5. **Validasi Cuaca:** Korelasi harian AgERA5 vs Open-Meteo di Bandung ($r_{\\text{precip}}=0,851$, $r_{\\text{temp}}=0,764$) membuktikan **konsistensi sesama turunan ECMWF ERA5**, bukan pembuktian stasiun darat BMKG (ground truth).
+4. **Hortikultura Cabai (DS06):** Granularitas geografis adalah **Tingkat Provinsi Jawa Barat ($N=8$ baris)** tanpa rincian kabupaten, dan **TIDAK MEMILIKI LABEL PENYAKIT/OPT**. Ambang batas buatan ("RH > 88%") resmi dinyatakan **EVIDENCE INSUFFICIENT**. Modul penyakit cabai dialihkan menjadi **Index of Favorable Weather Condition (IFWC)** berbasis proksi fisika kebasahan daun ($T_{\min} - T_d$ dan RH maksimum).
+5. **Validasi Cuaca:** Korelasi harian AgERA5 vs Open-Meteo di Bandung ($r_{\text{precip}}=0,851$, $r_{\text{temp}}=0,764$) membuktikan **konsistensi sesama turunan ECMWF ERA5**, bukan pembuktian stasiun darat BMKG (ground truth).
 
 ---
 
 ## 2. Matriks Kelayakan Penggabungan Antar-Dataset (Cross-Dataset Linking Matrix Revised)
 
-| Pasangan Linking | Target Engine | Sumber Cuaca | Sumber Hasil Panen | Irisan Temporal | Sampel Efektif ($N_{\\text{eff}}$) | Status Spasial & Kelayakan |
+| Pasangan Linking | Target Engine | Sumber Cuaca | Sumber Hasil Panen | Irisan Temporal | Sampel Efektif ($N_{\text{eff}}$) | Status Spasial & Kelayakan |
 | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| **LINK_01** | **Rice Engine (Padi)** | DS01 AgERA5 (24 Vars) | DS03 Produktivitas Padi | **2015–2020** (6 Thn) | **42 baris** (Saat ini) <br> *(162 jika 27 centroid)* | 🟡 **MODERATE** (Tersedia 7 kab; perlu 20 centroid untuk N=162) |
-| **LINK_02** | **Maize Engine (Jagung)** | DS01 AgERA5 (24 Vars) | DS05 Produktivitas Jagung | **2015–2022** (8 Thn) | **0 baris** (Subang lokal) <br> *(56 baris untuk 7 kab lain)* | 🟡 **MODERATE** (Subang Unmatched; perlu unduh centroid & detrending) |
+| **LINK_01** | **Rice Engine (Padi)** | DS01 AgERA5 (24 Vars) | DS03 Produktivitas Padi | **2015–2020** (6 Thn) | **162 baris** (27 Kab/Kota) <br> *(108 baris di 18 sentra)* | 🟢 **HIGH** (100% matched cuaca 27 Kab/Kota; WLS Fixed Baseline Area) |
+| **LINK_02** | **Maize Engine (Jagung)** | DS01 AgERA5 (24 Vars) | DS05 Produktivitas Jagung | **2015–2022** (8 Thn) | **216 baris** (27 Kab/Kota) <br> *(Subang direct match)* | 🟢 **HIGH-MODERATE** (Subang Matched; detrending linier diterapkan) |
 | **LINK_03** | **Chili Engine (Cabai)** | DS01 AgERA5 (24 Vars) | DS06 Produktivitas SBS Cabai | **2017–2024** (8 Thn) | **8 baris** (Provinsi Jabar) | 🟡 **MODERATE** (Yield makro N=8; Modul Penyakit wajib Rule-Based IFWC) |
 | **LINK_04** | **Extreme Climate Alert** | DS04 Indonesia Agroclimate | DS01 AgERA5 Time-Series | **2016–2024** (9 Thn) | **3.653 hari** (10 Thn) | 🟢 **VERY HIGH** (Konsistensi ERA5 r=0.85; Tasikmalaya ekstrem >4.000 mm) |
 | **LINK_05** | **Panel Benchmark** | DS02 Climate Covariates | DS02 Audited Yield | **2015–2024** (9 Thn) | **1.728 baris** (Balanced) | 🟢 **VERY HIGH** (Benchmark metodologi regresi panel BRRI) |
@@ -154,13 +154,13 @@ Berdasarkan audit verifikasi empiris yang ketat:
 ## 3. Analisis Irisan & Strategi Pemodelan Berbasis Bukti (Phase 8 & Phase 10)
 
 ### A. Komoditas Padi (LINK_01 — Rice Engine)
-- **Sampel Saat Ini:** 7 Kabupaten AgERA5 $\\times$ 6 tahun = $N_{\\text{eff}} = 42$ baris.
-- **Rencana Ekspansi:** Mengunduh 20 koordinat kabupaten lainnya via CDS OpenAPI untuk mencapai panel penuh $N = 162$.
+- **Sampel Saat Ini:** Seluruh 27 Kabupaten/Kota AgERA5 $\times$ 6 tahun = $N_{\text{eff}} = 162$ baris (108 baris di 18 sentra pertanian utama).
+- **Status Integrasi:** 100% matched secara spasial dan temporal (2015–2020).
 - **Resolusi Grain Gap:** Karena data target adalah produktivitas tahunan (bukan per musim MH/MK), fitur cuaca diagregasikan secara tahunan atau menggunakan indikator kumulatif dua musim secara simultan dalam model yang sama.
 
 ### B. Komoditas Jagung (LINK_02 — Maize Engine)
-- **Status Subang:** Saat ini belum memiliki titik cuaca langsung di repo. Koordinat Subang ($-6.5686^\\circ\\text{S}, 107.7619^\\circ\\text{E}$, elevasi 45 m dpl) telah dipetakan di `jabar_27_kabkota_centroids.csv`.
-- **Structural Break Handling:** Produktivitas jagung Subang memiliki tren linier tajam $+4,93\\text{ ku/ha/tahun}$ ($R^2=1,000$). Lonjakan dari 57,23 ke 89,49 ku/ha pada 2020–2022 harus didetrending terlebih dahulu. Variasi cuaca diekstraksi dari residu ($CV_{\\text{resid}} = 11,42\\%$).
+- **Status Subang:** 100% Matched langsung dengan `agera5_kab_subang_2015_2024.csv` ($-6.4830^\circ\text{S}, 107.7322^\circ\text{E}$, 18 sel grid AgERA5, 3.653 hari kalender).
+- **Structural Break Handling:** Produktivitas jagung Subang memiliki tren linier tajam $+4,93\text{ ku/ha/tahun}$ ($R^2=1,000$). Lonjakan dari 57,23 ke 89,49 ku/ha pada 2020–2022 harus didetrending terlebih dahulu. Variasi cuaca diekstraksi dari residu ($CV_{\text{resid}} = 11,42\%$).
 
 ### C. Komoditas Hortikultura Cabai (LINK_03 — Chili Engine)
 - **Granularitas:** Murni tingkat provinsi Jawa Barat ($N=8$ baris untuk Cabai Besar, $N=8$ baris untuk Cabai Rawit).

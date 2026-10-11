@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "data-scientist": {
+      "source": "magnus919/agent-skills",
+      "sourceType": "github",
+      "skillPath": "data-scientist/SKILL.md",
+      "computedHash": "1d7d96457a794462e8bfdafd7c408da13d94f25984ae1bd0cc5529848b560247"
+    }
+  }
+}
