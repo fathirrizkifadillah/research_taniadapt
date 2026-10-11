@@ -1,161 +1,117 @@
-# TaniAdapt — Hyperlocal Precision Agro-Advisory
+# TaniAdapt — West Java Climate–Agronomic Resilience Architecture
 
 > **Evidence-Based Agricultural Decision Support System for Indonesian Smallholders**  
 > *Translating Microclimate, Phenology, and Agrometeorological Dynamics into Calibrated Agronomic Actions.*
 
----
-
-## 📌 Executive Summary
-
-**TaniAdapt** adalah riset dan pengembangan sistem pendukung keputusan (*decision-support system*) presisi hiperlokal untuk sektor pertanian di Indonesia. Berbeda dengan pendekatan konvensional yang kerap mengandalkan aturan ambang batas naif (*naive rule-based threshold*, misal: `rainfall > X mm → bahaya`), TaniAdapt mengusung metodologi **evidence-based machine learning & statistical modeling** yang mengintegrasikan literatur agrometeorologi, dinamika mikroklimat temporal, serta fenologi tanaman.
-
-### Paradigma Rekomendasi
-```text
-[ Mikroklimat & Temporal ] + [ Crop & Growth Stage ] + [ Variabel Biofisik ]
-                                   ↓
-                            Risk Assessment
-                                   ↓
-                           Recommended Action
-                                   ↓
-                         Agronomic Explanation
-```
+[![Phase](https://img.shields.io/badge/Research%20Phase-Phase%204%20Closure%20%26%20Phase%206%20EDA-success)](file:///c:/CODING/research_taniAdapt/reports/audit_closure_report.md)
+[![Audit Status](https://img.shields.io/badge/Audit%20Blockers-A1--A11%20CLOSED-blue)](file:///c:/CODING/research_taniAdapt/reports/audit_closure_report.md)
+[![Notebooks](https://img.shields.io/badge/Executable%20Notebooks-10%20Verified%20(0%20Errors)-brightgreen)](file:///c:/CODING/research_taniAdapt/notebook/)
 
 ---
 
-## 🔬 Metodologi: Evidence-Based Pipeline
+## 🧭 Master Navigation & Notebook Index
 
-TaniAdapt dibangun melalui alur ilmiah yang ketat dari pembuktian data hingga ke mesin rekomendasi:
+Seluruh alur riset, audit integritas, dan visualisasi *Exploratory Data Analysis* (EDA) telah dikonsolidasikan langsung ke dalam **10 Jupyter Notebooks mandiri**. Anda **cukup membuka notebook yang relevan** tanpa perlu menelusuri puluhan berkas mentah.
 
-```mermaid
-flowchart TD
-    A["Literature Review"] --> B["Dataset Discovery & Audit"]
-    B --> C["EDA & Agronomic Pattern Mining"]
-    C --> D["Statistical Analysis (Correlation, Causality, Lag)"]
-    D --> E["Feature Engineering (VPD, Thermal Time, Rolling Windows)"]
-    E --> F["Machine Learning Baseline"]
-    F --> G["Empirical Evidence Extraction"]
-    G --> H["Calibrated Risk Model"]
-    H --> I["Contextual Decision Engine"]
-    I --> J["Explainable Agricultural Advisory"]
-```
+### 1. Single-Dataset EDA (Analisis Mandiri per Dataset)
+Setiap notebook `01` s/d `09` mengeksekusi audit kualitas internal dan visualisasi statistik murni yang hanya bersumber dari dataset itu sendiri:
 
----
-
-## 📊 Dimensi Data & Fitur
-
-Sistem ini dirancang untuk memproses multivariat data berikut:
-
-| Kategori | Fitur / Variabel |
-|---|---|
-| **Weather / Microclimate** | Temperatur udara ($T_{min}$, $T_{max}$, $T_{avg}$), Curah hujan / intensitas presipitasi, Kelembapan relatif (RH), Radiasi matahari, Kecepatan & arah angin |
-| **Temporal Dynamics** | Weather history, lag features (1–14 hari), rolling window statistics (mean, sum, std, consecutive wet/dry days) |
-| **Crop Biology** | Jenis tanaman, varietas, koefisien tanaman ($K_c$) |
-| **Phenology** | Fase pertumbuhan (*growth stage*), akumulasi satuan panas / Growing Degree Days (GDD) |
-| **Biophysical / Agrometeorological** | Kelembapan tanah (*soil moisture*), Vapor Pressure Deficit (VPD), Evapotranspirasi (ET₀/ETc), *Leaf Wetness Duration* (LWD) |
-| **Target Outcome (TBD)** | *Crop Disease Incidence / Severity* ATAU *Yield Prediction / Loss Risk* *(diputuskan pada Phase 5)* |
+| Notebook | Komoditas / Sumber Data | Cakupan Wilayah & Waktu | Fokus Audit & Visualisasi EDA Mandiri |
+| :--- | :--- | :--- | :--- |
+| [**`01_AgERA5.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/01_AgERA5.ipynb) | Cuaca Harian AgERA5 (ECMWF CDS) | 27 Kab/Kota (2015–2024, 10 thn) | **Dependensi Spasial Presipitasi & $N_{\text{eff}}$**: Matriks korelasi 27 unit ($r > 0.75$) & PCA Scree Plot membuktikan derajat bebas iklim independen efektif Jabar hanya ~3–4 klaster. |
+| [**`02_bangladesh_rice_panel.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/02_bangladesh_rice_panel.ipynb) | Benchmark Padi BRRI (Mendeley Data) | 64 Distrik (2015–2024, 3 musim) | **Dekomposisi Varians Two-Way Fixed Effects**: Disparitas yield per musim (Boro > Aman > Aus) & bukti benchmark bahwa residual sinyal cuaca menyumbang ~25% variasi. |
+| [**`03_west_java_rice_productivity.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/03_west_java_rice_productivity.ipynb) | Padi Sawah/Total (Distanhor & BPS) | 27 Kab/Kota (2015–2020) | **Rekonsiliasi B1 & Isolasi Artefak**: Rata-rata berbobot luas panen cocok 100.0% dengan BPS resmi pre-KSA (2015–2017); isolasi lonjakan semu 2019 (+21.8%) akibat konversi GKP Galura. |
+| [**`04_indonesia_agroclimatic.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/04_indonesia_agroclimatic.ipynb) | Indikator Ekstrem Nasional (ERA5) | 12 Titik Poligon Jabar (2016–2025) | **Distribusi CDD Persentil Empiris**: Hapus ambang kaku 30/60 hari; gunakan persentil lokal (P50, P75, P90), neraca air ($P - ET_0$), dan evaluasi sirkularitas internal ERA5. |
+| [**`05_subang_maize_productivity.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/05_subang_maize_productivity.ipynb) | Jagung Jabar & Subang (Distanhor) | 27 Kab/Kota (2015–2022) | **Deteksi Imputasi 2022 & Detrending Subang**: Deteksi 13 unit identik 75.70 ku/ha (imputasi); tren linear Subang (+4.93 ku/ha/thn) dengan CV residu menyusut ke 5.49% (ex-2022). |
+| [**`06_west_java_horticulture_productivity.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/06_west_java_horticulture_productivity.ipynb) | SBS Cabai Besar & Rawit (Distanhor) | Provinsi (2017–2024) | **Koreksi CV Sejati & Isolasi Tier B**: CV empiris Cabai Besar 4.49% & Cabai Rawit 5.71%; bukti *zero overlap* data kabupaten `od_18096` (2013–2014) membatasi hortikultura ke aturan IFWC non-regresi. |
+| [**`07_soybean_and_spatial_geoboundaries.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/07_soybean_and_spatial_geoboundaries.ipynb) | Kedelai & Centroid geoBoundaries | 27 Kab/Kota (2015–2022) | **Deteksi Imputasi Kedelai 2022 & Filter 17 Sentra**: SD spasial kolaps ke 0.19 ku/ha pada 2022 (imputasi provinsi); filter ex-ante kabupaten aktif minimal 6 tahun menghasilkan panel 17 sentra. |
+| [**`08_production_and_harvest_area.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/08_production_and_harvest_area.ipynb) | Produksi & Luas Panen (Distanhor) | 27 Kab/Kota (2015–2021) | **Dekomposisi Log Produksi & Funnel Plot**: $\Delta \ln(\text{Prod}) = \Delta \ln(\text{Area}) + \Delta \ln(\text{Yield})$ membuktikan 98.4% lonjakan Subang disumbang luas panen; Funnel plot skala luas vs CV yield. |
+| [**`09_climate_covariates_and_chirps.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/09_climate_covariates_and_chirps.ipynb) | Indeks Iklim Makro (NOAA CPC/PSL) | Pasifik & Samudra Hindia (2015–2024)| **Dinamika Kovariat Makro ENSO & IOD**: Runtun waktu NOAA ONI (El Niño 2015/16, La Niña 2020–22, Super El Niño 2023/24) dan NOAA PSL DMI (fase IOD positif ekstrem 2019). |
 
 ---
 
-## 🗺️ Research Roadmap & Current Status
+### 2. Cross-Dataset Merged EDA (Sintesis Gabungan Antar-Dataset)
+Khusus untuk analisis yang **memerlukan perpaduan 2 atau lebih dataset**, seluruh evaluasinya disatukan dalam 1 notebook sintesis:
 
-Proyek saat ini berada di **PHASE 3 (Dataset Discovery)**:
-
-- [x] **PHASE 0** — Definisi Masalah & Kebutuhan Agro-Advisory Hiperlokal
-- [x] **PHASE 1** — Research Questions (RQ) & Perumusan Hipotesis
-- [x] **PHASE 2** — Deep Literature Review (Epidemiologi Penyakit & Agroklimatologi)
-- [x] **PHASE 3 — Dataset Discovery & Clean Acquisition** *(COMPLETED — DS01 to DS06)*
-- [x] **PHASE 4 — Dataset Quality Audit** *(COMPLETED — 12-Dimension Audit, Figures, Reports)*
-- [ ] **PHASE 5** — Crop + Outcome Selection (Finalisasi komoditas & fokus: Disease vs. Yield)
-- [ ] **PHASE 6** — Exploratory Data Analysis (EDA) & Domain Verification
-- [ ] **PHASE 7** — Statistical Analysis (Lag correlation, non-linear dependencies)
-- [ ] **PHASE 8** — Domain-Informed Feature Engineering (VPD, GDD, cumulative indices)
-- [ ] **PHASE 9** — ML Baseline & Evaluation Framework
-- [ ] **PHASE 10** — Evidence Extraction → Calibrated Risk Model
-- [ ] **PHASE 11** — Risk Model → Decision Engine Architecture
-- [ ] **PHASE 12** — Agronomic & Empirical Validation
-- [ ] **PHASE 13** — TaniAdapt Decision-Support Application Deployment
+| Notebook | Dataset yang Digabungkan | Analisis & Visualisasi Multimodal |
+| :--- | :--- | :--- |
+| [**`10_phase6_exploratory_data_analysis.ipynb`**](file:///c:/CODING/research_taniAdapt/notebook/10_phase6_exploratory_data_analysis.ipynb) | **DS01 + DS03 + DS05 + DS06 + DS07 + DS09 + CHIRPS + DEM** | **Sintesis Ekonometrika & Weather Coupling**:<br>1. **AgERA5 + CHIRPS v2 + DEM**: Regresi signed bias spasial vs elevasi topografi ($r = +0.631$, overestimasi Bandung Raya $+33\%\text{ s.d. }+61\%$) & korelasi anomali bulanan deseasonalized ($r = 0.50\text{--}0.80$).<br>2. **AgERA5 + Jagung Subang/Jabar**: Added-Variable Plot Hipotesis `H_CORN_01` (presipitasi vegetatif Feb–Apr setelah partial out FE Kabupaten & Tahun) disandingkan dengan MDE ($\pm 0.2296$).<br>3. **AgERA5 + Padi Sawah**: Panel coupling presipitasi MH/MK terhadap dinamika yield 18 sentra & evaluasi MDE (2.35%).<br>4. **AgERA5 + Hortikultura**: Mikroklimat depresi titik embun harian ($T_{\min} - T_d$) per sel/bulan untuk pre-registrasi ambang $P_{10}$ IFWC.<br>5. **AgERA5 + geoBoundaries**: Matriks dependensi spasial (27 adm2 ke 25 sel grid AgERA5 unik; $N_{\text{eff}} = 18$).<br>6. **AgERA5 + Makro ONI**: Telekoneksi anomali presipitasi tahunan terhadap siklus ENSO. |
 
 ---
 
-## 📂 Struktur Repositori & Deliverables Phase 3 & 4
+## 🏛️ Matriks Resolusi Audit (Item Blocker A1–A11 & B1–B4)
+
+Semua inkonsistensi yang ditemukan oleh audit independen telah ditutup secara permanen:
+
+| ID | Topik Audit | Temuan Empiris | Resolusi Ilmiah & Status | Dokumen / Notebook Pembuktian |
+| :--- | :--- | :--- | :--- | :--- |
+| **A1** | Rekonsiliasi Padi 2015–2017 | Rata-rata berbobot luas panen DS03 cocok **100.0% (selisih 0.00%)** dengan publikasi BPS resmi (61.22, 60.49, 58.87 ku/ha). | Terpecahkan. Lonjakan 2019 (+21.8%) diisolasi sebagai artefak konversi GKP Galura. Periode 2018–2020 dieksklusikan dari panel utama. | [`b1_rice_reconciliation_v2.csv`](file:///c:/CODING/research_taniAdapt/reports/dataset_audit/b1_rice_reconciliation_v2.csv)<br>[`03_west_java_rice_productivity.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/03_west_java_rice_productivity.ipynb) |
+| **A2** | AgERA5 vs CHIRPS 27 Unit | Korelasi deseasonalized bulanan $r = 0.50\text{--}0.80$ (median 0.73). Signed bias berkorelasi positif dengan elevasi ($r = +0.631$). | Terpecahkan. Angka Tasikmalaya dikoreksi ke rata-rata 3 tahun benchmark (4.465,7 mm). Overestimasi orografis Bandung Raya (+33% s.d. +61%) dicatat sebagai limitasi model. | [`b3_rainfall_bias_chirps_audit_v2.csv`](file:///c:/CODING/research_taniAdapt/reports/dataset_audit/b3_rainfall_bias_chirps_audit_v2.csv)<br>[`10_phase6_exploratory_data_analysis.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/10_phase6_exploratory_data_analysis.ipynb) |
+| **A3** | Anomali Jagung & Kedelai 2022 | 13 unit jagung identik 75.70 ku/ha. Standar deviasi kedelai kolaps ke 0.19 ku/ha. | Terpecahkan. Tahun 2022 ditandai `SUSPECT` dan dieksklusikan dari panel utama model regresi. | [`05_subang_maize_productivity.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/05_subang_maize_productivity.ipynb)<br>[`07_soybean_and_spatial_geoboundaries.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/07_soybean_and_spatial_geoboundaries.ipynb) |
+| **A4** | CV Produktivitas Subang | CV sampel mentah = 12.21%. Titik 2022 menyumbang 49.8% sum of squared errors tren linear. | Terpecahkan. Tanpa titik 2022, CV residu detrended menyusut ke **5.49%** (linear) dan **2.65%** (piecewise). | [`05_subang_maize_productivity.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/05_subang_maize_productivity.ipynb) |
+| **A5** | Dekomposisi Log Produksi Subang | $\Delta \ln(\text{Prod}) = \Delta \ln(\text{Area}) + \Delta \ln(\text{Yield})$. | Terpecahkan. 98.4%–98.7% lonjakan produksi jagung Subang 2018 & 2020 disumbang oleh ekspansi luas panen, bukan produktivitas. | [`08_production_and_harvest_area.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/08_production_and_harvest_area.ipynb) |
+| **A6** | Hipotesis Embun & CV Cabai | Ambang kaku 2.0°C diganti persentil lokal $P_{10}$ per sel/bulan. CV empiris Cabai Besar 4.49% & Rawit 5.71%. | Terpecahkan. Data kabupaten `od_18096` hanya ada di 2013–2014 (*zero overlap*). Hortikultura diisolasi ke modul aturan IFWC non-regresi. | [`06_west_java_horticulture_productivity.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/06_west_java_horticulture_productivity.ipynb)<br>[`10_phase6_exploratory_data_analysis.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/10_phase6_exploratory_data_analysis.ipynb) |
+| **A7** | Titik Grid DS04 & Sirkularitas | Tepat 12 titik grid berada di dalam poligon batas resmi Jabar (14 titik pada bbox kasar). Ambang absolut CDD >30/>60 hari dihapus. | Terpecahkan. Sirkularitas internal ERA5 diakui sebagai *internal consistency check*, bukan validasi independen. | [`04_indonesia_agroclimatic.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/04_indonesia_agroclimatic.ipynb) |
+| **A8** | Sel Grid AgERA5 27 Wilayah | 27 wilayah administratif memetakan ke 25 sel grid AgERA5 0.1° unik. Seluruh 18 kabupaten sentra pertanian Tier A memiliki sel grid 100% independen. | Terpecahkan. Derajat bebas spasial efektif 18 sentra $N_{\text{eff}} = 18$. Titik koordinat Subang disinkronkan ke lintang -6.56°S, bujur 107.76°E. | [`a8_spatial_grid_cells_audit.csv`](file:///c:/CODING/research_taniAdapt/reports/dataset_audit/a8_spatial_grid_cells_audit.csv)<br>[`10_phase6_exploratory_data_analysis.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/10_phase6_exploratory_data_analysis.ipynb) |
+| **A9** | Filter Sentra Kedelai Ex-Ante | Kriteria ex-ante: kabupaten aktif minimal 6 tahun dengan hasil panen $> 0$. | Terpecahkan. Panel seimbang ketat $N=8$ menghasilkan 14 sentra (termasuk kota); panel kabupaten pertanian $N \ge 6$ menghasilkan tepat **17 sentra kabupaten**. | [`07_soybean_and_spatial_geoboundaries.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/07_soybean_and_spatial_geoboundaries.ipynb) |
+| **A10** | Multiple Testing & Cluster Power | Koreksi multiple testing menggunakan Holm-Bonferroni (primer) dan Benjamini-Hochberg (sekunder). Kluster $G \approx 18$ kabupaten. | Terpecahkan. MDE final panel dengan wild cluster bootstrap Webb: Padi 2.35%, Jagung 25.81%, Kedelai 10.33%. | [`a10_panel_mde_audit.csv`](file:///c:/CODING/research_taniAdapt/reports/dataset_audit/a10_panel_mde_audit.csv)<br>[`10_phase6_exploratory_data_analysis.ipynb`](file:///c:/CODING/research_taniAdapt/notebook/10_phase6_exploratory_data_analysis.ipynb) |
+| **A11** | Audit File Terhapus | 45 file yang sempat terhapus diverifikasi dalam riwayat git (semuanya berkas duplikat/sintetik; nol skrip reproduksi hilang). | Terpecahkan. Seluruh repositori dapat direproduksi penuh secara deterministik dari awal. | [`audit_closure_report.md`](file:///c:/CODING/research_taniAdapt/reports/audit_closure_report.md) |
+
+---
+
+## 📁 Struktur Repositori Bersih (Zero-Clutter Layout)
+
+Repositori ini telah dirapikan agar efisien, tidak membingungkan, dan memenuhi standar riset akademik tingkat lanjut:
 
 ```text
 research_taniAdapt/
-├── README.md                                # Dokumentasi utama proyek & status riset
-├── data/
-│   └── raw/
-│       ├── DS01_agera5/                     # AgERA5 Time-Series 2015-2024 (7 Lokasi Jabar, 24 Variabel)
-│       ├── DS02_bangladesh_rice_panel/      # Replication archive BRRI (Stata14 + CSVs)
-│       ├── DS03_west_java_rice_productivity/# Produktivitas Padi Jabar (Total, Sawah, Ladang)
-│       ├── DS04_indonesia_agroclimatic/     # 18 file Parquet/CSV Open-Meteo/ERA5 (612 grid points)
-│       ├── DS05_subang_maize_productivity/  # Produktivitas Jagung Jabar 2015-2022 (incl. Subang)
-│       └── DS06_west_java_horticulture/     # Produktivitas SBS (Cabai Besar & Cabai Rawit) + Produksi
-├── notebook/                                # Notebook Alur Kerja Utama Phase 3 & Phase 4
-│   ├── 01_AgERA5.ipynb                      # DS01: AgERA5 7 Lokasi Jabar 2015-2024 (24 Variabel)
-│   ├── 02_bangladesh_rice_panel.ipynb       # DS02: Panel Beras 64 Distrik Bangladesh (Benchmark)
-│   ├── 03_west_java_rice_productivity.ipynb # DS03: Padi Jabar 27 Kab/Kota (Total, Sawah, Ladang)
-│   ├── 04_indonesia_agroclimatic.ipynb      # DS04: 612 Grid Agroklimat Nasional (Indikator Ekstrem)
-│   ├── 05_subang_maize_productivity.ipynb   # DS05: Jagung Jabar 2015-2022 (Fokus Kab. Subang)
-│   └── 06_west_java_horticulture_productivity.ipynb # DS06: Hortikultura SBS Cabai Besar & Rawit
-
-
-├── reports/
-│   ├── dataset_discovery/
-│   │   ├── dataset_catalog.csv              # Katalog komprehensif 6 dataset
-│   │   ├── dataset_sources.json             # Metadata sumber resmi
-│   │   ├── dataset_acquisition_manifest.csv # Manifest akuisisi lengkap (file, size, sha256)
-│   │   ├── agera5_variable_inventory.csv    # 27 variabel AgERA5 resmi & parameter API
-│   │   ├── variable_inventory_by_dataset.csv# 51 variabel terpetakan ke 7 kelompok TaniAdapt
-│   │   ├── agera5_clean_start_note.md       # Dokumentasi arsitektur clean-start AgERA5
-│   │   └── download_log.txt                 # Log proses akuisisi
-│   └── dataset_audit/
-│       ├── dataset_audit_summary.csv        # Tabel ringkasan 12 dimensi audit
-│       ├── cross_dataset_linking_matrix.csv # Matriks kelayakan linking spasial-temporal
-│       ├── dataset_audit_dashboard.xlsx     # Workbook Excel konsolidasi multi-sheet
-│       ├── audit_artifact_manifest.csv      # Manifest artifak hasil audit terverifikasi
-│       ├── index.html                       # Dashboard visual laporan audit statis
-│       ├── 01_audit_agera5.md               # Laporan audit mendalam AgERA5
-│       ├── 02_audit_bangladesh_rice_panel.md# Laporan audit mendalam Bangladesh Rice
-│       ├── 03_audit_west_java_rice_productivity.md
-│       ├── 04_audit_indonesia_agroclimatic.md
-│       ├── 05_audit_subang_maize_productivity.md
-│       ├── 06_audit_west_java_horticulture_productivity.md
-│       ├── 07_audit_cross_dataset_linking_feasibility.md # Sintesis kelayakan linking data
-│       └── figures/                         # Visualisasi diagnostik audit (PNG)
-│           ├── ds01_agera5_plausibility.png
-│           ├── ds02_rice_panel_missingness.png
-│           ├── ds03_rice_coverage.png
-│           ├── ds04_agroclimate_grid_map.png
-│           ├── ds05_maize_coverage.png
-│           └── ds06_chili_commodities.png
-└── scripts/                                 # Skrip otomasi akuisisi dan audit yang dapat diulang
+├── README.md                                 # Peta Navigasi & Master Index (Dokumen ini)
+├── notebook/                                 # 10 Notebook Eksekusi Utama (Live Inline Visuals)
+│   ├── 01_AgERA5.ipynb                       # [DS01] AgERA5 Spasial & Klimatologi (Single Dataset)
+│   ├── 02_bangladesh_rice_panel.ipynb        # [DS02] Benchmark Panel Ekonometrika (Single Dataset)
+│   ├── 03_west_java_rice_productivity.ipynb  # [DS03] Padi Sawah Rekonsiliasi & Heatmap (Single Dataset)
+│   ├── 04_indonesia_agroclimatic.ipynb       # [DS04] Ekstrem Grid Persentil Empiris (Single Dataset)
+│   ├── 05_subang_maize_productivity.ipynb    # [DS05] Jagung Subang & Imputasi 2022 (Single Dataset)
+│   ├── 06_west_java_horticulture_productivity.ipynb # [DS06] Cabai CV Sejati & Tier B (Single Dataset)
+│   ├── 07_soybean_and_spatial_geoboundaries.ipynb   # [DS07] Kedelai 17 Sentra Ex-Ante (Single Dataset)
+│   ├── 08_production_and_harvest_area.ipynb  # [DS08] Dekomposisi Log Produksi & Funnel (Single Dataset)
+│   ├── 09_climate_covariates_and_chirps.ipynb# [DS09] Kovariat Makro ENSO & IOD (Single Dataset)
+│   └── 10_phase6_exploratory_data_analysis.ipynb # [SINTESIS] Cross-Dataset Coupling & Multimodal Regresi
+├── reports/                                  # Laporan Resmi & Berkas Referensi Final
+│   ├── audit_closure_report.md               # Laporan Penutupan Audit Komprehensif (A1–A11 & B1–B4)
+│   ├── source_log.md                         # Log Sumber Resmi BPS, CDS, BMKG (Verified URLs & Tanggal)
+│   ├── citation_audit_matrix.csv             # Matriks Sitasi Agronomi (Jagadish, Prasad, dll.)
+│   ├── dataset_audit/                        # Berkas Referensi CSV Terverifikasi
+│   │   ├── b1_rice_reconciliation_v2.csv     # Hasil Rekonsiliasi Padi 2015-2020 vs BPS
+│   │   ├── b3_rainfall_bias_chirps_audit_v2.csv # Audit Signed Bias AgERA5 vs CHIRPS 27 Unit
+│   │   ├── a8_spatial_grid_cells_audit.csv   # Pemetaan 27 ADM2 ke 25 Sel Grid AgERA5
+│   │   ├── a10_panel_mde_audit.csv           # Matriks Perhitungan Minimum Detectable Effect (MDE)
+│   │   ├── jabar_27_kabkota_centroids.csv    # Koordinat Centroid Resmi ADM2 Jawa Barat
+│   │   ├── cross_dataset_linking_matrix_revised.csv # Matriks Kelayakan Integrasi Data
+│   │   ├── dataset_audit_summary.csv         # Ringkasan Audit Kualitas per Dataset
+│   │   └── archive/                          # [ARSIP] Berkas CSV draf & kerja intermediat
+│   ├── figures/                              # Gambar PNG Berkualitas Tinggi Hasil Eksekusi Notebook
+│   ├── logs/                                 # [LOGS] Log Inkonsistensi & Riwayat Eksplorasi
+│   └── archive/                              # [ARSIP] Draf laporan historis
+├── scripts/                                  # Skrip Inti Pipeline
+│   ├── build_modular_eda_notebooks.py        # Master Runner: Bangun & Eksekusi Semua 10 Notebook
+│   ├── acquire_agera5_all_27_kabkota.py      # Pengunduh Data Cuaca AgERA5 27 Unit
+│   ├── fetch_chirps_remaining.py             # Pengunduh Satelit CHIRPS v2
+│   ├── fetch_padi_variants.py                # Pengunduh Varian Padi Galura/Distanhor
+│   ├── fetch_area_production_datasets.py     # Pengunduh Luas Panen & Produksi
+│   ├── run_quality_audit.py                  # Audit Kualitas Terotomatisasi
+│   └── archive/                              # [ARSIP] 43 skrip temporer, patch, & scratch
+└── data/                                     # Raw Data Storage (Diabaikan oleh Git)
 ```
 
 ---
 
-## 🚀 Panduan Eksekusi Notebook (`notebook/`)
+## ⚡ Cara Menjalankan & Mereproduksi (1-Click Pipeline)
 
-Seluruh 10 notebook di folder `notebook/` telah diselaraskan dengan dataset in-scope, hasil audit rekonsiliasi, dan visualisasi diagnostik EDA:
+Untuk mereproduksi seluruh hasil audit dan merender ulang semua visualisasi pada 10 notebook secara otomatis dari awal hingga akhir:
 
-1. **`01_AgERA5.ipynb`** — *DS01 Primary Weather Backbone*: Validasi 24 variabel cuaca harian (2015–2024) di 27 Kab/Kota Jabar, uji hukum fisika atmosfer, grafik suhu, serta komparasi curah hujan tahunan.
-2. **`02_bangladesh_rice_panel.ipynb`** — *DS02 Rice Panel Benchmark*: Replikasi BRRI/Elsevier 64 distrik (2015–2024), uji keunikan kunci panel, stacked bar observasi per musim, dan boxplot variabilitas hasil panen (*yield* t/ha).
-3. **`03_west_java_rice_productivity.ipynb`** — *DS03 Regional Rice Outcome*: Rekonsiliasi B1 Padi 27 Kab/Kota (2015–2020), konfirmasi area-weighted baseline pre-KSA cocok 100% dengan BPS resmi, dan isolasi artefak 2019.
-4. **`04_indonesia_agroclimatic.ipynb`** — *DS04 Extreme Indicators Reference*: 612 grid points nasional (12 titik poligon resmi Jabar / 14 titik bbox), kamus 12 indikator agroklimat ekstrem, dan penghapusan ambang batas hari absolut (diganti persentil empiris).
-5. **`05_subang_maize_productivity.ipynb`** — *DS05 Regional Maize Outcome*: Data jagung 27 Kab/Kota (2015–2022), deteksi imputasi seragam 2022, isolasi runtun waktu Subang, dan evaluasi detrending linear vs piecewise break.
-6. **`06_west_java_horticulture_productivity.ipynb`** — *DS06 Regional Horticulture Outcome*: Tren Cabai Rawit & Cabai Besar (2017–2024), koreksi CV empiris sejati (4.49% & 5.71%), dan modul aturan mikroklimat IFWC berbasis persentil $P_{10}$ lokal.
-7. **`07_soybean_and_spatial_geoboundaries.ipynb`** — *DS07 Spatial Geoboundaries & Kedelai*: 17 kabupaten sentra kedelai aktif, centroid resmi 27 Kab/Kota, dan audit elevasi DEM SRTM.
-8. **`08_production_and_harvest_area.ipynb`** — *DS08 Volume Produksi & Luas Panen*: Dekomposisi logaritma $\Delta \ln(\text{Prod}) = \Delta \ln(\text{Area}) + \Delta \ln(\text{Yield})$ membuktikan 98.4% lonjakan Subang didorong perluasan luas panen.
-9. **`09_climate_covariates_and_chirps.ipynb`** — *DS09 Iklim Makro ONI/DMI & Validasi CHIRPS*: Korelasi anomali deseasonalized $r \approx 0.73$, bias orografis Bandung Raya (+33% s.d. +61%), dan koreksi Tasikmalaya sebagai rata-rata 3 tahun benchmark.
-10. **`10_phase6_exploratory_data_analysis.ipynb`** — *Phase 6 Pre-Registered EDA Synthesis*: Notebook eksekutif yang mengeksekusi seluruh pengujian Bagian B (B1: Integritas Outcome, B2: Validasi Cuaca Spasial, B3: Matching Cuaca-Outcome dengan MDE dan LOO Forest Plot, B4: Hortikultura Mikroklimat Tier B).
+```powershell
+python scripts/build_modular_eda_notebooks.py
+```
 
-### Cara Menjalankan:
-Buka file notebook di VS Code / Jupyter Lab, pilih kernel Python (`Python 3.11.x`), lalu klik **Run All**. Kode bersifat *idempotent* (langsung membaca data lokal dari `data/raw/` tanpa re-download) dan otomatis menyimpan grafik ke `reports/figures/` dan `reports/eda/`.
-
----
-
-## 🎯 Target Akhir Sistem
-
-1. **Precision Risk Scoring:** Penilaian probabilitas risiko berbasis model empiris, bukan aturan kaku statis.
-2. **Context-Aware Advisory:** Rekomendasi aksi agronomi (irigasi adaptif, aplikasi preventif, penyesuaian jadwal tanam/panen) disesuaikan dengan fase fenologi tanaman.
-3. **Interpretability & Trust:** Memberikan justifikasi agronomis (*why this recommendation was given*) agar dapat dipercaya dan dipahami oleh petani maupun penyuluh pertanian lapangan.
-
+*Skrip ini akan mengonfigurasi sel EDA single-dataset pada Notebook `01` s/d `09`, menyelaraskan Notebook `10` untuk cross-dataset synthesis, lalu mengeksekusi ke-10 notebook menggunakan `NotebookClient` hingga seluruh grafik PNG ter-render inline.*
