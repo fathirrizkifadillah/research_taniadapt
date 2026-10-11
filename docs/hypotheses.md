@@ -4,6 +4,7 @@ Dokumen ini mengunci seluruh hipotesis pengujian empiris, jendela fenologi, stra
 
 > [!IMPORTANT]
 > **Aturan Metodologis & Anti-P-Hacking**:
+> - **Git Commit Hash**: `8f69dcb` | **Git Tag**: `v2-audit-closure`
 > 1. **Pre-Registered Variables**: Seluruh variabel cuaca dan jendela waktu yang tercantum di bawah ini bersifat terikat. Dilarang menambah variabel atau menggeser jendela waktu secara ad-hoc setelah melihat data eksplorasi.
 > 2. **Keluarga Uji & Koreksi *Multiple Testing***:
 >    - **Keluarga Primer**: **Holm-Bonferroni** (mengontrol *Family-Wise Error Rate* / FWER secara ketat).
