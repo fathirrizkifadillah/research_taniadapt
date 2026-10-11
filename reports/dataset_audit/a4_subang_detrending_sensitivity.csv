@@ -1,0 +1,7 @@
+sample,detrend_method,r_squared,rmse_sample,cv_ddof0_pct,cv_ddof1_pct,cv_ols_pct,notes
+Full 2015-2022 (N=8),1. Tanpa Detrend (Deviasi Rata-rata Mentah),0.0,14.057046466350705,22.35,23.89,23.89,Variabilitas mentah total (tren teknologi + cuaca + noise)
+Full 2015-2022 (N=8),2. Tren Linier OLS Tunggal,0.7387,7.184929913167969,11.42,12.21,13.19,Slope: +4.933 ku/ha/thn. 2022 menyumbang 49.7% kuadrat residu.
+Full 2015-2022 (N=8),3. Piecewise / Structural Break (Shift Pasca-2020),0.8613,5.235839614450959,8.33,8.9,10.53,Break intercept post-2020: +16.24 ku/ha.
+"Clean 2015-2021 (N=7, Excl 2022 Suspect)",1. Tanpa Detrend (Deviasi Rata-rata Mentah),0.0,7.173909739631588,12.2,13.18,13.18,Variabilitas mentah total (tren teknologi + cuaca + noise)
+"Clean 2015-2021 (N=7, Excl 2022 Suspect)",2. Tren Linier OLS Tunggal,0.8262,2.990547011596845,5.08,5.49,6.02,Slope: +3.019 ku/ha/thn. 2022 menyumbang 49.7% kuadrat residu.
+"Clean 2015-2021 (N=7, Excl 2022 Suspect)",3. Piecewise / Structural Break (Shift Pasca-2020),0.9595,1.4434176814680508,2.45,2.65,3.25,Break intercept post-2020: +8.77 ku/ha.

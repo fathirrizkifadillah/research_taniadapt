@@ -1,0 +1,4 @@
+commodity,n_clusters_g,n_years_t,n_obs,sigma_eps_residual,mde_log_points,mde_pct
+Padi Sawah (2015-2017 Pre-KSA),18,3,54,0.0456,0.0233,2.35
+Jagung (2015-2021 Ex-2022 WLS),18,7,124,0.7724,0.2296,25.81
+Kedelai (2015-2021 Ex-2022 17 Sentra),17,7,115,0.316,0.0983,10.33
