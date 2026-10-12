@@ -138,16 +138,15 @@ Dokumen ini mencatat seluruh inkonsistensi numerik, kontradiksi naratif, dan art
 - Pasangan kota/kabupaten berbagi sel cuaca yang sama. Koordinat Subang berbeda antar dokumen.
 
 ### B. Resolusi
-- **Script**: `scripts/audit_a8_spatial_grid_cells.py`
-- Dari 27 unit administratif, terdapat tepat **25 sel grid AgERA5 unik**.
-- Duplikasi sel HANYA terjadi pada:
-  1. Kab. Bogor dan Kota Bogor (sel $-6.60^\circ, 106.80^\circ$)
-  2. Kab. Cirebon dan Kota Cirebon (sel $-6.70^\circ, 108.60^\circ$).
-- Seluruh 18 kabupaten sentra Tier A memiliki sel grid 100% independen ($N_{\text{eff}} = 18$).
-- Koordinat Subang dibakukan tunggal:
-  - **Centroid Poligon Resmi**: Lintang $-6.4830^\circ$, Bujur $107.7322^\circ$
-  - **Sel Grid AgERA5**: $-6.50^\circ, 107.70^\circ$
-  - **Elevasi DEM**: $49.0\text{ meter dpl}$.
+- **Script**: `scripts/audit_a8_spatial_grid_cells.py` & audit AgERA5 2015–2024
+- Dari 27 unit administratif, terdapat tepat **22 sel grid AgERA5 unik** (bukan 25).
+- Duplikasi seri waktu cuaca AgERA5 (5 pasangan unit):
+  1. Bogor: Kab. Bogor, Kota Bogor, Kota Depok (sel -6.6°, 106.8°)
+  2. Cirebon: Kab. Cirebon dan Kota Cirebon (sel -6.7°, 108.6°)
+  3. Bandung: Kab. Bandung dan Kota Bandung (sel -7.0° / -6.9°, 107.6°)
+  4. Ciamis – Kota Tasikmalaya: Kab. Ciamis dan Kota Tasikmalaya (sel -7.3°, 108.3°)
+  5. Bandung Barat – Cimahi: Kab. Bandung Barat dan Kota Cimahi (sel -6.9°, 107.5°)
+- Seluruh dokumen dan tabel audit (`a8_spatial_grid_cells_audit.csv`) diperbarui ke angka tepat **22 sel unik**.
 
 ---
 
@@ -161,3 +160,18 @@ Dokumen ini mencatat seluruh inkonsistensi numerik, kontradiksi naratif, dan art
 - Total baris teoretis adalah 216 ($27 \times 8$). Baris observasi valid (yield $> 0$) adalah **156 baris untuk kedelai** dan **181 baris untuk jagung**.
 - Kriteria Ex Ante Sentra Kedelai: Unit berstatus KABUPATEN yang memiliki catatan produktivitas $> 0$ minimal 6 dari 8 tahun ($N \ge 6$).
 - Di bawah kriteria ini, terdapat tepat **17 kabupaten sentra kedelai** (13 kabupaten memiliki $N=8$, 4 kabupaten memiliki $N=6\text{--}7$). Definisi panel seimbang ketat ($N=8$, mencakup kota) menghasilkan 14 unit.
+
+---
+
+## 10. Item A10 — Angka Resmi BPS Padi: Konflik Publikasi & Artefak 2019
+
+### A. Inkonsistensi Ditemukan
+- `source_log.md` sebelumnya mencantumkan angka 2018–2020: 52.01, 52.38, dan 54.85 ku/ha (dari Publikasi KSA Nasional).
+- `b1_rice_reconciliation_v2.csv` sebelumnya mencantumkan: 56.51, 57.54, dan 56.82 ku/ha (dari BRS BPS Jawa Barat).
+- Data Galura DS03 2019 mencatat unweighted 68.55 ku/ha, berbobot luas panen 70.09 ku/ha, sementara narasi menyebut 63.80 ku/ha.
+
+### B. Resolusi Mandatori
+- Seluruh angka BPS resmi ditandai **UNVERIFIED** sampai pengguna mengisi verifikasi primer di `reports/dataset_audit/bps_manual_input.csv`. Label `VERIFIED` dihapus total.
+- Rekonsiliasi dilaporkan secara ketat hanya sebagai: *"DS03 berbobot luas panen vs nilai di bps_manual_input.csv"*.
+- Notebook 03 dibersihkan dari sel lama yang memuat hardcoded `bps_means=[56.20,...]`. Hanya satu sumber kebenaran yang diizinkan.
+

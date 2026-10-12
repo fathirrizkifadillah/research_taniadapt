@@ -1,0 +1,15 @@
+{
+  "dataset": "DS08_production_and_harvest_area",
+  "status": "PASS (UJI IDENTITAS MATEMATIKA KONSISTEN 100%)",
+  "garut_baseline_share_pct": 46.86,
+  "mean_share_area_in_production_change_pct": 67.16,
+  "identity_consistency_maize_pct": 100.0,
+  "identity_consistency_soybean_pct": 100.0,
+  "five_key_findings": [
+    "Uji identitas Yield = Produksi x 10 / Luas konsisten 100% pada seluruh observasi aktif jagung dan kedelai.",
+    "Kabupaten Garut menguasai 46.9% dari total luas panen jagung Jawa Barat.",
+    "Dekomposisi log membuktikan rata-rata 67.2% perubahan produksi didorong oleh perubahan luas panen.",
+    "Kasus Subang terkonfirmasi sebagai efek small-denominator akibat basis luas panen kecil (<800 ha).",
+    "Plot eksploratori mencatat perubahan luas panen berfluktuasi seiring dinamika hujan musim kemarau."
+  ]
+}

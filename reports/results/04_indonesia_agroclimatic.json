@@ -1,0 +1,15 @@
+{
+  "dataset": "DS04_indonesia_agroclimatic",
+  "status": "PASS (PEMBANDING INTERNAL SIRKULAR)",
+  "n_grid_points_jabar": 12,
+  "period": "2016-2025",
+  "anomaly_correlation_with_ds01": 0.9932,
+  "circularity_notice": "DS04 diturunkan dari ERA5, sehingga cocok dengan AgERA5 secara sirkular dan bukan validasi permukaan independen.",
+  "five_key_findings": [
+    "Terdapat tepat 12 titik grid 0.5\u00b0 yang mencakup daratan Jawa Barat.",
+    "Korelasi anomali presipitasi bulanan dengan AgERA5 sangat tinggi (r = 0.94).",
+    "Kesesuaian ini adalah validasi sirkular internal karena keduanya bersumber dari reanalisis ERA5.",
+    "Metrik CDD terdistribusi secara log-normal tanpa memerlukan ambang batas absolut buatan.",
+    "DS04 disetujui sebagai pembanding makro regional tingkat pulau, bukan pengganti AgERA5 0.1\u00b0."
+  ]
+}

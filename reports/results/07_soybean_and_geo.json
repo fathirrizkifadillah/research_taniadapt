@@ -1,0 +1,15 @@
+{
+  "dataset": "DS07_soybean_and_geo",
+  "status": "PASS (17 SENTRA EX-ANTE, 2022 SUSPECT)",
+  "n_sentra_ex_ante": 17,
+  "sd_spasial_2021_ku_ha": 2.18,
+  "sd_spasial_2022_ku_ha": 0.19,
+  "lookup_kab_cell_elev_rows": 27,
+  "five_key_findings": [
+    "Kriteria ex-ante N >= 6 tahun menyaring tepat 17 kabupaten sentra kedelai aktif.",
+    "Standar deviasi spasial kedelai pada 2022 menyusut ke 0.19 ku/ha (bukti imputasi rata-rata dinas).",
+    "Tahun 2022 resmi diklasifikasikan sebagai SUSPECT dan dieksklusikan dari panel utama regresi.",
+    "Pemadanan spasial centroid ADM2 ke 22 sel AgERA5 unik memiliki jarak rata-rata 5.2 km.",
+    "Tabel lookup data/processed/lookup_kab_cell_elev.csv berhasil dibuat sebagai sumber kebenaran relasi spasial."
+  ]
+}

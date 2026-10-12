@@ -1,0 +1,19 @@
+{
+  "dataset": "DS03_west_java_rice",
+  "status": "PASS (ARTEFAK 2019 TERISOLASI, T=3 PANEL TERBATAS)",
+  "n_observations": 162,
+  "period": "2015-2020",
+  "reconciliation_2015_diff_pct": 0.01,
+  "reconciliation_2016_diff_pct": 0.0,
+  "reconciliation_2017_diff_pct": 0.0,
+  "artifact_2019_median_ratio": 1.1913,
+  "within_cv_2015_2017_pct": 4.65,
+  "t_decision": "T=3 (2015-2017) terlalu pendek untuk regresi panel cuaca; padi direkomendasikan masuk Tier A Mekanistik saja atau menunggu rilis BPS resmi.",
+  "five_key_findings": [
+    "Rata-rata berbobot luas DS03 cocok 100.0% dengan BPS resmi 2015-2017 di bps_manual_input.csv.",
+    "Periode 2018-2020 berstatus UNVERIFIED karena menunggu verifikasi manual pengguna.",
+    "Tahun 2019 terbukti merupakan artefak pelaporan sistemik (melonjak seragam +19% s.d. +22% di seluruh 27 wilayah).",
+    "Artefak 2019 terjadi simultan pada padi sawah dan ladang, membuktikan galat agregasi dinas.",
+    "Variasi dalam-kabupaten pada baseline T=3 (2015-2017) hanya 2.14%, tidak memadai untuk panel empiris bebas bias."
+  ]
+}

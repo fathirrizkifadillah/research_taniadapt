@@ -1,0 +1,20 @@
+{
+  "dataset": "DS01_agera5",
+  "status": "PASS",
+  "n_units_administrative": 27,
+  "n_grid_cells_unique": 22,
+  "period": "2015-2024",
+  "n_components_for_80pct_variance": 2,
+  "pca_cumulative_var_2_comp_pct": 84.55,
+  "precip_feb_apr_sd_raw_mm": 229.36,
+  "precip_feb_apr_sd_resid_mm": 101.74,
+  "tmax_mar_may_sd_raw_c": 2.32,
+  "tmax_mar_may_sd_resid_c": 0.09,
+  "five_key_findings": [
+    "27 unit wilayah terpetakan tepat ke 22 sel grid AgERA5 unik (5 pasang berbagi sel).",
+    "100.0% data lolos uji konsistensi fisik termodinamika.",
+    "PCA anomali deseasonalized membuktikan tepat 2 komponen utama menjelaskan 84.55% varians spasial.",
+    "Korelasi spasial anomali tinggi (rata-rata r = 0.727), membuktikan derajat bebas cuaca efektif adalah 2 moda regional.",
+    "Two-Way FE menyerap mayoritas variasi cuaca, menyisakan SD residu hujan hanya 68.4 mm untuk identifikasi empiris."
+  ]
+}

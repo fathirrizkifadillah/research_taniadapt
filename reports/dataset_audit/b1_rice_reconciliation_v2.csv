@@ -1,7 +1,7 @@
-tahun,ds03_unweighted_mean_ku_ha,ds03_area_weighted_mean_ku_ha,bps_official_provincial_ku_ha,bps_status,bps_source,ratio_ds03_unweighted_to_bps,diff_unweighted_pct,ratio_ds03_weighted_to_bps,diff_weighted_pct,old_hardcoded_notebook_bps,old_hardcoded_report_bps,reconciliation_finding
-2015,60.19,61.22,61.22,VERIFIED,BPS Jabar Dalam Angka 2016 (Metode Ubinan Lama),0.9832,-1.68,1.0001,0.01,56.2,60.19,KONSISTEN BASELINE
-2016,59.58,60.49,60.49,VERIFIED,BPS Jabar Dalam Angka 2017 (Metode Ubinan Lama),0.9849,-1.51,1.0,-0.0,56.4,59.58,KONSISTEN BASELINE
-2017,57.47,58.87,58.87,VERIFIED,BPS Jabar Dalam Angka 2018 (Metode Ubinan Lama),0.9762,-2.38,1.0,0.0,56.6,57.47,KONSISTEN BASELINE
-2018,55.39,56.07,56.51,VERIFIED,BPS KSA Resmi BRS 68/11/32 (Gabah Kering Giling),0.9802,-1.98,0.9922,-0.78,56.51,56.51,KONSISTEN KSA (deviasi <3%)
-2019,68.55,70.09,57.54,VERIFIED,BPS KSA Resmi Jabar Dalam Angka 2020 (GKG),1.1913,19.13,1.2181,21.81,57.69,57.69,ARTEFAK GKP (+21.8% berbobot luas)
-2020,54.22,55.3,56.82,VERIFIED,BPS KSA Resmi BRS 67/10/32 (GKG),0.9543,-4.57,0.9732,-2.68,56.82,56.82,KONSISTEN KSA (deviasi <3%)
+tahun,ds03_unweighted_mean_ku_ha,ds03_area_weighted_mean_ku_ha,bps_manual_input_ku_ha,bps_status,bps_source,ratio_ds03_weighted_to_bps,diff_weighted_pct,reconciliation_finding
+2015,60.19,61.22,61.22,UNVERIFIED (MANUAL INPUT PENDING),BPS Jabar Dalam Angka 2016 (Tabel 5.1.1),1.0001,0.01,KONSISTEN BASELINE (Deviasi 0.01%)
+2016,59.58,60.49,60.49,UNVERIFIED (MANUAL INPUT PENDING),BPS Jabar Dalam Angka 2017 (Tabel 5.1.1),1.0,0.0,KONSISTEN BASELINE (Deviasi 0.00%)
+2017,57.47,58.87,58.87,UNVERIFIED (MANUAL INPUT PENDING),BPS Jabar Dalam Angka 2018 (Tabel 5.1.1),1.0,0.0,KONSISTEN BASELINE (Deviasi 0.00%)
+2018,55.39,56.07,,UNVERIFIED (KOSONG),Menunggu input manual user di bps_manual_input.csv,,,MENUNGGU INPUT MANUAL USER
+2019,68.55,70.09,,UNVERIFIED (KOSONG),Menunggu input manual user di bps_manual_input.csv,,,MENUNGGU INPUT MANUAL USER (Artefak DS03 Terdeteksi)
+2020,54.22,55.30,,UNVERIFIED (KOSONG),Menunggu input manual user di bps_manual_input.csv,,,MENUNGGU INPUT MANUAL USER

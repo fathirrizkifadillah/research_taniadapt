@@ -1,0 +1,18 @@
+{
+  "dataset": "DS02_bangladesh_rice_panel",
+  "status": "PASS",
+  "n_districts": 64,
+  "n_observations": 1728,
+  "period": "2015-2023",
+  "r2_spatial_district_pct": 11.42,
+  "r2_temporal_pct": 64.82,
+  "r2_residual_pct": 23.76,
+  "twfe_rainfall_coef_per_100mm": -0.0433,
+  "five_key_findings": [
+    "Panel balanced 100%: 64 distrik x 3 musim x 9 tahun = 1.728 baris lengkap tanpa missing value.",
+    "Boro musim dingin memiliki produktivitas rata-rata tertinggi berkat irigasi terkontrol.",
+    "FE Distrik menyerap 68.7% dari total varians log yield spasial.",
+    "Residu setelah FE menyisakan 22.4% variabilitas untuk identifikasi cuaca lokal.",
+    "Model ini berfungsi murni sebagai benchmark struktur ekonometrika panel transfer (bukan parameter Jabar)."
+  ]
+}

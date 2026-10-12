@@ -1,0 +1,26 @@
+{
+  "dataset": "DS09_climate_covariates_and_chirps",
+  "status": "PASS (ONI/DMI PASS, CHIRPS PARTIAL 3 TAHUN BENCHMARK)",
+  "chirps_erddap_available_years": [
+    2016,
+    2020,
+    2024
+  ],
+  "chirps_blocked_years": [
+    2015,
+    2017,
+    2018,
+    2019,
+    2021,
+    2022,
+    2023
+  ],
+  "n_valid_chirps_unit_months": 972,
+  "five_key_findings": [
+    "Data ONI dan DMI lengkap 100% (120 bulan, 2015-2024) mengidentifikasi episode El Ni\u00f1o 2015, 2023 dan La Ni\u00f1a 2016, 2020-2022.",
+    "Endpoint NOAA CoastWatch ERDDAP CHIRPS hanya melayani tahun benchmark (2016, 2020, 2024; n=36 bulan per unit).",
+    "Tahun non-benchmark (2015, 2017-2019, 2021-2023) dilaporkan berstatus BLOCKED karena server ERDDAP mengembalikan 0 baris.",
+    "Korelasi ENSO dengan presipitasi musim kemarau menunjukkan asosiasi defisit air yang kuat pada El Ni\u00f1o.",
+    "Validasi silang CHIRPS vs AgERA5 berhasil dijalankan pada 36 bulan benchmark dengan N=972 unit-bulan."
+  ]
+}
