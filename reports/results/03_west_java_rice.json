@@ -12,7 +12,7 @@
   "five_key_findings": [
     "Rata-rata berbobot luas DS03 cocok 100.0% dengan BPS resmi 2015-2017 di bps_manual_input.csv.",
     "Periode 2018-2020 berstatus UNVERIFIED karena menunggu verifikasi manual pengguna.",
-    "Tahun 2019 terbukti merupakan artefak pelaporan sistemik (melonjak seragam +19% s.d. +22% di seluruh 27 wilayah).",
+    "Tahun 2019 terindikasi kuat merupakan artefak pelaporan sistemik (melonjak seragam +19% s.d. +22% di seluruh 27 wilayah).",
     "Artefak 2019 terjadi simultan pada padi sawah dan ladang, artefak administratif serentak (sawah +23%, ladang +55%), penyebab belum diketahui.",
     "Variasi dalam-kabupaten pada baseline T=3 (2015-2017) hanya 2.14%, tidak memadai untuk panel empiris bebas bias."
   ]

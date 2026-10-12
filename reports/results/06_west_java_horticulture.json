@@ -6,7 +6,7 @@
   "kabkota_overlap_years": 0,
   "has_opt_disease_labels": false,
   "five_key_findings": [
-    "Data produktivitas cabai hanya tersedia pada agregat Provinsi Jawa Barat (2016-2024).",
+    "Data produktivitas cabai hanya tersedia pada agregat Provinsi Jawa Barat (2017-2024, N=8 tahun per target).",
     "Koefisien variasi provinsi sangat rendah (4.49% cabai besar, 5.71% cabai rawit) akibat perataan agregasi.",
     "Data kabupaten/kota (od_18096) hanya tersedia 2013-2014, memiliki zero temporal overlap dengan cuaca (2015-2024).",
     "Dataset sama sekali tidak memuat label kejadian penyakit/OPT (antraknosa, fusarium, dll.).",

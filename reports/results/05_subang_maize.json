@@ -10,7 +10,7 @@
   "r2_residual_pct": 47.34,
   "five_key_findings": [
     "18 sentra kabupaten memiliki panel lengkap 2015-2022 (N=124 obs valid 2015-2021).",
-    "Pada 2022, 13 kabupaten memiliki angka identik persis 75.70 ku/ha (bukti imputasi seragam).",
+    "Pada 2022, 13 kabupaten memiliki angka identik persis 75.70 ku/ha (indikasi imputasi seragam).",
     "Tahun 2022 resmi diklasifikasikan sebagai SUSPECT dan dieksklusikan dari panel utama.",
     "Kasus Subang terkonfirmasi: CV residu detrended linear turun ke 5.49% setelah eksklusi 2022.",
     "FE Kabupaten menyerap 45.2% variansi, menyisakan 42.0% residu untuk analisis cuaca."
