@@ -7,7 +7,7 @@ Dokumen ini mencatat riwayat hash git tag historis untuk menjamin integritas aud
 | Tag Name | Tag Object Hash | Target Commit Hash | Short Commit | Pesan / Keterangan Tag | Tanggal |
 |---|---|---|:---:|---|:---:|
 | `v2-audit-closure` | `7b645d2652ba52063e4da3313f8a7994cc39a7be` | `f733079d4352d5c0663ab6bca3b7a347a3a15060` | `f733079` | TaniAdapt Complete PhD-Level EDA Dossier | 2026-10-12 |
-| `audit-v3` | *(Ditetapkan pada commit perbaikan audit v3)* | *(Pending commit saat ini)* | *(Pending)* | Penutupan Perbaikan Reviewer: Outlier Jagung/Kedelai, MDE 2.8xSE, IFWC RH06/Depresiasi, CHIRPS Dentro-Year/Unit, PCA Demeaned, BPS Metadata | 2026-10-12 |
+| `audit-v3` | `6df2e920cf9c5d93ed47de6d3c658edc29569121` | `1aa2e016a4be74712adbf898436eb4b4c73bf5f0` | `1aa2e01` | Penutupan Perbaikan Reviewer: Outlier Jagung/Kedelai, MDE 2.8xSE, IFWC RH06/Depresiasi, CHIRPS Dalam-Tahun/Unit, PCA Demeaned, BPS Metadata | 2026-10-12 |
 
 ## 2. Riwayat Commit Terkait
 - `f733079` (`f733079d4352d5c0663ab6bca3b7a347a3a15060`): docs: generate expanded PhD-level data science research dossier (.docx) with full mathematical framework and embedded figures
