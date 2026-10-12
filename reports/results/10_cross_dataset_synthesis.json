@@ -216,5 +216,29 @@
         "status": "evidence_insufficient"
       }
     ]
+  },
+  "phase8_feature_engineering": {
+    "status": "COMPLETED",
+    "daily_records_processed": 65754,
+    "seasonal_observations": 126,
+    "feature_groups": [
+      "temporal_lags (lag 1, 3, 7, 14 hari)",
+      "rolling_windows (rolling 7, 14, 30 hari)",
+      "extreme_indices (CDD, CWD, DTR, heavy_rain >= 20mm)",
+      "biophysical_water_balance (FAO-56 ET0, ETc, P-ET0, P-ETc, VPD_max, P10_dew_depression)"
+    ],
+    "multicollinearity_diagnostics": {
+      "precip_sum_vs_water_balance_r": 0.996,
+      "precip_sum_vs_heavy_rain_days_r": 0.929,
+      "water_balance_vs_srad_sum_r": -0.713,
+      "temp_mean_vs_vpd_max_r": 0.697,
+      "vif_extremes": {
+        "water_balance": 4312.9,
+        "precip_sum": 3704.6,
+        "temp_mean": 20.0,
+        "srad_sum": 14.1
+      },
+      "methodological_takeaway": "Kolineritas ekstrem antara Total Hujan dan Defisit Air (r = +0.996) memicu VIF > 3000. Regresi linear multivariat biasa dilarang memuat kedua variabel secara bersamaan tanpa regularisasi L1/L2 di Phase 9."
+    }
   }
 }
