@@ -290,5 +290,44 @@
       }
     ],
     "empirical_conclusion": "Seluruh model prediktif mengalami keruntuhan generalisasi out-of-sample (LOYO CV R2 berkisar -0.113 s.d. +0.034). Pola ini mengonfirmasi bahwa data cuaca musiman tidak dapat memprediksi variabilitas yield tahunan secara akurat, memberikan landasan ilmiah yang kuat bagi keputusan TaniAdapt untuk beralih ke pendekatan biofisik mekanistik FAO-56 Penman-Monteith."
+  },
+  "phase10_evidence_to_risk_model": {
+    "status": "COMPLETED",
+    "abiotic_water_deficit_model": {
+      "method": "FAO-56 Penman-Monteith ET0 + Table 12 Kc",
+      "metric": "14-day cumulative water balance CWB_14d = sum(P - ETc)",
+      "thresholds": {
+        "normal": "CWB_14d >= -25.0 mm",
+        "waspada_defisit_ringan": "-50.0 mm <= CWB_14d < -25.0 mm",
+        "kondisi_stres_abiotik": "CWB_14d < -50.0 mm"
+      },
+      "verified_crops": [
+        "padi",
+        "jagung",
+        "kedelai",
+        "tomat"
+      ]
+    },
+    "abiotic_waterlogging_model": {
+      "metric": "3-day precipitation sum or CWD >= 5 days",
+      "threshold": "P_3d >= 100.0 mm -> kondisi_stres_abiotik (waterlogging)"
+    },
+    "biotic_microclimate_opt_model": {
+      "method": "Local relative P10 dew point depression (Tmin - Td)",
+      "metric": "conducive days count in last 7 days",
+      "threshold": "conducive_days_7d >= 3 -> kondisi_mendukung_OPT",
+      "target_crops": [
+        "cabai",
+        "tomat"
+      ]
+    },
+    "insufficient_evidence_safeguard": {
+      "status_trigger": "evidence_insufficient",
+      "unverified_domains": [
+        "thermal_gdd_phases (suhu kardinal base/opt/max)",
+        "chili_water_kc (kebutuhan air cabai rawit/merah)",
+        "chemical_fungicide_sop (SOP resmi penyuluhan)"
+      ]
+    }
   }
 }
