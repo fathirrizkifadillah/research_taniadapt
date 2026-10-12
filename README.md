@@ -3,6 +3,8 @@
 > **Evidence-Based Agricultural Decision Support System for Indonesian Smallholders**  
 > *Translating Microclimate, Phenology, and Agrometeorological Dynamics into Calibrated Agronomic Actions.*
 
+> **Phase 4 canonical record:** see [`docs/phase4_final_dataset_evidence_registry.md`](docs/phase4_final_dataset_evidence_registry.md) for the authoritative dataset status and [`docs/reproducibility.md`](docs/reproducibility.md) for the refresh workflow.
+
 [![Phase](https://img.shields.io/badge/Research%20Phase-Phase%204%20Closure%20%26%20Phase%206%20EDA-success)](file:///c:/CODING/research_taniAdapt/reports/audit_closure_report.md)
 [![Audit Status](https://img.shields.io/badge/Audit%20Blockers-A1--A11%20CLOSED-blue)](file:///c:/CODING/research_taniAdapt/reports/audit_closure_report.md)
 [![Notebooks](https://img.shields.io/badge/Executable%20Notebooks-10%20Verified%20(0%20Errors)-brightgreen)](file:///c:/CODING/research_taniAdapt/notebook/)

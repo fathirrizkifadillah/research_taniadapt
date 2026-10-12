@@ -6,11 +6,10 @@ and saving JSON results to reports/results/.
 """
 
 import sys
-from pathlib import Path
 import nbformat as nbf
 from nbclient import NotebookClient
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 NOTEBOOK_DIR = PROJECT_ROOT / "notebook"
 
 notebook_files = [

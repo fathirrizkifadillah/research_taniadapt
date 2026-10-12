@@ -1,7 +1,7 @@
-tahun,level,wilayah,produktivitas_ku_ha,judul_publikasi,tabel,halaman,sumber_halaman,diisi_oleh,url_atau_file
-2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.1,245,Halaman 245,BPS Jawa Barat (Dalam Angka 2016),https://jabar.bps.go.id/publication
-2016,provinsi,JAWA BARAT,60.49,Provinsi Jawa Barat Dalam Angka 2017,Tabel 5.1.1,248,Halaman 248,BPS Jawa Barat (Dalam Angka 2017),https://jabar.bps.go.id/publication
-2017,provinsi,JAWA BARAT,58.87,Provinsi Jawa Barat Dalam Angka 2018,Tabel 5.1.1,252,Halaman 252,BPS Jawa Barat (Dalam Angka 2018),https://jabar.bps.go.id/publication
-2018,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,https://jabar.bps.go.id/publication
-2019,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,https://jabar.bps.go.id/publication
-2020,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,https://jabar.bps.go.id/publication
+tahun,level,wilayah,produktivitas_ku_ha,judul_publikasi,tabel,halaman,sumber_halaman,sumber_halaman_verified,diisi_oleh,url_atau_file
+2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.1,245,Halaman 245,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+2016,provinsi,JAWA BARAT,60.49,Provinsi Jawa Barat Dalam Angka 2017,Tabel 5.1.1,248,Halaman 248,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+2017,provinsi,JAWA BARAT,58.87,Provinsi Jawa Barat Dalam Angka 2018,Tabel 5.1.1,252,Halaman 252,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+2018,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+2019,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+2020,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication

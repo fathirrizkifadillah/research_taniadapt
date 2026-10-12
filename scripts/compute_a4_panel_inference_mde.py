@@ -8,15 +8,14 @@ Purpose: Complete technical audit for Item A4:
          5. Apply rigorous inferential logic comparing 95% CI against agronomically relevant effect size
 """
 
-from pathlib import Path
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 from scipy import stats
 import sys
+from project_paths import PROJECT_ROOT
 
 # Add project root to sys.path to import eda_utils
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 sys.path.append(str(PROJECT_ROOT / "scripts"))
 from eda_utils import wild_cluster_bootstrap_webb, compute_analytical_mde
 
@@ -90,7 +89,8 @@ def run_twfe_and_webb(df_sub, y_col, x_col, cluster_col="nama_kabupaten_kota"):
     n_clusters = df_sub[cluster_col].nunique()
     df_resid = n_obs - n_clusters - df_sub["tahun"].nunique()
     
-    mde = compute_analytical_mde(sigma_y_resid, sigma_x_resid, n_obs, alpha=0.05, power=0.80, df=df_resid)
+    # MDE must use the same resampling uncertainty as the reported CI.
+    mde = compute_analytical_mde(boot_se=boot_se)
     
     return {
         "beta_hat": beta_hat,

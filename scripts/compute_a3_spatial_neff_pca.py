@@ -5,12 +5,11 @@ Purpose: Compute spatial dependence and PCA decomposition on DESEASONALIZED mont
 Encodes PhD-level methods from .agents/skills/data-scientist.
 """
 
-from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 RAW_AGERA5 = PROJECT_ROOT / "data" / "raw" / "DS01_agera5"
 AUDIT_CELLS = PROJECT_ROOT / "reports" / "dataset_audit" / "a8_spatial_grid_cells_audit.csv"
 OUTPUT_PROCESSED = PROJECT_ROOT / "data" / "processed" / "agera5_22_cells_monthly_anomalies.csv"

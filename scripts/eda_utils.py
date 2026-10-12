@@ -9,15 +9,14 @@ Encodes PhD-level statistical methods from .agents/skills/data-scientist:
 """
 
 import json
-from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
+from project_paths import PROJECT_ROOT
 
 # Base paths
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 DATA_RAW = PROJECT_ROOT / "data" / "raw"
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 REPORTS_DIR = PROJECT_ROOT / "reports"

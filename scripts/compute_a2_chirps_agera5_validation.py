@@ -9,12 +9,11 @@ Purpose: Complete technical audit for Item A2:
 """
 
 import glob
-from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import stats
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 RAW_AGERA5 = PROJECT_ROOT / "data" / "raw" / "DS01_agera5"
 RAW_CHIRPS = PROJECT_ROOT / "data" / "raw" / "CHIRPS"
 CENTROIDS_FILE = PROJECT_ROOT / "reports" / "dataset_audit" / "jabar_27_kabkota_centroids.csv"
@@ -117,21 +116,13 @@ for _, r in df_cent.iterrows():
         else:
             bias_by_yr[f"bias_{yr}"] = np.nan
             
-    is_high_bias = abs(bias_pct) >= 20.0
     is_tier_a = name in target_6_kabs
     
-    # Sampling test: compare centroid vs estimated area average
-    # Topographic dampening factor for highland / mountainous polygons
-    # In orographic terrain (elevation > 500m), point centroid has higher local extremes than polygon mean
-    elevation = r.get("dem_elevation_m", 100.0)
-    if is_tier_a:
-        # Spatial smoothing test: polygon area mean reduces point bias by ~18-35% in high relief
-        area_reduction_factor = 0.72 if elevation > 400 else 0.85
-        bias_area_sampled = bias_pct * area_reduction_factor
-        bias_reduced = abs(bias_area_sampled) < abs(bias_pct)
-    else:
-        bias_area_sampled = bias_pct
-        bias_reduced = False
+    # No polygon-area data are available locally. A fixed reduction factor would
+    # manufacture a result, so this field remains explicitly unavailable.
+    elevation = r.get("dem_elevation_m", np.nan)
+    bias_area_sampled = np.nan
+    bias_reduced = np.nan
         
     row = {
         "nama_kabupaten_kota": name,
@@ -148,7 +139,7 @@ for _, r in df_cent.iterrows():
         "bias_2020_pct": round(bias_by_yr.get("bias_2020", np.nan), 2),
         "bias_2024_pct": round(bias_by_yr.get("bias_2024", np.nan), 2),
         "is_tier_a_target": is_tier_a,
-        "is_bias_ge_20pct": is_high_bias,
+        "is_bias_ge_20pct": np.nan,
         "bias_area_sampled_pct": round(bias_area_sampled, 2),
         "sampling_test_bias_reduced": bias_reduced,
         "keterangan_orografi": "Orografi Priangan Timur / Gunung" if elevation > 500 else "Dataran Rendah Pantura"
@@ -166,6 +157,4 @@ df_all_m = pd.concat(all_matched_monthly, ignore_index=True)
 df_all_m.to_csv(OUTPUT_PROCESSED, index=False)
 
 print(f"Successfully computed audit! Saved to {OUTPUT_AUDIT}")
-print(f"High-bias tier A regencies flagged (|bias| >= 20%):")
-flagged = df_audit[df_audit["is_bias_ge_20pct"] & df_audit["is_tier_a_target"]]
-print(flagged[["nama_kabupaten_kota", "signed_bias_overall_pct", "bias_area_sampled_pct", "sampling_test_bias_reduced"]])
+print("Polygon-versus-centroid bias comparison: PENDING; no local polygon-area extraction was available.")

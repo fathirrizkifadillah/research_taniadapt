@@ -1,10 +1,9 @@
 import cdsapi
 import os
 import time
-from pathlib import Path
 import pandas as pd
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 OUT_DIR = PROJECT_ROOT / "data" / "raw" / "DS01_agera5"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 

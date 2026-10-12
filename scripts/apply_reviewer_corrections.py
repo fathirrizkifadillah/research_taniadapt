@@ -4,14 +4,13 @@ Implements all 9 reviewer corrections across notebooks 01-10 and exports results
 """
 
 import sys
-from pathlib import Path
 import nbformat as nbf
 import numpy as np
 import pandas as pd
 from scipy import stats
 import statsmodels.api as sm
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 NOTEBOOK_DIR = PROJECT_ROOT / "notebook"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 RESULTS_DIR = REPORTS_DIR / "results"

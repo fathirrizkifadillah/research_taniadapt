@@ -5,12 +5,11 @@ and cleanly splits combined cells across notebooks 01 to 10.
 """
 
 import sys
-from pathlib import Path
 import nbformat as nbf
 import numpy as np
 import pandas as pd
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 NOTEBOOK_DIR = PROJECT_ROOT / "notebook"
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 REPORTS_DIR = PROJECT_ROOT / "reports"
@@ -49,7 +48,7 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 import statsmodels.api as sm
 
-PROJECT_ROOT = Path(r"c:\\CODING\\research_taniAdapt")
+PROJECT_ROOT = Path.cwd().resolve().parent if Path.cwd().name == "notebook" else Path.cwd().resolve()
 sys.path.append(str(PROJECT_ROOT / "scripts"))
 from eda_utils import set_taniadapt_style, save_eda_figure, write_results_json, PALETTE
 
@@ -329,7 +328,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import statsmodels.api as sm
 
-PROJECT_ROOT = Path(r"c:\\CODING\\research_taniAdapt")
+PROJECT_ROOT = Path.cwd().resolve().parent if Path.cwd().name == "notebook" else Path.cwd().resolve()
 sys.path.append(str(PROJECT_ROOT / "scripts"))
 from eda_utils import set_taniadapt_style, save_eda_figure, write_results_json, PALETTE
 

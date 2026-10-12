@@ -2,14 +2,13 @@ import os
 import glob
 import json
 import hashlib
-from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 AUDIT_DIR = PROJECT_ROOT / "reports" / "dataset_audit"
 FIGURES_DIR = PROJECT_ROOT / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)

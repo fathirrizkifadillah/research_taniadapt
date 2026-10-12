@@ -6,9 +6,8 @@ by axis bounds, and clean, beautiful, publication-quality presentation.
 """
 
 import nbformat as nbf
-from pathlib import Path
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 NOTEBOOK_DIR = PROJECT_ROOT / "notebook"
 
 print("=== STARTING FIGURE LAYOUT POLISHING ===")

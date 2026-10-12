@@ -15,17 +15,35 @@
     2022,
     2023
   ],
-  "n_valid_chirps_unit_months": 972,
+  "n_valid_chirps_unit_months": 936,
   "chirps_r_within_2016": 0.635,
   "chirps_r_within_2020": 0.7277,
   "chirps_r_within_2024": 0.693,
   "chirps_r_per_unit_median": 0.7569,
   "max_signed_bias_mh_pct": 72.31,
   "five_key_findings": [
-    "Data ONI dan DMI lengkap 100% (120 bulan, 2015-2024) mengidentifikasi episode El Ni\u00f1o 2015, 2023 dan La Ni\u00f1a 2016, 2020-2022.",
-    "Endpoint NOAA CoastWatch ERDDAP CHIRPS hanya melayani tahun benchmark (2016, 2020, 2024; n=36 bulan per unit).",
-    "Tahun non-benchmark (2015, 2017-2019, 2021-2023) dilaporkan berstatus BLOCKED karena server ERDDAP mengembalikan 0 baris.",
-    "Korelasi ENSO dengan presipitasi musim kemarau menunjukkan asosiasi defisit air yang kuat pada El Ni\u00f1o.",
-    "Validasi silang CHIRPS vs AgERA5 berhasil dijalankan pada 36 bulan benchmark dengan N=972 unit-bulan."
-  ]
+    "ONI and DMI cover 120 months from 2015-2024.",
+    "CHIRPS benchmark coverage is 2016, 2020, and 2024 only.",
+    "Matched anomaly rows total N=936: 2016 N=312, 2020 N=312, 2024 N=312.",
+    "Pooled anomaly correlation is r=0.7102; median per-unit correlation is 0.7569 across 26 units.",
+    "Indramayu has two benchmark years and Depok one benchmark year; no missing unit-months are imputed."
+  ],
+  "n_chirps_unit_months_by_year": {
+    "2016": 312,
+    "2020": 312,
+    "2024": 312
+  },
+  "n_for_pooled_r": 936,
+  "n_for_within_year_r": {
+    "2016": 312,
+    "2020": 312,
+    "2024": 312
+  },
+  "n_units_for_per_unit_r": 26,
+  "chirps_r_pooled": 0.7102,
+  "chirps_r_within": {
+    "2016": 0.635,
+    "2020": 0.7277,
+    "2024": 0.693
+  }
 }

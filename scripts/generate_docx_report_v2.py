@@ -7,7 +7,6 @@ detailed dataset profiles (DS01-DS10), Phase 5 decision logic, and embedded figu
 
 import os
 import sys
-from pathlib import Path
 import docx
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
@@ -15,8 +14,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
+from project_paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(r"c:\CODING\research_taniAdapt")
 OUTPUT_DOCX = PROJECT_ROOT / "reports" / "TaniAdapt_Comprehensive_EDA_Dossier.docx"
 FIG_DIR = PROJECT_ROOT / "reports" / "figures"
 

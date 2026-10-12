@@ -20,10 +20,10 @@
   "h_corn_01_wls_baseline_mde": 0.0859,
   "h_corn_01_robust_huber_beta": 0.0198,
   "h_corn_01_robust_huber_ci": [
-    -0.0292,
-    0.0709
+    -0.0282,
+    0.0704
   ],
-  "h_corn_01_robust_huber_mde": 0.0765,
+  "h_corn_01_robust_huber_mde": 0.0725,
   "h_corn_01_clean_mad_z_beta": 0.0555,
   "h_corn_01_clean_mad_z_ci": [
     -0.0275,
@@ -42,10 +42,23 @@
   "chirps_validation_pearson_r_per_unit_median": 0.7569,
   "max_signed_bias_mh_pct": 72.31,
   "five_key_findings": [
-    "Validasi silang AgERA5 vs CHIRPS menghasilkan korelasi anomali pooled r = 0.710 dan median per-unit r = 0.757 pada 36 bulan valid.",
-    "Uji sampling spasial membuktikan perataan poligon area meredam bias sebesar 18-28% pada 6 sentra Tier A; bias maksimum MH mencapai +72.31%.",
-    "Effect size H_CORN_01 OLS terhitung beta = +0.0368 dengan 95% CI Wild Bootstrap Webb [-0.0521, +0.1300] (Evidence Insufficient).",
-    "Re-estimasi robust: WLS bobot luas baseline menghasilkan beta = +0.0395 (MDE = 0.0859); Robust Huber menghasilkan beta = +0.0198 (MDE = 0.0765); tanpa outlier MAD-z P95 menghasilkan beta = +0.0555 (MDE = 0.1298).",
-    "Padi T=3 resmi direkomendasikan masuk Tier A Mekanistik saja karena degrees of freedom terlalu sedikit (df=33)."
-  ]
+    "CHIRPS versus AgERA5 anomaly correlation pooled r=0.7102, N=936; within-year N is recorded by year.",
+    "The prior polygon-sampling calculation was modelled from a fixed reduction factor and is not retained as empirical evidence.",
+    "H_CORN_01 beta=+0.0368, Webb CI [-0.0521, +0.1300], MDE=0.1444; evidence is insufficient for a yield-effect claim.",
+    "Robust sensitivity estimates and all MDE values use their recorded bootstrap SE and method fields.",
+    "Rice T=3 MDE=0.0255; the narrow value does not establish high power."
+  ],
+  "chirps_validation_n_pooled": 936,
+  "chirps_validation_n_by_year": {
+    "2016": 312,
+    "2020": 312,
+    "2024": 312
+  },
+  "chirps_validation_n_units": 26,
+  "h_corn_01_wls_baseline_boot_se": 0.0307,
+  "h_corn_01_wls_baseline_inference_method": "WLS fixed-effect residualization; Webb wild-cluster bootstrap, cluster=kabupaten, B=999",
+  "h_corn_01_robust_huber_boot_se": 0.0259,
+  "h_corn_01_robust_huber_inference_method": "Huber RLM; Webb wild-cluster residual bootstrap, cluster=kabupaten, B=999",
+  "h_corn_01_clean_mad_z_boot_se": 0.0463,
+  "h_corn_01_clean_mad_z_inference_method": "Within-kabupaten MAD-z screen at empirical P95=2.8501; Webb wild-cluster bootstrap, cluster=kabupaten, B=999; dropped=7"
 }

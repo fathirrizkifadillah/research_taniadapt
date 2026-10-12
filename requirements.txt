@@ -1,0 +1,16 @@
+# Reproducible research environment for the maintained TaniAdapt pipeline.
+# Install with: python -m pip install -r requirements.txt
+numpy
+pandas
+scipy
+scikit-learn
+statsmodels
+matplotlib
+seaborn
+nbformat
+nbclient
+ipykernel
+openpyxl
+python-docx
+cdsapi
+playwright
