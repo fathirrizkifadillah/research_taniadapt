@@ -240,5 +240,55 @@
       },
       "methodological_takeaway": "Kolineritas ekstrem antara Total Hujan dan Defisit Air (r = +0.996) memicu VIF > 3000. Regresi linear multivariat biasa dilarang memuat kedua variabel secara bersamaan tanpa regularisasi L1/L2 di Phase 9."
     }
+  },
+  "phase9_ml_baseline_benchmark": {
+    "status": "COMPLETED",
+    "target_outcome": "log_yield_jagung (18 sentra, 2015-2021, N=124)",
+    "validation_scheme": "Leave-One-Year-Out (LOYO) Cross-Validation",
+    "benchmark_results": [
+      {
+        "model": "1. Pooled OLS (Two-Way FE)",
+        "train_r2": 0.158,
+        "loyo_cv_r2": -0.113,
+        "loyo_rmse": 0.614,
+        "loyo_mae": 0.334
+      },
+      {
+        "model": "2. WLS (Fixed Area Weight)",
+        "train_r2": 0.158,
+        "loyo_cv_r2": -0.113,
+        "loyo_rmse": 0.614,
+        "loyo_mae": 0.334
+      },
+      {
+        "model": "3. Ridge Regression (L2)",
+        "train_r2": 0.15,
+        "loyo_cv_r2": -0.041,
+        "loyo_rmse": 0.594,
+        "loyo_mae": 0.306
+      },
+      {
+        "model": "4. Lasso Regression (L1)",
+        "train_r2": 0.091,
+        "loyo_cv_r2": -0.024,
+        "loyo_rmse": 0.589,
+        "loyo_mae": 0.263
+      },
+      {
+        "model": "5. Elastic Net (L1+L2)",
+        "train_r2": 0.126,
+        "loyo_cv_r2": -0.032,
+        "loyo_rmse": 0.591,
+        "loyo_mae": 0.284
+      },
+      {
+        "model": "6. Random Forest (Shallow)",
+        "train_r2": 0.389,
+        "loyo_cv_r2": 0.034,
+        "loyo_rmse": 0.572,
+        "loyo_mae": 0.261
+      }
+    ],
+    "empirical_conclusion": "Seluruh model prediktif mengalami keruntuhan generalisasi out-of-sample (LOYO CV R2 berkisar -0.113 s.d. +0.034). Pola ini mengonfirmasi bahwa data cuaca musiman tidak dapat memprediksi variabilitas yield tahunan secara akurat, memberikan landasan ilmiah yang kuat bagi keputusan TaniAdapt untuk beralih ke pendekatan biofisik mekanistik FAO-56 Penman-Monteith."
   }
 }
