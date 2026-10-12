@@ -22,6 +22,7 @@ __pycache__/
 # Virtual environments
 venv/
 .venv/
+.venv_*/
 env/
 ENV/
 
@@ -36,6 +37,8 @@ Desktop.ini
 
 # Temporary logs
 *.tmp
+_docx_qa/
+reports/TaniAdapt_Progress_and_Evidence_Pack_for_Claude.docx
 
 # Exploratory, scratch, and test scripts
 scripts/test_*.py

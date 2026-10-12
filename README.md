@@ -86,7 +86,7 @@ research_taniAdapt/
 │   ├── dataset_audit/                        # Berkas Referensi CSV Terverifikasi
 │   │   ├── b1_rice_reconciliation_v2.csv     # Hasil Rekonsiliasi Padi 2015-2020 vs BPS
 │   │   ├── b3_rainfall_bias_chirps_audit_v2.csv # Audit Signed Bias AgERA5 vs CHIRPS 27 Unit
-│   │   ├── a8_spatial_grid_cells_audit.csv   # Pemetaan 27 ADM2 ke 25 Sel Grid AgERA5
+│   │   ├── a8_spatial_grid_cells_audit.csv   # Pemetaan 27 ADM2 ke 22 Sel Grid AgERA5
 │   │   ├── a10_panel_mde_audit.csv           # Matriks Perhitungan Minimum Detectable Effect (MDE)
 │   │   ├── jabar_27_kabkota_centroids.csv    # Koordinat Centroid Resmi ADM2 Jawa Barat
 │   │   ├── cross_dataset_linking_matrix_revised.csv # Matriks Kelayakan Integrasi Data
@@ -96,13 +96,12 @@ research_taniAdapt/
 │   ├── logs/                                 # [LOGS] Log Inkonsistensi & Riwayat Eksplorasi
 │   └── archive/                              # [ARSIP] Draf laporan historis
 ├── scripts/                                  # Skrip Inti Pipeline
-│   ├── build_modular_eda_notebooks.py        # Master Runner: Bangun & Eksekusi Semua 10 Notebook
-│   ├── acquire_agera5_all_27_kabkota.py      # Pengunduh Data Cuaca AgERA5 27 Unit
-│   ├── fetch_chirps_remaining.py             # Pengunduh Satelit CHIRPS v2
-│   ├── fetch_padi_variants.py                # Pengunduh Varian Padi Galura/Distanhor
-│   ├── fetch_area_production_datasets.py     # Pengunduh Luas Panen & Produksi
-│   ├── run_quality_audit.py                  # Audit Kualitas Terotomatisasi
-│   └── archive/                              # [ARSIP] 43 skrip temporer, patch, & scratch
+│   ├── run_phase4_pipeline.py                # Runner kanonik audit Phase 4
+│   ├── refresh_phase4_canonical_results.py   # Sinkronisasi hasil DS09 dan lintas dataset
+│   ├── compute_a2_chirps_agera5_validation.py# Validasi CHIRPS vs AgERA5
+│   ├── compute_a3_spatial_neff_pca.py        # Audit sel cuaca dan PCA
+│   ├── compute_a4_panel_inference_mde.py     # Inferensi panel dan MDE
+│   └── project_paths.py                      # Path relatif repository
 └── data/                                     # Raw Data Storage (Diabaikan oleh Git)
 ```
 
@@ -113,7 +112,7 @@ research_taniAdapt/
 Untuk mereproduksi seluruh hasil audit dan merender ulang semua visualisasi pada 10 notebook secara otomatis dari awal hingga akhir:
 
 ```powershell
-python scripts/build_modular_eda_notebooks.py
+python scripts/run_phase4_pipeline.py
 ```
 
-*Skrip ini akan mengonfigurasi sel EDA single-dataset pada Notebook `01` s/d `09`, menyelaraskan Notebook `10` untuk cross-dataset synthesis, lalu mengeksekusi ke-10 notebook menggunakan `NotebookClient` hingga seluruh grafik PNG ter-render inline.*
+*Runner ini mengeksekusi audit kanonik A2, A3, A4, lalu menyegarkan hasil DS09 dan cross-dataset. Tambahkan `--include-notebooks` bila ingin menjalankan ulang 10 notebook EDA.*
