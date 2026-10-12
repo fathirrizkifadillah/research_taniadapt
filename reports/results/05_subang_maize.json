@@ -1,19 +1,18 @@
 {
-  "dataset": "DS05_subang_maize",
-  "status": "PASS (2022 EKSKLUSI RESMI SEBAGAI SUSPECT)",
-  "n_observations_total": 216,
-  "n_observations_valid_active": 181,
-  "identical_records_2022_count": 13,
-  "identical_value_2022_ku_ha": 75.7,
-  "r2_spatial_kabupaten_pct": 48.41,
-  "r2_temporal_year_pct": 4.25,
+  "dataset": "DS05_subang_maize_productivity",
+  "status": "PASS (2022 SUSPECT TERISOLASI, 18 SENTRA TIER A VALID)",
+  "n_observations_active": 181,
+  "n_sentra_kabupaten": 18,
+  "period_valid": "2015-2021",
+  "subang_cv_residual_linear_pct": 5.49,
+  "r2_spatial_district_pct": 48.41,
+  "r2_temporal_pct": 4.25,
   "r2_residual_pct": 47.34,
-  "adjusted_r2_pct": 41.77,
   "five_key_findings": [
-    "181 dari 216 baris bernilai aktif (>0 ku/ha); nilai nol berada di kota non-pertanian.",
-    "Tahun 2022 terbukti cacat imputasi: 13 kabupaten memiliki nilai identik 75.70 ku/ha.",
-    "Tahun 2022 resmi diklasifikasikan sebagai SUSPECT dan dieksklusikan dari analisis utama.",
-    "Dekomposisi varians membuktikan FE Kabupaten menyerap 45.2% dan FE Tahun menyerap 12.8% variasi.",
-    "Residu setelah FE adalah 42.0%, yang mencakup gabungan cuaca lokal, noise, dan kesalahan ukur."
+    "18 sentra kabupaten memiliki panel lengkap 2015-2022 (N=124 obs valid 2015-2021).",
+    "Pada 2022, 13 kabupaten memiliki angka identik persis 75.70 ku/ha (bukti imputasi seragam).",
+    "Tahun 2022 resmi diklasifikasikan sebagai SUSPECT dan dieksklusikan dari panel utama.",
+    "Kasus Subang terkonfirmasi: CV residu detrended linear turun ke 5.49% setelah eksklusi 2022.",
+    "FE Kabupaten menyerap 45.2% variansi, menyisakan 42.0% residu untuk analisis cuaca."
   ]
 }

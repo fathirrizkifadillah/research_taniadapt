@@ -13,8 +13,8 @@
   "five_key_findings": [
     "Validasi silang AgERA5 vs CHIRPS menghasilkan korelasi anomali r = 0.710 pada 36 bulan valid.",
     "Uji sampling spasial membuktikan perataan poligon area meredam bias sebesar 18-28% pada 6 sentra Tier A.",
-    "Effect size H_CORN_01 terhitung \u03b2 = +0.0368 dengan 95% CI Wild Bootstrap Webb [-0.0521, +0.1300] (Evidence Insufficient).",
-    "Analytical MDE jagung terhitung \u00b10.2306, mengonfirmasi keterbatasan power data tahunan makro.",
+    "Effect size H_CORN_01 terhitung beta = +0.0368 dengan 95% CI Wild Bootstrap Webb [-0.0521, +0.1300] (Evidence Insufficient).",
+    "Analytical MDE jagung terhitung +-0.2306, mengonfirmasi keterbatasan power data tahunan makro.",
     "Padi T=3 resmi direkomendasikan masuk Tier A Mekanistik saja karena degrees of freedom terlalu sedikit (df=33)."
   ]
 }
