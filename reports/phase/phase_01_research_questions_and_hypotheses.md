@@ -1,30 +1,52 @@
-# TaniAdapt Research Dossier — Phase 1: Research Questions & Hypotheses
+# TaniAdapt Research Dossier — Phase 1: Research Questions & Pre-registered Hypotheses
 
 **Status**: COMPLETED / RATIFIED  
-**Prinsip Utama**: Pre-registration, anti-p-hacking, pencegahan manipulasi hipotesis eks-post.
+**Dokumen Induk**: `docs/hypotheses.md`  
+**Prinsip**: Prapendaftaran Eks-Ante, Pencegahan HARKing (*Hypothesizing After Results are Known*), dan Kontrol Galat Tipe I.
 
 ---
 
-## 1. Pertanyaan Riset Utama (Research Questions)
-1. **RQ1 (Sensitivitas Cuaca Hasil Panen)**: Sejauh mana anomali agrometeorologi musiman (suhu rata-rata, curah hujan vegetatif, VPD maksimum, hari kering berurutan) secara empiris memengaruhi fluktuasi produktivitas tahunan tanaman pangan di tingkat kabupaten Jawa Barat?
-2. **RQ2 (Daya Prediksi Out-of-Sample)**: Apakah model regresi linier maupun machine learning non-linier memiliki daya generalisasi temporal (*out-of-sample*) untuk memprediksi hasil panen dari data cuaca tahunan, ataukah variasi tersebut didominasi oleh faktor non-cuaca (manajemen & pelaporan)?
-3. **RQ3 (Keunggulan Pendekatan Mekanistik)**: Apakah neraca air biofisik harian berbasis FAO-56 Penman-Monteith dan proksi mikroklimat fajar $P_{10}$ lebih andal sebagai dasar pemodelan risiko keputusan operasional petani dibanding regresi statistik hasil panen?
+## 1. Tiga Pertanyaan Riset Utama (Research Questions)
+
+### RQ1: Sensitivitas Agrometeorologis Hasil Panen
+*Apakah fluktuasi anomali cuaca musiman (suhu rata-rata, presipitasi fenologi, VPD, dan hari kering) memiliki dampak statistik yang terukur secara signifikan terhadap produktivitas tahunan tanaman pangan di Jawa Barat pada skala kabupaten?*
+
+### RQ2: Daya Generalisasi Out-of-Sample Model Prediktif
+*Apakah model ekonometrika linier teratur maupun model machine learning non-linier memiliki daya prediksi out-of-sample (antar-tahun) yang memadai untuk meramalkan hasil panen, ataukah variabilitas data tahunan BPS/Dinas didominasi oleh faktor kebisingan administratif dan variasi agronomi mikro di luar cuaca makro?*
+
+### RQ3: Validitas Operasional Pendekatan Mekanistik vs Regresi Hasil
+*Dapatkah model neraca air biofisik Penman-Monteith (FAO-56) dan proksi mikroklimat kondensasi daun fajar ($P_{10}$) memberikan sinyal risiko operasional harian yang lebih dapat dipertanggungjawabkan bagi petani kecil dibanding model peramalan hasil panen?*
 
 ---
 
-## 2. Prapendaftaran 11 Hipotesis Ekonometrika (Pre-registered Hypotheses)
-Sebelum analisis statistik dijalankan, 11 hipotesis fenologi didaftarkan secara transparan di `docs/hypotheses.md`:
-* **Jagung**:
-  * `H_CORN_01`: Efek curah hujan vegetatif (Feb–Apr) terhadap yield jagung bertanda positif (+).
-  * `H_CORN_02`: Efek suhu rata-rata fase tumbuh (Mar–Mei) bertanda negatif (-).
-  * `H_CORN_03`: Efek VPD maksimum fase reproduktif (Apr–Jun) bertanda negatif (-).
-  * `H_CORN_04`: Efek hari kering berturut-turut CDD (Mei–Jul) bertanda negatif (-).
-* **Padi**:
-  * `H_RICE_01`: Curah hujan Musim Hujan (Okt–Jan) memiliki efek batas atas (*saturation threshold*).
-  * `H_RICE_02`: Suhu maksimum MK1 (Mar–Mei) menurunkan yield gabah (-).
-  * `H_RICE_03`: Kekeringan CDD MK1 (Apr–Jun) menurunkan yield gabah (-).
-  * `H_RICE_04`: Radiasi surya MH (Des–Feb) meningkatkan fotosintesis dan yield (+).
-* **Kedelai**:
-  * `H_SOY_01`: Curah hujan pengisian polong (Jun–Agu) meningkatkan hasil (+).
-  * `H_SOY_02`: Suhu malam tinggi (Jul–Sep) meningkatkan respirasi dan menurunkan hasil (-).
-  * `H_SOY_03`: Hujan lebat saat pemasakan (Agu–Okt) merusak biji dan menurunkan hasil (-).
+## 2. Prapendaftaran 11 Hipotesis Ekonometrika Fenologi (Pre-registered Hypotheses)
+
+Untuk mencegah bias seleksi model (*p-hacking*), seluruh hipotesis fenologis didaftarkan secara transparan sebelum estimasi dilakukan:
+
+| ID Hipotesis | Komoditas | Jendela Fenologi Kritis | Prediktor Agrometeorologi | Tanda Hipotesis | Mekanisme Fisiologis Tanaman |
+|---|---|---|---|:---:|---|
+| **H_CORN_01** | Jagung | Vegetatif Awal (Feb–Apr) | Presipitasi Terakumulasi ($P_{\text{veg}}$) | **(+)** | Air yang cukup memicu pembentukan daun dan biomassa fotosintesis awal. |
+| **H_CORN_02** | Jagung | Pertumbuhan Aktif (Mar–Mei) | Suhu Rata-rata ($T_{\text{mean}}$) | **(-)** | Suhu di atas batas optimum meningkatkan laju respirasi pemeliharaan dan memperpendek fase pengisian biji. |
+| **H_CORN_03** | Jagung | Pembungaan/Silking (Apr–Jun) | VPD Maksimum ($VPD_{\text{max}}$) | **(-)** | Tekanan uap jenuh tinggi mengeringkan rambut tongkol (*silk drying*) dan menurunkan viabilitas serbuk sari. |
+| **H_CORN_04** | Jagung | Pemasakan/Ripening (Mei–Jul) | Consecutive Dry Days ($CDD$) | **(-)** | Hari kering berkepanjangan selama pengisian biji memicu aborsi bulir (*kernel abortion*). |
+| **H_RICE_01** | Padi | Musim Hujan Awal (Okt–Jan) | Presipitasi Musim Hujan ($P_{\text{mh}}$) | **(Cap)** | Kebutuhan air sawah tergenang; memiliki batas saturasi di mana kelebihan hujan memicu banjir/rebah. |
+| **H_RICE_02** | Padi | Musim Kemarau I (Mar–Mei) | Suhu Maksimum ($T_{\text{max}}$) | **(-)** | Suhu $> 35^\circ\text{C}$ saat pembungaan pagi memicu sterilitas bulir gabah hampa (*spikelet sterility*). |
+| **H_RICE_03** | Padi | Akhir MK1 (Apr–Jun) | Hari Kering Berurutan ($CDD_{\text{mk1}}$) | **(-)** | Ketiadaan hujan saat pengisian malai menyebabkan retakan tanah sawah dan gagal panen (*puso*). |
+| **H_RICE_04** | Padi | Puncak Musim Hujan (Des–Feb) | Radiasi Surya ($Rad_{\text{mh}}$) | **(+)** | Tutupan awan tebal mengurangi radiasi aktif fotosintesis (PAR), menurunkan pembentukan anakan produktif. |
+| **H_SOY_01** | Kedelai | Pengisian Polong (Jun–Agu) | Presipitasi Polong ($P_{\text{pod}}$) | **(+)** | Kekurangan air pada fase R3–R5 menyebabkan polong hampa dan ukuran biji kerdil. |
+| **H_SOY_02** | Kedelai | Pemasakan Biji (Jul–Sep) | Suhu Malam Tropis ($T_{\text{min}}$) | **(-)** | Suhu malam hangat meningkatkan konsumsi respirasi malam hari dan mengurangi akumulasi minyak/protein. |
+| **H_SOY_03** | Kedelai | Panen Fisiologis (Agu–Okt) | Frekuensi Hujan Lebat ($R20$) | **(-)** | Hujan saat polong kering memicu kebusukan polong, pembusukan jamur, dan perkecambahan di polong. |
+
+---
+
+## 3. Protokol Inferensi Ekonometrika yang Ditetapkan
+1. **Spesifikasi Model Utama**:
+   $$\ln(Y_{it}) = lpha_i + \gamma_t + eta \cdot W_{it} + arepsilon_{it}$$
+   Di mana $lpha_i$ adalah *Kabupaten Fixed Effects* (mengontrol kualitas tanah, topografi, dan budaya lokal permanen), dan $\gamma_t$ adalah *Year Fixed Effects* (mengontrol guncangan makro nasional, subsidi pupuk, dan tren varietas).
+2. **Koreksi Galat Standar Klaster Kecil**:
+   * Jumlah klaster kabupaten di Jawa Barat adalah $G = 18$ (kurang dari batas asimtotik $G=30$–$50$).
+   * Standar *Cluster-Robust Standard Errors* (CRSE) standar akan menghasilkan *downward bias* (nilai p terlalu optimis palsu).
+   * Ditetapkan secara wajib: **Wild Cluster Bootstrap Webb 6-point ($B=999$ pengulangan)** untuk menghitung interval kepercayaan 95% yang valid.
+3. **Analisis Daya Statistik Minimum Detectable Effect (MDE)**:
+   $$	ext{MDE} = (t_{lpha/2} + t_{1-\kappa}) 	imes 	ext{SE}_{	ext{bootstrap}} pprox 2.80 	imes 	ext{SE}$$
+   Jika nilai estimasi $|\hat{eta}| < 	ext{MDE}$, peneliti **DILARANG** mengklaim bahwa "cuaca tidak berpengaruh", melainkan wajib menyimpulkan bahwa data tidak memiliki daya statistik yang cukup (**`evidence_insufficient`**).

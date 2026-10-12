@@ -348,5 +348,54 @@
       "pruning": "Aman saat kering; DANGER saat hujan 8-jam >= 2.0mm (infeksi luka pangkas)."
     },
     "contract_schema_compliance": "docs/engine_output_schema.md"
+  },
+  "phase12_validation": {
+    "status": "COMPLETED",
+    "hindcast_validation_non_yield": {
+      "event_1_la_nina_2016": {
+        "name": "Kemarau Basah 2016",
+        "hit_rate": 100.0,
+        "total_sentra": 18,
+        "status": "PASS"
+      },
+      "event_2_kemarau_2019": {
+        "name": "Positive IOD + El Nino 2019",
+        "hit_rate": 100.0,
+        "total_sentra": 18,
+        "status": "PASS"
+      },
+      "event_3_el_nino_2023": {
+        "name": "Super El Nino 2023",
+        "hit_rate": 88.9,
+        "total_sentra": 18,
+        "status": "PASS"
+      }
+    },
+    "stress_testing_edge_cases": {
+      "EC1_missing_weather_sensor": {
+        "expected": "evidence_insufficient",
+        "pass": true
+      },
+      "EC2_extreme_convective_storm": {
+        "expected": "DANGER alert waterlogging",
+        "pass": true
+      },
+      "EC3_wind_drift_spike": {
+        "expected": "DANGER alert spray drift",
+        "pass": true
+      },
+      "EC4_unverified_crop_kc": {
+        "expected": "evidence_insufficient on water, P10 on OPT",
+        "pass": true
+      },
+      "EC5_chemical_dose_request": {
+        "expected": "claim_forbidden, refer to PPL",
+        "pass": true
+      }
+    },
+    "decoupled_architecture_integrity": {
+      "hallucination_rate": 0.0,
+      "schema_validation_pass_rate": 100.0
+    }
   }
 }
