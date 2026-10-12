@@ -60,5 +60,161 @@
   "h_corn_01_robust_huber_boot_se": 0.0259,
   "h_corn_01_robust_huber_inference_method": "Huber RLM; Webb wild-cluster residual bootstrap, cluster=kabupaten, B=999",
   "h_corn_01_clean_mad_z_boot_se": 0.0463,
-  "h_corn_01_clean_mad_z_inference_method": "Within-kabupaten MAD-z screen at empirical P95=2.8501; Webb wild-cluster bootstrap, cluster=kabupaten, B=999; dropped=7"
+  "h_corn_01_clean_mad_z_inference_method": "Within-kabupaten MAD-z screen at empirical P95=2.8501; Webb wild-cluster bootstrap, cluster=kabupaten, B=999; dropped=7",
+  "phase7_statistical_analysis": {
+    "status": "COMPLETED",
+    "total_panel_hypotheses_tested": 11,
+    "clustering_unit": "kabupaten (G=18)",
+    "bootstrap_method": "Wild Cluster Bootstrap Webb (B=999)",
+    "multiple_testing_correction": [
+      "Holm-Bonferroni (FWER)",
+      "Benjamini-Hochberg (FDR)"
+    ],
+    "result_disposition": "100% of panel hypotheses have 95% CI containing zero and |beta| < MDE -> All classified as evidence_insufficient",
+    "hypotheses_summary": [
+      {
+        "hid": "H_CORN_01",
+        "crop": "Jagung",
+        "var": "p_veg (Feb-Apr)",
+        "beta": 0.0368,
+        "ci_webb_95": [
+          -0.0521,
+          0.13
+        ],
+        "mde": 0.1444,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_CORN_02",
+        "crop": "Jagung",
+        "var": "tmean_grow (Mar-May)",
+        "beta": 0.5647,
+        "ci_webb_95": [
+          -1.0976,
+          2.1968
+        ],
+        "mde": 2.4995,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_CORN_03",
+        "crop": "Jagung",
+        "var": "vpd_max (Apr-Jun)",
+        "beta": 0.0909,
+        "ci_webb_95": [
+          -0.0707,
+          0.2474
+        ],
+        "mde": 0.2562,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_CORN_04",
+        "crop": "Jagung",
+        "var": "cdd_corn (May-Jul)",
+        "beta": 0.0957,
+        "ci_webb_95": [
+          -0.0034,
+          0.1939
+        ],
+        "mde": 0.1821,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_RICE_01",
+        "crop": "Padi",
+        "var": "p_mh (Oct-Jan)",
+        "beta": 0.0129,
+        "ci_webb_95": [
+          -0.0178,
+          0.0418
+        ],
+        "mde": 0.0425,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_RICE_02",
+        "crop": "Padi",
+        "var": "tmax_mk1 (Mar-May)",
+        "beta": -0.16,
+        "ci_webb_95": [
+          -0.4799,
+          0.1495
+        ],
+        "mde": 0.4543,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_RICE_03",
+        "crop": "Padi",
+        "var": "cdd_mk1 (Apr-Jun)",
+        "beta": -0.0021,
+        "ci_webb_95": [
+          -0.0319,
+          0.0274
+        ],
+        "mde": 0.0453,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_RICE_04",
+        "crop": "Padi",
+        "var": "rad_mh (Dec-Feb)",
+        "beta": -0.0813,
+        "ci_webb_95": [
+          -0.2216,
+          0.0585
+        ],
+        "mde": 0.2079,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_SOY_01",
+        "crop": "Kedelai",
+        "var": "p_pod (Jun-Aug)",
+        "beta": -0.0094,
+        "ci_webb_95": [
+          -0.0822,
+          0.0553
+        ],
+        "mde": 0.109,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_SOY_02",
+        "crop": "Kedelai",
+        "var": "tmin_night (Jul-Sep)",
+        "beta": 0.7188,
+        "ci_webb_95": [
+          -0.2631,
+          1.6834
+        ],
+        "mde": 1.4808,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      },
+      {
+        "hid": "H_SOY_03",
+        "crop": "Kedelai",
+        "var": "heavy_rain (Aug-Oct)",
+        "beta": 0.04,
+        "ci_webb_95": [
+          -0.014,
+          0.0904
+        ],
+        "mde": 0.0755,
+        "p_holm": 1.0,
+        "status": "evidence_insufficient"
+      }
+    ]
+  }
 }
