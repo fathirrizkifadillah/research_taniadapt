@@ -37,6 +37,7 @@ Desktop.ini
 
 # Temporary logs
 *.tmp
+~$*
 _docx_qa/
 reports/TaniAdapt_Progress_and_Evidence_Pack_for_Claude.docx
 reports/TaniAdapt_Claude_Followup_Phase4.docx
