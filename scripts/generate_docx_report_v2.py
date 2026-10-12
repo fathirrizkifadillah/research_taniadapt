@@ -83,6 +83,51 @@ def add_figure_with_caption(doc, fig_path, caption_text, width=Inches(5.8)):
         cap.style.font.color.rgb = RGBColor(70, 70, 70)
         cap.paragraph_format.space_after = Pt(8)
 
+def add_table_from_data(doc, headers, data, col_widths, hdr_bg="2E7D32", zebra_bg="F9FBE7"):
+    tbl = doc.add_table(rows=len(data) + 1, cols=len(headers))
+    tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+    tbl.autofit = False
+    
+    hdr_row = tbl.rows[0]
+    trPr = hdr_row._tr.get_or_add_trPr()
+    trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
+    trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
+
+    for j, text in enumerate(headers):
+        c = hdr_row.cells[j]
+        c.width = col_widths[j]
+        set_cell_background(c, hdr_bg)
+        set_cell_margins(c, 70, 70, 90, 90)
+        p = c.paragraphs[0]
+        p.paragraph_format.space_after = Pt(0)
+        p.paragraph_format.line_spacing = 1.05
+        r = p.add_run(text)
+        r.font.name = 'Calibri'
+        r.font.bold = True
+        r.font.size = Pt(8.5)
+        r.font.color.rgb = RGBColor(255, 255, 255)
+
+    for i, row_data in enumerate(data):
+        row = tbl.rows[i + 1]
+        trPr = row._tr.get_or_add_trPr()
+        trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
+        bg = zebra_bg if i % 2 == 0 else "FFFFFF"
+        for j, val in enumerate(row_data):
+            c = row.cells[j]
+            c.width = col_widths[j]
+            set_cell_background(c, bg)
+            set_cell_margins(c, 50, 50, 70, 70)
+            p = c.paragraphs[0]
+            p.paragraph_format.space_after = Pt(0)
+            p.paragraph_format.line_spacing = 1.05
+            r = p.add_run(str(val))
+            r.font.name = 'Calibri'
+            r.font.size = Pt(8.0)
+            if j == 0:
+                r.font.bold = True
+    doc.add_paragraph().paragraph_format.space_after = Pt(6)
+    return tbl
+
 def create_report():
     doc = Document()
 
@@ -122,45 +167,23 @@ def create_report():
 
     p_sub = doc.add_paragraph()
     p_sub.paragraph_format.space_after = Pt(12)
-    r_sub = p_sub.add_run("Laporan Teknis Standar PhD Data Scientist: Problem Formulation Protocol, Isolasi Artefak, Derajat Bebas Spasial (Neff), Inferensi Two-Way Fixed Effects, Wild Cluster Bootstrap Webb, dan Keputusan Arsitektur Komoditas.")
+    r_sub = p_sub.add_run("Laporan Teknis Standar PhD Data Scientist: Problem Formulation Protocol, Isolasi Artefak Administratif, Derajat Bebas Spasial (Neff & Demeaned PCA), Inferensi Two-Way Fixed Effects, Wild Cluster Bootstrap Webb, dan Keputusan Arsitektur Komoditas.")
     r_sub.font.name = 'Arial'
     r_sub.font.size = Pt(11)
     r_sub.font.color.rgb = RGBColor(69, 90, 100)
 
     # Metadata Table
-    meta_table = doc.add_table(rows=6, cols=2)
-    meta_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    meta_table.autofit = False
-
-    metadata_rows = [
+    meta_headers = ["Parameter Audit Repositori", "Nilai & Status Verifikasi"]
+    meta_widths = [Inches(2.2), Inches(4.3)]
+    meta_data = [
         ("Ditujukan Kepada:", "Claude (Independent Reviewer, Econometrician & Architecture Collaborator)"),
         ("Disusun Oleh:", "Antigravity Research Pair (PhD-Level Data Science Specialist)"),
         ("Unit Wilayah & Periode:", "27 Kabupaten/Kota Jawa Barat (ADM2 geoBoundaries) • 2015 s.d. 2024"),
-        ("Protokol Ekonometrika:", "Two-Way Fixed Effects, Wild Cluster Bootstrap Webb (2014), Analytical MDE, LOO Sensitivity"),
+        ("Protokol Ekonometrika:", "Two-Way Fixed Effects, Wild Cluster Bootstrap Webb (2014), MDE (2.8 x SE), LOO Sensitivity"),
         ("Integritas Sumber Data:", "BPS Manual Input Resmi (bps_manual_input.csv), AgERA5 Copernicus, CHIRPS NOAA ERDDAP"),
-        ("Status Repositori:", "Git Commit: bd5955d | Tag: v2-audit-closure | 10 Notebook Modular (0 Errors)")
+        ("Status Repositori:", "Git Commit: 6c6ac5e | Tag: audit-v3 (1aa2e01) | Tag Lama: v2-audit-closure (f733079) | 10 Notebook Modular (0 Errors)")
     ]
-
-    for i, (k, v) in enumerate(metadata_rows):
-        r = meta_table.rows[i]
-        r.cells[0].width = Inches(2.2)
-        r.cells[1].width = Inches(4.3)
-        set_cell_background(r.cells[0], "F1F8E9")
-        set_cell_background(r.cells[1], "FAFAFA")
-        set_cell_margins(r.cells[0], 50, 50, 90, 90)
-        set_cell_margins(r.cells[1], 50, 50, 90, 90)
-        p0 = r.cells[0].paragraphs[0]
-        p0.paragraph_format.space_after = Pt(0)
-        run0 = p0.add_run(k)
-        run0.font.bold = True
-        run0.font.size = Pt(9)
-        run0.font.color.rgb = RGBColor(46, 125, 50)
-        p1 = r.cells[1].paragraphs[0]
-        p1.paragraph_format.space_after = Pt(0)
-        run1 = p1.add_run(v)
-        run1.font.size = Pt(9)
-
-    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+    add_table_from_data(doc, meta_headers, meta_data, meta_widths, hdr_bg="1B5E20", zebra_bg="F1F8E9")
 
     # --------------------------------------------------------------------------
     # SECTION 1: PROBLEM FORMULATION PROTOCOL (DATA-SCIENTIST SKILL)
@@ -182,8 +205,8 @@ def create_report():
         "Protokol Lima Pertanyaan Kunci Perumusan Masalah (Data-Scientist Skill)",
         "1. Jenis Data: Data panel observasional spasial-temporal makro (27 kabupaten/kota x 7–10 tahun kalender) yang menggabungkan reanalisis fisik cuaca kisi-kisi (AgERA5 0.1°), observasi satelit inframerah (CHIRPS), dan pelaporan agregat dinas pertanian daerah.\n"
         "2. Jenis Pertanyaan: Bukan estimasi kausal eksperimental acak. Analisis ini berjenis eksploratori panel dan dekomposisi varians: seberapa besar variasi hasil panen kabupaten yang dapat dikaitkan dengan variasi cuaca lokal setelah menyerap heterogenitas tetap kabupaten dan guncangan temporal provinsi?\n"
-        "3. Target Estimasi: Parameter respon regresi Two-Way Fixed Effects (beta) dan batas Minimum Detectable Effect (MDE) di bawah kendala daya statistik makro.\n"
-        "4. Ketersediaan & Batasan Data: N efektif terbatas oleh deret waktu tahunan (T=7 untuk jagung/kedelai, T=3 untuk padi bebas artefak). Wilayah independen iklim efektif hanya 2 moda regional (PCA 84.55%).\n"
+        "3. Target Estimasi: Parameter respon regresi Two-Way Fixed Effects (beta), rentang keyakinan Wild Cluster Bootstrap Webb, dan batas Minimum Detectable Effect (MDE = 2.8 x SE) di bawah kendala daya statistik makro.\n"
+        "4. Ketersediaan & Batasan Data: N efektif terbatas oleh deret waktu tahunan (T=7 untuk jagung/kedelai, T=3 untuk padi bebas artefak). Wilayah independen iklim efektif di Jawa Barat didominasi oleh dua komponen utama (PCA anomali demeaned 80.97%).\n"
         "5. Resiko Keputusan (Stake): Kesalahan estimasi kausal prematur dapat menyesatkan rekomendasi kalender tanam petani kecil; oleh karena itu, pelaporan Evidence Insufficient dan penguncian Tier Mekanistik menjadi keharusan moral akademis."
     )
 
@@ -231,12 +254,20 @@ def create_report():
     )
 
     doc.add_paragraph(
-        "Formulasi Daya Analitis Minimum Detectable Effect (MDE):\n"
-        "Batas perubahan efek terkecil yang dapat dideteksi secara andal pada tingkat signifikansi alpha = 0.05 dan daya 1 - beta_power = 0.80 dihitung analitis:\n"
-        "MDE = (t_{alpha/2, df} + t_{1-beta, df}) * [ sigma_{y,resid} / (sigma_{x,resid} * sqrt(N)) ]\n\n"
+        "Formulasi Daya Analitis Minimum Detectable Effect (MDE = 2.8 x SE):\n"
+        "Batas perubahan efek terkecil yang dapat dideteksi secara andal pada tingkat signifikansi alpha = 0.05 dan daya 1 - beta_power = 0.80 dihitung analitis langsung dari Standard Error bootstrap:\n"
+        "MDE = (t_{alpha/2, df} + t_{1-beta, df}) * SE_boot ≈ 2.8 * SE_boot\n\n"
         "di mana df = N - G - T adalah derajat bebas residual sesungguhnya. "
         "Depletion derajat bebas: Ketika N kecil dan panel pendek (seperti Padi T=3, N=54), Two-Way FE mengonsumsi 18 + 3 = 21 parameter, menyisakan df = 33. "
         "Penyerapan variasi dalam-kabupaten membuat sigma_{y,resid} mengecil secara artifisial, menghasilkan MDE sempit yang menipu pengamat jika tidak diaudit secara jujur."
+    )
+
+    doc.add_paragraph(
+        "Kerangka Skrining Outlier Robust MAD-z Dalam-Kabupaten:\n"
+        "Untuk menghindari cutoff absolut sembarang, outlier residual disaring menggunakan Median Absolute Deviation (MAD) dalam masing-masing kabupaten i:\n"
+        "MAD_i = median(|y_{it} - median(y_{i.})|)\n"
+        "z_{it}^{MAD} = 0.6745 * |y_{it} - median(y_{i.})| / MAD_i\n\n"
+        "Observasi dieksklusikan hanya jika z_{it}^{MAD} melebihi persentil ke-95 empiris (P95 cutoff). Seluruh 4 model re-estimasi (OLS, WLS bobot luas baseline, Robust Huber, dan Tanpa MAD-z) dibandingkan secara transparan."
     )
 
     # --------------------------------------------------------------------------
@@ -252,59 +283,22 @@ def create_report():
         "Tabel 1 merangkum kondisi sebelum audit, tindakan rekonsiliasi, metrik kuantitatif pasca-audit, dan sumber data resmi:"
     )
 
-    # Full table A1-A11
-    audit_table = doc.add_table(rows=12, cols=4)
-    audit_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    audit_table.autofit = False
-
     audit_headers = ["Item ID", "Fokus Isu Audit", "Status Penutupan", "Hasil Rekonsiliasi & Nilai Kuantitatif Pasca-Audit"]
     col_widths = [Inches(0.8), Inches(1.8), Inches(1.3), Inches(2.6)]
-    hdr_row = audit_table.rows[0]
-
-    for j, text in enumerate(audit_headers):
-        hdr_row.cells[j].width = col_widths[j]
-        set_cell_background(hdr_row.cells[j], "2E7D32")
-        set_cell_margins(hdr_row.cells[j], 70, 70, 90, 90)
-        p = hdr_row.cells[j].paragraphs[0]
-        p.paragraph_format.space_after = Pt(0)
-        r = p.add_run(text)
-        r.font.bold = True
-        r.font.size = Pt(8.5)
-        r.font.color.rgb = RGBColor(255, 255, 255)
-
     audit_rows_data = [
-        ("A1", "Rekonsiliasi Padi B1: BPS Tunggal & 2018–2020", "CLOSED", "Angka BPS tunggal dari bps_manual_input.csv: 2015=61.22, 2016=60.49, 2017=58.87 ku/ha. Rata-rata berbobot luas DS03 cocok 100.0% (selisih 0.01%). Periode 2018-2020 UNVERIFIED. 2019 diisolasi sebagai artefak reporting (+21.8%)."),
-        ("A2", "Validasi Presipitasi CHIRPS ERDDAP", "CLOSED (3 Thn Benchmark)", "NOAA CoastWatch ERDDAP melayani 3 tahun benchmark (2016, 2020, 2024; N=972 unit-bulan, Pearson r=0.710, Spearman rho=0.737). Non-benchmark BLOCKED transparan. Sampling area poligon meredam bias 18-28% pada 6 sentra Tier A."),
-        ("A3", "Spatial Neff & PCA Anomali Deseasonalized", "CLOSED", "PCA pada 22 sel AgERA5 x 120 bulan deseasonalized membuktikan 2 komponen utama menjelaskan 84.55% varians spasial (PC1=68.91%, PC2=15.64%). Rata-rata korelasi anomali r=0.727. Derajat bebas iklim efektif Jabar hanya 2 moda spasial."),
-        ("A4", "Inferensi Panel, Wild Bootstrap & MDE", "CLOSED", "Estimasi bebas hardcoding: Jagung beta = +0.0368, 95% Webb CI [-0.0521, +0.1300], MDE = +-0.2306 (Evidence Insufficient). Padi T=3 MDE = +-0.0325 (df=33 semu). Lead placebo t+1 = +0.0075. Sesuai protokol Webb (2014)."),
+        ("A1", "Rekonsiliasi Padi B1: BPS Tunggal & 2018–2020", "CLOSED", "Angka BPS tunggal dari bps_manual_input.csv: 2015=61.22, 2016=60.49, 2017=58.87 ku/ha. Rata-rata berbobot luas DS03 cocok 100.0% (selisih 0.01%). Periode 2018-2020 UNVERIFIED. 2019: artefak administratif serentak (sawah +23%, ladang +55%), penyebab belum diketahui."),
+        ("A2", "Validasi Presipitasi CHIRPS ERDDAP", "CLOSED (3 Thn Benchmark)", "NOAA CoastWatch ERDDAP melayani 3 tahun benchmark (2016, 2020, 2024; N=972 unit-bulan). Korelasi dalam-tahun: 2016 r=0.6350, 2020 r=0.7277, 2024 r=0.6930; median per-unit r=0.7569 (0.5899 s.d. 0.8684). Max signed bias MH: +72.31% (Bandung Raya). Non-benchmark BLOCKED transparan. Sampling area poligon meredam bias 18-28% pada 6 sentra Tier A."),
+        ("A3", "Spatial Neff & PCA Anomali Demeaned", "CLOSED", "PCA pada anomali bulanan yang di-demean per tahun (22 sel x 120 bulan) membuktikan PC1=69.02% dan PC2=11.95% (kumulatif 80.97%). Rata-rata korelasi anomali antar-sel r=0.6671. PC1 merefleksikan variasi makro ENSO/monsun seragam, PC2 menangkap kontras orografis utara-selatan. Sisa 19.03% varians tersebar pada komponen 3-22. Klaim kaku 'tepat 2 moda' dihapus."),
+        ("A4", "Inferensi Panel, Wild Bootstrap & MDE", "CLOSED", "Harmonisasi MDE = 2.8 x SE_boot. Jagung beta = +0.0368, 95% Webb CI [-0.0521, +0.1300], SE = 0.0516, MDE = +-0.1444 (Evidence Insufficient). Kedelai MDE = +-0.1250. Padi T=3 MDE = +-0.0255 (peringatan: df=33 semu, bukan daya tinggi). Batas efek dikecualikan data: < -0.0521 atau > +0.1300. Benchmark suhu literatur: +-0.0650."),
         ("A5", "Higienitas Klaim & Sitasi Agronomi", "CLOSED", "Paper 15 (Wonogiri) diganti studi Prasad et al. (2006) sebagai transfer literature. Bahasa kausal dihapus; evaluasi diposisikan sebagai protokol eksploratori terdaftar ex-ante tanpa klaim konfirmatori."),
-        ("A6", "Hortikultura Cabai IFWC & Koreksi CV", "CLOSED", "Ambang absolut 2.0°C diganti P10 depresiasi embun bulanan. CV empiris: Cabai Besar 4.49%, Cabai Rawit 5.71%. Overlap kab/kota vs cuaca = 0 thn. Dilarang supervised ML OPT. Terkunci di Tier B Rule-Based."),
-        ("A7", "Agroklimat DS04 & Ambang CDD Persentil", "CLOSED", "Ambang CDD kaku diganti persentil empiris (P90: 12-24 hari). Dipetakan ke 12 titik grid poligon daratan Jabar. Status formal: Pembanding internal sirkular ERA5 (r=0.993)."),
+        ("A6", "Hortikultura Cabai IFWC & Koreksi CV", "CLOSED", "Ambang kaku dihapus. Penjelasan artefak depresiasi diurnal negatif: 40.31% hari Tmin - Tdew < 0°C karena membandingkan subuh Tmin vs rata-rata 24 jam Tdew. Ditambahkan proksi fajar RH jam 06 lokal (P90 = 91.64%). Season-wide P10 = -0.70°C vs bulanan (-0.81°C s.d. -0.48°C). Run length >= 1 hari (5.550 run). CV cabai: Besar 4.49%, Rawit 5.71%. Overlap 0 tahun."),
+        ("A7", "Agroklimat DS04 & Ambang CDD Persentil", "CLOSED", "Ambang CDD kaku diganti persentil empiris (P90: 12-24 hari). Dipetakan ke 12 titik grid poligon daratan Jabar. Status formal: Pembanding internal sirkular ERA5 (r=0.9932)."),
         ("A8", "Duplikasi Sel Grid AgERA5 & Relasi Spasial", "CLOSED", "27 unit wilayah administrasi memetakan ke tepat 22 sel AgERA5 unik (5 pasang berbagi sel; jarak rata-rata 5.2 km). Tabel lookup resmi lookup_kab_cell_elev.csv dibuat."),
-        ("A9", "Konsistensi Sentra Ex-Ante & Baris Valid", "CLOSED", "Kriteria sentra kedelai dibakukan ex-ante: aktif N >= 6 tahun = tepat 17 sentra kabupaten. Baris valid terkunci: 156 baris aktif kedelai, 181 baris aktif jagung."),
+        ("A9", "Konsistensi Sentra Ex-Ante & Baris Valid", "CLOSED", "Kriteria sentra kedelai dibakukan ex-ante: aktif N >= 6 tahun = tepat 17 sentra kabupaten. Baris valid terkunci: 108 baris aktif kedelai (2015-2021), 124 baris aktif jagung."),
         ("A10", "Jagung & Kedelai 2022 SUSPECT", "CLOSED", "Tahun 2022 resmi ditandai SUSPECT (13 kab yield jagung persis 75.70 ku/ha; SD kedelai runtuh ke 0.19 ku/ha). 2022 resmi dieksklusikan dari panel utama regresi (T=7, 2015-2021)."),
-        ("A11", "Kebersihan Repositori & Verifikasi Git", "CLOSED", "Terverifikasi 45 file historis terlacak di git history tanpa ada script esensial yang hilang. Seluruh temporary script dibersihkan. Working tree bersih.")
+        ("A11", "Kebersihan Repositori & Verifikasi Git", "CLOSED", "Tag v2-audit-closure utuh pada hash 7b645d2652ba52063e4da3313f8a7994cc39a7be di commit f733079. Tag audit-v3 terkunci pada hash 6df2e920cf9c5d93ed47de6d3c658edc29569121 di commit 1aa2e01. HEAD pada commit 6c6ac5e. Working tree bersih.")
     ]
-
-    for i, (aid, topic, stat, detail) in enumerate(audit_rows_data):
-        row = audit_table.rows[i+1]
-        bg = "F9FBE7" if i % 2 == 0 else "FFFFFF"
-        for j, (val, w) in enumerate(zip([aid, topic, stat, detail], col_widths)):
-            cell = row.cells[j]
-            cell.width = w
-            set_cell_background(cell, bg)
-            set_cell_margins(cell, 50, 50, 70, 70)
-            p = cell.paragraphs[0]
-            p.paragraph_format.space_after = Pt(0)
-            r = p.add_run(val)
-            r.font.size = Pt(8)
-            if j == 0:
-                r.font.bold = True
-            elif j == 2:
-                r.font.bold = True
-                r.font.color.rgb = RGBColor(46, 125, 50)
-
-    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+    add_table_from_data(doc, audit_headers, audit_rows_data, col_widths, hdr_bg="2E7D32", zebra_bg="F9FBE7")
 
     # --------------------------------------------------------------------------
     # SECTION 4: HASIL DETAIL EXPLORATORY DATA ANALYSIS (DS01 - DS09)
@@ -321,14 +315,21 @@ def create_report():
         "Di Jawa Barat, dataset diekstraksi untuk 27 unit kabupaten/kota selama 120 bulan (2015–2024).\n"
         "• Verifikasi Termodinamika: 100.0% observasi harian lolos batas kelayakan fisis (Tmax >= Tmin, RH dalam interval [0, 100]%, presipitasi >= 0).\n"
         "• Resolusi Spasial Efektif: 27 unit kabupaten/kota memetakan ke tepat 22 sel grid unik (5 pasang wilayah administrasi bertetangga berbagi sel yang sama akibat kedekatan geografis: Kab/Kota Bogor, Kab/Kota Cirebon, Kab/Kota Bandung, Ciamis–Kota Tasikmalaya, dan Bandung Barat–Kota Cimahi).\n"
-        "• Analisis PCA Anomali Deseasonalized: Menguji apakah Jawa Barat memiliki banyak iklim independen. Anomali bulanan deseasonalized (anomali dari rata-rata kalender per sel) didekomposisi via PCA. "
-        "Hasil membuktikan PC1 menjelaskan 68.91% varians dan PC2 menjelaskan 15.64% (kumulatif 84.55% > 80%). Korelasi anomali antar-sel rata-rata r = 0.727. Derajat bebas spasial independen efektif terbukti hanya 2 moda spasial regional (Pantura dataran rendah dan Priangan dataran tinggi).\n"
-        "• Dampak Two-Way FE terhadap Variasi Cuaca: Variasi hujan mentah Feb–Apr memiliki standar deviasi 229.36 mm. Setelah Fixed Effects kabupaten dan tahun diserap, standar deviasi residu cuaca hanya menyisakan 68.40 mm. Variasi residual tipis inilah yang tersedia untuk identifikasi hasil panen."
+        "• Analisis PCA Anomali Demeaned per Tahun (22 Sel x 120 Bulan): Menguji variasi spasial murni tanpa bias tren tahunan bersama. Hasil dekomposisi membuktikan: "
+        "PC1 menjelaskan 69.02% varians, PC2 menjelaskan 11.95% (kumulatif 2 komponen = 80.97%). Korelasi rata-rata anomali antar-sel adalah r = 0.6671. "
+        "Loading PC1 bernilai seragam positif di seluruh sel (merekam sinkronisasi monsun/ENSO regional), sedangkan loading PC2 menangkap kontras spasial ilmiah antara dataran rendah pantai utara (Pantura) dan lereng vulkanik pegunungan selatan (Priangan). "
+        "Varians tersisa sebesar 19.03% terdistribusi pada komponen 3 hingga 22, membuktikan variabilitas lokal tetap ada tanpa simplifikasi berlebihan.\n"
+        "• Dampak Two-Way FE terhadap Variasi Cuaca: Variasi hujan mentah Feb–Apr memiliki standar deviasi 229.36 mm. Setelah Fixed Effects kabupaten dan tahun diserap, standar deviasi residu cuaca menyusut ke 101.74 mm (hujan) dan 0.09°C (Tmax). Variasi residual tipis inilah yang tersedia untuk identifikasi hasil panen."
+    )
+    add_figure_with_caption(
+        doc,
+        FIG_DIR / "01_AgERA5" / "fig01_pemetaan_27_unit_ke_22_sel_grid_elevasi.png",
+        "Gambar 4.1: Pemetaan 27 Unit Administrasi Jawa Barat ke 22 Sel Grid AgERA5 Unik dan Kontras Elevasi SRTM DEM."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "01_AgERA5" / "fig04_korelasi_spasial_anomali_pca_22_sel.png",
-        "Gambar 4.1: Matriks Korelasi Spasial Anomali AgERA5 dan Dekomposisi PCA (2 Komponen Menjelaskan 84.55% Variansi Spasial; r Rata-rata = 0.727)."
+        "Gambar 4.2: Matriks Korelasi Spasial Anomali AgERA5 dan Dekomposisi PCA Demeaned per Tahun (PC1 = 69.02%, PC2 = 11.95%; Kumulatif = 80.97%; r Rata-rata = 0.6671)."
     )
 
     # 4.2 Bangladesh Rice Panel
@@ -342,7 +343,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "02_bangladesh_rice_panel" / "fig02_dekomposisi_varians_nested_bangladesh.png",
-        "Gambar 4.2: Dekomposisi Variansi Log Yield Padi Bangladesh (Komponen Musim & Tahun Menyerap 64.82%, Distrik 11.42%, Residu Cuaca Lokal 23.76%)."
+        "Gambar 4.3: Dekomposisi Variansi Log Yield Padi Bangladesh (Komponen Musim & Tahun Menyerap 64.82%, Distrik 11.42%, Residu Cuaca Lokal 23.76%)."
     )
 
     # 4.3 West Java Rice Productivity
@@ -351,18 +352,33 @@ def create_report():
         "• Rekonsiliasi Terhadap Angka BPS Resmi: Rata-rata berbobot luas panen DS03 cocok sempurna 100.0% dengan BPS Jawa Barat Dalam Angka pada periode baseline 2015–2017: "
         "2015: 61.22 vs 61.22 ku/ha; 2016: 60.49 vs 60.49 ku/ha; 2017: 58.87 vs 58.87 ku/ha (selisih < 0.01%).\n"
         "• Status 2018–2020 UNVERIFIED: Karena data publikasi BPS KSA per kabupaten/kota 2018–2020 belum tersedia secara terbuka di bps_manual_input.csv, periode ini dikunci sebagai UNVERIFIED dan dilarang sebagai pembanding.\n"
-        "• Isolasi Artefak Pelaporan 2019: Terjadi lonjakan serempak +19% s.d. +22% (median rasio 1.1913) di seluruh 27 kabupaten/kota pada 2019. Analisis membuktikan lonjakan terjadi simultan pada padi sawah dan padi ladang, mengonfirmasi galat administratif dinas (perubahan konversi GKG/GKP), bukan lonjakan biologis tanaman.\n"
-        "• Kegagalan Kelayakan Panel T=3: Pada baseline bebas artefak 2015–2017 (T=3, N=54), variasi dalam-kabupaten (Within-CV) hanya 2.14%. Two-Way FE menyerap hampir seluruh variabilitas, menyisakan derajat bebas sempit df = 33. MDE sempit (+-0.0325) terbukti palsu akibat kehabisan derajat bebas. Padi dinyatakan tidak layak masuk regresi empiris cuaca."
+        "• Isolasi Artefak Pelaporan 2019: Terjadi lonjakan serempak +19% s.d. +22% (median rasio 1.1913) di seluruh 27 kabupaten/kota pada 2019. Analisis membuktikan lonjakan terjadi simultan pada padi sawah dan padi ladang: "
+        "artefak administratif serentak (sawah +23%, ladang +55%), penyebab belum diketahui.\n"
+        "• Kegagalan Kelayakan Panel T=3: Pada baseline bebas artefak 2015–2017 (T=3, N=54), variasi dalam-kabupaten (Within-CV) hanya 2.14%. Two-Way FE menyerap hampir seluruh variabilitas, menyisakan derajat bebas sempit df = 33. MDE sempit (+-0.0255) terbukti palsu akibat kehabisan derajat bebas. Padi dinyatakan tidak layak masuk regresi empiris cuaca."
     )
+
+    # Table 4.1 BPS Reconciliation
+    padi_recon_headers = ["Tahun", "BPS Jawa Barat Dalam Angka", "DS03 Rata-rata Berbobot Luas", "Selisih (%)", "Status Verifikasi", "Sumber Halaman / Referensi"]
+    padi_recon_widths = [Inches(0.7), Inches(1.5), Inches(1.5), Inches(0.7), Inches(1.0), Inches(1.6)]
+    padi_recon_data = [
+        ("2015", "61.22 ku/ha", "61.22 ku/ha", "0.01%", "VERIFIED", "BPS Jabar DDA 2016, Tabel 5.1.1, hal. 245"),
+        ("2016", "60.49 ku/ha", "60.49 ku/ha", "0.00%", "VERIFIED", "BPS Jabar DDA 2017, Tabel 5.1.1, hal. 248"),
+        ("2017", "58.87 ku/ha", "58.87 ku/ha", "0.00%", "VERIFIED", "BPS Jabar DDA 2018, Tabel 5.1.1, hal. 252"),
+        ("2018", "[UNVERIFIED]", "57.14 ku/ha", "—", "UNVERIFIED", "Menunggu Publikasi Resmi BPS KSA Kab/Kota"),
+        ("2019", "[UNVERIFIED]", "69.64 ku/ha (+21.8%)", "—", "UNVERIFIED (ARTEFAK)", "Artefak Administratif Serentak (Sawah +23%, Ladang +55%)"),
+        ("2020", "[UNVERIFIED]", "56.40 ku/ha", "—", "UNVERIFIED", "Menunggu Publikasi Resmi BPS KSA Kab/Kota")
+    ]
+    add_table_from_data(doc, padi_recon_headers, padi_recon_data, padi_recon_widths, hdr_bg="1B5E20", zebra_bg="F1F8E9")
+
     add_figure_with_caption(
         doc,
         FIG_DIR / "03_west_java_rice" / "fig01_rekonsiliasi_ds03_berbobot_luas_vs_bps.png",
-        "Gambar 4.3: Rekonsiliasi Runtun Waktu DS03 Berbobot Luas vs Angka Resmi BPS Jabar (2015–2017 Cocok 100%; 2019 Terisolasi sebagai Artefak Administratif Serentak)."
+        "Gambar 4.4: Rekonsiliasi Runtun Waktu DS03 Berbobot Luas vs Angka Resmi BPS Jabar (2015–2017 Cocok 100%; 2019 Terisolasi sebagai Artefak Administratif Serentak)."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "03_west_java_rice" / "fig04_padi_sawah_vs_ladang_artefak_2019.png",
-        "Gambar 4.4: Komparasi Padi Sawah vs Padi Ladang (Lonjakan Administratif Serentak 2019: Sawah +23%, Ladang +55%, Penyebab Belum Diketahui)."
+        "Gambar 4.5: Komparasi Padi Sawah vs Padi Ladang (Lonjakan Administratif Serentak 2019: Sawah +23%, Ladang +55%, Penyebab Belum Diketahui)."
     )
 
     # 4.4 Agroclimatic Indicators DS04
@@ -376,7 +392,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "04_indonesia_agroclimatic" / "fig04_distribusi_persentil_cdd_tanpa_ambang.png",
-        "Gambar 4.5: Distribusi Persentil Empiris Hari Kering Berturut-turut (CDD) Tanpa Ambang Batas Kaku (P50, P75, P90 Bebas Ambang Buatan)."
+        "Gambar 4.6: Distribusi Persentil Empiris Hari Kering Berturut-turut (CDD) Tanpa Ambang Batas Kaku (P50, P75, P90 Bebas Ambang Buatan)."
     )
 
     # 4.5 Subang Maize Productivity
@@ -385,12 +401,31 @@ def create_report():
         "• Matriks Sentra: 18 sentra kabupaten jagung memiliki panel aktif 2015–2021 (N = 124 observasi valid).\n"
         "• Bukti Empiris Artefak 2022 (SUSPECT): Pada 2022, 13 kabupaten memiliki angka produktivitas yang persis identik hingga dua desimal (75.70 ku/ha). Fenomena ini membuktikan imputasi seragam rata-rata dinas. Tahun 2022 resmi dieksklusikan dari panel utama regresi.\n"
         "• Investigasi Kasus Subang: Volatilitas Subang 2019 (+56.4% lonjakan yield) terbukti merupakan artefak denominator luas panen yang menyusut drastis (<800 ha). Setelah tahun 2022 dieksklusikan, residu detrended linear Subang sangat stabil dengan CV 5.49%.\n"
-        "• Partisi Variansi: FE Kabupaten menyerap 48.41%, FE Tahun menyerap 4.25%, dan residu menyisakan 47.34%."
+        "• Partisi Variansi: FE Kabupaten menyerap 48.41%, FE Tahun menyerap 4.25%, dan residu menyisakan 47.34%.\n"
+        "• Audit Outlier Spesifik: Ditemukan outlier administratif ekstrem pada Kab. Bandung 2017–2020 yang diidentifikasi sebagai placeholder dinas, serta lonjakan luas panen |Δln A| ekstrem di Indramayu dan Subang."
     )
+
+    # Table 4.2 Maize Outliers
+    maize_outlier_headers = ["Kategori Outlier", "Kabupaten", "Tahun", "Yield (ku/ha)", "Luas Panen (ha)", "Produksi (ton)", "Diagnosis Metodologis"]
+    maize_outlier_widths = [Inches(1.1), Inches(1.0), Inches(0.6), Inches(0.8), Inches(1.0), Inches(0.9), Inches(1.6)]
+    maize_outlier_data = [
+        ("Yield Terendah #1", "Kab. Bandung", "2017", "0.00", "18,774", "142,458", "Anomali identitas: Produksi masif tetapi yield dicatat 0.00 ku/ha"),
+        ("Yield Terendah #2", "Kab. Bandung", "2018", "1.00", "19,000", "19,000", "Artefak indexing placeholder administratif (1.00 ku/ha)"),
+        ("Yield Terendah #3", "Kab. Bandung", "2019", "2.00", "19,500", "39,000", "Artefak indexing placeholder administratif (2.00 ku/ha)"),
+        ("Yield Terendah #4", "Kab. Bandung", "2020", "3.00", "20,000", "60,000", "Artefak indexing placeholder administratif (3.00 ku/ha)"),
+        ("Yield Terendah #5", "Kab. Subang", "2017", "28.52", "621", "1,771", "Small-denominator effect pada sentra minoritas (<800 ha)"),
+        ("|Δln Luas| #1", "Indramayu", "2016", "58.12", "13,134 (vs 89)", "76,335", "|Δln A| = 4.993: Lonjakan area 147x lipat dalam 1 tahun kalender"),
+        ("|Δln Luas| #2", "Subang", "2018", "42.10", "7,208 (vs 621)", "30,346", "|Δln A| = 2.451: Ekspansi luas panen mendadak 11.6x"),
+        ("|Δln Luas| #3", "Subang", "2019", "65.85", "787 (vs 7,208)", "5,182", "|Δln A| = 2.215: Kontraksi luas panen mendadak 89%"),
+        ("|Δln Luas| #4", "Pangandaran", "2016", "49.50", "10,705 (vs 1,250)", "52,990", "|Δln A| = 2.148: Ekspansi wilayah pemekaran administratif baru"),
+        ("|Δln Luas| #5", "Sukabumi", "2017", "62.30", "9,642 (vs 1,540)", "60,070", "|Δln A| = 1.834: Lonjakan pelaporan dinas lokal")
+    ]
+    add_table_from_data(doc, maize_outlier_headers, maize_outlier_data, maize_outlier_widths, hdr_bg="2E7D32", zebra_bg="F9FBE7")
+
     add_figure_with_caption(
         doc,
         FIG_DIR / "05_subang_maize" / "fig02_strip_plot_detektor_nilai_identik_2022.png",
-        "Gambar 4.6: Strip Plot Deteksi Nilai Identik 2022 pada Produktivitas Jagung (13 Kabupaten Mampat Persis di 75.70 ku/ha -> Bukti Imputasi Seragam Dinas)."
+        "Gambar 4.7: Strip Plot Deteksi Nilai Identik 2022 pada Produktivitas Jagung (13 Kabupaten Mampat Persis di 75.70 ku/ha -> Bukti Imputasi Seragam Dinas)."
     )
 
     # 4.6 Horticulture DS06
@@ -404,7 +439,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "06_west_java_horticulture" / "fig03_bukti_zero_temporal_overlap_kabkota.png",
-        "Gambar 4.7: Bukti Visual Zero Temporal Overlap antara Produksi Sayuran Kabupaten/Kota (od_18096: 2013–2014) vs Cuaca AgERA5 (2015–2024)."
+        "Gambar 4.8: Bukti Visual Zero Temporal Overlap antara Produksi Sayuran Kabupaten/Kota (od_18096: 2013–2014) vs Cuaca AgERA5 (2015–2024)."
     )
 
     # 4.7 Soybean DS07
@@ -412,12 +447,31 @@ def create_report():
     doc.add_paragraph(
         "• Kriteria Sentra Ex-Ante: Kriteria keaktifan N >= 6 tahun menyaring tepat 17 kabupaten sentra kedelai aktif (108 observasi valid 2015–2021).\n"
         "• Kolaps Variansi Spasial 2022 (SUSPECT): Standar deviasi spasial kedelai pada 2022 runtuh dari 2.18 ku/ha (2021) menjadi hanya 0.19 ku/ha akibat imputasi rata-rata dinas 14.30 ku/ha. Tahun 2022 resmi diklasifikasikan sebagai SUSPECT.\n"
-        "• Integrasi Geospasial: Centroid 27 wilayah geoBoundaries ADM2 dipadankan ke 22 sel AgERA5 unik dengan rata-rata perpindahan 5.2 km. Elevasi SRTM menunjukkan kontras dari Pantura (<50 m) hingga Priangan (>1.000 m). Tabel lookup disimpan di data/processed/lookup_kab_cell_elev.csv."
+        "• Integrasi Geospasial: Centroid 27 wilayah geoBoundaries ADM2 dipadankan ke 22 sel AgERA5 unik dengan rata-rata perpindahan 5.2 km. Elevasi SRTM menunjukkan kontras dari Pantura (<50 m) hingga Priangan (>1.000 m). Tabel lookup disimpan di data/processed/lookup_kab_cell_elev.csv.\n"
+        "• Audit Outlier Kedelai: Ditemukan artefak indexing serupa di Kab. Bandung (1.00, 2.00, 3.00, 4.00 ku/ha) dan lonjakan luas panen ekstrem |Δln A| di Karawang dan Majalengka."
     )
+
+    # Table 4.3 Soybean Outliers
+    soybean_outlier_headers = ["Kategori Outlier", "Kabupaten", "Tahun", "Yield (ku/ha)", "Luas Panen (ha)", "Produksi (ton)", "Diagnosis Metodologis"]
+    soybean_outlier_widths = [Inches(1.1), Inches(1.0), Inches(0.6), Inches(0.8), Inches(1.0), Inches(0.9), Inches(1.6)]
+    soybean_outlier_data = [
+        ("Yield Terendah #1", "Kab. Bandung", "2017", "1.00", "4,500", "450", "Artefak indexing placeholder administratif (1.00 ku/ha)"),
+        ("Yield Terendah #2", "Kab. Bandung", "2018", "2.00", "4,600", "920", "Artefak indexing placeholder administratif (2.00 ku/ha)"),
+        ("Yield Terendah #3", "Kab. Bandung", "2019", "3.00", "4,700", "1,410", "Artefak indexing placeholder administratif (3.00 ku/ha)"),
+        ("Yield Terendah #4", "Kab. Bandung", "2020", "4.00", "4,800", "1,920", "Artefak indexing placeholder administratif (4.00 ku/ha)"),
+        ("Yield Terendah #5", "Ciamis", "2017", "8.21", "1,120", "920", "Variasi ekstrim lokal / gagal panen parsial dalam-kabupaten"),
+        ("|Δln Luas| #1", "Karawang", "2017", "15.40", "5,600 (vs 120)", "8,624", "|Δln A| = 3.842: Lonjakan area 46.7x lipat"),
+        ("|Δln Luas| #2", "Majalengka", "2018", "14.80", "6,120 (vs 407)", "9,058", "|Δln A| = 2.711: Lonjakan area 15.0x lipat"),
+        ("|Δln Luas| #3", "Subang", "2019", "13.50", "250 (vs 2,770)", "338", "|Δln A| = 2.405: Kontraksi area 91%"),
+        ("|Δln Luas| #4", "Indramayu", "2016", "14.10", "1,450 (vs 162)", "2,045", "|Δln A| = 2.190: Lonjakan area 8.9x lipat"),
+        ("|Δln Luas| #5", "Pangandaran", "2017", "12.90", "3,200 (vs 453)", "4,128", "|Δln A| = 1.954: Lonjakan area 7.1x lipat")
+    ]
+    add_table_from_data(doc, soybean_outlier_headers, soybean_outlier_data, soybean_outlier_widths, hdr_bg="2E7D32", zebra_bg="F9FBE7")
+
     add_figure_with_caption(
         doc,
         FIG_DIR / "07_soybean_and_geo" / "fig02_strip_plot_dan_sd_spasial_kedelai_2022_suspect.png",
-        "Gambar 4.8: Strip Plot & Keruntuhan Standar Deviasi Spasial Kedelai 2022 (SD Menyusut ke 0.19 ku/ha -> Bukti Imputasi Rata-rata Dinas 14.30 ku/ha)."
+        "Gambar 4.9: Strip Plot & Keruntuhan Standar Deviasi Spasial Kedelai 2022 (SD Menyusut ke 0.19 ku/ha -> Bukti Imputasi Rata-rata Dinas 14.30 ku/ha)."
     )
 
     # 4.8 Area & Production DS08
@@ -431,7 +485,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "08_production_and_harvest_area" / "fig02_dekomposisi_log_produksi_luas_yield.png",
-        "Gambar 4.9: Dekomposisi Log Produksi Jagung: Delta ln(P) = Delta ln(A) + Delta ln(Y) (Rata-rata 67.2% Fluktuasi Digerakkan oleh Luas Panen)."
+        "Gambar 4.10: Dekomposisi Log Produksi Jagung: Delta ln(P) = Delta ln(A) + Delta ln(Y) (Rata-rata 67.2% Fluktuasi Digerakkan oleh Luas Panen Petani)."
     )
 
     # 4.9 Macro Climate & CHIRPS DS09
@@ -444,7 +498,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "09_climate_covariates_and_chirps" / "fig01_oni_dmi_fase_enso_iod_2015_2024.png",
-        "Gambar 4.10: Runtun Waktu Indeks Iklim Makro Global ONI dan DMI 2015–2024 (Fase ENSO Pasifik & IOD Samudera Hindia Lengkap 120 Bulan)."
+        "Gambar 4.11: Runtun Waktu Indeks Iklim Makro Global ONI dan DMI 2015–2024 (Fase ENSO Pasifik & IOD Samudera Hindia Lengkap 120 Bulan)."
     )
 
     # --------------------------------------------------------------------------
@@ -458,38 +512,57 @@ def create_report():
     # 5.1 Validasi Cuaca
     doc.add_heading("5.1 Validasi Cuaca AgERA5 vs Satelit CHIRPS & Analisis Topografi Orografis", level=2)
     doc.add_paragraph(
-        "• Validasi Silang Lintas Satelit: Scatter plot anomali bulanan AgERA5 vs CHIRPS v2 menghasilkan Pearson r = 0.7102 dan Spearman rho = 0.7371 pada 36 bulan benchmark valid (N = 972 unit-bulan), membuktikan konsistensi AgERA5 dalam merekam dinamika temporal satelit inframerah CHIRPS.\n"
-        "• Pola Signed Bias Orografis: Analisis bias musiman terhadap elevasi DEM SRTM mengungkap bias overestimasi positif pada Musim Hujan di dataran tinggi Priangan (+20% s.d. +45%) akibat parameterisasi konvektif ERA5, serta bias defisit negatif di pesisir Pantura pada Musim Kemarau.\n"
+        "• Validasi Silang Lintas Satelit: Scatter plot anomali bulanan AgERA5 vs CHIRPS v2 menghasilkan Pearson r = 0.7102 dan Spearman rho = 0.7371 pada 36 bulan benchmark valid (N = 972 unit-bulan).\n"
+        "• Korelasi Dalam-Tahun & Antar-Unit: Korelasi dalam-tahun terhitung konsisten tinggi (2016: r = 0.6350; 2020: r = 0.7277; 2024: r = 0.6930). Korelasi per-unit wilayah administrasi mencatat median r = 0.7569 (berkisar antara 0.5899 hingga 0.8684).\n"
+        "• Pola Signed Bias Orografis: Analisis bias musiman terhadap elevasi DEM SRTM mengungkap signed bias maksimum Musim Hujan mencapai +72.31% di dataran tinggi Priangan (Bandung Raya) akibat parameterisasi konvektif ERA5 pada topografi pegunungan kompleks, serta bias defisit negatif di pesisir Pantura pada Musim Kemarau.\n"
         "• Uji Sampling Spasial Poligon: Mengambil rata-rata sampling seluruh poligon wilayah terbukti meredam amplitudo bias sebesar 18% hingga 28% dibandingkan hanya mengandalkan piksel centroid tunggal pada 6 sentra Tier A."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig01_scatter_anomali_bulanan_agera5_vs_chirps.png",
-        "Gambar 5.1: Validasi Silang Anomali Bulanan AgERA5 vs CHIRPS v2 pada 36 Bulan Benchmark (N = 972 Unit-Bulan; r = 0.710, rho = 0.737)."
+        "Gambar 5.1: Validasi Silang Anomali Bulanan AgERA5 vs CHIRPS v2 pada 36 Bulan Benchmark (N = 972 Unit-Bulan; Pooled r = 0.710, Median per-Unit r = 0.757)."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig02_bias_bertanda_musim_vs_elevasi.png",
-        "Gambar 5.2: Signed Bias AgERA5 vs CHIRPS per Musim vs Elevasi (Pola Orografis Positif Tajam pada Musim Hujan di Dataran Tinggi Priangan)."
+        "Gambar 5.2: Signed Bias AgERA5 vs CHIRPS per Musim vs Elevasi (Signed Bias Musim Hujan Mencapai Puncak +72.31% di Dataran Tinggi Priangan)."
+    )
+    add_figure_with_caption(
+        doc,
+        FIG_DIR / "10_cross_dataset_synthesis" / "fig03_uji_sampling_centroid_vs_area_6_kabupaten.png",
+        "Gambar 5.3: Uji Efektivitas Sampling Spasial Rata-rata Poligon Area vs Centroid Tunggal (Peredaman Bias 18-28% pada 6 Sentra Tier A)."
     )
 
     # 5.2 Uji Hipotesis H_CORN_01
     doc.add_heading("5.2 Evaluasi Hipotesis Terdaftar H_CORN_01 & Estimasi Ulang Robust", level=2)
     doc.add_paragraph(
-        "Evaluasi ekonometrika Added-Variable Plot Two-Way FE pada 18 sentra kabupaten (2015–2021, N = 124 observasi):\n"
-        "• Model 1 (Baseline OLS TWFE): beta = +0.0368 log points / SD, 95% Webb CI = [-0.0521, +0.1300], Bootstrap SE = 0.0516, MDE (2.8 x SE) = +-0.1444.\n"
-        "• Model 2 (WLS Bobot Luas Baseline 2015–2017): beta = +0.0395, 95% Webb CI = [-0.0161, +0.0932], Bootstrap SE = 0.0307, MDE = +-0.0859.\n"
-        "• Model 3 (Regresi Robust Huber / RLM): beta = +0.0198, 95% Webb CI = [-0.0292, +0.0709], Bootstrap SE = 0.0273, MDE = +-0.0765.\n"
-        "• Model 4 (Tanpa Outlier MAD-z P95 Cutoff): beta = +0.0555, 95% Webb CI = [-0.0275, +0.1398], Bootstrap SE = 0.0463, MDE = +-0.1298.\n\n"
-        "Efek yang Dikecualikan oleh Data: beta < -0.0521 atau beta > +0.1300.\n"
-        "Transfer dari Efek Suhu Literatur: +-0.0650 log points (Schlenker & Roberts 2009).\n"
-        "Status Evaluasi Resmi: EVIDENCE INSUFFICIENT.\n"
-        "Pada seluruh spesifikasi di atas, 95% CI Wild Bootstrap Webb melintasi nol dan mencakup rentang transfer efek suhu literatur (+-0.0650). Mengingat MDE panel makro tahunan lebih lebar dari benchmark efek (+-0.1444 > 0.0650), data observasional makro tidak memiliki daya statistik untuk menarik kesimpulan kausal konfirmatori."
+        "Evaluasi ekonometrika Added-Variable Plot Two-Way FE pada 18 sentra kabupaten jagung (2015–2021, N = 124 observasi):\n"
+        "Menguji dampak anomali hujan periode vegetatif (Feb–Apr) terhadap log produktivitas jagung di bawah 4 model estimasi alternatif:"
+    )
+
+    # Table 5.1 Re-estimation H_CORN_01
+    h_corn_headers = ["Model", "Spesifikasi Model Regresi", "Beta (log pts/SD)", "95% Webb Bootstrap CI", "Bootstrap SE", "MDE (2.8 x SE)", "Batas Dikecualikan", "Status Evaluasi"]
+    h_corn_widths = [Inches(0.7), Inches(1.8), Inches(0.8), Inches(1.1), Inches(0.7), Inches(0.8), Inches(1.1), Inches(1.0)]
+    h_corn_data = [
+        ("Model 1", "Baseline OLS TWFE (18 Sentra, N=124)", "+0.0368", "[-0.0521, +0.1300]", "0.0516", "±0.1444", "< -0.0521 atau > +0.1300", "Evidence Insufficient"),
+        ("Model 2", "WLS Bobot Baseline Luas 2015–2017", "+0.0395", "[-0.0161, +0.0932]", "0.0307", "±0.0859", "< -0.0161 atau > +0.0932", "Evidence Insufficient"),
+        ("Model 3", "Regresi Robust Huber (RLM)", "+0.0198", "[-0.0292, +0.0709]", "0.0273", "±0.0765", "< -0.0292 atau > +0.0709", "Evidence Insufficient"),
+        ("Model 4", "Tanpa Outlier MAD-z (Cutoff P95, 7 obs dropped)", "+0.0555", "[-0.0275, +0.1398]", "0.0463", "±0.1298", "< -0.0275 atau > +0.1398", "Evidence Insufficient")
+    ]
+    add_table_from_data(doc, h_corn_headers, h_corn_data, h_corn_widths, hdr_bg="1B5E20", zebra_bg="F1F8E9")
+
+    doc.add_paragraph(
+        "Interpretasi Ekonometrika Mendalam:\n"
+        "• Efek yang Dikecualikan oleh Data: beta < -0.0521 atau beta > +0.1300 (data menolak efek cuaca negatif tajam atau positif ekstrem).\n"
+        "• Transfer dari Efek Suhu Literatur: +-0.0650 log points (Schlenker & Roberts 2009).\n"
+        "• Status Evaluasi Resmi: EVIDENCE INSUFFICIENT.\n"
+        "Pada seluruh 4 spesifikasi di atas, 95% Confidence Interval Wild Cluster Bootstrap Webb selalu melintasi nol dan mencakup rentang transfer efek literatur (+-0.0650). "
+        "Karena MDE panel makro tahunan lebih lebar daripada benchmark efek (+-0.1444 > 0.0650), data observasional makro tahunan tidak memiliki daya statistik untuk menarik kesimpulan kausal konfirmatori."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig07_added_variable_plot_corn_webb_ci_mde.png",
-        "Gambar 5.3: Added-Variable Plot H_CORN_01 Two-Way FE dengan 95% CI Wild Cluster Bootstrap Webb dan MDE = 2.8 x SE (Status: Evidence Insufficient)."
+        "Gambar 5.4: Added-Variable Plot H_CORN_01 Two-Way FE dengan 95% CI Wild Cluster Bootstrap Webb dan MDE = 2.8 x SE (Status: Evidence Insufficient)."
     )
 
     # 5.3 Sensitivitas & Falsifikasi
@@ -502,48 +575,58 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig08_forest_loo_tahun_webb_bootstrap.png",
-        "Gambar 5.4: Forest Plot Leave-One-Year-Out (LOO) Uji Ketahanan Sensitivitas Ekstrem (Estimasi Konsisten & CI Selalu Melintasi Nol)."
+        "Gambar 5.5: Forest Plot Leave-One-Year-Out (LOO) Uji Ketahanan Sensitivitas Ekstrem (Estimasi Konsisten & CI Selalu Melintasi Nol)."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig09_stabilitas_jendela_dan_lead_placebo_dihitung.png",
-        "Gambar 5.5: Uji Stabilitas Jendela Waktu & Lead Weather Placebo (t+1) Dihitung Nyata dari Data Menggunakan Two-Way FE & Wild Bootstrap Webb."
+        "Gambar 5.6: Uji Stabilitas Jendela Waktu & Lead Weather Placebo (t+1) Dihitung Nyata dari Data Menggunakan Two-Way FE & Wild Bootstrap Webb."
     )
 
     # 5.4 Hortikultura Tier B Mikroklimat
     doc.add_heading("5.4 Tier B Hortikultura: Monitoring Mikroklimat Kebasahan Daun Jenuh (IFWC)", level=2)
     doc.add_paragraph(
-        "• Depresiasi Titik Embun Malam (Tmin – Tdew): Tmin adalah nilai minimum 24 jam (subuh), sedangkan Tdew adalah rata-rata 24 jam. Sebanyak 40.3% hari mencatat depresiasi negatif (< 0°C) murni akibat ketidaksesuaian rata-rata diurnal, bukan supersaturasi udara. Sebagai pelengkap proksi fajar, kelembapan relatif jam 06 lokal (RH_06h) mencatat persentil 90 sebesar 91.6%.\n"
+        "• Depresiasi Titik Embun Malam (Tmin – Tdew): Tmin adalah nilai minimum 24 jam (subuh), sedangkan Tdew adalah rata-rata 24 jam. Sebanyak 40.31% hari mencatat depresiasi negatif (< 0°C) murni akibat ketidaksesuaian rata-rata diurnal, bukan supersaturasi udara. Sebagai pelengkap proksi fajar, kelembapan relatif jam 06 lokal (RH_06h) mencatat persentil 90 sebesar 91.64%.\n"
         "• Persentil Ambang Batas: P10 seluruh musim tanam terhitung -0.70°C (bervariasi per bulan: -0.81°C Maret s.d. -0.48°C Agustus).\n"
-        "• Persistensi Hari Basah Ekstrem: Run length hari berturut-turut di bawah P10 (hanya menghitung run >= 1 hari) dilaporkan murni deskriptif untuk sistem peringatan dini jamur (IFWC) tanpa regresi terhadap hasil panen."
+        "• Persistensi Hari Basah Ekstrem: Run length hari berturut-turut di bawah P10 (hanya menghitung run >= 1 hari, total 5.550 run) dilaporkan murni deskriptif untuk sistem peringatan dini jamur (IFWC) tanpa regresi terhadap hasil panen."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig10_tier_b_ifwc_depresiasi_embun_run_length.png",
-        "Gambar 5.6: Distribusi Depresiasi Titik Embun Malam (Tmin – Tdew) dan Frekuensi Run Length Hari Lembap di Bawah P10 (Run >= 1 Hari, Tier B Deskriptif)."
+        "Gambar 5.7: Distribusi Depresiasi Titik Embun Malam (Tmin – Tdew) dan Frekuensi Run Length Hari Lembap di Bawah P10 (Run >= 1 Hari, Tier B Deskriptif)."
     )
 
     # 5.5 MDE & Dekomposisi Varians
     doc.add_heading("5.5 Daya Statistik (MDE = 2.8 x SE) & Dekomposisi Varians Lintas Komoditas", level=2)
     doc.add_paragraph(
-        "Tabel komparasi MDE dihitung konsisten langsung dari Standard Error Wild Cluster Bootstrap (MDE = 2.8 x SE):\n"
-        "• Jagung (DS05, T=7, N=124): Bootstrap SE = 0.0516, MDE = +-0.1444 (Daya Rendah, MDE 14.4% > Efek Suhu 6.5%).\n"
-        "• Kedelai (DS07, T=7, N=108): Bootstrap SE = 0.0503, MDE = +-0.1408 (Daya Rendah, MDE 14.1%).\n"
-        "• Padi Sawah (DS03, T=3, N=54): Bootstrap SE = 0.0163, MDE = +-0.0457 (PERINGATAN: Degrees of freedom sedikit df=33, bukan daya statistik tinggi!).\n\n"
-        "Dekomposisi varians Two-Way FE:\n"
-        "• Jagung: FE Kabupaten = 45.2%, FE Tahun = 12.8%, Residu setelah FE = 42.0%.\n"
-        "• Kedelai: FE Kabupaten = 58.4%, FE Tahun = 8.2%, Residu setelah FE = 33.4%.\n"
+        "Tabel komparasi MDE dihitung konsisten langsung dari Standard Error Wild Cluster Bootstrap (MDE = 2.8 x SE_boot):\n"
+    )
+
+    # Table 5.2 MDE Comparison
+    mde_headers = ["Komoditas & Panel", "Periode Valid", "N Obs", "Clusters (G)", "Within-CV", "Bootstrap SE", "MDE (2.8 x SE)", "Benchmark Efek", "Daya Statistik"]
+    mde_widths = [Inches(1.2), Inches(0.9), Inches(0.5), Inches(0.8), Inches(0.7), Inches(0.7), Inches(0.8), Inches(0.9), Inches(1.1)]
+    mde_data = [
+        ("Jagung (DS05)", "2015–2021 (T=7)", "124", "18 sentra", "5.49%", "0.0516", "±0.1444", "±0.0650 (Suhu)", "Daya Rendah (MDE > Efek)"),
+        ("Kedelai (DS07)", "2015–2021 (T=7)", "108", "17 sentra", "4.82%", "0.0446", "±0.1250", "±0.0650 (Suhu)", "Daya Rendah (MDE > Efek)"),
+        ("Padi Sawah (DS03)", "2015–2017 (T=3)", "54", "18 sentra", "2.14%", "0.0091", "±0.0255", "±0.0650 (Suhu)", "df Depleted (df=33 semu)")
+    ]
+    add_table_from_data(doc, mde_headers, mde_data, mde_widths, hdr_bg="2E7D32", zebra_bg="F9FBE7")
+
+    doc.add_paragraph(
+        "Dekomposisi Varians Two-Way FE Lintas Komoditas:\n"
+        "• Jagung (DS05): FE Kabupaten = 45.2%, FE Tahun = 12.8%, Residu setelah FE = 42.0%.\n"
+        "• Kedelai (DS07): FE Kabupaten = 58.4%, FE Tahun = 8.2%, Residu setelah FE = 33.4%.\n"
         "Komponen residu setelah FE diberi label jujur sebagai gabungan cuaca lokal, noise acak, dan variasi non-iklim."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig11_mde_per_panel_final_formula_sigma.png",
-        "Gambar 5.7: Perbandingan Analytical Minimum Detectable Effect (MDE) Lintas Panel Komoditas Berdasarkan Varians Residual Two-Way FE."
+        "Gambar 5.8: Perbandingan Analytical Minimum Detectable Effect (MDE = 2.8 x SE_boot) Lintas Panel Komoditas Berdasarkan Varians Residual Two-Way FE."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig12_dekomposisi_varians_per_komoditas.png",
-        "Gambar 5.8: Dekomposisi Variansi Two-Way Fixed Effects Log Yield Jagung dan Kedelai Jawa Barat."
+        "Gambar 5.9: Dekomposisi Variansi Two-Way Fixed Effects Log Yield Jagung dan Kedelai Jawa Barat."
     )
 
     # --------------------------------------------------------------------------
@@ -632,6 +715,7 @@ def create_report():
         "Seluruh berkas riset, metadata, figur, dan notebook tersimpan secara terstruktur di dalam repositori:\n"
         "• Laporan Penutupan Audit: reports/audit_closure_report.md\n"
         "• Dokumen Keputusan Komoditas: docs/crop_outcome_decision.md\n"
+        "• Log Git & Hash Provenance: reports/logs/git_history.md\n"
         "• Tabel Lookup Spasial: data/processed/lookup_kab_cell_elev.csv\n"
         "• Katalog Figur: reports/figures/INDEX.md dan reports/figures/figure_manifest.csv (51 file PNG 200 DPI)\n"
         "• Ringkasan Hasil JSON: direktori reports/results/ (10 berkas JSON hasil olah kode)\n"

@@ -28,7 +28,7 @@ Angka-angka di bawah ini bersumber langsung dari hasil olah kode di `reports/res
 | **Tahun Efektif ($T$)** | **$T = 3$** (2015–2017) | **$T = 7$** (2015–2021) | **$T = 7$** (2015–2021) | **$T = 8$** (2017–2024) | **$T = 8$** (2017–2024) |
 | **Sel Grid Unik ($S_{\text{eff}}$)** | 18 kabupaten sentra | 18 kabupaten sentra | 17 kabupaten sentra | 1 unit agregat provinsi | 1 unit agregat provinsi |
 | **Status Artefak / Imputasi** | 2019 Artefak (+21.8%), 2018–2020 BPS UNVERIFIED | 2022 Imputasi identik 75.70 ku/ha (13 kab) | 2022 Imputasi identik 14.30 ku/ha (SD = 0.19) | Tidak ada label kab/kota pasca-2014 | Tidak ada label kab/kota pasca-2014 |
-| **Analytical MDE** | $\pm 0,0329$ ($df = 33$ semu) | $\pm 0,2306$ ($df = 99$) | $\pm 0,1842$ ($df = 84$) | *Tidak Dihitung* (N=16) | *Tidak Dihitung* (N=8) |
+| **Analytical MDE** | $\pm 0,0255$ ($df = 33$ semu) | $\pm 0,1444$ (2.8 x SE) | $\pm 0,1250$ (2.8 x SE) | *Tidak Dihitung* (N=16) | *Tidak Dihitung* (N=8) |
 | **Literatur Pendukung** | IRRI Oryza / Paper 12 & 15 | Paper 13 & 14 (Global) | Paper 13 & 14 (Global) | IFWC / Microclimate Disease | IFWC / Microclimate Disease |
 | **Pangsa Luas Panen Jabar** | 1.580.000 ha (Utama) | ~75.000 ha (Sekunder) | ~15.000 ha (Tersier) | ~25.000 ha (Hortikultura) | ~10.000 ha (Hortikultura) |
 
@@ -63,7 +63,7 @@ Angka-angka di bawah ini bersumber langsung dari hasil olah kode di `reports/res
 - **Keputusan Arsitektur**: **TIER B — RULE-BASED MIKROKLIMAT IFWC (INDEX FOR WEATHER-FAVORABLE CONDITIONS)**.
 - **Larangan Keras**: **Dilarang melakukan regresi yield tahunan dan dilarang melatih model Machine Learning penyakit tanaman (OPT)**.
 - **Alasan**: Data produksi kab/kota (od_18096) hanya tersedia 2013–2014 (**zero temporal overlap** dengan AgERA5 2015–2024), dan dataset tidak memuat label serangan hama/penyakit.
-- **Target Luaran**: Skor Indeks Risiko Harian (0–100) berbasis persistensi kebasahan daun malam ($T_{\min} - T_d < 1,0^\circ\text{C}$) dan anomali kelembapan relatif diurnal.
+- **Target Luaran**: Skor Indeks Risiko Harian (0–100) berbasis persistensi kebasahan daun malam (persentil P10 depresiasi titik embun & proksi fajar RH jam 06) dan anomali kelembapan relatif diurnal.
 
 ### E. Tomat (`tomat`)
 - **Keputusan Arsitektur**: **TIER B — RULE-BASED ADVISORY BERSAMA CABAI**.
@@ -76,7 +76,7 @@ Angka-angka di bawah ini bersumber langsung dari hasil olah kode di `reports/res
 | Modul Decision Engine | Klasifikasi Tier Evidence | Metodologi yang Digunakan | Batasan Operasional yang Diterima |
 | :--- | :---: | :--- | :--- |
 | **Fenologi & Kalender Tanam Padi** | `[Published Model]` | Akumulasi Derajat Hari (GDD) & Neraca Air FAO-56 | Tanggal panen riil petani tidak tercatat harian; divalidasi silang ke kalender tanam Katam Balitbangtan |
-| **Identifikasi Panel Cuaca Jagung** | `[Evidence Insufficient]` | Fixed Effects OLS + Wild Cluster Bootstrap Webb | Data tahunan makro tidak cukup mendeteksi koefisien halus ($\text{MDE} = \pm 0,2306$); advisory cuaca jagung tidak mengklaim dampak kausal mutlak |
+| **Identifikasi Panel Cuaca Jagung** | `[Evidence Insufficient]` | Fixed Effects OLS + Wild Cluster Bootstrap Webb | Data tahunan makro tidak cukup mendeteksi koefisien halus ($\text{MDE} = \pm 0,1444$); advisory cuaca jagung tidak mengklaim dampak kausal mutlak |
 | **Peringatan Dini Kebasahan Cabai** | `[Literature Transfer]` | Persistensi Depresiasi Titik Embun Malam ($T_{\min} - T_d$) | Engine tidak memprediksi kemunculan spora jamur fisik, melainkan hanya menghitung durasi kondisi atmosfer kondusif |
 | **Baseline Normalitas Cuaca** | `[Data Learned]` | Klimatologi Persentil AgERA5 2015–2024 (P10–P90) | Menggantikan seluruh ambang batas absolut buatan dengan distribusi persentil lokal per sel grid |
 
