@@ -50,5 +50,3 @@ scripts/fetch_*.py
 scripts/verify_correlation_*.py
 
 .agents
-
-/context
