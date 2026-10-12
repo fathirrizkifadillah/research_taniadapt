@@ -16,6 +16,11 @@
     2023
   ],
   "n_valid_chirps_unit_months": 972,
+  "chirps_r_within_2016": 0.635,
+  "chirps_r_within_2020": 0.7277,
+  "chirps_r_within_2024": 0.693,
+  "chirps_r_per_unit_median": 0.7569,
+  "max_signed_bias_mh_pct": 72.31,
   "five_key_findings": [
     "Data ONI dan DMI lengkap 100% (120 bulan, 2015-2024) mengidentifikasi episode El Ni\u00f1o 2015, 2023 dan La Ni\u00f1a 2016, 2020-2022.",
     "Endpoint NOAA CoastWatch ERDDAP CHIRPS hanya melayani tahun benchmark (2016, 2020, 2024; n=36 bulan per unit).",

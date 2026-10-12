@@ -6,15 +6,46 @@
     -0.0521,
     0.13
   ],
-  "h_corn_01_mde": 0.2306,
-  "rice_t3_mde": 0.0325,
-  "chirps_validation_pearson_r": 0.7102,
-  "chirps_validation_spearman_rho": 0.7371,
+  "h_corn_01_effects_ruled_out_by_data": [
+    "< -0.0521",
+    "> +0.1300"
+  ],
+  "h_corn_01_boot_se": 0.0516,
+  "h_corn_01_mde_2_8xse": 0.1444,
+  "h_corn_01_wls_baseline_beta": 0.0395,
+  "h_corn_01_wls_baseline_ci": [
+    -0.0161,
+    0.0932
+  ],
+  "h_corn_01_wls_baseline_mde": 0.0859,
+  "h_corn_01_robust_huber_beta": 0.0198,
+  "h_corn_01_robust_huber_ci": [
+    -0.0292,
+    0.0709
+  ],
+  "h_corn_01_robust_huber_mde": 0.0765,
+  "h_corn_01_clean_mad_z_beta": 0.0555,
+  "h_corn_01_clean_mad_z_ci": [
+    -0.0275,
+    0.1398
+  ],
+  "h_corn_01_clean_mad_z_mde": 0.1298,
+  "literature_temperature_transfer_benchmark": 0.065,
+  "soybean_boot_se": 0.0446,
+  "soybean_mde_2_8xse": 0.125,
+  "rice_t3_boot_se": 0.0091,
+  "rice_t3_mde_2_8xse": 0.0255,
+  "chirps_validation_pearson_r_pooled": 0.7102,
+  "chirps_validation_pearson_r_within_2016": 0.635,
+  "chirps_validation_pearson_r_within_2020": 0.7277,
+  "chirps_validation_pearson_r_within_2024": 0.693,
+  "chirps_validation_pearson_r_per_unit_median": 0.7569,
+  "max_signed_bias_mh_pct": 72.31,
   "five_key_findings": [
-    "Validasi silang AgERA5 vs CHIRPS menghasilkan korelasi anomali r = 0.710 pada 36 bulan valid.",
-    "Uji sampling spasial membuktikan perataan poligon area meredam bias sebesar 18-28% pada 6 sentra Tier A.",
-    "Effect size H_CORN_01 terhitung beta = +0.0368 dengan 95% CI Wild Bootstrap Webb [-0.0521, +0.1300] (Evidence Insufficient).",
-    "Analytical MDE jagung terhitung +-0.2306, mengonfirmasi keterbatasan power data tahunan makro.",
+    "Validasi silang AgERA5 vs CHIRPS menghasilkan korelasi anomali pooled r = 0.710 dan median per-unit r = 0.757 pada 36 bulan valid.",
+    "Uji sampling spasial membuktikan perataan poligon area meredam bias sebesar 18-28% pada 6 sentra Tier A; bias maksimum MH mencapai +72.31%.",
+    "Effect size H_CORN_01 OLS terhitung beta = +0.0368 dengan 95% CI Wild Bootstrap Webb [-0.0521, +0.1300] (Evidence Insufficient).",
+    "Re-estimasi robust: WLS bobot luas baseline menghasilkan beta = +0.0395 (MDE = 0.0859); Robust Huber menghasilkan beta = +0.0198 (MDE = 0.0765); tanpa outlier MAD-z P95 menghasilkan beta = +0.0555 (MDE = 0.1298).",
     "Padi T=3 resmi direkomendasikan masuk Tier A Mekanistik saja karena degrees of freedom terlalu sedikit (df=33)."
   ]
 }

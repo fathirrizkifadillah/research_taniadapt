@@ -4,8 +4,13 @@
   "n_units_administrative": 27,
   "n_grid_cells_unique": 22,
   "period": "2015-2024",
-  "n_components_for_80pct_variance": 2,
-  "pca_cumulative_var_2_comp_pct": 84.55,
+  "pca_raw_comp_1_pct": 74.97,
+  "pca_raw_comp_2_pct": 9.59,
+  "pca_raw_cumulative_2_pct": 84.55,
+  "pca_demeaned_comp_1_pct": 69.02,
+  "pca_demeaned_comp_2_pct": 11.95,
+  "pca_demeaned_cumulative_2_pct": 80.97,
+  "pca_demeaned_pairwise_r_mean": 0.6671,
   "precip_feb_apr_sd_raw_mm": 229.36,
   "precip_feb_apr_sd_resid_mm": 101.74,
   "tmax_mar_may_sd_raw_c": 2.32,
@@ -13,8 +18,8 @@
   "five_key_findings": [
     "27 unit wilayah terpetakan tepat ke 22 sel grid AgERA5 unik (5 pasang berbagi sel).",
     "100.0% data lolos uji konsistensi fisik termodinamika.",
-    "PCA anomali deseasonalized membuktikan tepat 2 komponen utama menjelaskan 84.55% varians spasial.",
-    "Korelasi spasial anomali tinggi (rata-rata r = 0.727), membuktikan derajat bebas cuaca efektif adalah 2 moda regional.",
-    "Two-Way FE menyerap mayoritas variasi cuaca, menyisakan SD residu hujan hanya 68.4 mm untuk identifikasi empiris."
+    "PCA anomali demeaned per tahun membuktikan PC1 & PC2 menjelaskan 80.97% varians spasial murni (r = 0.667).",
+    "Peta loading PC1 menunjukkan muatan positif seragam, sedangkan PC2 menangkap kontras orografis utara-selatan.",
+    "Two-Way FE menyerap mayoritas variasi cuaca bersama, menyisakan SD residu hujan hanya 68.4 mm untuk identifikasi empiris."
   ]
 }

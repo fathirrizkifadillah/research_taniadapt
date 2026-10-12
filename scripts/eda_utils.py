@@ -166,12 +166,22 @@ def wild_cluster_bootstrap_webb(y_resid, x_resid, cluster_series, n_boot=999, se
     
     return float(beta_hat), ci_lower, ci_upper, boot_se
 
-def compute_analytical_mde(sigma_y_resid, sigma_x_resid, n_obs, alpha=0.05, power=0.80, df=None):
+def compute_mde_from_boot_se(boot_se, factor=2.8):
     """
-    Computes analytical Minimum Detectable Effect (MDE) for panel regression:
-    MDE = (t_{alpha/2, df} + t_{1-beta, df}) * SE(beta)
-    where SE(beta) = sigma_epsilon / (sigma_{x_tilde} * sqrt(N)).
+    Computes Minimum Detectable Effect (MDE) directly from Wild Cluster Bootstrap SE:
+    MDE = factor * SE_boot (where factor ~ t_{alpha/2} + t_{1-beta} ~ 1.96 + 0.84 = 2.80).
     """
+    return float(factor * boot_se)
+
+def compute_analytical_mde(sigma_y_resid=None, sigma_x_resid=None, n_obs=None, alpha=0.05, power=0.80, df=None, boot_se=None):
+    """
+    Computes Minimum Detectable Effect (MDE).
+    If boot_se is provided, calculates MDE = 2.8 * boot_se directly from the same bootstrap SE as requested.
+    Otherwise uses residual SDs: MDE = (t_{alpha/2, df} + t_{1-beta, df}) * SE(beta).
+    """
+    if boot_se is not None:
+        return float(2.8 * boot_se)
+        
     if df is None:
         df = n_obs - 2
     if df <= 0:

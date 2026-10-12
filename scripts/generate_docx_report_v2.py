@@ -362,7 +362,7 @@ def create_report():
     add_figure_with_caption(
         doc,
         FIG_DIR / "03_west_java_rice" / "fig04_padi_sawah_vs_ladang_artefak_2019.png",
-        "Gambar 4.4: Komparasi Padi Sawah vs Padi Ladang (Lonjakan Serempak 2019 Terjadi pada Kedua Sub-Sektor, Membuktikan Galat Konversi Dinas)."
+        "Gambar 4.4: Komparasi Padi Sawah vs Padi Ladang (Lonjakan Administratif Serentak 2019: Sawah +23%, Ladang +55%, Penyebab Belum Diketahui)."
     )
 
     # 4.4 Agroclimatic Indicators DS04
@@ -474,22 +474,22 @@ def create_report():
     )
 
     # 5.2 Uji Hipotesis H_CORN_01
-    doc.add_heading("5.2 Evaluasi Hipotesis Terdaftar H_CORN_01 (Hujan Feb–Apr vs Hasil Jagung)", level=2)
+    doc.add_heading("5.2 Evaluasi Hipotesis Terdaftar H_CORN_01 & Estimasi Ulang Robust", level=2)
     doc.add_paragraph(
         "Evaluasi ekonometrika Added-Variable Plot Two-Way FE pada 18 sentra kabupaten (2015–2021, N = 124 observasi):\n"
-        "• Effect Size Point Estimate (beta): +0.0368 log points per 1 SD anomali cuaca (+3.68% perubahan hasil panen per standar deviasi presipitasi vegetatif Feb–Apr).\n"
-        "• Wild Cluster Bootstrap Webb (cluster = kabupaten, 999 bootstrap, seed = 42):\n"
-        "  - Bootstrap Standard Error = 0.0464\n"
-        "  - 95% Confidence Interval Webb = [-0.0521, +0.1300]\n"
-        "• Minimum Detectable Effect (Analytical MDE): +-0.2306 log points pada alpha = 0.05 dan Power = 0.80.\n"
-        "• Batas Efek Relevan Agronomis (Transfer Literatur): +-0.0650 log points (Schlenker & Roberts 2009).\n"
-        "• Status Evaluasi Resmi: EVIDENCE INSUFFICIENT.\n"
-        "  95% CI Wild Bootstrap Webb mencakup efek agronomis yang relevan (+0.0650) sekaligus mencakup efek nol (0.0000). Mengingat MDE panel makro tahunan sangat lebar (+-0.2306 > 0.0650), data observasional makro tidak memiliki daya statistik untuk menarik kesimpulan konfirmatori."
+        "• Model 1 (Baseline OLS TWFE): beta = +0.0368 log points / SD, 95% Webb CI = [-0.0521, +0.1300], Bootstrap SE = 0.0516, MDE (2.8 x SE) = +-0.1444.\n"
+        "• Model 2 (WLS Bobot Luas Baseline 2015–2017): beta = +0.0395, 95% Webb CI = [-0.0161, +0.0932], Bootstrap SE = 0.0307, MDE = +-0.0859.\n"
+        "• Model 3 (Regresi Robust Huber / RLM): beta = +0.0198, 95% Webb CI = [-0.0292, +0.0709], Bootstrap SE = 0.0273, MDE = +-0.0765.\n"
+        "• Model 4 (Tanpa Outlier MAD-z P95 Cutoff): beta = +0.0555, 95% Webb CI = [-0.0275, +0.1398], Bootstrap SE = 0.0463, MDE = +-0.1298.\n\n"
+        "Efek yang Dikecualikan oleh Data: beta < -0.0521 atau beta > +0.1300.\n"
+        "Transfer dari Efek Suhu Literatur: +-0.0650 log points (Schlenker & Roberts 2009).\n"
+        "Status Evaluasi Resmi: EVIDENCE INSUFFICIENT.\n"
+        "Pada seluruh spesifikasi di atas, 95% CI Wild Bootstrap Webb melintasi nol dan mencakup rentang transfer efek suhu literatur (+-0.0650). Mengingat MDE panel makro tahunan lebih lebar dari benchmark efek (+-0.1444 > 0.0650), data observasional makro tidak memiliki daya statistik untuk menarik kesimpulan kausal konfirmatori."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig07_added_variable_plot_corn_webb_ci_mde.png",
-        "Gambar 5.3: Added-Variable Plot H_CORN_01 Two-Way FE dengan 95% CI Wild Cluster Bootstrap Webb dan MDE Analitis (Status: Evidence Insufficient)."
+        "Gambar 5.3: Added-Variable Plot H_CORN_01 Two-Way FE dengan 95% CI Wild Cluster Bootstrap Webb dan MDE = 2.8 x SE (Status: Evidence Insufficient)."
     )
 
     # 5.3 Sensitivitas & Falsifikasi
@@ -513,26 +513,27 @@ def create_report():
     # 5.4 Hortikultura Tier B Mikroklimat
     doc.add_heading("5.4 Tier B Hortikultura: Monitoring Mikroklimat Kebasahan Daun Jenuh (IFWC)", level=2)
     doc.add_paragraph(
-        "• Depresiasi Titik Embun Malam (Tmin - Tdew): Ketika Tmin - Tdew < 1.0°C, kelembapan malam mendekati saturasi 100%, memicu kondensasi air bebas pada tajuk daun tanaman cabai.\n"
-        "• Persistensi Hari Basah Ekstrem: Evaluasi run length hari berturut-turut di bawah P10 depresiasi embun bulanan dilaporkan murni deskriptif untuk sistem peringatan dini penyakit jamur (IFWC) tanpa menghubungkannya dengan regresi hasil panen."
+        "• Depresiasi Titik Embun Malam (Tmin – Tdew): Tmin adalah nilai minimum 24 jam (subuh), sedangkan Tdew adalah rata-rata 24 jam. Sebanyak 40.3% hari mencatat depresiasi negatif (< 0°C) murni akibat ketidaksesuaian rata-rata diurnal, bukan supersaturasi udara. Sebagai pelengkap proksi fajar, kelembapan relatif jam 06 lokal (RH_06h) mencatat persentil 90 sebesar 91.6%.\n"
+        "• Persentil Ambang Batas: P10 seluruh musim tanam terhitung -0.70°C (bervariasi per bulan: -0.81°C Maret s.d. -0.48°C Agustus).\n"
+        "• Persistensi Hari Basah Ekstrem: Run length hari berturut-turut di bawah P10 (hanya menghitung run >= 1 hari) dilaporkan murni deskriptif untuk sistem peringatan dini jamur (IFWC) tanpa regresi terhadap hasil panen."
     )
     add_figure_with_caption(
         doc,
         FIG_DIR / "10_cross_dataset_synthesis" / "fig10_tier_b_ifwc_depresiasi_embun_run_length.png",
-        "Gambar 5.6: Distribusi Depresiasi Titik Embun Malam (Tmin - Tdew) dan Frekuensi Run Length Hari Lembap Jenuh di Bawah P10 (Tier B Deskriptif)."
+        "Gambar 5.6: Distribusi Depresiasi Titik Embun Malam (Tmin – Tdew) dan Frekuensi Run Length Hari Lembap di Bawah P10 (Run >= 1 Hari, Tier B Deskriptif)."
     )
 
     # 5.5 MDE & Dekomposisi Varians
-    doc.add_heading("5.5 Daya Statistik Analitis (MDE) & Dekomposisi Varians Lintas Komoditas", level=2)
+    doc.add_heading("5.5 Daya Statistik (MDE = 2.8 x SE) & Dekomposisi Varians Lintas Komoditas", level=2)
     doc.add_paragraph(
-        "Tabel komparasi MDE analitis dihitung langsung dari rumus varians residual:\n"
-        "• Jagung (DS05, T=7, N=124): MDE = +-0.2306 (Underpowered, MDE 23.1% > Efek Agronomis 6.5%).\n"
-        "• Kedelai (DS07, T=7, N=108): MDE = +-0.1842 (Underpowered, MDE 18.4%).\n"
-        "• Padi Sawah (DS03, T=3, N=54): MDE = +-0.0325 (PERINGATAN: Degrees of freedom sempit df=33, bukan daya statistik tinggi).\n\n"
+        "Tabel komparasi MDE dihitung konsisten langsung dari Standard Error Wild Cluster Bootstrap (MDE = 2.8 x SE):\n"
+        "• Jagung (DS05, T=7, N=124): Bootstrap SE = 0.0516, MDE = +-0.1444 (Daya Rendah, MDE 14.4% > Efek Suhu 6.5%).\n"
+        "• Kedelai (DS07, T=7, N=108): Bootstrap SE = 0.0503, MDE = +-0.1408 (Daya Rendah, MDE 14.1%).\n"
+        "• Padi Sawah (DS03, T=3, N=54): Bootstrap SE = 0.0163, MDE = +-0.0457 (PERINGATAN: Degrees of freedom sedikit df=33, bukan daya statistik tinggi!).\n\n"
         "Dekomposisi varians Two-Way FE:\n"
         "• Jagung: FE Kabupaten = 45.2%, FE Tahun = 12.8%, Residu setelah FE = 42.0%.\n"
         "• Kedelai: FE Kabupaten = 58.4%, FE Tahun = 8.2%, Residu setelah FE = 33.4%.\n"
-        "Komponen residu setelah FE diberi label jujur sebagai gabungan cuaca lokal, noise acak, dan kesalahan ukur lapangan."
+        "Komponen residu setelah FE diberi label jujur sebagai gabungan cuaca lokal, noise acak, dan variasi non-iklim."
     )
     add_figure_with_caption(
         doc,
@@ -578,10 +579,10 @@ def create_report():
         r.font.color.rgb = RGBColor(255, 255, 255)
 
     dec_data = [
-        ("Padi Sawah (DS03)", "TIER A — MEKANISTIK SAJA (No Panel Regression)", "T=3 (2015–2017)\nN=54 observasi", "Periode 2018-2020 UNVERIFIED; 2019 terdistorsi artefak dinas (+21.8%). Panel T=3 menyerap variasi dalam-kabupaten (Within-CV=2.14%). df=33 sempit. Advisory dibangun murni di atas Model Mekanistik Biofisik (Crop Calendar + GDD + Evapotranspirasi ET0)."),
-        ("Jagung (DS05)", "TIER A — EMPIRICAL PANEL (Sensitivity) + MEKANISTIK", "T=7 (2015–2021)\n18 Sentra, N=124 obs", "Tahun 2022 dieksklusikan (imputasi seragam 75.70 ku/ha). Panel 2015-2021 memiliki integritas penuh. Status: Evidence Insufficient (Webb CI melintasi nol). Digunakan untuk uji sensitivitas iklim makro dan kalender tanam."),
-        ("Kedelai (DS07)", "TIER A — PANEL SECONDARY BENCHMARK + MEKANISTIK", "T=7 (2015–2021)\n17 Sentra, N=108 obs", "Kriteria ex-ante N>=6 tahun menyaring 17 sentra aktif. Tahun 2022 dieksklusikan (SD runtuh ke 0.19 ku/ha). MDE = +-0.1842. Berfungsi sebagai pembanding sekunder legum."),
-        ("Cabai & Sayuran (DS06)", "TIER B — RULE-BASED ADVISORY ONLY (No Yield Reg)", "Provinsi (2017–2024)\nN=16 observasi", "Zero temporal overlap kabupaten vs cuaca. Bebas label OPT. CV provinsi datar (~4-6%). Monitoring difokuskan pada mikroklimat kebasahan daun malam (Tmin - Tdew < P10) untuk sistem peringatan dini jamur (IFWC).")
+        ("Padi Sawah (DS03)", "TIER A — MEKANISTIK SAJA (No Panel Regression)", "T=3 (2015–2017)\nN=54 observasi", "Periode 2018-2020 UNVERIFIED; 2019 terdistorsi artefak administratif serentak (sawah +23%, ladang +55%), penyebab belum diketahui. Panel T=3 menyerap variasi dalam-kabupaten (Within-CV=2.14%). df=33 sempit. Advisory dibangun murni di atas Model Mekanistik Biofisik (Crop Calendar + GDD + Evapotranspirasi ET0)."),
+        ("Jagung (DS05)", "TIER A — EMPIRICAL PANEL (Sensitivity) + MEKANISTIK", "T=7 (2015–2021)\n18 Sentra, N=124 obs", "Tahun 2022 dieksklusikan (imputasi seragam 75.70 ku/ha). Panel 2015-2021 terdaftar ex-ante (dengan pengujian outlier eksplisit). MDE (2.8 x SE) = +-0.1444. Status: Evidence Insufficient (Webb CI melintasi nol). Digunakan untuk uji sensitivitas iklim makro dan kalender tanam."),
+        ("Kedelai (DS07)", "TIER A — PANEL SECONDARY BENCHMARK + MEKANISTIK", "T=7 (2015–2021)\n17 Sentra, N=108 obs", "Kriteria ex-ante N>=6 tahun menyaring 17 sentra aktif. Tahun 2022 dieksklusikan (SD runtuh ke 0.19 ku/ha). MDE (2.8 x SE) = +-0.1250. Berfungsi sebagai pembanding sekunder legum."),
+        ("Cabai & Sayuran (DS06)", "TIER B — RULE-BASED ADVISORY ONLY (No Yield Reg)", "Provinsi (2017–2024)\nN=16 observasi", "Zero temporal overlap kabupaten vs cuaca. Bebas label OPT. CV provinsi datar (~4-6%). Monitoring difokuskan pada mikroklimat kebasahan daun malam (persentil P10 depresiasi embun & proksi fajar RH 06h) untuk sistem peringatan dini jamur (IFWC).")
     ]
 
     for i, (crop, tier, sam, ras) in enumerate(dec_data):
