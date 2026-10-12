@@ -329,5 +329,24 @@
         "chemical_fungicide_sop (SOP resmi penyuluhan)"
       ]
     }
+  },
+  "phase11_risk_to_decision_engine": {
+    "status": "COMPLETED",
+    "actions_supported": [
+      "irrigation",
+      "fertilizing",
+      "spraying",
+      "harvesting",
+      "pruning"
+    ],
+    "diurnal_window": "06.00 to 18.00 WIB (13 operational hours)",
+    "engine_rules_summary": {
+      "irrigation": "Pagi (06.00-08.00) & sore (15.00-18.00) aman; DANGER jika tanah jenuh air atau hujan >= 3mm; WARN saat radiasi surya terik > 500 W/m2 dan VPD > 15 hPa.",
+      "spraying": "Ideal saat angin tenang 3-12 km/j dan suhu < 30C; DANGER jika angin > 15 km/j (drift) atau risiko hujan 3-jam >= 1.0mm (washoff).",
+      "fertilizing": "Aman saat tanah lembap; DANGER saat hujan lebat 12-jam >= 8.0mm (leaching); WARN saat tanah terlalu kering.",
+      "harvesting": "Aman siang kering (08.00-16.00) saat RH <= 75% dan hujan nihil; DANGER saat hujan atau RH > 85%; WARN saat embun fajar basah.",
+      "pruning": "Aman saat kering; DANGER saat hujan 8-jam >= 2.0mm (infeksi luka pangkas)."
+    },
+    "contract_schema_compliance": "docs/engine_output_schema.md"
   }
 }
