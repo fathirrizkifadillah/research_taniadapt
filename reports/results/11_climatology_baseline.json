@@ -1,0 +1,146 @@
+{
+  "dataset": "DS01_agera5_climatology_1991_2020",
+  "status": "PARTIAL_CELLS_READY",
+  "cells_processed_count": 6,
+  "total_unique_audit_cells": 22,
+  "files_downloaded": 175,
+  "rank_basis_description": "Daily AgERA5 records across 14-day calendar windows and seasonal groupings (MH/MK).",
+  "consistency_check_1991_2020_vs_2015_2024": {
+    "finding": "Downloaded cells exhibit seasonal monsoon dynamics consistent with the 2015-2024 baseline. Median temperature in recent decade is +0.2C to +0.4C higher than 1991-2020 climatology.",
+    "status": "CONSISTENCY_INSPECTED_NOT_ALTERED"
+  },
+  "cell_summaries": [
+    {
+      "lat": -6.2,
+      "lon": 107.1,
+      "rank_basis_n_days": 10958,
+      "rank_basis_n_years": 30,
+      "precip_percentiles": {
+        "P10": 0.08,
+        "P25": 0.89,
+        "P50": 3.81,
+        "P75": 9.25,
+        "P90": 15.02
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 21.23,
+        "P25": 22.28,
+        "P50": 22.99,
+        "P75": 23.49,
+        "P90": 23.92
+      },
+      "seasonal_mh_mean_daily_precip_mm": 8.8,
+      "seasonal_mk_mean_daily_precip_mm": 3.48
+    },
+    {
+      "lat": -6.6,
+      "lon": 106.8,
+      "rank_basis_n_days": 10958,
+      "rank_basis_n_years": 30,
+      "precip_percentiles": {
+        "P10": 0.31,
+        "P25": 1.45,
+        "P50": 4.84,
+        "P75": 10.62,
+        "P90": 17.15
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 19.34,
+        "P25": 20.39,
+        "P50": 21.07,
+        "P75": 21.58,
+        "P90": 22.01
+      },
+      "seasonal_mh_mean_daily_precip_mm": 10.07,
+      "seasonal_mk_mean_daily_precip_mm": 4.45
+    },
+    {
+      "lat": -6.9,
+      "lon": 107.5,
+      "rank_basis_n_days": 10958,
+      "rank_basis_n_years": 30,
+      "precip_percentiles": {
+        "P10": 0.57,
+        "P25": 1.81,
+        "P50": 6.68,
+        "P75": 15.18,
+        "P90": 24.98
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 16.76,
+        "P25": 18.08,
+        "P50": 19.08,
+        "P75": 19.68,
+        "P90": 20.16
+      },
+      "seasonal_mh_mean_daily_precip_mm": 14.09,
+      "seasonal_mk_mean_daily_precip_mm": 6.75
+    },
+    {
+      "lat": -7.0,
+      "lon": 107.6,
+      "rank_basis_n_days": 10958,
+      "rank_basis_n_years": 30,
+      "precip_percentiles": {
+        "P10": 0.05,
+        "P25": 0.84,
+        "P50": 5.21,
+        "P75": 14.1,
+        "P90": 22.48
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 15.67,
+        "P25": 17.54,
+        "P50": 19.03,
+        "P75": 19.64,
+        "P90": 20.06
+      },
+      "seasonal_mh_mean_daily_precip_mm": 13.29,
+      "seasonal_mk_mean_daily_precip_mm": 4.56
+    },
+    {
+      "lat": -7.1,
+      "lon": 107.2,
+      "rank_basis_n_days": 9131,
+      "rank_basis_n_years": 25,
+      "precip_percentiles": {
+        "P10": 0.32,
+        "P25": 1.32,
+        "P50": 6.16,
+        "P75": 14.18,
+        "P90": 22.94
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 16.47,
+        "P25": 17.31,
+        "P50": 17.81,
+        "P75": 18.15,
+        "P90": 18.41
+      },
+      "seasonal_mh_mean_daily_precip_mm": 13.33,
+      "seasonal_mk_mean_daily_precip_mm": 5.97
+    },
+    {
+      "lat": -7.3,
+      "lon": 108.3,
+      "rank_basis_n_days": 10958,
+      "rank_basis_n_years": 30,
+      "precip_percentiles": {
+        "P10": 0.53,
+        "P25": 2.02,
+        "P50": 5.86,
+        "P75": 13.67,
+        "P90": 23.23
+      },
+      "tmean_celsius_percentiles": {
+        "P10": 19.46,
+        "P25": 20.58,
+        "P50": 21.34,
+        "P75": 21.75,
+        "P90": 22.1
+      },
+      "seasonal_mh_mean_daily_precip_mm": 13.79,
+      "seasonal_mk_mean_daily_precip_mm": 5.67
+    }
+  ]
+}

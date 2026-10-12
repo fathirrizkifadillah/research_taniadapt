@@ -39,6 +39,9 @@ Desktop.ini
 *.tmp
 _docx_qa/
 reports/TaniAdapt_Progress_and_Evidence_Pack_for_Claude.docx
+reports/TaniAdapt_Claude_Followup_Phase4.docx
+_docx_qa_followup.pdf
+_docx_qa_followup-*.png
 
 # Exploratory, scratch, and test scripts
 scripts/test_*.py
@@ -47,3 +50,5 @@ scripts/fetch_*.py
 scripts/verify_correlation_*.py
 
 .agents
+
+/context

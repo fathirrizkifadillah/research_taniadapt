@@ -1,0 +1,133 @@
+{
+  "status": "COMPLETED",
+  "reference_plan": "docs/hindcast_plan.md",
+  "preregistered_commit": "c515e27",
+  "total_units_evaluated": 18,
+  "event_results": {
+    "HC_2016_WET": {
+      "hits": 18,
+      "misses": 0,
+      "hit_rate_pct": 100.0
+    },
+    "HC_2019_DRY": {
+      "hits": 18,
+      "misses": 0,
+      "hit_rate_pct": 100.0
+    },
+    "HC_2023_DRY": {
+      "hits": 16,
+      "misses": 2,
+      "hit_rate_pct": 88.9
+    }
+  },
+  "per_unit_results": [
+    {
+      "kab": "bandung",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "bandung_barat",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "bekasi",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "bogor",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "ciamis",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "cianjur",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "cirebon",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "garut",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "indramayu",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "MISS"
+    },
+    {
+      "kab": "karawang",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "kuningan",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "majalengka",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "pangandaran",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "purwakarta",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "subang",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "sukabumi",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "sumedang",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "HIT"
+    },
+    {
+      "kab": "tasikmalaya",
+      "HC_2016_WET": "HIT",
+      "HC_2019_DRY": "HIT",
+      "HC_2023_DRY": "MISS"
+    }
+  ]
+}

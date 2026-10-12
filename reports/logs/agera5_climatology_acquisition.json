@@ -1,0 +1,11 @@
+{
+  "dataset": "sis-agrometeorological-indicators-timeseries",
+  "cells": 22,
+  "years": [
+    1991,
+    2020
+  ],
+  "quota_check": "CANNOT_ACCESS_PERSONAL_QUOTA_VIA_CDSAPI",
+  "requests": [],
+  "service_status_check": "OK"
+}

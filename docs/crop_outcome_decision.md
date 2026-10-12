@@ -29,12 +29,12 @@ Harvest-area shares are intentionally omitted because this decision document doe
 
 ### Padi
 
-Use a mechanistic advisory only after the relevant published model and input rules are verified. DS03 is limited to 2015-2017 and the BPS manual baseline remains pending human verification.
+The only VERIFIED mechanistic references currently available are `FAO56_ET0_PM` and `FAO56_KC_RICE`; they permit a reference ETc calculation, once a calendar is supplied, and do not permit a stress, yield, or action conclusion. DS03 is limited to 2015-2017 and the BPS manual baseline remains pending human verification.
 
 ### Jagung and kedelai
 
-Use empirical sensitivity analysis plus mechanistic advisory. Do not turn estimates or confidence intervals into causal statements, yield forecasts, or risk thresholds.
+Use empirical sensitivity analysis plus mechanistic advisory. `FAO56_ET0_PM`, `FAO56_KC_MAIZE`, and `FAO56_KC_SOY` permit reference ETc only. Do not turn estimates or confidence intervals into causal statements, yield forecasts, or risk thresholds. Thermal parameters remain unverified in the current registry.
 
 ### Cabai and tomat
 
-Use a Tier B literature-transfer rule only. The output is **jumlah hari kondusif dalam jendela N hari terakhir**. It must not report a 0-100 score, disease probability, disease occurrence, or yield loss.
+Use a Tier B literature-transfer rule only after a crop-disease source is VERIFIED. The output is **jumlah hari kondusif dalam jendela N hari terakhir**. It must not report a 0-100 score, disease probability, disease occurrence, or yield loss. `FAO56_KC_TOMATO` is limited to reference ETc and is not a disease rule; cabai has no VERIFIED entry.

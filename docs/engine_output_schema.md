@@ -24,7 +24,7 @@ The engine follows `Evidence -> Finding -> Interpretation -> Model -> Decision L
   "indicators": [{"id": "<indicator>", "value": null, "unit": "<unit>", "relative_rank": null, "rank_basis": "<dataset and calendar window actually available>", "rank_basis_n": null}],
   "status": "normal | kondisi_mendukung_OPT | kondisi_stres_abiotik | evidence_insufficient",
   "evidence_tier": "data_learned | published_model | literature_transfer | insufficient",
-  "evidence_refs": ["<verified dataset or literature reference>"],
+  "evidence_refs": ["<VERIFIED evidence_registry ID only>"],
   "claim_allowed": "<dari hasil engine>",
   "claim_forbidden": ["<forbidden claim>"],
   "limitations": ["<limitation>"],
@@ -45,13 +45,13 @@ The engine follows `Evidence -> Finding -> Interpretation -> Model -> Decision L
 ### Rice
 
 ```json
-{"crop":"padi","as_of":"YYYY-MM-DD","issue_time":"YYYY-MM-DDTHH:MM:SS+07:00","timezone":"Asia/Jakarta","rule_version":"<version>","data_version":"<version>","data_freshness_days":null,"layer":"seasonal","indicators":[{"id":"water_balance_indicator","value":null,"unit":"<unit>","relative_rank":null,"rank_basis":"<available local basis>","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"published_model","evidence_refs":["DS03 rice outcome baseline, 2015-2017 only","<verified published crop model>"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["season-specific yield prediction","empirical yield effect claim from DS03"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
+{"crop":"padi","as_of":"YYYY-MM-DD","issue_time":"YYYY-MM-DDTHH:MM:SS+07:00","timezone":"Asia/Jakarta","rule_version":"<version>","data_version":"<version>","data_freshness_days":null,"layer":"seasonal","indicators":[{"id":"water_balance_indicator","value":null,"unit":"<unit>","relative_rank":null,"rank_basis":"<available local basis>","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"published_model","evidence_refs":["FAO56_ET0_PM","FAO56_KC_RICE"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["season-specific yield prediction","empirical yield effect claim from DS03"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
 ```
 
 ### Maize
 
 ```json
-{"crop":"jagung","as_of":"YYYY-MM-DD","issue_time":"YYYY-MM-DDTHH:MM:SS+07:00","timezone":"Asia/Jakarta","rule_version":"<version>","data_version":"<version>","data_freshness_days":null,"layer":"seasonal","indicators":[{"id":"phenology_weather_indicator","value":null,"unit":"<unit>","relative_rank":null,"rank_basis":"AgERA5 2015-2021 only when built","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"insufficient","evidence_refs":["DS05 2015-2021 sensitivity analysis","<verified mechanistic reference>"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["yield stress conclusion from a confidence interval containing zero","calibrated yield forecast"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
+{"crop":"jagung","as_of":"YYYY-MM-DD","issue_time":"YYYY-MM-DDTHH:MM:SS+07:00","timezone":"Asia/Jakarta","rule_version":"<version>","data_version":"<version>","data_freshness_days":null,"layer":"seasonal","indicators":[{"id":"water_balance_indicator","value":null,"unit":"<unit>","relative_rank":null,"rank_basis":"<available local basis>","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"insufficient","evidence_refs":["FAO56_ET0_PM","FAO56_KC_MAIZE"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["yield stress conclusion from a confidence interval containing zero","calibrated yield forecast"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
 ```
 
 ### Chili and tomato
@@ -59,7 +59,7 @@ The engine follows `Evidence -> Finding -> Interpretation -> Model -> Decision L
 Both crops report `jumlah_hari_kondusif_dalam_jendela_N_hari_terakhir`. They use `evidence_tier: literature_transfer` and `status: evidence_insufficient` until a VERIFIED literature source supplies the rule. Use `ambang: PENDING_LITERATURE`; literal temperature, humidity, and dew-point thresholds are forbidden.
 
 ```json
-{"crop":"cabai | tomat","layer":"daily","indicators":[{"id":"jumlah_hari_kondusif","value":null,"unit":"hari","relative_rank":null,"rank_basis":"<available local basis>","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"literature_transfer","evidence_refs":["ambang: PENDING_LITERATURE"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["calibrated disease probability","disease occurrence claim","yield loss estimate"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
+{"crop":"cabai | tomat","layer":"daily","indicators":[{"id":"jumlah_hari_kondusif","value":null,"unit":"hari","relative_rank":null,"rank_basis":"<available local basis>","rank_basis_n":null}],"status":"evidence_insufficient","evidence_tier":"literature_transfer","evidence_refs":[],"limitations":["ambang: PENDING_LITERATURE"],"claim_allowed":"<dari hasil engine>","claim_forbidden":["calibrated disease probability","disease occurrence claim","yield loss estimate"],"action_ids":["ACT_AWAIT_EVIDENCE"]}
 ```
 
 ## Action table
