@@ -145,7 +145,8 @@
     },
     "status": {
       "type": "string",
-      "enum": ["normal", "kondisi_mendukung_OPT", "kondisi_stres_abiotik", "evidence_insufficient"]
+      "enum": ["normal", "kondisi_stres_abiotik", "evidence_insufficient"],
+      "description": "Status level atas engine. Status kondisi_mendukung_OPT tidak terjangkau (tak aktif) di level atas karena belum ada aturan OPT berstatus VERIFIED_METHOD."
     },
     "evidence_tier": {
       "type": "string",
@@ -180,7 +181,7 @@
   "if": {
     "properties": {
       "status": {
-        "enum": ["kondisi_stres_abiotik", "kondisi_mendukung_OPT"]
+        "const": "kondisi_stres_abiotik"
       }
     }
   },
@@ -189,15 +190,7 @@
       "evidence_refs": {
         "minItems": 1,
         "contains": {
-          "enum": [
-            "RULE_WATER_FAO56_DEPLETION",
-            "FAO56_RAW_DEPLETION",
-            "FAO56_ET0_PM",
-            "FAO56_KC_RICE",
-            "FAO56_KC_MAIZE",
-            "FAO56_KC_SOY",
-            "FAO56_KC_TOMATO"
-          ]
+          "const": "RULE_WATER_FAO56_DEPLETION"
         }
       }
     }

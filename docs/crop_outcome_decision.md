@@ -1,6 +1,6 @@
 # Crop and Outcome Selection
 
-**Status:** PENDING_USER_RATIFICATION (Keputusan Kanonik Pasca-Audit, Menunggu Ratifikasi Pengguna Manusia)  
+**Status:** PENDING_HUMAN (Menunggu ratifikasi pengguna manusia)
 **Tanggal Pengajuan:** 2026-10-13  
 **Otoritas Bukti:** Didasarkan pada Audit Kualitas Data Phase 4 (Butir A1–A11) dan Analisis Eksplorasi Data Phase 6.
 

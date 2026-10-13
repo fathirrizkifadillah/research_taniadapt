@@ -120,24 +120,77 @@ def test_reject_invalid_date_time_format(engine_schema: dict, valid_baseline_pay
         jsonschema.validate(instance=bad_payload, schema=engine_schema, format_checker=jsonschema.FormatChecker())
 
 
-def test_schema_if_then_rejects_stress_without_verified_evidence(engine_schema: dict, valid_baseline_payload: dict):
-    """Test that schema if/then rejects kondisi_stres_abiotik if evidence_refs has no VERIFIED ID."""
+def test_schema_if_then_rejects_stress_without_trigger_rule(engine_schema: dict, valid_baseline_payload: dict):
+    """Test that schema if/then rejects kondisi_stres_abiotik if evidence_refs has other FAO IDs but lacks RULE_WATER_FAO56_DEPLETION."""
     unverified_payload = valid_baseline_payload.copy()
     unverified_payload["status"] = "kondisi_stres_abiotik"
-    unverified_payload["evidence_refs"] = ["UNVERIFIED_HEURISTIC_RULE"]
+    unverified_payload["evidence_refs"] = ["FAO56_RAW_DEPLETION", "FAO56_KC_MAIZE"]  # Lacks RULE_WATER_FAO56_DEPLETION
     
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(instance=unverified_payload, schema=engine_schema, format_checker=jsonschema.FormatChecker())
 
 
-def test_schema_if_then_accepts_stress_with_verified_evidence(engine_schema: dict, valid_baseline_payload: dict):
-    """Test that schema if/then accepts kondisi_stres_abiotik when evidence_refs contains FAO56_RAW_DEPLETION."""
+def test_schema_if_then_accepts_stress_with_verified_trigger_rule(engine_schema: dict, valid_baseline_payload: dict):
+    """Test that schema if/then accepts kondisi_stres_abiotik when evidence_refs contains RULE_WATER_FAO56_DEPLETION."""
     verified_payload = valid_baseline_payload.copy()
     verified_payload["status"] = "kondisi_stres_abiotik"
-    verified_payload["evidence_refs"] = ["FAO56_RAW_DEPLETION", "FAO56_KC_MAIZE"]
+    verified_payload["evidence_refs"] = ["RULE_WATER_FAO56_DEPLETION", "FAO56_RAW_DEPLETION"]
     
     # Should validate cleanly
     jsonschema.validate(instance=verified_payload, schema=engine_schema, format_checker=jsonschema.FormatChecker())
+
+
+def test_schema_rejects_kondisi_mendukung_opt_unreachable(engine_schema: dict, valid_baseline_payload: dict):
+    """Test that top-level status kondisi_mendukung_OPT is rejected at schema level as unreachable."""
+    unreachable_payload = valid_baseline_payload.copy()
+    unreachable_payload["status"] = "kondisi_mendukung_OPT"
+    unreachable_payload["evidence_refs"] = ["SENTELHAS_2008_LWD"]
+    
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(instance=unreachable_payload, schema=engine_schema, format_checker=jsonschema.FormatChecker())
+
+
+def test_fao56_example36_independent_parity():
+    """Reproduce FAO-56 Example 36 TAW (Eq. 82) and RAW (Eq. 83) across 3 soil textures within 1 mm tolerance."""
+    def calc_ex36(theta_fc: float, theta_wp: float, zr: float, p: float):
+        taw = 1000.0 * (theta_fc - theta_wp) * zr
+        raw = p * taw
+        return round(taw), round(raw)
+
+    # 1. Loamy sand (theta_fc = 0.15, theta_wp = 0.06 -> 90 mm/m)
+    # Tomato (Zr = 0.8 m, p = 0.40): TAW 72, RAW 29
+    taw, raw = calc_ex36(0.15, 0.06, 0.8, 0.40)
+    assert abs(taw - 72) <= 1 and abs(raw - 29) <= 1
+    # Maize (Zr = 1.2 m, p = 0.55): TAW 108, RAW 59
+    taw, raw = calc_ex36(0.15, 0.06, 1.2, 0.55)
+    assert abs(taw - 108) <= 1 and abs(raw - 59) <= 1
+
+    # 2. Silt (theta_fc = 0.32, theta_wp = 0.15 -> 170 mm/m)
+    # Tomato: TAW 136, RAW 54
+    taw, raw = calc_ex36(0.32, 0.15, 0.8, 0.40)
+    assert abs(taw - 136) <= 1 and abs(raw - 54) <= 1
+    # Maize: TAW 204, RAW 112
+    taw, raw = calc_ex36(0.32, 0.15, 1.2, 0.55)
+    assert abs(taw - 204) <= 1 and abs(raw - 112) <= 1
+
+    # 3. Silty clay (theta_fc = 0.35, theta_wp = 0.23 -> 120 mm/m)
+    # Tomato: TAW 96, RAW 38
+    taw, raw = calc_ex36(0.35, 0.23, 0.8, 0.40)
+    assert abs(taw - 96) <= 1 and abs(raw - 38) <= 1
+    # Maize: TAW 144, RAW 79
+    taw, raw = calc_ex36(0.35, 0.23, 1.2, 0.55)
+    assert abs(taw - 144) <= 1 and abs(raw - 79) <= 1
+
+
+def test_harvesting_rh_transition_rule():
+    """Verify that rules.json defines RULE_HARVEST_RH_WARN for transition RH 75-85%."""
+    with open(RULES_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    rule_warn = next((r for r in data["rules"] if r["id"] == "RULE_HARVEST_RH_WARN"), None)
+    assert rule_warn is not None, "RULE_HARVEST_RH_WARN must exist in rules.json"
+    assert rule_warn["status_label"] == "WARN"
+    assert rule_warn["condition"]["min"] == 75.0
+    assert rule_warn["condition"]["max"] == 85.0
 
 
 def test_fao56_crop_p_and_zr_configs():
@@ -175,3 +228,18 @@ def test_all_rules_in_rules_json_conform_to_contract(verified_evidence_ids: set[
             assert status in ("METHOD_UNCALIBRATED", "CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"), (
                 f"Rule {r['id']} lacks verified evidence_id ({ev_id}) but has status {status}"
             )
+
+
+def test_engine_code_single_source_hash_parity():
+    """Verify hash parity between canonical research files and web app engine files."""
+    import hashlib
+    web_engine_dir = Path("/mnt/c/CODING/TaniAdapt/taniadapt-web/src/lib/engine")
+    if not web_engine_dir.exists():
+        pytest.skip("Web engine directory not present on this host")
+    
+    for filename, rel_src in [("rules.json", RULES_FILE), ("engine_output.schema.json", SCHEMA_FILE)]:
+        web_file = web_engine_dir / filename
+        assert web_file.exists(), f"Web engine file {filename} missing"
+        h_src = hashlib.sha256(rel_src.read_bytes()).hexdigest()
+        h_web = hashlib.sha256(web_file.read_bytes()).hexdigest()
+        assert h_src == h_web, f"SHA256 mismatch between canonical {filename} and web engine: {h_src} != {h_web}"

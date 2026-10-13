@@ -27,23 +27,23 @@
       "config": {
         "soil": {
           "texture_default": "loam",
-          "texture_note": "asumsi tanah loam, nilai dipilih dari rentang FAO-56 Tabel 19",
+          "texture_note": "asumsi tanah loam, nilai dipilih dari rentang FAO-56 Bab 7, Tabel 19 (https://www.fao.org/4/x0490e)",
           "theta_fc": 0.27,
           "theta_fc_range": [0.20, 0.30],
           "theta_wp": 0.12,
           "theta_wp_range": [0.07, 0.17],
           "taw_default_mm_m": 150.0,
           "taw_range_mm_m": [130.0, 180.0],
-          "taw_source": "FAO-56 Bab 7 Tabel 19 p. 165"
+          "taw_source": "FAO-56 Bab 7, Tabel 19 (https://www.fao.org/4/x0490e)"
         },
         "crops": {
           "jagung": {
             "name": "Jagung Pipil / Grain Maize",
             "zr_range_m": [1.0, 1.7],
             "zr_chosen_m": 1.0,
-            "zr_note": "pilihan tim di dalam rentang FAO-56 Tabel 22 pp. 167-168",
+            "zr_note": "pilihan tim di dalam rentang FAO-56 Bab 8, Tabel 22 (https://www.fao.org/4/x0490e)",
             "p_fraction": 0.55,
-            "p_source": "FAO-56 Bab 8 Tabel 22 p. 167 (p untuk ETc ≈ 5 mm/hari)",
+            "p_source": "FAO-56 Bab 8, Tabel 22 (p untuk ETc ≈ 5 mm/hari; https://www.fao.org/4/x0490e)",
             "kc_ini": 0.30,
             "kc_mid": 1.20,
             "kc_end_options": {
@@ -51,42 +51,42 @@
               "panen_basah": 0.60
             },
             "panen_kering_default": true,
-            "kc_source": "FAO-56 Bab 6 Tabel 12 p. 110",
+            "kc_source": "FAO-56 Bab 6, Tabel 12 (https://www.fao.org/4/x0490e)",
             "stage_lengths_days": [20, 35, 40, 30],
             "total_days": 125,
-            "stage_length_label": "analog humid (Nigeria), bukan Jawa Barat (FAO-56 Tabel 11 p. 103)"
+            "stage_length_label": "analog humid (Nigeria), bukan Jawa Barat (FAO-56 Bab 6, Tabel 11; https://www.fao.org/4/x0490e)"
           },
           "kedelai": {
             "name": "Kedelai / Soybean",
             "zr_range_m": [0.6, 1.3],
             "zr_chosen_m": 0.8,
-            "zr_note": "pilihan tim di dalam rentang FAO-56 Tabel 22 pp. 167-168",
+            "zr_note": "pilihan tim di dalam rentang FAO-56 Bab 8, Tabel 22 (https://www.fao.org/4/x0490e)",
             "p_fraction": 0.50,
-            "p_source": "FAO-56 Bab 8 Tabel 22 p. 167 (p untuk ETc ≈ 5 mm/hari)",
+            "p_source": "FAO-56 Bab 8, Tabel 22 (p untuk ETc ≈ 5 mm/hari; https://www.fao.org/4/x0490e)",
             "kc_ini": 0.40,
             "kc_mid": 1.15,
             "kc_end": 0.50,
-            "kc_source": "FAO-56 Bab 6 Tabel 12 p. 110",
+            "kc_source": "FAO-56 Bab 6, Tabel 12 (https://www.fao.org/4/x0490e)",
             "stage_lengths_days": [15, 15, 40, 15],
             "total_days": 85,
-            "stage_length_label": "Tropics (FAO-56 Tabel 11 p. 104)"
+            "stage_length_label": "Tropics (FAO-56 Bab 6, Tabel 11; https://www.fao.org/4/x0490e)"
           },
           "tomat": {
             "name": "Tomat / Tomato",
             "zr_range_m": [0.7, 1.5],
             "zr_chosen_m": 0.7,
-            "zr_note": "pilihan tim di dalam rentang FAO-56 Tabel 22 pp. 167-168",
+            "zr_note": "pilihan tim di dalam rentang FAO-56 Bab 8, Tabel 22 (https://www.fao.org/4/x0490e)",
             "p_fraction": 0.40,
-            "p_source": "FAO-56 Bab 8 Tabel 22 p. 168 (p untuk ETc ≈ 5 mm/hari)",
+            "p_source": "FAO-56 Bab 8, Tabel 22 (p untuk ETc ≈ 5 mm/hari; https://www.fao.org/4/x0490e)",
             "kc_ini": 0.60,
             "kc_mid": 1.15,
             "kc_end_range": [0.70, 0.90],
             "kc_end_chosen": 0.80,
-            "kc_end_note": "pilihan tim (titik tengah rentang FAO-56 Tabel 12 p. 110), status CONVENTION_PENDING",
-            "kc_source": "FAO-56 Bab 6 Tabel 12 p. 110",
+            "kc_end_note": "pilihan tim (titik tengah rentang FAO-56 Bab 6, Tabel 12; https://www.fao.org/4/x0490e), status CONVENTION_PENDING",
+            "kc_source": "FAO-56 Bab 6, Tabel 12 (https://www.fao.org/4/x0490e)",
             "stage_lengths_days": [30, 40, 45, 30],
             "total_days": 145,
-            "stage_length_label": "tidak punya baris tropis di Tabel 11 -> panjang fase tomat CONVENTION_PENDING"
+            "stage_length_label": "tidak punya baris tropis di FAO-56 Bab 6, Tabel 11 -> panjang fase tomat CONVENTION_PENDING (https://www.fao.org/4/x0490e)"
           },
           "padi": {
             "name": "Padi Sawah / Wetland Rice",
@@ -96,16 +96,17 @@
             "kc_mid": 1.20,
             "kc_end_range": [0.60, 0.90],
             "kc_end_chosen": 0.60,
-            "kc_source": "FAO-56 Bab 6 Tabel 12 p. 110"
+            "kc_source": "FAO-56 Bab 6, Tabel 12 (https://www.fao.org/4/x0490e)"
           }
         },
         "limitations": {
-          "p_adjustment": "Penyesuaian p terhadap ETc: p = p_Table22 + 0.04 * (5 - ETc) (FAO-56 Bab 8 Eq. 89 p. 162). Toleransi: p dapat turun 5-10% pada tanah halus dan naik 5-10% pada tanah kasar; dicatat sebagai batasan dan tidak dipakai sebagai koreksi otomatis.",
+          "p_adjustment": "Penyesuaian p terhadap ETc: p = p_Table22 + 0.04 * (5 - ETc); rumus belum diverifikasi manusia (nomor persamaan belum dikonfirmasi). Dari Example 36 terkonfirmasi: TAW = Eq. 82, RAW = Eq. 83 (https://www.fao.org/4/x0490e). Toleransi: p dapat turun 5-10% pada tanah halus dan naik 5-10% pada tanah kasar; dicatat sebagai batasan dan tidak dipakai sebagai koreksi otomatis.",
+          "kc_climate_adjustment": "Nilai Kc_mid dan Kc_end tabel FAO-56 Bab 6, Tabel 12 berlaku untuk RHmin ≈ 45% dan angin ≈ 2 m/s; koreksi iklim (FAO-56 Eq. 62/65) belum diterapkan.",
           "dr0_assumption": "Kondisi awal deplesi Dr0 dijadikan input eksplisit (default Dr0 = 0, kapasitas lapang), ditandai sebagai asumsi.",
           "soil_sensitivity": "Engine mengevaluasi sensitivitas TAW pada batas 130 mm/m dan 180 mm/m; jika keputusan berubah, flag sensitif_terhadap_asumsi_tanah diset true."
         }
       },
-      "description": "Deplesi lengas zona perakaran (Dr) melampaui air siap serap (RAW = p * TAW) sesuai FAO-56 Bab 8 Tabel 19 & 22.",
+      "description": "Deplesi lengas zona perakaran (Dr) melampaui air siap serap (RAW = p * TAW) sesuai FAO-56 Bab 8, Tabel 19 & Tabel 22 (Eq. 82 & Eq. 83; https://www.fao.org/4/x0490e).",
       "notes": "Metode biofisik terverifikasi FAO-56; satu-satunya aturan evaluasi defisit lengas irigasi aktif di engine yang boleh memicu kondisi_stres_abiotik."
     },
     {
@@ -173,7 +174,7 @@
       "status_label": "WARN",
       "crop_scope": ["padi"],
       "source_data": "forecast",
-      "description": "Kc padi sawah FAO-56 Tabel 12 mengasumsikan sawah tergenang; modul deplesi tanah tidak berlaku tanpa model genangan/perkolasi lokal.",
+      "description": "Kc padi sawah FAO-56 Bab 6, Tabel 12 mengasumsikan sawah tergenang; modul deplesi tanah tidak berlaku tanpa model genangan/perkolasi lokal.",
       "notes": "Wajib mengembalikan evidence_insufficient untuk modul penyiraman padi."
     },
     {
@@ -282,7 +283,7 @@
       "id": "RULE_OPT_LWD_HOURLY_RH90",
       "action": "scouting_opt",
       "condition": {
-        "metric": "hourly_consecutive_rh90_hours",
+        "metric": "daily_rh90_hours_sum",
         "operator": ">=",
         "threshold": 10
       },
@@ -292,7 +293,7 @@
       "status_label": "WARN",
       "crop_scope": ["cabai", "tomat"],
       "source_data": "forecast",
-      "description": "Jumlah jam per hari dengan kelembapan relatif (RH) >= 90% dari data cuaca jam-jaman (hourly) mencapai >= 10 jam sebagai proksi Leaf Wetness Duration (LWD).",
+      "description": "Jumlah jam per hari dengan kelembapan relatif (RH) >= 90% dari data cuaca jam-jaman (hourly) sebagai indikator durasi kebasahan daun (LWD). Ambang batas 10 jam berstatus CONVENTION_PENDING ('ambang ditetapkan tim, tanpa sumber').",
       "notes": "Metode tercantum dalam jurnal (Sentelhas et al. 2008, Agric. For. Meteorol. 148(3):392–400), ambang belum dikalibrasi untuk Jawa Barat. Berstatus METHOD_UNCALIBRATED: aturan ini TIDAK boleh mengisi kondisi_stres_abiotik atau kondisi_mendukung_OPT level atas. Jika data per jam tidak tersedia -> evidence_insufficient."
     },
     {
@@ -414,6 +415,24 @@
       "crop_scope": ["padi", "jagung", "kedelai"],
       "source_data": "forecast",
       "description": "Kelembapan relatif udara <= 75% mendukung pemanenan gabah dan polong kering.",
+      "notes": "aturan praktis ditetapkan tim, tanpa sumber ilmiah"
+    },
+    {
+      "id": "RULE_HARVEST_RH_WARN",
+      "action": "harvesting",
+      "condition": {
+        "metric": "relative_humidity",
+        "operator": "between",
+        "min": 75.0,
+        "max": 85.0
+      },
+      "unit": "%",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "WARN",
+      "crop_scope": ["padi", "jagung", "kedelai"],
+      "source_data": "forecast",
+      "description": "Kelembapan relatif udara 75–85% merupakan zona transisi kelembapan panen: perlu kewaspadaan dan pengeringan segera setelah panen.",
       "notes": "aturan praktis ditetapkan tim, tanpa sumber ilmiah"
     },
     {
