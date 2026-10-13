@@ -289,7 +289,7 @@
         "loyo_mae": 0.261
       }
     ],
-    "empirical_conclusion": "Seluruh model prediktif mengalami keruntuhan generalisasi out-of-sample (LOYO CV R2 berkisar -0.113 s.d. +0.034). Pola ini mengonfirmasi bahwa data cuaca musiman tidak dapat memprediksi variabilitas yield tahunan secara akurat, memberikan landasan ilmiah yang kuat bagi keputusan TaniAdapt untuk beralih ke pendekatan biofisik mekanistik FAO-56 Penman-Monteith."
+    "empirical_conclusion": "Seluruh model prediktif menghasilkan LOYO CV R2 berkisar -0.113 s.d. +0.034: tidak ada bukti prediktif dalam data ini; year FE tidak bisa diestimasi untuk tahun yang ditahan sehingga R2 negatif sebagian akibat desain evaluasi."
   },
   "phase10_evidence_to_risk_model": {
     "status": "COMPLETED",

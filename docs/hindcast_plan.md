@@ -50,15 +50,27 @@ Pada peristiwa kemarau 2023, sistem mencatat 2 sentra yang tidak memenuhi syarat
 
 ---
 
-## 4. Evaluasi Tahun Kontrol & Tingkat Alarm Palsu (False-Alarm Rate)
+## 4. Evaluasi Tahun Kontrol, Penjelasan Aturan Jendela, & Batasan Baseline
 
-Untuk memastikan bahwa kriteria konvensi tidak over-sensitif (selalu memicu alarm pada tahun normal), dilakukan pengujian pada **tahun kontrol tanpa bencana iklim ekstrem makro**:
+### A. Aturan Jendela HIT Berbasis P25 & P75
+Kriteria deteksi peristiwa kekeringan (HC_2019_DRY dan HC_2023_DRY) menerapkan **aturan konjungsi ganda (conjunctive rule)**:
+1. `max(CDD)` dalam jendela musiman $> P_{75}$ historis deret CDD lokal sel.
+2. `mean(rolling_14d_precip)` dalam jendela musiman $< P_{25}$ historis presipitasi 14-hari lokal sel.
+Kedua syarat wajib terpenuhi bersamaan agar dapat dinyatakan sebagai **HIT**.
 
+### B. Baseline yang Dipakai & Keterlibatan Tahun Peristiwa
+- **Distribusi Referensi**: Karena data klimatologi 30 tahun (1991–2020) dari CDS API saat ini baru terunduh untuk 6 sel unik, ambang persentil $P_{25}$ dan $P_{75}$ pada skrip evaluasi saat ini dihitung dari data 10 tahun AgERA5 (2015–2024) per sel.
+- **Keterlibatan Tahun Peristiwa**: Tahun peristiwa (2016, 2019, 2023) **termasuk di dalam baseline 10 tahun** tersebut. 
+- **Implikasi Metodologis**: Menyertakan tahun ekstrem ke dalam perhitungan baseline menaikkan ambang $P_{75}$ dan menurunkan ambang $P_{25}$, sehingga kriteria menjadi lebih ketat (*conservative bias*). Pada revisi mendatang dengan basis murni 1991–2020, tahun peristiwa akan sepenuhnya berada di luar (*out-of-sample*) dari baseline.
+
+### C. Evaluasi Tahun Kontrol (False-Alarm Rate)
+Pengujian pada tahun kontrol tanpa anomali ekstrem makro:
 1. **Tahun Kontrol 2017 (Tahun Netral Tipikal BMKG)**:
-   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate)**. Tidak ada satu pun sentra yang memicu alarm kemarau ekstrem pada tahun 2017.
-   * *Alarm Basah (Wet Alarm)*: **1 / 18 Sentra (5.6%)** (Spesifisitas 94.4%).
+   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate, Spesifisitas Kering = 100.0%)**. Tidak ada sentra yang memicu alarm kemarau.
+   * *Alarm Basah (Wet Alarm)*: **1 / 18 Sentra (5.6% False Alarm Rate, Spesifisitas Basah = 94.4%)**.
 2. **Tahun Kontrol 2021 (Tahun Normal / La Niña Lemah Terlokalisir)**:
-   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate)**.
+   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate, Spesifisitas Kering = 100.0%)**.
+   * *Alarm Basah (Wet Alarm)*: **7 / 18 Sentra (38.9%)** (mencerminkan anomali basah regional di Jawa bagian barat pada akhir 2021).
 
 ---
 

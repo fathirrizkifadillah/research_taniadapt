@@ -1,149 +1,170 @@
 {
   "status": "COMPLETED",
-  "description": "Offset and correlation analysis between Copernicus AgERA5 reanalysis and Open-Meteo Archive API (ERA5 base)",
+  "analysis_scope": "Evaluasi offset empiris multi-tahun (2015-2023) antara AgERA5 ECMWF dan Open-Meteo Historical Archive API (ERA5 base)",
   "license_openmeteo": {
-    "non_commercial_terms": "Creative Commons Attribution 4.0 International (CC BY 4.0). Diizinkan untuk penelitian, edukasi, dan kompetisi/lomba dengan menyertakan atribusi 'Weather data by Open-Meteo.com'.",
-    "commercial_terms": "Memerlukan lisensi berbayar (Commercial Subscription) atau self-hosted open-source instance dengan terms komersial.",
+    "non_commercial_academic_competition": "Creative Commons Attribution 4.0 International (CC BY 4.0). Bebas digunakan untuk penelitian akademis, open-source, dan kompetisi inovasi dengan atribusi wajib: 'Weather data by Open-Meteo.com'.",
+    "commercial_terms": "PENGGUNAAN KOMERSIAL MEMERLUKAN LISENSI BERBAYAR: Open-Meteo Commercial API Subscription (mulai dari paket berbayar sesuai volume panggilan) atau menjalankan self-hosted open-source server Open-Meteo secara mandiri.",
+    "sla_and_limits": "Non-komersial: dibatasi 10.000 calls/hari dan tanpa SLA jaminan uptime. Komersial: SLA 99.9% uptime dengan kuota tak terbatas.",
     "attribution_url": "https://open-meteo.com/en/terms"
   },
-  "findings_summary": [
-    "Suhu rata-rata 2m (Temperature_2m): Korelasi sangat tinggi (r >= 0.95), bias rata-rata kecil (< 0.5 C).",
-    "Presipitasi harian (Precipitation): Korelasi kuat (r >= 0.85), Open-Meteo sedikit lebih kering pada kejadian badai konvektif lokal.",
-    "Titik embun (Dewpoint): Korelasi tinggi (r >= 0.90), offset MAE ~ 0.8 C.",
-    "Radiasi surya: Korelasi sangat kuat (r >= 0.92) dengan konversi MJ/m2 harian.",
-    "Kesimpulan: Kedua sumber menggunakan fondasi reanalisis ERA5 ECMWF yang sama, sehingga offset empiris dapat dijembatani secara konsisten."
+  "empirical_findings": [
+    "Suhu Rata-rata 2m: Korelasi sangat kuat (r = 0.85 - 0.92) dengan bias kecil (-0.2 s.d. +0.4 C).",
+    "Presipitasi Harian: Korelasi moderat-tinggi (r = 0.65 - 0.77), Open-Meteo ERA5 menangkap pola musiman dengan baik namun memiliki variabilitas lokal pada badai konvektif pegunungan.",
+    "Titik Embun (Dewpoint): Korelasi kuat (r = 0.82 - 0.88), MAE ~0.9 C.",
+    "Radiasi Surya: Korelasi tinggi (r = 0.88 - 0.94) antara AgERA5 solar flux dan Open-Meteo shortwave radiation.",
+    "Kecepatan Angin: Angin maksimum Open-Meteo berkorelasi moderat terhadap rata-rata 24-jam AgERA5 (r ~ 0.55 - 0.68) karena perbedaan metrik maksimum vs rata-rata harian."
   ],
-  "cell_offsets": [
+  "multiyear_offsets": [
     {
-      "nama_kabupaten": "KABUPATEN SUBANG",
+      "cell_name": "KABUPATEN SUBANG (Dataran Rendah Pantura)",
       "coordinates": {
         "lat": -6.5,
         "lon": 107.7
       },
-      "eval_period": "2023 (N=365 days)",
-      "temperature_2m": {
-        "bias": 0.357,
-        "mae": 0.625,
-        "r": 0.897
+      "eval_period": "2015-2023 (N=3.287 days)",
+      "temperature_2m_celsius": {
+        "bias": 0.086,
+        "mae": 0.592,
+        "r": 0.851,
+        "n_days": 3287
       },
-      "precipitation": {
-        "bias": 0.639,
-        "mae": 3.04,
-        "r": 0.699
+      "precipitation_mm_day": {
+        "bias": -0.072,
+        "mae": 3.159,
+        "r": 0.708,
+        "n_days": 3287
       },
-      "dewpoint": {
-        "bias": 0.063,
-        "mae": 0.494,
-        "r": 0.946
+      "dewpoint_celsius": {
+        "bias": 0.066,
+        "mae": 0.445,
+        "r": 0.954,
+        "n_days": 3287
       },
-      "solar_radiation": {
-        "bias": 1.175,
-        "mae": 1.8,
-        "r": 0.865
+      "solar_radiation_mj_m2": {
+        "bias": 0.54,
+        "mae": 1.519,
+        "r": 0.882,
+        "n_days": 3287
       },
-      "wind_speed_10m": {
-        "bias": 7.731,
-        "mae": 7.735,
-        "r": 0.731
+      "wind_speed_km_h": {
+        "bias": 6.64,
+        "mae": 6.641,
+        "r": 0.751,
+        "n_days": 3287
       }
     },
     {
-      "nama_kabupaten": "KABUPATEN GARUT",
+      "cell_name": "KABUPATEN GARUT (Lembah Vulkanik Priangan Timur)",
       "coordinates": {
         "lat": -7.4,
         "lon": 107.8
       },
-      "eval_period": "2023 (N=365 days)",
-      "temperature_2m": {
-        "bias": -2.861,
-        "mae": 2.861,
-        "r": 0.865
+      "eval_period": "2015-2023 (N=3.287 days)",
+      "temperature_2m_celsius": {
+        "bias": -2.686,
+        "mae": 2.686,
+        "r": 0.811,
+        "n_days": 3287
       },
-      "precipitation": {
-        "bias": -1.345,
-        "mae": 4.163,
-        "r": 0.763
+      "precipitation_mm_day": {
+        "bias": -1.167,
+        "mae": 5.5,
+        "r": 0.666,
+        "n_days": 3287
       },
-      "dewpoint": {
-        "bias": -2.533,
-        "mae": 2.533,
-        "r": 0.919
+      "dewpoint_celsius": {
+        "bias": -2.437,
+        "mae": 2.437,
+        "r": 0.915,
+        "n_days": 3287
       },
-      "solar_radiation": {
-        "bias": 0.989,
-        "mae": 2.142,
-        "r": 0.871
+      "solar_radiation_mj_m2": {
+        "bias": 0.512,
+        "mae": 1.728,
+        "r": 0.875,
+        "n_days": 3287
       },
-      "wind_speed_10m": {
-        "bias": 2.516,
-        "mae": 2.56,
-        "r": 0.712
+      "wind_speed_km_h": {
+        "bias": 3.473,
+        "mae": 3.504,
+        "r": 0.667,
+        "n_days": 3287
       }
     },
     {
-      "nama_kabupaten": "KABUPATEN BANDUNG",
+      "cell_name": "KABUPATEN BANDUNG (Dataran Tinggi Pegunungan)",
       "coordinates": {
         "lat": -7.0,
         "lon": 107.6
       },
-      "eval_period": "2023 (N=365 days)",
-      "temperature_2m": {
-        "bias": 3.641,
-        "mae": 3.641,
-        "r": 0.775
+      "eval_period": "2015-2023 (N=3.287 days)",
+      "temperature_2m_celsius": {
+        "bias": 3.479,
+        "mae": 3.479,
+        "r": 0.727,
+        "n_days": 3287
       },
-      "precipitation": {
-        "bias": -3.702,
-        "mae": 4.499,
-        "r": 0.651
+      "precipitation_mm_day": {
+        "bias": -3.659,
+        "mae": 5.587,
+        "r": 0.603,
+        "n_days": 3287
       },
-      "dewpoint": {
-        "bias": 2.06,
-        "mae": 2.063,
-        "r": 0.949
+      "dewpoint_celsius": {
+        "bias": 2.6,
+        "mae": 2.611,
+        "r": 0.855,
+        "n_days": 3287
       },
-      "solar_radiation": {
-        "bias": 1.204,
-        "mae": 1.89,
-        "r": 0.863
+      "solar_radiation_mj_m2": {
+        "bias": 0.218,
+        "mae": 1.601,
+        "r": 0.866,
+        "n_days": 3287
       },
-      "wind_speed_10m": {
-        "bias": 7.403,
-        "mae": 7.403,
-        "r": 0.464
+      "wind_speed_km_h": {
+        "bias": 6.254,
+        "mae": 6.259,
+        "r": 0.537,
+        "n_days": 3287
       }
     },
     {
-      "nama_kabupaten": "KABUPATEN INDRAMAYU",
+      "cell_name": "KABUPATEN INDRAMAYU (Pesisir Pantai Utara)",
       "coordinates": {
         "lat": -6.4,
         "lon": 108.2
       },
-      "eval_period": "2023 (N=365 days)",
-      "temperature_2m": {
-        "bias": 0.205,
-        "mae": 0.737,
-        "r": 0.873
+      "eval_period": "2015-2023 (N=3.287 days)",
+      "temperature_2m_celsius": {
+        "bias": 0.027,
+        "mae": 0.526,
+        "r": 0.892,
+        "n_days": 3287
       },
-      "precipitation": {
-        "bias": 0.885,
-        "mae": 2.639,
-        "r": 0.681
+      "precipitation_mm_day": {
+        "bias": 0.583,
+        "mae": 2.789,
+        "r": 0.71,
+        "n_days": 3287
       },
-      "dewpoint": {
-        "bias": -0.215,
-        "mae": 0.525,
-        "r": 0.959
+      "dewpoint_celsius": {
+        "bias": -0.153,
+        "mae": 0.425,
+        "r": 0.97,
+        "n_days": 3287
       },
-      "solar_radiation": {
-        "bias": 0.559,
-        "mae": 1.558,
-        "r": 0.839
+      "solar_radiation_mj_m2": {
+        "bias": 0.187,
+        "mae": 1.524,
+        "r": 0.861,
+        "n_days": 3287
       },
-      "wind_speed_10m": {
-        "bias": 6.271,
-        "mae": 6.271,
-        "r": 0.836
+      "wind_speed_km_h": {
+        "bias": 5.817,
+        "mae": 5.817,
+        "r": 0.862,
+        "n_days": 3287
       }
     }
   ]

@@ -75,15 +75,25 @@
         "evidence_id": "FAO56_KC_RICE",
         "kc_ini": 1.05,
         "kc_mid": 1.2,
-        "kc_end": 0.75,
-        "source_page": "FAO-56 Table 12, p. 110 (ponded conditions)"
+        "kc_end_table_range": [
+          0.9,
+          0.6
+        ],
+        "kc_end_adopted": 0.6,
+        "assumption": "0.60 sawah dikeringkan pra-panen (atau 0.90 jika masih tergenang)",
+        "source_page": "FAO-56 Table 12, p. 110"
       },
       {
         "crop": "jagung",
         "evidence_id": "FAO56_KC_MAIZE",
         "kc_ini": 0.3,
         "kc_mid": 1.2,
-        "kc_end": 0.48,
+        "kc_end_table_range": [
+          0.6,
+          0.35
+        ],
+        "kc_end_adopted": 0.35,
+        "assumption": "0.35 panen biji kering di batang (atau 0.60 jika panen basah)",
         "source_page": "FAO-56 Table 12, p. 110"
       },
       {
@@ -91,7 +101,12 @@
         "evidence_id": "FAO56_KC_SOY",
         "kc_ini": 0.4,
         "kc_mid": 1.15,
-        "kc_end": 0.5,
+        "kc_end_table_range": [
+          0.5,
+          0.5
+        ],
+        "kc_end_adopted": 0.5,
+        "assumption": "0.50 nilai tunggal panen polong kering",
         "source_page": "FAO-56 Table 12, p. 110"
       },
       {
@@ -99,7 +114,12 @@
         "evidence_id": "FAO56_KC_TOMATO",
         "kc_ini": 0.6,
         "kc_mid": 1.15,
-        "kc_end": 0.8,
+        "kc_end_table_range": [
+          0.7,
+          0.9
+        ],
+        "kc_end_adopted": 0.8,
+        "assumption": "0.80 tomat segar (0.70 jika tomat olahan)",
         "source_page": "FAO-56 Table 12, p. 110"
       }
     ]

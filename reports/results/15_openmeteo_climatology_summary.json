@@ -1,0 +1,148 @@
+{
+  "status": "COMPLETED",
+  "description": "21-Year ERA5 Baseline Climatology (2000-2020) for all 27 Kab/Kota Jawa Barat",
+  "total_regions": 27,
+  "source": "Open-Meteo Historical Weather API (ERA5 model)",
+  "period": "2000-2020 (7.671 days per location)",
+  "license": {
+    "non_commercial": "CC BY 4.0 with attribution 'Weather data by Open-Meteo.com'",
+    "commercial": "Requires paid commercial license from Open-Meteo GmbH"
+  },
+  "regions": [
+    {
+      "kabupaten": "KABUPATEN BANDUNG",
+      "file": "openmeteo_era5_2000_2020_kab_bandung.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN BANDUNG BARAT",
+      "file": "openmeteo_era5_2000_2020_kab_bandung_barat.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN BEKASI",
+      "file": "openmeteo_era5_2000_2020_kab_bekasi.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN BOGOR",
+      "file": "openmeteo_era5_2000_2020_kab_bogor.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN CIAMIS",
+      "file": "openmeteo_era5_2000_2020_kab_ciamis.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN CIANJUR",
+      "file": "openmeteo_era5_2000_2020_kab_cianjur.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN CIREBON",
+      "file": "openmeteo_era5_2000_2020_kab_cirebon.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN GARUT",
+      "file": "openmeteo_era5_2000_2020_kab_garut.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN INDRAMAYU",
+      "file": "openmeteo_era5_2000_2020_kab_indramayu.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN KARAWANG",
+      "file": "openmeteo_era5_2000_2020_kab_karawang.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN KUNINGAN",
+      "file": "openmeteo_era5_2000_2020_kab_kuningan.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN MAJALENGKA",
+      "file": "openmeteo_era5_2000_2020_kab_majalengka.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN PANGANDARAN",
+      "file": "openmeteo_era5_2000_2020_kab_pangandaran.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN PURWAKARTA",
+      "file": "openmeteo_era5_2000_2020_kab_purwakarta.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN SUBANG",
+      "file": "openmeteo_era5_2000_2020_kab_subang.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN SUKABUMI",
+      "file": "openmeteo_era5_2000_2020_kab_sukabumi.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN SUMEDANG",
+      "file": "openmeteo_era5_2000_2020_kab_sumedang.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KABUPATEN TASIKMALAYA",
+      "file": "openmeteo_era5_2000_2020_kab_tasikmalaya.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA BANDUNG",
+      "file": "openmeteo_era5_2000_2020_kota_bandung.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA BANJAR",
+      "file": "openmeteo_era5_2000_2020_kota_banjar.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA BEKASI",
+      "file": "openmeteo_era5_2000_2020_kota_bekasi.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA BOGOR",
+      "file": "openmeteo_era5_2000_2020_kota_bogor.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA CIMAHI",
+      "file": "openmeteo_era5_2000_2020_kota_cimahi.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA CIREBON",
+      "file": "openmeteo_era5_2000_2020_kota_cirebon.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA DEPOK",
+      "file": "openmeteo_era5_2000_2020_kota_depok.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA SUKABUMI",
+      "file": "openmeteo_era5_2000_2020_kota_sukabumi.json",
+      "status": "OK"
+    },
+    {
+      "kabupaten": "KOTA TASIKMALAYA",
+      "file": "openmeteo_era5_2000_2020_kota_tasikmalaya.json",
+      "status": "OK"
+    }
+  ]
+}

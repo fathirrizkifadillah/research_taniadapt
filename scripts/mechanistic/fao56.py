@@ -101,28 +101,32 @@ CROP_STAGES_TABLE11: Dict[str, Dict[str, int]] = {
 # Crop coefficients and rooting parameters from FAO-56 Table 12 & Table 22
 CROP_PARAMS_TABLE12_22: Dict[str, Dict[str, Any]] = {
     "jagung": {
-        "kc_ini": 0.30, "kc_mid": 1.20, "kc_end": 0.48, # Table 12 p. 110
+        "kc_ini": 0.30, "kc_mid": 1.20, "kc_end": 0.35, "kc_end_range": [0.60, 0.35], # Table 12 p. 110: 0.60 (panen basah) s.d. 0.35 (panen kering di batang)
+        "kc_end_harvest_assumption": "0.35 (asumsi panen kering di batang; 0.60 jika panen biji berkadar air tinggi)",
         "zr_min": 0.3, "zr_max": 1.2, "p": 0.55,       # Table 22 p. 167
         "evidence_id_kc": "FAO56_KC_MAIZE",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
     },
     "kedelai": {
-        "kc_ini": 0.40, "kc_mid": 1.15, "kc_end": 0.50, # Table 12 p. 110
+        "kc_ini": 0.40, "kc_mid": 1.15, "kc_end": 0.50, "kc_end_range": [0.50, 0.50], # Table 12 p. 110: nilai tunggal definitif
+        "kc_end_harvest_assumption": "0.50 (kondisi panen polong kering standar)",
         "zr_min": 0.3, "zr_max": 1.0, "p": 0.50,       # Table 22 p. 167
         "evidence_id_kc": "FAO56_KC_SOY",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
     },
     "tomat": {
-        "kc_ini": 0.60, "kc_mid": 1.15, "kc_end": 0.80, # Table 12 p. 110
+        "kc_ini": 0.60, "kc_mid": 1.15, "kc_end": 0.80, "kc_end_range": [0.70, 0.90], # Table 12 p. 110: 0.70-0.80 processing; 0.80-0.90 fresh
+        "kc_end_harvest_assumption": "0.80 (asumsi tomat konsumsi segar; 0.70 jika tomat olahan)",
         "zr_min": 0.25, "zr_max": 1.0, "p": 0.40,      # Table 22 p. 167
         "evidence_id_kc": "FAO56_KC_TOMATO",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
     },
     "padi": {
-        "kc_ini": 1.05, "kc_mid": 1.20, "kc_end": 0.75, # Table 12 p. 110
+        "kc_ini": 1.05, "kc_mid": 1.20, "kc_end": 0.60, "kc_end_range": [0.90, 0.60], # Table 12 p. 110: 0.90 air tergenang; 0.60 dikeringkan pra-panen
+        "kc_end_harvest_assumption": "0.60 (asumsi sawah dikeringkan 2-3 minggu pra-panen; 0.90 jika sawah masih tergenang)",
         "zr_min": 0.5, "zr_max": 1.0, "p": 0.20,       # Table 22 p. 167
         "evidence_id_kc": "FAO56_KC_RICE",
         "evidence_id_water": None,

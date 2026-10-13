@@ -37,14 +37,25 @@ Pada peristiwa kemarau 2023, sistem mencatat 2 sentra yang tidak memenuhi syarat
 
 ---
 
-## 3. Evaluasi Tahun Kontrol & False-Alarm Rate
+## 3. Evaluasi Tahun Kontrol, Penjelasan Aturan Jendela, & Batasan Baseline
 
-Pengujian pada tahun kontrol tanpa anomali ekstrem makro:
+### A. Aturan Jendela HIT Berbasis P25 & P75
+Kriteria deteksi peristiwa kekeringan (HC_2019_DRY dan HC_2023_DRY) menerapkan **aturan konjungsi ganda (conjunctive rule)**:
+1. `max(CDD)` dalam jendela musiman $> P_{75}$ historis deret CDD lokal sel.
+2. `mean(rolling_14d_precip)` dalam jendela musiman $< P_{25}$ historis presipitasi 14-hari lokal sel.
+Kedua syarat wajib terpenuhi bersamaan agar dapat dinyatakan sebagai **HIT**.
+
+### B. Baseline yang Dipakai & Keterlibatan Tahun Peristiwa
+- **Distribusi Referensi**: Karena data klimatologi 30 tahun (1991–2020) dari CDS API saat ini baru terunduh untuk 6 sel unik, ambang persentil $P_{25}$ dan $P_{75}$ pada evaluasi saat ini dihitung dari data 10 tahun AgERA5 (2015–2024) per sel.
+- **Keterlibatan Tahun Peristiwa**: Tahun peristiwa (2016, 2019, 2023) **termasuk di dalam baseline 10 tahun** tersebut. Ini merupakan batasan metodologis yang dicatat secara transparan (membuat kriteria lebih ketat / conservative bias).
+
+### C. Evaluasi Tahun Kontrol (False-Alarm Rate)
 1. **Tahun Kontrol 2017 (Netral/Normal BMKG)**:
-   * False-alarm kemarau ekstrem: **0 / 18 Sentra (0.0%)**.
-   * Alarm basah: **1 / 18 Sentra (5.6%)** (Spesifisitas 94.4%).
+   * False-alarm kemarau ekstrem: **0 / 18 Sentra (0.0% False Alarm Rate, Spesifisitas Kering = 100.0%)**.
+   * Alarm basah: **1 / 18 Sentra (5.6% False Alarm Rate, Spesifisitas Basah = 94.4%)**.
 2. **Tahun Kontrol 2021 (Normal / La Niña Lemah)**:
-   * False-alarm kemarau ekstrem: **0 / 18 Sentra (0.0%)**.
+   * False-alarm kemarau ekstrem: **0 / 18 Sentra (0.0% False Alarm Rate, Spesifisitas Kering = 100.0%)**.
+   * Alarm basah: **7 / 18 Sentra (38.9%)** (anomali basah terlokalisir akhir 2021).
 
 ---
 

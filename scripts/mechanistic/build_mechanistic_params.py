@@ -51,10 +51,10 @@ def main() -> None:
         "crop_coefficients_table12": {
             "citation_page": "FAO-56 Chapter 6, Table 12, pp. 109-114",
             "kc_parameters": [
-                {"crop": "padi", "evidence_id": "FAO56_KC_RICE", "kc_ini": 1.05, "kc_mid": 1.20, "kc_end": 0.75, "source_page": "FAO-56 Table 12, p. 110 (ponded conditions)"},
-                {"crop": "jagung", "evidence_id": "FAO56_KC_MAIZE", "kc_ini": 0.30, "kc_mid": 1.20, "kc_end": 0.48, "source_page": "FAO-56 Table 12, p. 110"},
-                {"crop": "kedelai", "evidence_id": "FAO56_KC_SOY", "kc_ini": 0.40, "kc_mid": 1.15, "kc_end": 0.50, "source_page": "FAO-56 Table 12, p. 110"},
-                {"crop": "tomat", "evidence_id": "FAO56_KC_TOMATO", "kc_ini": 0.60, "kc_mid": 1.15, "kc_end": 0.80, "source_page": "FAO-56 Table 12, p. 110"}
+                {"crop": "padi", "evidence_id": "FAO56_KC_RICE", "kc_ini": 1.05, "kc_mid": 1.20, "kc_end_table_range": [0.90, 0.60], "kc_end_adopted": 0.60, "assumption": "0.60 sawah dikeringkan pra-panen (atau 0.90 jika masih tergenang)", "source_page": "FAO-56 Table 12, p. 110"},
+                {"crop": "jagung", "evidence_id": "FAO56_KC_MAIZE", "kc_ini": 0.30, "kc_mid": 1.20, "kc_end_table_range": [0.60, 0.35], "kc_end_adopted": 0.35, "assumption": "0.35 panen biji kering di batang (atau 0.60 jika panen basah)", "source_page": "FAO-56 Table 12, p. 110"},
+                {"crop": "kedelai", "evidence_id": "FAO56_KC_SOY", "kc_ini": 0.40, "kc_mid": 1.15, "kc_end_table_range": [0.50, 0.50], "kc_end_adopted": 0.50, "assumption": "0.50 nilai tunggal panen polong kering", "source_page": "FAO-56 Table 12, p. 110"},
+                {"crop": "tomat", "evidence_id": "FAO56_KC_TOMATO", "kc_ini": 0.60, "kc_mid": 1.15, "kc_end_table_range": [0.70, 0.90], "kc_end_adopted": 0.80, "assumption": "0.80 tomat segar (0.70 jika tomat olahan)", "source_page": "FAO-56 Table 12, p. 110"}
             ]
         },
         "soil_water_depletion_table19_22": {

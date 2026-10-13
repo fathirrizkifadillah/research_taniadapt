@@ -1,11 +1,8 @@
 """Export static climatology percentiles for web app to data/export/climatology_{cell}.json.
 
-Calculates P10, P25, P50, P75, P90 for:
-1. 14-day rolling precipitation (mm)
-2. 14-day rolling climatic water balance P - ET0 (mm)
-3. Dawn dew point depression Tmin - Td (Celsius)
-
-Includes cell metadata, rank_basis_n, data source, and version.
+Distinguishes honestly between:
+1. Pure 30-year 1991-2020 baseline (for the 6 CDS-downloaded cells).
+2. 10-year 2015-2024 decadal reference (for the remaining 16 cells, with explicit limitations).
 """
 from __future__ import annotations
 
@@ -27,7 +24,6 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     lookup_df = pd.read_csv(LOOKUP_CSV).drop_duplicates("agera5_cell_id").reset_index(drop=True)
     
-    # Check 1991-2020 available cells
     clim_cells_available = set()
     if CLIM_1991_2020.exists():
         for f in CLIM_1991_2020.glob("*.csv"):
@@ -38,7 +34,7 @@ def main() -> None:
                 clim_cells_available.add((round(lat, 1), round(lon, 1)))
 
     print(f"Total cells in lookup: {len(lookup_df)}")
-    print(f"Cells with 1991-2020 CDS downloads: {len(clim_cells_available)}")
+    print(f"Cells with pure 1991-2020 CDS downloads: {len(clim_cells_available)} (out of 22)")
 
     for _, row in lookup_df.iterrows():
         cell_id = row["agera5_cell_id"]
@@ -47,16 +43,18 @@ def main() -> None:
         lon = round(row["agera5_grid_lon"], 1)
         elev = row["dem_elevation_m"]
         
-        # Clean cell_id for filename
         clean_name = f"cell_{lat:.1f}_{lon:.1f}".replace("-", "m").replace(".", "p")
         out_file = OUT_DIR / f"climatology_{clean_name}.json"
 
-        # Determine source data
         has_30yr = (lat, lon) in clim_cells_available
         if has_30yr:
-            source_desc = "Copernicus AgERA5 (1991-2020 Baseline, CDS API)"
+            source_desc = "Copernicus AgERA5 (1991-2020 Pure 30-Year Baseline, CDS API)"
             rank_n = 30
-            # Load 1991-2020 files
+            rank_basis_id = "AgERA5_1991_2020_30yr"
+            data_ver = "agera5-climatology-1991-2020-v1.0"
+            is_pure_30yr = True
+            limitation = "Data dasar 30 tahun penuh terunduh langsung dari Copernicus CDS API."
+            
             lat_str = f"m{abs(lat):.1f}" if lat < 0 else f"p{lat:.1f}"
             lon_str = f"p{lon:.1f}"
             pattern = f"agera5_lat{lat_str}_lon{lon_str}_*.csv"
@@ -67,11 +65,14 @@ def main() -> None:
         else:
             source_desc = "Copernicus AgERA5 (2015-2024 10-Year Decadal Reference)"
             rank_n = 10
-            # Fallback to 2015-2024 cell file
+            rank_basis_id = "AgERA5_2015_2024_10yr"
+            data_ver = "agera5-reference-2015-2024-v1.0"
+            is_pure_30yr = False
+            limitation = "Sel ini belum diunduh untuk periode 1991-2020 dari CDS API; persentil dihitung murni dari dekade 2015-2024 sebagai acuan sementara tanpa interpolasi spasial buatan."
+            
             slug = kab_name.lower().replace("kabupaten ", "kab_").replace("kota ", "kota_").replace(" ", "_")
             ag_file = DATA_AGERA5 / f"agera5_{slug}_2015_2024.csv"
             if not ag_file.exists():
-                # find by cell_id in grid_csv
                 grid_df = pd.read_csv(GRID_CSV)
                 match = grid_df[grid_df["agera5_cell_id"] == cell_id]
                 if not match.empty:
@@ -99,7 +100,6 @@ def main() -> None:
         df_cell["roll_wb"] = roll_wb
         df_cell["dew_dep"] = dew_dep
 
-        # Monthly percentile profiles
         monthly_stats = {}
         for m_idx in range(1, 13):
             sub_m = df_cell[df_cell["month"] == m_idx]
@@ -129,20 +129,24 @@ def main() -> None:
             }
 
         payload = {
-            "version": "v2.2-climatology-export",
+            "version": "v2.3-climatology-export",
             "cell_id": cell_id,
             "representative_kabupaten": kab_name,
             "coordinates": {"lat": lat, "lon": lon},
             "elevation_m": float(elev),
+            "rank_basis_id": rank_basis_id,
             "rank_basis_n": rank_n,
+            "data_version": data_ver,
+            "is_pure_1991_2020_climatology": is_pure_30yr,
             "source": source_desc,
+            "limitation_note": limitation,
             "monthly_climatology_14d": monthly_stats
         }
 
         out_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        print(f"Exported {out_file.name} ({source_desc}, n={rank_n})")
+        print(f"Exported {out_file.name} (pure_30yr={is_pure_30yr}, n={rank_n})")
 
-    print("\nAll static climatology artifacts exported successfully to data/export/")
+    print("\nAll 22 static climatology artifacts updated with honest metadata!")
 
 
 if __name__ == "__main__":

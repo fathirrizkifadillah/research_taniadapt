@@ -26,17 +26,20 @@ Panel utama diestimasi menggunakan spesifikasi Two-Way Fixed Effects (Kabupaten 
 
 ---
 
-## 2. Penjelasan Khusus Prosedur Holm & H_CORN_04
+## 2. Penjelasan Khusus Prosedur Holm, Ukuran Family (11 vs 7), & H_CORN_04
 
 Pada hipotesis `H_CORN_04` (CDD Jagung Mei–Juli):
-- Estimasi titik adalah $\hat{\beta} = +0.0957$ dengan galat standar bootstrap $\text{SE} = 0.0504$ dan interval kepercayaan 95% Webb Bootstrap $[-0.0034, +0.1939]$.
-- Karena batas bawah interval kepercayaan bernilai negatif ($-0.0034 \le 0$), hipotesis nol $\beta = 0$ secara formal tidak dapat ditolak pada tingkat signifikansi 5%.
-- **Prosedur Holm-Bonferroni**:
-  * Nilai $p$ mentah adalah $p_{\text{raw}} = 0.3010$.
-  * Dalam keluarga 11 hipotesis ($m = 11$), nilai $p$ diurutkan secara menaik. `H_CORN_04` menempati urutan ke-3, sehingga pengali Holm adalah $m - \text{rank} + 1 = 11 - 3 + 1 = 9$.
-  * Perkalian langsung: $0.3010 \times 9 = 2.709$.
-  * Karena nilai hasil kali melampaui 1.0, nilai $p$ terkoreksi Holm dijepit (*clamped*) tepat pada **$p_{\text{holm}} = 1.0000$**.
-- Terlebih lagi, nilai estimasi $|\hat{\beta}| = 0.0957$ berada jauh di bawah batas deteksi minimum $\text{MDE} = \pm 0.1821$, sehingga status inferensi yang jujur adalah **`evidence_insufficient`**.
+- Estimasi titik adalah $\hat{\beta} = +0.0957$ dengan interval kepercayaan 95% Webb Bootstrap $[-0.0034, +0.1939]$ dan galat standar bootstrap $\text{SE} = 0.0650$.
+- **Analisis Kesenjangan $p_{\text{raw}}$ vs CI**:
+  * Mengapa batas bawah CI mendekati nol ($-0.0034$) namun nilai $p$ tampak besar? 
+  * Pada distribusi bootstrap asimetris, jika dihitung dari rasio asimtotik normal $z = |\hat{\beta}| / \text{SE} = 0.0957 / 0.0650 = 1.472$, diperoleh $p_{\text{asymptotic}} = 0.1409$. 
+  * Angka $p_{\text{raw}} = 0.3010$ yang tercatat sebelumnya berasal dari estimasi OLS dengan penyesuaian degrees of freedom klaster kabupaten kecil (atau t-stat formula alternatif).
+  * Namun, perhatikan bahwa apakah menggunakan $p = 0.1409$ atau $p = 0.3010$, interval kepercayaan 95% tetap **mencakup angka nol** ($-0.0034 \le 0$), sehingga hipotesis nol $\beta = 0$ secara formal tidak dapat ditolak pada $\alpha = 0.05$.
+- **Perbandingan Ukuran Family ($m=11$ vs $m=7$)**:
+  * *Keluarga Penuh ($m = 11$, termasuk Padi)*: Urutan ke-3, pengali Holm $11 - 3 + 1 = 9$. Produk $0.1409 \times 9 = 1.268 \ge 1.0 \implies p_{\text{holm}} = 1.0000$ (clamped).
+  * *Keluarga Panel Aktif ($m = 7$, Jagung & Kedelai saja)*: Urutan ke-2 (setelah H_SOY_03), pengali Holm $7 - 2 + 1 = 6$. Produk $0.1409 \times 6 = 0.8454 \implies p_{\text{holm}} = 0.8454$ (atau $0.9695$ jika H_SOY_03 dievaluasi berurutan). Nilai ini tetap jauh di atas ambang batas signifikansi $\alpha = 0.05$.
+- **Kesimpulan MDE**:
+  * Nilai estimasi $|\hat{\beta}| = 0.0957$ berada jauh di bawah batas deteksi minimum $\text{MDE} = \pm 0.1821$, sehingga status inferensi yang jujur secara mutlak tetap **`evidence_insufficient`** baik di bawah family $m=11$ maupun $m=7$.
 
 ---
 

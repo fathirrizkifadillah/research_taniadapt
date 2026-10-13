@@ -4,6 +4,7 @@
   "title": "TaniAdaptEngineOutput",
   "description": "JSON Schema Draft 2020-12 untuk payload kontrak keluaran Decision Engine TaniAdapt",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "crop",
     "location",
@@ -14,6 +15,8 @@
     "data_version",
     "layer",
     "indicators",
+    "actions",
+    "hourly",
     "status",
     "evidence_tier",
     "evidence_refs",
@@ -29,6 +32,7 @@
     },
     "location": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["kabkota", "cell_id", "weather_source"],
       "properties": {
         "kabkota": { "type": "string" },
@@ -41,7 +45,8 @@
       "format": "date"
     },
     "issue_time": {
-      "type": "string"
+      "type": "string",
+      "format": "date-time"
     },
     "timezone": {
       "type": "string",
@@ -67,12 +72,14 @@
     "forecast_uncertainty": {
       "type": ["number", "null"],
       "minimum": 0,
-      "maximum": 100
+      "maximum": 100,
+      "description": "Probabilitas presipitasi (%) dari model numerik cuaca, atau null jika tidak tersedia"
     },
     "indicators": {
       "type": "array",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": ["id", "value", "unit", "relative_rank", "rank_basis", "rank_basis_n"],
         "properties": {
           "id": { "type": "string" },
@@ -81,10 +88,58 @@
           "unit": { "type": "string" },
           "relative_rank": {
             "type": ["string", "null"],
-            "enum": ["low", "typical", "unusually_high", "high", null]
+            "enum": ["low", "typical", "unusually_high", null]
           },
           "rank_basis": { "type": ["string", "null"] },
           "rank_basis_n": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action", "window", "status_label", "rule_ids", "rule_status", "evidence_refs", "reason"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["irrigation", "fertilizing", "spraying", "harvesting", "pruning", "drainage_inspection", "scouting_opt"]
+          },
+          "window": { "type": "string" },
+          "status_label": {
+            "type": "string",
+            "enum": ["Sangat Aman", "Perlu Waspada", "Hindari"]
+          },
+          "rule_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "rule_status": {
+            "type": "string",
+            "enum": ["VERIFIED_METHOD", "CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "hourly": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["hour", "status", "reason"],
+        "properties": {
+          "hour": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["SAFE", "WARN", "DANGER"]
+          },
+          "reason": { "type": "string" }
         }
       }
     },
@@ -114,6 +169,30 @@
     "action_ids": {
       "type": "array",
       "items": { "type": "string" }
+    }
+  },
+  "if": {
+    "properties": {
+      "status": {
+        "enum": ["kondisi_stres_abiotik", "kondisi_mendukung_OPT"]
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "evidence_refs": {
+        "minItems": 1,
+        "contains": {
+          "enum": [
+            "FAO56_ET0_PM",
+            "FAO56_KC_RICE",
+            "FAO56_KC_MAIZE",
+            "FAO56_KC_SOY",
+            "FAO56_KC_TOMATO",
+            "FAO56_RAW_DEPLETION"
+          ]
+        }
+      }
     }
   }
 }
