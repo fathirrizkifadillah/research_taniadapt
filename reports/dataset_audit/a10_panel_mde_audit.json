@@ -1,1 +1,186 @@
-{"corn_main":{"beta_hat":0.0368283479,"ci_low":-0.0521048011,"ci_high":0.1299674672,"boot_se":0.0515544541,"sigma_y_resid":0.4020949757,"sigma_x_resid":0.443085918,"n_obs":124,"n_clusters":18,"df_resid":99,"mde":0.1443524714},"corn_shift_neg":{"beta_hat":-0.0075570498,"ci_low":-0.0759524614,"ci_high":0.0681965189,"boot_se":0.0379916103,"sigma_y_resid":0.4020949757,"sigma_x_resid":0.3761576514,"n_obs":124,"n_clusters":18,"df_resid":99,"mde":0.1063765089},"corn_shift_pos":{"beta_hat":0.0581038151,"ci_low":-0.0221487697,"ci_high":0.1431221755,"boot_se":0.0474961524,"sigma_y_resid":0.4020949757,"sigma_x_resid":0.4606907643,"n_obs":124,"n_clusters":18,"df_resid":99,"mde":0.1329892268},"corn_placebo_lead":{"beta_hat":0.1340965217,"ci_low":-0.1017078285,"ci_high":0.3627861738,"boot_se":0.1499474914,"sigma_y_resid":0.4020949757,"sigma_x_resid":0.4427621416,"n_obs":124,"n_clusters":18,"df_resid":99,"mde":0.419852976},"corn_loo":[{"dropped_year":2015,"label":"Buang 2015 (Super El Nino)","beta_hat":0.0111523422,"ci_low":-0.0502649615,"ci_high":0.0708090971,"mde":0.0914478429},{"dropped_year":2016,"label":"Buang 2016 (La Nina)","beta_hat":0.0247117066,"ci_low":-0.0628726615,"ci_high":0.1124421219,"mde":0.1362423376},{"dropped_year":2017,"label":"Buang 2017","beta_hat":0.0487610783,"ci_low":-0.0557541491,"ci_high":0.157374095,"mde":0.1697224761},{"dropped_year":2018,"label":"Buang 2018","beta_hat":0.0897169134,"ci_low":-0.0594324218,"ci_high":0.2415102131,"mde":0.2616594392},{"dropped_year":2019,"label":"Buang 2019","beta_hat":0.0181633266,"ci_low":-0.0466370967,"ci_high":0.0849549966,"mde":0.1012560373},{"dropped_year":2020,"label":"Buang 2020","beta_hat":0.0044797241,"ci_low":-0.0773763603,"ci_high":0.0907211947,"mde":0.129439685},{"dropped_year":2021,"label":"Buang 2021","beta_hat":0.052904335,"ci_low":-0.0687708829,"ci_high":0.1816024819,"mde":0.2034694147}],"rice_t3":{"beta_hat":-0.0103445819,"ci_low":-0.0277947921,"ci_high":0.0074025816,"boot_se":0.0091100862,"sigma_y_resid":0.0365328005,"sigma_x_resid":0.436798841,"n_obs":54,"n_clusters":18,"df_resid":33,"mde":0.0255082412}}
+{
+  "corn_main": {
+    "beta_hat": 0.0368283479,
+    "ci_low": -0.0521048011,
+    "ci_high": 0.1299674672,
+    "boot_se": 0.0515544541,
+    "sigma_y_resid": 0.4020949757,
+    "sigma_x_resid": 0.443085918,
+    "n_obs": 124,
+    "n_clusters": 18,
+    "df_resid": 99,
+    "mde": 0.1443524714
+  },
+  "corn_shift_neg": {
+    "beta_hat": -0.0075570498,
+    "ci_low": -0.0759524614,
+    "ci_high": 0.0681965189,
+    "boot_se": 0.0379916103,
+    "sigma_y_resid": 0.4020949757,
+    "sigma_x_resid": 0.3761576514,
+    "n_obs": 124,
+    "n_clusters": 18,
+    "df_resid": 99,
+    "mde": 0.1063765089
+  },
+  "corn_shift_pos": {
+    "beta_hat": 0.0581038151,
+    "ci_low": -0.0221487697,
+    "ci_high": 0.1431221755,
+    "boot_se": 0.0474961524,
+    "sigma_y_resid": 0.4020949757,
+    "sigma_x_resid": 0.4606907643,
+    "n_obs": 124,
+    "n_clusters": 18,
+    "df_resid": 99,
+    "mde": 0.1329892268
+  },
+  "corn_placebo_lead": {
+    "beta_hat": 0.1340965217,
+    "ci_low": -0.1017078285,
+    "ci_high": 0.3627861738,
+    "boot_se": 0.1499474914,
+    "sigma_y_resid": 0.4020949757,
+    "sigma_x_resid": 0.4427621416,
+    "n_obs": 124,
+    "n_clusters": 18,
+    "df_resid": 99,
+    "mde": 0.419852976
+  },
+  "corn_loo": [
+    {
+      "dropped_year": 2015,
+      "label": "Buang 2015 (Super El Nino)",
+      "beta_hat": 0.0111523422,
+      "ci_low": -0.0502649615,
+      "ci_high": 0.0708090971,
+      "mde": 0.0914478429
+    },
+    {
+      "dropped_year": 2016,
+      "label": "Buang 2016 (La Nina)",
+      "beta_hat": 0.0247117066,
+      "ci_low": -0.0628726615,
+      "ci_high": 0.1124421219,
+      "mde": 0.1362423376
+    },
+    {
+      "dropped_year": 2017,
+      "label": "Buang 2017",
+      "beta_hat": 0.0487610783,
+      "ci_low": -0.0557541491,
+      "ci_high": 0.157374095,
+      "mde": 0.1697224761
+    },
+    {
+      "dropped_year": 2018,
+      "label": "Buang 2018",
+      "beta_hat": 0.0897169134,
+      "ci_low": -0.0594324218,
+      "ci_high": 0.2415102131,
+      "mde": 0.2616594392
+    },
+    {
+      "dropped_year": 2019,
+      "label": "Buang 2019",
+      "beta_hat": 0.0181633266,
+      "ci_low": -0.0466370967,
+      "ci_high": 0.0849549966,
+      "mde": 0.1012560373
+    },
+    {
+      "dropped_year": 2020,
+      "label": "Buang 2020",
+      "beta_hat": 0.0044797241,
+      "ci_low": -0.0773763603,
+      "ci_high": 0.0907211947,
+      "mde": 0.129439685
+    },
+    {
+      "dropped_year": 2021,
+      "label": "Buang 2021",
+      "beta_hat": 0.052904335,
+      "ci_low": -0.0687708829,
+      "ci_high": 0.1816024819,
+      "mde": 0.2034694147
+    }
+  ],
+  "rice_t3": {
+    "beta_hat": -0.0103445819,
+    "ci_low": -0.0277947921,
+    "ci_high": 0.0074025816,
+    "boot_se": 0.0091100862,
+    "sigma_y_resid": 0.0365328005,
+    "sigma_x_resid": 0.436798841,
+    "n_obs": 54,
+    "n_clusters": 18,
+    "df_resid": 33,
+    "mde": 0.0255082412
+  },
+  "rice_sensitivity": {
+    "ksa_with_2019": {
+      "label": "KSA (2018-2020) Dengan 2019",
+      "years": [
+        2018,
+        2019,
+        2020
+      ],
+      "n_obs": 54,
+      "beta_hat": 0.015145540621916339,
+      "ci_low": -0.00525971589297758,
+      "ci_high": 0.03760753690431911,
+      "boot_se": 0.011131858848134312,
+      "mde": 0.031169204774776072,
+      "status": "peka terhadap anomali DS03 2019"
+    },
+    "ksa_without_2019": {
+      "label": "KSA (2018-2020) Tanpa 2019",
+      "years": [
+        2018,
+        2020
+      ],
+      "n_obs": 36,
+      "beta_hat": -0.004470122444702582,
+      "ci_low": -0.029472318543247875,
+      "ci_high": 0.02052198023018549,
+      "boot_se": 0.014090970768876726,
+      "mde": 0.03945471815285483,
+      "status": "peka terhadap anomali DS03 2019"
+    },
+    "full_with_2019": {
+      "label": "Full (2015-2020) Dengan 2019",
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "n_obs": 108,
+      "beta_hat": 0.009871554417256144,
+      "ci_low": -0.005170324423053993,
+      "ci_high": 0.024806347430527266,
+      "boot_se": 0.00793960207059683,
+      "mde": 0.02223088579767112,
+      "status": "peka terhadap anomali DS03 2019"
+    },
+    "full_without_2019": {
+      "label": "Full (2015-2020) Tanpa 2019",
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2020
+      ],
+      "n_obs": 90,
+      "beta_hat": 0.0017965972740320597,
+      "ci_low": -0.013982940157526004,
+      "ci_high": 0.016635627974357154,
+      "boot_se": 0.008330195484752195,
+      "mde": 0.023324547357306144,
+      "status": "peka terhadap anomali DS03 2019"
+    }
+  }
+}

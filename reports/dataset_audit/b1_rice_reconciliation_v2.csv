@@ -2,6 +2,6 @@ tahun,ds03_unweighted_mean_ku_ha,ds03_area_weighted_mean_ku_ha,bps_manual_input_
 2015,60.19,61.22,61.22,,VERIFIED_HUMAN,BPS Jabar Dalam Angka 2016 (Tabel 5.1.3/5.1.12),1.0000,0.00,Cocok dengan publikasi BPS 2015 (Pre-KSA)
 2016,59.58,60.49,,60.49,TIDAK_TERSEDIA,TIDAK TERSEDIA di publikasi BPS Jabar,,,DS03-derived; tanpa pembanding BPS resmi
 2017,57.47,58.87,,58.87,TIDAK_TERSEDIA,TIDAK TERSEDIA di publikasi BPS Jabar,,,DS03-derived; tanpa pembanding BPS resmi
-2018,55.39,56.07,56.51,,VERIFIED_HUMAN,BPS Jabar Dalam Angka 2020 (Tabel 5.1.1),0.9922,-0.78,Pembanding BPS metode KSA (Patahan metodologi 2017 ke 2018; tidak sebanding dengan 2015)
-2019,68.55,70.09,57.54,,VERIFIED_HUMAN,BPS Jabar Dalam Angka 2020 (Tabel 5.1.1),1.2181,21.81,ANOMALI, BELUM DIJELASKAN (DS03 berbobot luas 70.09 vs BPS 57.54 ku/ha; rasio 1.2181 (+21.81%))
-2020,54.22,55.30,,,UNVERIFIED,UNVERIFIED,,,Belum diverifikasi manusia
+2018,55.39,56.07,56.51,,UNVERIFIED_BY_HUMAN (edisi campuran),BPS Jabar Dalam Angka 2020 (Tabel 5.1.1) vs BRS No 68/11/32,0.9922,-0.78,"Inkonsistensi terdeteksi: Produksi 9.647.359 / Luas 1.691.725 = 57.03 ku/ha (BRS), sedangkan JDA 2020 Tabel 5.1.1 mencatat 56.51 ku/ha (edisi campuran, jangan dipakai rasio sampai diverifikasi manusia)"
+2019,68.55,70.09,57.54,,VERIFIED_HUMAN,BPS Jabar Dalam Angka 2020 (Tabel 5.1.1),1.2181,21.81,"ANOMALI, BELUM DIJELASKAN (DS03 berbobot luas 70.09 vs BPS 57.54 ku/ha; rasio 1.2181 (+21.81%)). Uji aritmetika: jika dikali faktor konversi GKP ke GKG SKGB BPS ~0.84-0.86, hasil ~58.8-60.3 ku/ha, namun ini hipotesis tak teruji. PENDING_HUMAN: konfirmasi satuan DS03 2019."
+2020,54.22,55.30,,,UNVERIFIED_BY_HUMAN,BPS JDA 2021 (belum diverifikasi manusia),,,Belum diverifikasi manusia; angka 56.82 dari publikasi luar berstatus UNVERIFIED_BY_HUMAN
