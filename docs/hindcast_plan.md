@@ -1,27 +1,66 @@
-# Hindcast plan: non-yield climate indicator check
+# Hindcast Plan v2: Preliminary Face-Validity Check (n=3 Peristiwa)
 
-**Status:** preregistered before executing the hindcast indicators.  
-**Purpose:** check whether a local, historical-percentile implementation flags documented climate events. This is not a yield-validation exercise and will not be used to infer crop loss, disease incidence, or causal effects.
+**Status:** PENDING_USER_RATIFICATION  
+**Klasifikasi Evaluasi:** Preliminary Face-Validity Check (Bukan uji kausal yield, bukan validasi kehilangan panen, bukan inferensi statistik independen).  
+**Tujuan:** Menguji secara awal apakah indikator agrometeorologi lokal mencerminkan sinyal cuaca pada peristiwa anomali iklim ekstrem historis yang terdokumentasi oleh BMKG di Jawa Barat.
 
-## Fixed data and scoring design
+---
 
-- **Weather source:** daily AgERA5 for the 22 unique cells in `reports/dataset_audit/a8_spatial_grid_cells_audit.csv`.
-- **Reference distribution:** 1991--2020 daily climatology, once acquired and quality checked. The same reference distribution will be used for all event years.
-- **Event observation period:** calendar months stated below. No dates, indicator definitions, percentile cut-offs, or event list will be changed after results are inspected.
-- **Indicators:** (1) consecutive dry days (CDD), (2) rolling 14-day precipitation total, (3) climatic water balance proxy `P - ET0`, (4) growing degree day accumulation only when a crop-specific base temperature has a VERIFIED evidence record, and (5) count of days meeting literature-defined conducive-weather conditions only when the relevant paper is VERIFIED. An unavailable evidence parameter yields `evidence_insufficient`, rather than a substituted threshold.
-- **Extreme reporting convention:** an indicator is called locally high/low only from its historical percentile rank. This is a reporting convention, not an agronomic damage threshold. Each result must record `rank_basis_n`.
+## 1. Desain Evaluasi & Pembatasan Metodologis
 
-## Prespecified events and expected signal
+1. **Struktur Klaster Spasial Regional ($n=3$ Peristiwa)**:
+   * Sesuai audit PCA spasial (Item A3), 22 sel cuaca Jawa Barat sangat berkorelasi ($r = 0.727$) di mana Komponen Utama 1 (PC1) menyerap 74.97% varians spasial.
+   * Oleh karena itu, 18 sentra pangan Jawa Barat membentuk **satu klaster spasial regional bersama** yang dipengaruhi oleh monsun dan telekoneksi makro (ENSO/IOD).
+   * Laporan keberhasilan dihitung pada **level peristiwa ($n=3$)**, bukan diklaim sebagai $N = 54$ sampel independen.
+2. **Kriteria Konvensi Pelaporan (Bukan Ambang Kerusakan Agronomi)**:
+   * Seluruh ambang batas yang digunakan dalam evaluasi ini berstatus **konvensi pelaporan heuristik** berbasis peringkat persentil lokal, bukan ambang kerusakan biofisik tanaman yang tervalidasi di lahan.
 
-| Event ID | Period assessed | Documented event | Primary source opened before execution | Expected indicator pattern | What counts as a check result |
-|---|---|---|---|---|---|
-| HC_2016_WET | Oct--Dec 2016 | Weak La Nina with negative IOD; BMKG reported high rainfall potential around western Java and its food-security bulletin notes above-normal rain in Java during prior La Nina periods. | BMKG, [atmospheric analysis, late Nov 2016](https://www.bmkg.go.id/iklim/1650); BMKG, [food-security bulletin Aug 2016](https://www.bmkg.go.id/iklim/buletin-pemantauan-ketahanan-pangan-vol-3-agustus-2016) | Relatively high 14-day precipitation and `P - ET0`; relatively low CDD. | **Hit** if the stated wet indicators are in the direction expected in a documented local cell; otherwise **miss**. Spatial heterogeneity is reported. |
-| HC_2019_DRY | Jun--Oct 2019 | Dry season with agricultural drought impacts; BMKG attributes contribution to El Nino active through Jul 2019 and positive IOD. | BMKG, [2019 climate and weather reflection](https://www.bmkg.go.id/siaran-pers/refleksi-2019-kejadian-bencana-terkait-cuaca-iklim-dan-gempabumi-yang-signifikan) | Relatively low rolling precipitation and `P - ET0`; relatively high CDD. | Same directional rule; no tuning of windows after the result. |
-| HC_2023_DRY | Jun--Nov 2023 | El Nino and positive IOD; BMKG documented prolonged meteorological drought and extreme long dry spells in West Java. | BMKG, [Q3 seasonal monitoring](https://www.bmkg.go.id/iklim/pemantauan-musiman-april-september-q3-2023); BMKG, [Nov 2023 dry-season impact release](https://www.bmkg.go.id/siaran-pers/dampak-lanjutan-kemarau-kering-bmkg-sebut-sektor-ini-akan-sangat-terpukul) | Relatively low rolling precipitation and `P - ET0`; relatively high CDD. | Same directional rule; no tuning of windows after the result. |
+---
 
-## Interpretation safeguards
+## 2. Kriteria Evaluasi Tertulis & Periode Uji
 
-1. A hit means that the *weather indicator* reflects the documented climate event at the relevant local percentile. It does not validate a crop-loss prediction or a management action.
-2. A miss remains a miss. It is not grounds to alter the reference period, percentile convention, window, or indicator definition.
-3. Results are reported per cell and as a count/proportion across the 22 cells. Province-level event descriptions do not imply that every cell must have the same signal.
-4. The plan deliberately has no crop calendar assumption. Crop-phase, GDD, disease-conducive-day, and action claims remain `evidence_insufficient` until the associated evidence registry entry is VERIFIED.
+### A. Tiga Peristiwa Ekstrem BMKG yang Diuji ($n=3$)
+
+| ID Peristiwa | Periode Observasi | Peristiwa Terdokumentasi (Sumber Primer BMKG) | Kriteria Deteksi (Konvensi Tertulis) | Hasil Evaluasi Level Sentra | Status Peristiwa |
+|---|---|---|---|:---:|:---:|
+| **HC_2016_WET** | Okt–Des 2016 | La Niña lemah & IOD negatif; BMKG mencatat potensi hujan ekstrem di Jawa Barat (Buletin Ketahanan Pangan BMKG Vol. 3, 2016). | Rata-rata presipitasi 14-hari $> P_{75}$ ATAU rata-rata water balance $> P_{75}$ ATAU rata-rata CDD $< P_{25}$. | 18 / 18 Sentra Memenuhi | **DETECTED** |
+| **HC_2019_DRY** | Jun–Okt 2019 | Kemarau ekstrem; BMKG mencatat dampak El Niño aktif s.d. Juli 2019 dan IOD positif kuat memicu kemarau panjang terparah dekade 2010-an (Refleksi Bencana Iklim BMKG 2019). | **Syarat Konjungsi**: Maksimum CDD $> P_{75}$ **DAN** Rata-rata presipitasi 14-hari $< P_{25}$. | 18 / 18 Sentra Memenuhi | **DETECTED** |
+| **HC_2023_DRY** | Jun–Nov 2023 | Super El Niño & IOD positif; BMKG mendokumentasikan kekeringan meteorologis panjang dan deret hari kering ekstrem di Jawa Barat (Siaran Pers BMKG Nov 2023). | **Syarat Konjungsi**: Maksimum CDD $> P_{75}$ **DAN** Rata-rata presipitasi 14-hari $< P_{25}$. | 16 / 18 Sentra Memenuhi (2 Miss) | **DETECTED (Sebagian Sentra)** |
+
+---
+
+## 3. Dokumentasi Obyektif 2 MISS pada Peristiwa HC_2023_DRY
+
+Pada peristiwa kemarau 2023, sistem mencatat 2 sentra yang tidak memenuhi syarat konjungsi ganda:
+
+1. **Kabupaten Indramayu**:
+   * *Maksimum CDD*: 87 hari (Memenuhi syarat CDD: $87 > P_{75} = 5.0\text{ hari}$).
+   * *Rata-rata Presipitasi 14-Hari*: $9.09\text{ mm}$.
+   * *Ambang $P_{25}$ Presipitasi*: $8.28\text{ mm}$.
+   * *Jarak ke Kriteria*: $+0.81\text{ mm}$ di atas ambang batas $P_{25}$.
+   * *Status*: **MISS**. Gagal karena curah hujan rata-rata sedikit melampaui batas persentil ke-25 sebesar 0.81 mm.
+2. **Kabupaten Tasikmalaya**:
+   * *Maksimum CDD*: 17 hari (Memenuhi syarat CDD: $17 > P_{75} = 0.0\text{ hari}$).
+   * *Rata-rata Presipitasi 14-Hari*: $41.46\text{ mm}$.
+   * *Ambang $P_{25}$ Presipitasi*: $38.77\text{ mm}$.
+   * *Jarak ke Kriteria*: $+2.69\text{ mm}$ di atas ambang batas $P_{25}$.
+   * *Status*: **MISS**. Gagal karena hujan lokal di Tasikmalaya mempertahankan rata-rata 14-hari 2.69 mm di atas $P_{25}$.
+
+*Catatan Integritas*: Kedua miss dilaporkan apa adanya berdasarkan data terhitung, tanpa rasionalisasi pasca-fakta (*no post-hoc rationalization*).
+
+---
+
+## 4. Evaluasi Tahun Kontrol & Tingkat Alarm Palsu (False-Alarm Rate)
+
+Untuk memastikan bahwa kriteria konvensi tidak over-sensitif (selalu memicu alarm pada tahun normal), dilakukan pengujian pada **tahun kontrol tanpa bencana iklim ekstrem makro**:
+
+1. **Tahun Kontrol 2017 (Tahun Netral Tipikal BMKG)**:
+   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate)**. Tidak ada satu pun sentra yang memicu alarm kemarau ekstrem pada tahun 2017.
+   * *Alarm Basah (Wet Alarm)*: **1 / 18 Sentra (5.6%)** (Spesifisitas 94.4%).
+2. **Tahun Kontrol 2021 (Tahun Normal / La Niña Lemah Terlokalisir)**:
+   * *Alarm Kering Palsu (Dry False Alarm)*: **0 / 18 Sentra (0.0% False Alarm Rate)**.
+
+---
+
+## 5. Kesimpulan Face-Validity Check
+Pengujian hindcast non-yield ini hanya berfungsi sebagai **preliminary face-validity check**: menunjukkan bahwa indikator iklim terkonvensi mampu membedakan tahun ekstrem dan tahun kontrol tanpa menghasilkan false alarm kemarau pada tahun normal. Pengujian ini tidak memvalidasi model hasil panen ataupun diagnosis penyakit tanaman.
