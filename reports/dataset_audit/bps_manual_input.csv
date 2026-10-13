@@ -1,7 +1,7 @@
-tahun,level,wilayah,produktivitas_ku_ha,judul_publikasi,tabel,halaman,sumber_halaman,sumber_halaman_verified,diisi_oleh,url_atau_file
-2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.1,245,Halaman 245,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
-2016,provinsi,JAWA BARAT,60.49,Provinsi Jawa Barat Dalam Angka 2017,Tabel 5.1.1,248,Halaman 248,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
-2017,provinsi,JAWA BARAT,58.87,Provinsi Jawa Barat Dalam Angka 2018,Tabel 5.1.1,252,Halaman 252,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
-2018,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
-2019,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
-2020,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication
+tahun,level,wilayah,produktivitas_ku_ha,judul_publikasi,tabel,halaman,sumber_halaman,sumber_halaman_verified,diisi_oleh,url_atau_file,catatan
+2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.3/5.1.12,245,Halaman 245,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Terverifikasi dari PDF resmi BPS JDA 2016
+2016,provinsi,JAWA BARAT,,,TIDAK TERSEDIA di publikasi BPS Jabar,,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Tidak ada tabel produktivitas pembanding resmi di JDA 2017
+2017,provinsi,JAWA BARAT,,,TIDAK TERSEDIA di publikasi BPS Jabar,,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Tidak ada tabel produktivitas pembanding resmi di JDA 2018
+2018,provinsi,JAWA BARAT,56.51,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,260,Halaman 260,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Metode KSA; versi lama di JDA 2019 mencatat 56.39
+2019,provinsi,JAWA BARAT,57.54,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,260,Halaman 260,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Metode KSA; pembanding resmi pasca-patahan metodologi
+2020,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Belum diverifikasi manusia

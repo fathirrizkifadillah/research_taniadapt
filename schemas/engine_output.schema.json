@@ -145,7 +145,7 @@
     },
     "status": {
       "type": "string",
-      "enum": ["normal", "kondisi_mendukung_OPT", "kondisi_stres_abiotik", "waspada_defisit_ringan", "evidence_insufficient"]
+      "enum": ["normal", "kondisi_mendukung_OPT", "kondisi_stres_abiotik", "evidence_insufficient"]
     },
     "evidence_tier": {
       "type": "string",

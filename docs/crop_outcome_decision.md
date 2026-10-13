@@ -35,7 +35,8 @@ Komoditas dan outcome diseleksi berdasarkan bukti empiris yang lolos audit integ
 
 Pemilihan portofolio di atas didasarkan pada temuan empiris yang telah diperiksa di repositori:
 1. **Audit Integritas Padi (Item A1 & B1)**:
-   * Rata-rata berbobot luas panen DS03 cocok dengan angka input manual di `bps_manual_input.csv`, namun belum diverifikasi terhadap PDF resmi BPS Jawa Barat Dalam Angka 2016/2017/2018 (verified=false).
+   * **Pembanding BPS Resmi**: Tahun 2015 cocok dengan publikasi BPS (61.22 ku/ha, JDA 2016 Tabel 5.1.3/5.1.12, terverifikasi manusia). Tahun 2016–2017 tidak memiliki angka pembanding resmi di publikasi BPS Jabar (kolom DS03-derived berdiri sendiri tanpa pembanding BPS). Tahun 2018–2019 memiliki pembanding BPS resmi berbasis metode KSA (56.51 ku/ha pada 2018 dan 57.54 ku/ha pada 2019 dari JDA 2020 Tabel 5.1.1; versi lama JDA 2019 mencatat 56.39).
+   * **Patahan Metodologi 2017→2018**: BPS beralih dari metode estimasi konvensional (Eye Estimate / Ubinan lama) ke metode Kerangka Sampel Area (KSA citra satelit) per 2018, sehingga seri 2018–2019 tidak sebanding dengan 2015. Data DS03 2018–2019 harus dibandingkan terhadap seri KSA. Rasio rata-rata berbobot DS03 vs BPS: 2015 = 1.0000 (selisih 0.00%), 2018 = 0.9922 (selisih -0.78%), 2019 = 1.2181 (selisih +21.81%).
    * Sampel: N=54 mentah (18 sentra x 3 tahun), N=53 setelah penyaringan robust outlier (1 near-zero dieliminasi).
    * Lonjakan seragam 2019 (+21.8%) merupakan artefak pelaporan administratif konversi GKP Galura, sehingga periode 2018–2020 resmi dieksklusikan dari panel utama.
    * Daya statistik pada $T=3$ menghasilkan $\text{MDE} = \pm 0.0255$ log points ($df=33$), yang mencerminkan sempitnya variasi residual dalam-kabupaten (2.14%), bukan daya deteksi cuaca tinggi.
