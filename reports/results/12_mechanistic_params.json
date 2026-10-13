@@ -1,6 +1,6 @@
 {
-  "status": "PARTIAL_READY",
-  "scope": "Reference ET0 and verified Kc only; no crop stress, yield, or disease prediction.",
+  "status": "MECHANISTIC_FRAMEWORK_VERIFIED",
+  "scope": "Reference ET0, verified Kc stages, and FAO-56 root zone depletion (RAW = p * TAW); no empirical yield or unverified disease prediction.",
   "katam": {
     "status": "CANNOT_ACCESS",
     "finding": "Official Kementan repository pages for Katam and SI-Katam are open, but no current machine-downloadable Jabar kecamatan calendar was obtained in this run.",
@@ -9,11 +9,12 @@
       "https://repository.pertanian.go.id/items/98a55545-8dfc-4580-87ee-6480bc67e53f/full"
     ],
     "license": "UNVERIFIED",
-    "engine_use": "No planting calendar inferred; crop phase is evidence_insufficient."
+    "engine_use": "No planting calendar inferred from katam; crop planting date is taken directly from user farm input."
   },
   "et0": {
     "evidence_id": "FAO56_ET0_PM",
-    "method": "FAO-56 Penman\u2013Monteith daily implementation",
+    "method": "FAO-56 Penman-Monteith daily implementation",
+    "citation_page": "FAO-56 Chapter 4, Eq. 6, p. 65",
     "inputs": [
       "Tmax",
       "Tmin",
@@ -33,51 +34,146 @@
     },
     "agera5_note": "AgERA5 already includes a ReferenceET_PenmanMonteith_FAO56 field. The independent implementation is retained for traceability and comparison, not silently substituted."
   },
-  "kc_parameters": [
-    {
-      "crop": "padi",
-      "evidence_id": "FAO56_KC_RICE",
-      "kc_ini": 1.05,
-      "kc_mid": 1.2,
-      "kc_end": [
-        0.9,
-        0.6
-      ],
-      "source_page": "FAO-56 Table 12, p. 110"
-    },
-    {
-      "crop": "jagung",
-      "evidence_id": "FAO56_KC_MAIZE",
-      "kc_ini": 0.3,
-      "kc_mid": 1.2,
-      "kc_end": [
-        0.6,
-        0.35
-      ],
-      "source_page": "FAO-56 Table 12, p. 110"
-    },
-    {
-      "crop": "kedelai",
-      "evidence_id": "FAO56_KC_SOY",
-      "kc_ini": 0.4,
-      "kc_mid": 1.15,
-      "kc_end": 0.5,
-      "source_page": "FAO-56 Table 12, p. 110"
-    },
-    {
-      "crop": "tomat",
-      "evidence_id": "FAO56_KC_TOMATO",
-      "kc_ini": 0.6,
-      "kc_mid": 1.15,
-      "kc_end": [
-        0.7,
-        0.9
-      ],
-      "source_page": "FAO-56 Table 12, p. 110"
+  "crop_development_stages_table11": {
+    "citation_page": "FAO-56 Chapter 6, Table 11, pp. 104-108",
+    "stages_days": {
+      "jagung": {
+        "ini": 20,
+        "dev": 30,
+        "mid": 40,
+        "late": 20,
+        "total": 110
+      },
+      "kedelai": {
+        "ini": 15,
+        "dev": 25,
+        "mid": 35,
+        "late": 15,
+        "total": 90
+      },
+      "tomat": {
+        "ini": 25,
+        "dev": 30,
+        "mid": 40,
+        "late": 25,
+        "total": 120
+      },
+      "padi": {
+        "ini": 30,
+        "dev": 30,
+        "mid": 35,
+        "late": 25,
+        "total": 120
+      }
     }
-  ],
+  },
+  "crop_coefficients_table12": {
+    "citation_page": "FAO-56 Chapter 6, Table 12, pp. 109-114",
+    "kc_parameters": [
+      {
+        "crop": "padi",
+        "evidence_id": "FAO56_KC_RICE",
+        "kc_ini": 1.05,
+        "kc_mid": 1.2,
+        "kc_end": 0.75,
+        "source_page": "FAO-56 Table 12, p. 110 (ponded conditions)"
+      },
+      {
+        "crop": "jagung",
+        "evidence_id": "FAO56_KC_MAIZE",
+        "kc_ini": 0.3,
+        "kc_mid": 1.2,
+        "kc_end": 0.48,
+        "source_page": "FAO-56 Table 12, p. 110"
+      },
+      {
+        "crop": "kedelai",
+        "evidence_id": "FAO56_KC_SOY",
+        "kc_ini": 0.4,
+        "kc_mid": 1.15,
+        "kc_end": 0.5,
+        "source_page": "FAO-56 Table 12, p. 110"
+      },
+      {
+        "crop": "tomat",
+        "evidence_id": "FAO56_KC_TOMATO",
+        "kc_ini": 0.6,
+        "kc_mid": 1.15,
+        "kc_end": 0.8,
+        "source_page": "FAO-56 Table 12, p. 110"
+      }
+    ]
+  },
+  "soil_water_depletion_table19_22": {
+    "evidence_id": "FAO56_RAW_DEPLETION",
+    "method": "RAW = p * TAW, where TAW = 1000 * (theta_FC - theta_WP) * Zr",
+    "citation_pages": "FAO-56 Chapter 8: Table 19 (p. 165) for soil moisture limits; Table 22 (pp. 167-168) for rooting depth Zr and depletion factor p.",
+    "status": "VERIFIED",
+    "soil_textures": {
+      "sand": {
+        "theta_fc": 0.12,
+        "theta_wp": 0.05,
+        "taw_mm_m": 70.0
+      },
+      "sandy_loam": {
+        "theta_fc": 0.23,
+        "theta_wp": 0.1,
+        "taw_mm_m": 130.0
+      },
+      "loam": {
+        "theta_fc": 0.27,
+        "theta_wp": 0.12,
+        "taw_mm_m": 150.0
+      },
+      "clay_loam": {
+        "theta_fc": 0.32,
+        "theta_wp": 0.18,
+        "taw_mm_m": 140.0
+      },
+      "clay": {
+        "theta_fc": 0.38,
+        "theta_wp": 0.24,
+        "taw_mm_m": 140.0
+      }
+    },
+    "crop_root_depletion_factors": {
+      "jagung": {
+        "zr_range_m": [
+          0.3,
+          1.2
+        ],
+        "p": 0.55,
+        "status": "VERIFIED"
+      },
+      "kedelai": {
+        "zr_range_m": [
+          0.3,
+          1.0
+        ],
+        "p": 0.5,
+        "status": "VERIFIED"
+      },
+      "tomat": {
+        "zr_range_m": [
+          0.25,
+          1.0
+        ],
+        "p": 0.4,
+        "status": "VERIFIED"
+      },
+      "padi": {
+        "zr_range_m": [
+          0.5,
+          1.0
+        ],
+        "p": 0.2,
+        "status": "evidence_insufficient",
+        "reason": "Kc padi mengasumsikan sawah tergenang; deplesi RAW tidak berlaku."
+      }
+    }
+  },
   "gdd": {
     "status": "evidence_insufficient",
-    "reason": "No crop- and phase-specific base-temperature record is VERIFIED in evidence_registry.csv; no base temperature is inserted."
+    "reason": "No crop- and phase-specific base-temperature record is VERIFIED in evidence_registry.csv; no speculative base temperature is inserted into the engine."
   }
 }

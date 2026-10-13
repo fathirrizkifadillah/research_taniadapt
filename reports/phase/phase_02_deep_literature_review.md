@@ -1,6 +1,6 @@
 # TaniAdapt Research Dossier — Phase 2: Deep Literature Review & Evidence Framework
 
-**Status**: COMPLETED / RATIFIED  
+**Status**: PENDING_USER_RATIFICATION  
 **Dokumen Induk**: `docs/evidence_registry_literature.md` & `reports/dataset_audit/evidence_registry.csv`  
 **Sumber Primer**: 16 Paper Akademik Bereputasi Internasional & 15 Benchmark Kompetitor DSS
 

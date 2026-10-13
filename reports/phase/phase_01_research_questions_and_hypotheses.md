@@ -1,8 +1,8 @@
-# TaniAdapt Research Dossier — Phase 1: Research Questions & Pre-registered Hypotheses
+# TaniAdapt Research Dossier — Phase 1: Research Questions & Documented Hypotheses
 
-**Status**: COMPLETED / RATIFIED  
+**Status**: PENDING_USER_RATIFICATION  
 **Dokumen Induk**: `docs/hypotheses.md`  
-**Prinsip**: Prapendaftaran Eks-Ante, Pencegahan HARKing (*Hypothesizing After Results are Known*), dan Kontrol Galat Tipe I.
+**Catatan Integritas Prapendaftaran**: Hipotesis didokumentasikan (*post-data-access documentation*). Commit pertama `docs/hypotheses.md` tercatat pada commit `4629ad9` (2026-10-11 14:25:00 +0700), sedangkan penelusuran dan akses dataset awal di repositori telah berlangsung lebih awal sejak commit `0d53072` (2026-10-05 21:35:12) hingga `9c600fe` (2026-10-06 01:10:34). Oleh karena itu, dokumen ini secara jujur diposisikan sebagai dokumentasi hipotesis eksploratori terdaftar, bukan pra-registrasi sebelum akses data.
 
 ---
 

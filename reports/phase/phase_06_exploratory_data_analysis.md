@@ -33,7 +33,7 @@ notebook/
 * Validasi CHIRPS vs AgERA5 pada 936 unit-bulan menunjukkan korelasi tinggi ($r = 0.727$), namun AgERA5 cenderung sedikit basah (*wet bias*) di lereng pegunungan orografis.
 
 ### B. EDA 07: Geospasial, Centroid, dan Resolusi Elevasi SRTM
-* Sebanyak 27 Kabupaten/Kota Jawa Barat berhasil dipetakan ke 22 sel cuaca unik $0.1^\circ$. Jarak pergeseran rata-rata (*haversine offset*) adalah **5.8 km**.
+* Sebanyak 27 Kabupaten/Kota Jawa Barat berhasil dipetakan ke 22 sel cuaca unik $0.1^\circ$. Jarak pergeseran rata-rata (*haversine offset*) adalah **5.80 km (formula Haversine)**.
 * Profil elevasi menunjukkan gradien curam: dari 7 mdpl (Indramayu) hingga 1.341 mdpl (Lembang/Bandung Barat), memvalidasi perlunya koreksi tekanan udara barometrik lokal pada formula Penman-Monteith.
 
 ### C. EDA 10: Sintesis Multi-Dataset di Notebook 10

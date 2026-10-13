@@ -129,5 +129,35 @@
       "HC_2019_DRY": "HIT",
       "HC_2023_DRY": "MISS"
     }
+  ],
+  "evaluation_type": "preliminary face-validity check (n=3 peristiwa)",
+  "spatial_cluster_note": "18 sentra membentuk satu klaster spasial regional bersama (PC1 menyerap 74.97% varians); hasil dilaporkan di level peristiwa n=3.",
+  "control_year_checks": {
+    "control_year_2017": {
+      "status": "PASS",
+      "description": "Tahun normal tipikal BMKG",
+      "dry_false_alarms": 0,
+      "total_sentra": 18,
+      "dry_false_alarm_rate_pct": 0.0,
+      "wet_alarms": 1,
+      "wet_alarm_rate_pct": 5.6
+    },
+    "control_year_2021": {
+      "status": "PASS",
+      "description": "Tahun normal / La Nina lemah",
+      "dry_false_alarms": 0,
+      "total_sentra": 18,
+      "dry_false_alarm_rate_pct": 0.0
+    }
+  },
+  "objective_misses_2023": [
+    {
+      "kab": "indramayu",
+      "reason": "Maksimum CDD 87 hari melampaui P75 (5.0 hari), tetapi rata-rata presipitasi 14-hari adalah 9.09 mm, berada +0.81 mm di atas ambang batas P25 (8.28 mm)."
+    },
+    {
+      "kab": "tasikmalaya",
+      "reason": "Maksimum CDD 17 hari melampaui P75 (0.0 hari), tetapi rata-rata presipitasi 14-hari adalah 41.46 mm, berada +2.69 mm di atas ambang batas P25 (38.77 mm)."
+    }
   ]
 }

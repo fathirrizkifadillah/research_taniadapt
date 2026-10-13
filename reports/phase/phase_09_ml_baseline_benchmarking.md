@@ -40,7 +40,8 @@ Untuk memvalidasi apakah model ML menangkap sinyal kausal fisis nyata ataukah se
 ---
 
 ## 4. Kesimpulan Saintifik & Justifikasi Arsitektur TaniAdapt
-Temuan empiris Phase 9 memberikan konfirmasi ilmiah paling kuat bagi arah proyek TaniAdapt:
-1. **Kegagalan Paradigma Prediksi Hasil Panen Berbasis Cuaca**: Tidak ada algoritma Machine Learning—baik linier, teratur, maupun pohon non-linier—yang mampu memprediksi variabilitas yield tahunan secara handal dari data cuaca musiman di Jawa Barat ($R^2_{\text{LOYO}} pprox 0$).
-2. **Mengapa Petani Tidak Boleh Diberi Model ML Tebak-Hasil**: Fluktuasi hasil panen tahunan di lapangan didominasi oleh faktor bibit, dosis pupuk riil, serangan hama mikro, dan pencatatan administratif dinas, bukan oleh anomali cuaca makro.
-3. **Peralihan Mutlak ke Decision Engine Mekanistik FAO-56**: Karena yield tidak dapat diprediksi secara statistik, TaniAdapt mengalihkan seluruh otak pengambil keputusan ke **hukum-hukum biofisik mekanistik deterministik (FAO-56 Penman-Monteith dan neraca lengas tanah harian)** untuk memandu keputusan operasional petani.
+Temuan empiris Phase 9 memberikan konfirmasi ilmiah paling objektif bagi arah proyek TaniAdapt:
+1. **Evaluasi Out-of-Sample LOYO CV**: LOYO CV $R^2 \approx 0$: tidak ada bukti prediktif dalam data ini; catat bahwa *Year Fixed Effects* tidak bisa diestimasi untuk tahun yang ditahan (*held-out year*) sehingga $R^2$ negatif sebagian merupakan akibat dari desain evaluasi ekonometrika ini.
+2. **Ketiadaan Sinyal Cuaca Prediktif pada Yield Tahunan**: Tidak ada algoritma Machine Learning—baik linier, regularisasi, maupun pohon non-linier—yang mampu memprediksi variabilitas yield tahunan secara handal dari data cuaca musiman di Jawa Barat ($R^2_{\text{LOYO}} \approx 0$).
+3. **Mengapa Petani Tidak Boleh Diberi Model ML Tebak-Hasil**: Fluktuasi hasil panen tahunan di lapangan didominasi oleh faktor bibit, dosis pupuk riil, serangan hama mikro, dan pencatatan administratif dinas, bukan oleh anomali cuaca makro.
+4. **Peralihan Mutlak ke Decision Engine Mekanistik FAO-56**: Karena yield tidak dapat diprediksi secara statistik bebas bias, TaniAdapt mengalihkan seluruh otak pengambil keputusan ke **hukum-hukum biofisik mekanistik deterministik (FAO-56 Penman-Monteith, dinamika deplesi lengas tanah, dan neraca air harian)** untuk memandu keputusan operasional petani.

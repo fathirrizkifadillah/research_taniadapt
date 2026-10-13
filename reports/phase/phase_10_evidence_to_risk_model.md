@@ -7,7 +7,7 @@
 ---
 
 ## 1. Landasan Bukti Ilmiah Model Risiko
-Phase 10 bertanggung jawab menjembatani temuan analitik (Phase 7–9) menjadi model risiko fisis yang deterministik. Sesuai kontrak bukti TaniAdapt, status risiko **BUKAN** skor tebakan 0–100 atau probabilitas palsu, melainkan dipetakan ke 3 domain fisis terkalibrasi:
+Phase 10 bertanggung jawab menjembatani temuan analitik (Phase 7–9) menjadi model risiko fisis yang deterministik. Sesuai kontrak bukti TaniAdapt, status risiko **BUKAN** skor tebakan 0–100 atau probabilitas palsu, melainkan dipetakan ke 3 domain fisis terkonvensi, belum dikalibrasi terhadap data lapangan:
 
 ---
 

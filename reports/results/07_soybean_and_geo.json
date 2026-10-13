@@ -9,7 +9,7 @@
     "Kriteria ex-ante N >= 6 tahun menyaring tepat 17 kabupaten sentra kedelai aktif.",
     "Standar deviasi spasial kedelai pada 2022 menyusut ke 0.19 ku/ha (indikasi imputasi seragam dinas).",
     "Tahun 2022 resmi diklasifikasikan sebagai SUSPECT dan dieksklusikan dari panel utama regresi.",
-    "Pemadanan spasial centroid ADM2 ke 22 sel AgERA5 unik memiliki jarak rata-rata 5.2 km.",
+    "Pemadanan spasial centroid ADM2 ke 22 sel AgERA5 unik memiliki jarak rata-rata 5.80 km (formula Haversine).",
     "Tabel lookup data/processed/lookup_kab_cell_elev.csv berhasil dibuat sebagai sumber kebenaran relasi spasial."
   ]
 }

@@ -1,0 +1,313 @@
+{
+  "rules_version": "v2.2-honest-status",
+  "last_updated": "2026-10-13",
+  "rules": [
+    {
+      "id": "RULE_WATER_CWB_DROUGHT",
+      "action": "irrigation",
+      "condition": {
+        "metric": "cwb_14d",
+        "operator": "<",
+        "threshold": -50.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["jagung", "kedelai", "tomat"],
+      "source_data": "reanalysis_forecast",
+      "description": "Ambang batas konvensi defisit neraca lengas tanah kumulatif 14 hari di bawah -50 mm memicu rekomendasi irigasi replenishment.",
+      "notes": "Belum dikalibrasi terhadap pengukuran kadar air tanah lapang (TDR/sensor in-situ)."
+    },
+    {
+      "id": "RULE_WATER_CWB_WARN",
+      "action": "irrigation",
+      "condition": {
+        "metric": "cwb_14d",
+        "operator": "between",
+        "min": -50.0,
+        "max": -25.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "WARN",
+      "crop_scope": ["jagung", "kedelai", "tomat"],
+      "source_data": "reanalysis_forecast",
+      "description": "Ambang konvensi waspada defisit air ringan pada jendela kumulatif 14 hari antara -50 mm dan -25 mm.",
+      "notes": "Status konvensi sebelum integrasi deplesi dinamis FAO-56 Dr vs RAW."
+    },
+    {
+      "id": "RULE_WATER_CWB_NORMAL",
+      "action": "irrigation",
+      "condition": {
+        "metric": "cwb_14d",
+        "operator": ">=",
+        "threshold": -25.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "SAFE",
+      "crop_scope": ["jagung", "kedelai", "tomat"],
+      "source_data": "reanalysis_forecast",
+      "description": "Kondisi lengas tanah konvensi normal jika defisit 14 hari tidak melebihi -25 mm.",
+      "notes": "Status konvensi umum."
+    },
+    {
+      "id": "RULE_WATER_FAO56_DEPLETION",
+      "action": "irrigation",
+      "condition": {
+        "metric": "soil_water_depletion_Dr",
+        "operator": ">",
+        "threshold_reference": "RAW_p_x_TAW"
+      },
+      "unit": "mm",
+      "evidence_id": "FAO56_RAW_DEPLETION",
+      "status": "VERIFIED",
+      "status_label": "DANGER",
+      "crop_scope": ["jagung", "kedelai", "tomat"],
+      "source_data": "reanalysis_forecast",
+      "description": "Deplesi lengas zona perakaran (Dr) melampaui air siap serap (RAW = p * TAW) sesuai FAO-56 Bab 8 Tabel 19 & 22.",
+      "notes": "Memerlukan parameter tekstur tanah dan kedalaman akar efektif terkonfigurasi."
+    },
+    {
+      "id": "RULE_WATER_PADI_INSUFFICIENT",
+      "action": "irrigation",
+      "condition": {
+        "metric": "ponded_water_depth",
+        "operator": "is_null"
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "INSUFFICIENT",
+      "status_label": "WARN",
+      "crop_scope": ["padi"],
+      "source_data": "forecast",
+      "description": "Koefisien Kc padi FAO-56 Tabel 12 mengasumsikan sawah tergenang; modul deplesi tidak berlaku tanpa model genangan/perkolasi lokal.",
+      "notes": "Wajib mengembalikan evidence_insufficient untuk modul penyiraman padi."
+    },
+    {
+      "id": "RULE_WATERLOGGING_3D",
+      "action": "drainage_inspection",
+      "condition": {
+        "metric": "precip_3d_sum",
+        "operator": ">=",
+        "threshold": 100.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "reanalysis_forecast",
+      "description": "Akumulasi presipitasi 3 hari >= 100 mm memicu potensi anoksia akar dan kebutuhan inspeksi saluran drainase.",
+      "notes": "Konvensi agrometeorologi curah hujan lebat ekstrem."
+    },
+    {
+      "id": "RULE_WATERLOGGING_CWD",
+      "action": "drainage_inspection",
+      "condition": {
+        "metric": "consecutive_wet_days",
+        "operator": ">=",
+        "threshold": 5
+      },
+      "unit": "hari",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "reanalysis_forecast",
+      "description": "Hari hujan basah berurutan >= 5 hari memicu kejenuhan tanah berkepanjangan.",
+      "notes": "Indikator iklim ekstrem AgERA5."
+    },
+    {
+      "id": "RULE_OPT_DAWN_P10_7D",
+      "action": "scouting_opt",
+      "condition": {
+        "metric": "dew_depression_p10_conducive_7d",
+        "operator": ">=",
+        "threshold": 3
+      },
+      "unit": "hari",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "WARN",
+      "crop_scope": ["cabai", "tomat"],
+      "source_data": "reanalysis_forecast",
+      "description": "Frekuensi hari dengan depresi titik embun (Tmin - Td) <= P10 lokal mencapai >= 3 hari dalam 7 hari terakhir.",
+      "notes": "P10 adalah konvensi ad-hoc tanpa sitasi literatur primer. Td AgERA5 adalah rata-rata 24 jam sehingga timing fajar memiliki bias."
+    },
+    {
+      "id": "RULE_SPRAY_WIND_SAFE",
+      "action": "spraying",
+      "condition": {
+        "metric": "wind_speed",
+        "operator": "<",
+        "threshold": 12.0
+      },
+      "unit": "km/h",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "SAFE",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Kecepatan angin < 12 km/j aman untuk penyemprotan kanopi.",
+      "notes": "Konvensi operasional standar lapangan perlindungan tanaman."
+    },
+    {
+      "id": "RULE_SPRAY_WIND_WARN_TRANSITION",
+      "action": "spraying",
+      "condition": {
+        "metric": "wind_speed",
+        "operator": "between",
+        "min": 12.0,
+        "max": 15.0
+      },
+      "unit": "km/h",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "WARN",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Kecepatan angin 12–15 km/j merupakan zona transisi: risiko drift mulai meningkat, gunakan nosel droplet kasar dan rendahkan boom.",
+      "notes": "Menutup celah ambang 12–15 km/j sebagai status waspada transisi."
+    },
+    {
+      "id": "RULE_SPRAY_WIND_DANGER",
+      "action": "spraying",
+      "condition": {
+        "metric": "wind_speed",
+        "operator": ">",
+        "threshold": 15.0
+      },
+      "unit": "km/h",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Kecepatan angin > 15 km/j berbahaya karena droplet terhempas (spray drift) keluar dari target tanaman.",
+      "notes": "Batas bahaya drift umum."
+    },
+    {
+      "id": "RULE_FERT_RAIN_12H",
+      "action": "fertilizing",
+      "condition": {
+        "metric": "precip_12h_forecast",
+        "operator": ">=",
+        "threshold": 8.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Prakiraan hujan >= 8.0 mm dalam 12 jam memicu risiko pupuk larut hanyut terbawa limpasan permukaan.",
+      "notes": "Ambang konvensi pencegahan pencucian hara (nutrient leaching/runoff)."
+    },
+    {
+      "id": "RULE_HARVEST_RH_SAFE",
+      "action": "harvesting",
+      "condition": {
+        "metric": "relative_humidity",
+        "operator": "<=",
+        "threshold": 75.0
+      },
+      "unit": "%",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "SAFE",
+      "crop_scope": ["padi", "jagung", "kedelai"],
+      "source_data": "forecast",
+      "description": "Kelembapan relatif udara <= 75% mendukung pemanenan gabah dan polong kering.",
+      "notes": "Konvensi kadar air pascapanen."
+    },
+    {
+      "id": "RULE_HARVEST_RH_DANGER",
+      "action": "harvesting",
+      "condition": {
+        "metric": "relative_humidity",
+        "operator": ">",
+        "threshold": 85.0
+      },
+      "unit": "%",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["padi", "jagung", "kedelai"],
+      "source_data": "forecast",
+      "description": "Kelembapan udara > 85% memicu risiko pembasahan dan pembusukan biji hasil panen.",
+      "notes": "Konvensi pascapanen basah."
+    },
+    {
+      "id": "RULE_IRRIG_SRAD_HIGH",
+      "action": "irrigation",
+      "condition": {
+        "metric": "solar_radiation",
+        "operator": ">",
+        "threshold": 500.0
+      },
+      "unit": "W/m²",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "WARN",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Radiasi surya > 500 W/m² saat siang terik mempercepat penguapan langsung sebelum air meresap ke perakaran.",
+      "notes": "Konvensi efisiensi aplikasi air."
+    },
+    {
+      "id": "RULE_IRRIG_SOIL_SATURATED",
+      "action": "irrigation",
+      "condition": {
+        "metric": "soil_moisture",
+        "operator": ">=",
+        "threshold": 0.70
+      },
+      "unit": "m³/m³",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Volumetric soil moisture >= 0.70 m³/m³ (atau tanah jenuh air mendekati kapasitas lapang maksimum) melarang penyiraman tambahan.",
+      "notes": "Catatan satuan: Open-Meteo mengeluarkan m³/m³; pastikan perbandingan tidak tertukar dengan persen."
+    },
+    {
+      "id": "RULE_SPRAY_TEMP_SAFE",
+      "action": "spraying",
+      "condition": {
+        "metric": "temperature",
+        "operator": "<",
+        "threshold": 30.0
+      },
+      "unit": "°C",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "SAFE",
+      "crop_scope": ["all"],
+      "source_data": "forecast",
+      "description": "Suhu udara < 30°C mencegah penguapan droplet semprot dan fotodegradasi bahan aktif.",
+      "notes": "Konvensi suhu aplikasi pestisida."
+    },
+    {
+      "id": "RULE_PRUNE_RAIN_8H",
+      "action": "pruning",
+      "condition": {
+        "metric": "precip_8h_forecast",
+        "operator": ">=",
+        "threshold": 2.0
+      },
+      "unit": "mm",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["tomat", "cabai"],
+      "source_data": "forecast",
+      "description": "Prakiraan hujan >= 2.0 mm dalam 8 jam ke depan meningkatkan risiko infeksi jamur pada luka pangkas yang belum membentuk kalus.",
+      "notes": "Konvensi pemangkasan sanitasi hortikultura."
+    }
+  ]
+}

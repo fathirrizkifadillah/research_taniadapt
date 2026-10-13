@@ -10,7 +10,7 @@ Dokumen ini mengunci seluruh hipotesis pengujian empiris, jendela fenologi, stra
 >    - **Keluarga Primer**: **Holm-Bonferroni** (mengontrol *Family-Wise Error Rate* / FWER secara ketat).
 >    - **Keluarga Sekunder**: **Benjamini-Hochberg** (mengontrol *False Discovery Rate* / FDR).
 > 3. **Jendela Tumpang Tindih**: Variasi jendela waktu yang saling tumpang-tindih (misalnya Mar–Mei vs Apr–Jun) diklasifikasikan sebagai **uji sensitivitas**, BUKAN hipotesis independen terpisah.
-> 4. **Bahasa Inferensi**: Wajib menggunakan terminologi "berasosiasi dengan" atau "konsisten dengan hipotesis agronomis". Dilarang menggunakan klaim kausalitas mutlak ("menyebabkan", "membuktikan").
+> 4. **Bahasa Inferensi**: Wajib menggunakan terminologi "berasosiasi dengan" atau "konsisten dengan hipotesis agronomis". Dilarang menggunakan klaim kausalitas mutlak ("menyebabkan", "menunjukkan").
 
 ---
 

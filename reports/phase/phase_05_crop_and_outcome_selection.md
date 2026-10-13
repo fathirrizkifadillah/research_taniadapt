@@ -1,6 +1,6 @@
 # TaniAdapt Research Dossier — Phase 5: Crop & Outcome Selection
 
-**Status**: COMPLETED / RATIFIED (Terkunci Resmi di `docs/crop_outcome_decision.md`)  
+**Status**: PENDING_USER_RATIFICATION (Menunggu Ratifikasi Pengguna Manusia)  
 **Hasil Ratifikasi**: Mengunci Portofolio 5 Komoditas Terpilih dan Menetapkan Kelas Analisis Spesifik  
 
 ---
@@ -20,7 +20,7 @@
 ## 2. Komoditas yang Dikeluarkan dari Sistem (Excluded Crops)
 * **Bawang Merah (*Allium cepa*)**:
   * *Status*: **`blocked pending new data`**.
-  * *Alasan Eksklusi*: Tingkat produksi sangat terkonsentrasi di sedikit kantong mikro spesifik (Brebes perbatasan Cirebon/Majalengka), data panel di level kabupaten memiliki lonjakan ekstrim non-biologis dan ketiadaan koefisien fenologi terkalibrasi untuk dataran rendah tropis basah. Sistem menolak mengarang model bawang merah sampai tersedia data mikro baru.
+  * *Alasan Eksklusi*: Tingkat produksi sangat terkonsentrasi di sedikit kantong mikro spesifik (Brebes perbatasan Cirebon/Majalengka), data panel di level kabupaten memiliki lonjakan ekstrim non-biologis dan ketiadaan koefisien fenologi terkonvensi, belum dikalibrasi terhadap data lapangan untuk dataran rendah tropis basah. Sistem menolak mengarang model bawang merah sampai tersedia data mikro baru.
 
 ---
 

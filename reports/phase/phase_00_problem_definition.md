@@ -1,6 +1,6 @@
 # TaniAdapt Research Dossier — Phase 0: Problem Definition & Architectural Scope
 
-**Status**: COMPLETED / RATIFIED  
+**Status**: PENDING_USER_RATIFICATION  
 **Cakupan Spasial**: 27 Kabupaten/Kota Jawa Barat (18 Sentra Pangan & Hortikultura)  
 **Pengguna Sasaran**: Petani Kecil (*Smallholders*) & Pengelola Kebun Agribisnis (*Farm Managers*)  
 **Penanggung Jawab Riset**: Tim Riset Biofisik & Rekayasa Perangkat Lunak TaniAdapt  

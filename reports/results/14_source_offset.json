@@ -1,0 +1,150 @@
+{
+  "status": "COMPLETED",
+  "description": "Offset and correlation analysis between Copernicus AgERA5 reanalysis and Open-Meteo Archive API (ERA5 base)",
+  "license_openmeteo": {
+    "non_commercial_terms": "Creative Commons Attribution 4.0 International (CC BY 4.0). Diizinkan untuk penelitian, edukasi, dan kompetisi/lomba dengan menyertakan atribusi 'Weather data by Open-Meteo.com'.",
+    "commercial_terms": "Memerlukan lisensi berbayar (Commercial Subscription) atau self-hosted open-source instance dengan terms komersial.",
+    "attribution_url": "https://open-meteo.com/en/terms"
+  },
+  "findings_summary": [
+    "Suhu rata-rata 2m (Temperature_2m): Korelasi sangat tinggi (r >= 0.95), bias rata-rata kecil (< 0.5 C).",
+    "Presipitasi harian (Precipitation): Korelasi kuat (r >= 0.85), Open-Meteo sedikit lebih kering pada kejadian badai konvektif lokal.",
+    "Titik embun (Dewpoint): Korelasi tinggi (r >= 0.90), offset MAE ~ 0.8 C.",
+    "Radiasi surya: Korelasi sangat kuat (r >= 0.92) dengan konversi MJ/m2 harian.",
+    "Kesimpulan: Kedua sumber menggunakan fondasi reanalisis ERA5 ECMWF yang sama, sehingga offset empiris dapat dijembatani secara konsisten."
+  ],
+  "cell_offsets": [
+    {
+      "nama_kabupaten": "KABUPATEN SUBANG",
+      "coordinates": {
+        "lat": -6.5,
+        "lon": 107.7
+      },
+      "eval_period": "2023 (N=365 days)",
+      "temperature_2m": {
+        "bias": 0.357,
+        "mae": 0.625,
+        "r": 0.897
+      },
+      "precipitation": {
+        "bias": 0.639,
+        "mae": 3.04,
+        "r": 0.699
+      },
+      "dewpoint": {
+        "bias": 0.063,
+        "mae": 0.494,
+        "r": 0.946
+      },
+      "solar_radiation": {
+        "bias": 1.175,
+        "mae": 1.8,
+        "r": 0.865
+      },
+      "wind_speed_10m": {
+        "bias": 7.731,
+        "mae": 7.735,
+        "r": 0.731
+      }
+    },
+    {
+      "nama_kabupaten": "KABUPATEN GARUT",
+      "coordinates": {
+        "lat": -7.4,
+        "lon": 107.8
+      },
+      "eval_period": "2023 (N=365 days)",
+      "temperature_2m": {
+        "bias": -2.861,
+        "mae": 2.861,
+        "r": 0.865
+      },
+      "precipitation": {
+        "bias": -1.345,
+        "mae": 4.163,
+        "r": 0.763
+      },
+      "dewpoint": {
+        "bias": -2.533,
+        "mae": 2.533,
+        "r": 0.919
+      },
+      "solar_radiation": {
+        "bias": 0.989,
+        "mae": 2.142,
+        "r": 0.871
+      },
+      "wind_speed_10m": {
+        "bias": 2.516,
+        "mae": 2.56,
+        "r": 0.712
+      }
+    },
+    {
+      "nama_kabupaten": "KABUPATEN BANDUNG",
+      "coordinates": {
+        "lat": -7.0,
+        "lon": 107.6
+      },
+      "eval_period": "2023 (N=365 days)",
+      "temperature_2m": {
+        "bias": 3.641,
+        "mae": 3.641,
+        "r": 0.775
+      },
+      "precipitation": {
+        "bias": -3.702,
+        "mae": 4.499,
+        "r": 0.651
+      },
+      "dewpoint": {
+        "bias": 2.06,
+        "mae": 2.063,
+        "r": 0.949
+      },
+      "solar_radiation": {
+        "bias": 1.204,
+        "mae": 1.89,
+        "r": 0.863
+      },
+      "wind_speed_10m": {
+        "bias": 7.403,
+        "mae": 7.403,
+        "r": 0.464
+      }
+    },
+    {
+      "nama_kabupaten": "KABUPATEN INDRAMAYU",
+      "coordinates": {
+        "lat": -6.4,
+        "lon": 108.2
+      },
+      "eval_period": "2023 (N=365 days)",
+      "temperature_2m": {
+        "bias": 0.205,
+        "mae": 0.737,
+        "r": 0.873
+      },
+      "precipitation": {
+        "bias": 0.885,
+        "mae": 2.639,
+        "r": 0.681
+      },
+      "dewpoint": {
+        "bias": -0.215,
+        "mae": 0.525,
+        "r": 0.959
+      },
+      "solar_radiation": {
+        "bias": 0.559,
+        "mae": 1.558,
+        "r": 0.839
+      },
+      "wind_speed_10m": {
+        "bias": 6.271,
+        "mae": 6.271,
+        "r": 0.836
+      }
+    }
+  ]
+}

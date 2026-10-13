@@ -1,6 +1,6 @@
 # TaniAdapt Research Dossier — Phase 4: Dataset Quality Audit & Blocker Reconciliation
 
-**Status**: COMPLETED / RATIFIED  
+**Status**: PENDING_USER_RATIFICATION  
 **Dokumen Induk**: `reports/audit_closure_report.md` & `reports/dataset_audit/audit_artifact_manifest.csv`  
 **Hasil Eksekutif**: 11 Blocker Audit Kritis (A1 s/d A11) Ditutup 100% Berdasarkan Fakta Lapangan
 
@@ -17,7 +17,7 @@
 | **A5** | **Kelengkapan 27 Wilayah Kabupaten/Kota** | Mengaudit kelengkapan data panel. Seluruh 27 kab/kota terpetakan ke 22 sel cuaca unik. Wilayah perkotaan kecil (misal Kota Cimahi, Cirebon, Sukabumi) memanfaatkan sel cuaca kabupaten induk sekitarnya. | **CLOSED / AUDITED** |
 | **A6** | **Integritas Input Manual Data BPS Padi 2015–2017** | Menetapkan bahwa seluruh baris input manual di `bps_manual_input.csv` yang belum dicek fisik terhadap buku cetak BPS diberi penanda transparan `verified=false` dan status registry `PENDING_MANUAL_VERIFICATION`. | **CLOSED / DOCUMENTED** |
 | **A7** | **Eliminasi Artefak Imputasi Jagung & Kedelai 2022** | Menemukan artefak birokrasi serius: 13 kabupaten memiliki angka produktivitas kembar persis **75.70 ku/ha**. Seluruh data jagung dan kedelai tahun 2022 **DIHAPUS SECARA TOTAL** dari panel analisis regresi agar tidak merusak estimasi ekonometrika. | **CLOSED / PRUNED** |
-| **A8** | **Audit Offset Spasial Grid Sel AgERA5 vs Centroid** | Menghitung jarak Haversine antara centroid batas wilayah resmi dengan pusat sel cuaca AgERA5. Rata-rata jarak offset adalah **5.8 km** (sangat aman di bawah resolusi grid 10 km). | **CLOSED / VERIFIED** |
+| **A8** | **Audit Offset Spasial Grid Sel AgERA5 vs Centroid** | Menghitung jarak Haversine antara centroid batas wilayah resmi dengan pusat sel cuaca AgERA5. Rata-rata jarak offset adalah **5.80 km (formula Haversine)** (sangat aman di bawah resolusi grid 10 km). | **CLOSED / VERIFIED** |
 | **A9** | **Pembersihan Kosakata Terlarang ("Membuktikan")** | Menghapus seluruh kata klaim mutlak "mengonfirmasi" atau "terbukti" di seluruh berkas skrip, laporan markdown, dan metadata JSON, digantikan dengan terminologi saintifik objektif ("mengindikasikan", "menunjukkan"). | **CLOSED / SANITIZED** |
 | **A10** | **Audit Status Registri Bukti (Evidence Registry)** | Menyaring 16 entri parameter ilmiah ke dalam status resmi: 5 VERIFIED, 2 UNVERIFIED, 2 CANNOT_OPEN, dan 7 PENDING. Menegakkan safeguard `evidence_insufficient` bagi parameter non-terverifikasi. | **CLOSED / LOCKED** |
 | **A11** | **Skrip Otomasi Pengujian Berulang (Reproducibility)** | Menulis skrip audit kanonik mandiri `scripts/run_phase4_pipeline.py` yang mengeksekusi seluruh pengecekan A1–A10 secara otomatis dan menghasilkan status PASS (Exit Code 0). | **CLOSED / REPRODUCIBLE** |

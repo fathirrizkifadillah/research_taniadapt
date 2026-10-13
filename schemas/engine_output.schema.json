@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taniadapt.id/schemas/engine_output.schema.json",
+  "title": "TaniAdaptEngineOutput",
+  "description": "JSON Schema Draft 2020-12 untuk payload kontrak keluaran Decision Engine TaniAdapt",
+  "type": "object",
+  "required": [
+    "crop",
+    "location",
+    "as_of",
+    "issue_time",
+    "timezone",
+    "rules_version",
+    "data_version",
+    "layer",
+    "indicators",
+    "status",
+    "evidence_tier",
+    "evidence_refs",
+    "claim_allowed",
+    "claim_forbidden",
+    "limitations",
+    "action_ids"
+  ],
+  "properties": {
+    "crop": {
+      "type": "string",
+      "enum": ["padi", "jagung", "kedelai", "cabai", "tomat"]
+    },
+    "location": {
+      "type": "object",
+      "required": ["kabkota", "cell_id", "weather_source"],
+      "properties": {
+        "kabkota": { "type": "string" },
+        "cell_id": { "type": "string" },
+        "weather_source": { "type": "string" }
+      }
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "issue_time": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string",
+      "enum": ["Asia/Jakarta"]
+    },
+    "rules_version": {
+      "type": "string"
+    },
+    "data_version": {
+      "type": "string"
+    },
+    "data_freshness_days": {
+      "type": ["integer", "null"]
+    },
+    "layer": {
+      "type": "string",
+      "enum": ["seasonal", "daily", "hourly"]
+    },
+    "source_data": {
+      "type": ["string", "null"],
+      "enum": ["forecast", "reanalysis", "reanalysis_forecast", "station", null]
+    },
+    "forecast_uncertainty": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "indicators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "value", "unit", "relative_rank", "rank_basis", "rank_basis_n"],
+        "properties": {
+          "id": { "type": "string" },
+          "rule_id": { "type": ["string", "null"] },
+          "value": { "type": ["number", "null"] },
+          "unit": { "type": "string" },
+          "relative_rank": {
+            "type": ["string", "null"],
+            "enum": ["low", "typical", "unusually_high", "high", null]
+          },
+          "rank_basis": { "type": ["string", "null"] },
+          "rank_basis_n": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["normal", "kondisi_mendukung_OPT", "kondisi_stres_abiotik", "waspada_defisit_ringan", "evidence_insufficient"]
+    },
+    "evidence_tier": {
+      "type": "string",
+      "enum": ["data_learned", "published_model", "literature_transfer", "convention_pending", "insufficient"]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "claim_allowed": {
+      "type": "string"
+    },
+    "claim_forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "action_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

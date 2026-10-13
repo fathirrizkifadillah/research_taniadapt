@@ -1,6 +1,6 @@
 # TaniAdapt Research Dossier — Phase 3: Dataset Discovery & Multi-Source Fusion
 
-**Status**: COMPLETED / RATIFIED  
+**Status**: PENDING_USER_RATIFICATION  
 **Ruang Lingkup**: Evaluasi 20 Kandidat Dataset dan Integrasi 9 Dataset Terpilih (DS01 s/d DS09)  
 **Tujuan**: Membangun Fondasi Data Geospasial, Iklim Reanalysis, dan Statistik Produksi Jawa Barat yang Konsisten
 
@@ -11,7 +11,7 @@
 | ID Dataset | Nama & Penyedia Data | Cakupan Wilayah | Resolusi Temporal | Resolusi Spasial | Format Data & Skema Kunci |
 |---|---|---|:---:|:---:|---|
 | **DS01** | **Copernicus AgERA5 (ECMWF)** | Jawa Barat (22 Grid Cells) | Harian (1991–2024) | Grid $0.1^\circ$ (~10 km) | CSV: Suhu 2m (min/mean/max), Titik Embun, Presipitasi, Radiasi Surya, Kecepatan Angin 10m, dan $ET_0$ Penman-Monteith. |
-| **DS02** | **CHIRPS (UCSB CHC)** | Jawa Barat (27 Kab/Kota) | Harian & Bulanan (2015–2024) | Grid $0.05^\circ$ (~5 km) | NetCDF/CSV: Estimasi curah hujan satelit inframerah terkalibrasi stasiun bumi untuk audit bias hujan AgERA5. |
+| **DS02** | **CHIRPS (UCSB CHC)** | Jawa Barat (27 Kab/Kota) | Harian & Bulanan (2015–2024) | Grid $0.05^\circ$ (~5 km) | NetCDF/CSV: Estimasi curah hujan satelit inframerah terkonvensi, belum dikalibrasi terhadap data lapangan stasiun bumi untuk audit bias hujan AgERA5. |
 | **DS03** | **BPS Jabar — Padi Sawah Tradisional** | 27 Kabupaten/Kota | Tahunan (2015–2017) | Tingkat Kabupaten (ADM2) | CSV/PDF: Luas Panen (ha), Produksi (ton), dan Produktivitas (ku/ha) pra-metode KSA (N=54 valid). |
 | **DS04** | **BPS Jabar — Padi KSA Modern** | 27 Kabupaten/Kota | Bulanan/Subround (2018–2024) | Tingkat Kabupaten (ADM2) | CSV: Luas panen berbasis Kerangka Sampel Area citra satelit dan amatan fase vegetatif bulanan. |
 | **DS05** | **Open Data Jabar — Jagung** | 27 Kabupaten/Kota | Tahunan (2015–2021) | Tingkat Kabupaten (ADM2) | CSV: Luas panen, produksi, produktivitas jagung pipil (18 sentra utama aktif, N=124 valid). |
