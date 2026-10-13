@@ -23,12 +23,12 @@ Dokumen ini mencatat seluruh inkonsistensi numerik, kontradiksi naratif, dan art
 - **Temuan**:
   1. Angka `56.20, 56.40, 56.60 ku/ha` di notebook adalah *placeholder* tidak berdasar sumber resmi.
   2. Angka `60.19, 59.58, 57.47 ku/ha` adalah rata-rata aritmatika tanpa bobot dari 27 unit DS03.
-  3. Angka resmi BPS Jawa Barat dalam publikasi *Provinsi Jawa Barat Dalam Angka 2016–2018* adalah: **61.22 ku/ha (2015), 60.49 ku/ha (2016), dan 58.87 ku/ha (2017)**.
+  3. Publikasi resmi BPS Jawa Barat terverifikasi manusia hanya untuk: **61.22 ku/ha (2015, JDA 2016 Tabel 5.1.3/5.1.12)**; sedangkan tabel pembanding resmi untuk 2016 dan 2017 **TIDAK TERSEDIA** di publikasi BPS Jabar Dalam Angka.
   4. Ketika data mentah DS03 dihitung menggunakan **rata-rata berbobot luas panen (area-weighted mean)**:
-     - 2015: $61.22\text{ ku/ha}$ (Selisih ke BPS: **0.00%**)
-     - 2016: $60.49\text{ ku/ha}$ (Selisih ke BPS: **0.00%**)
-     - 2017: $58.87\text{ ku/ha}$ (Selisih ke BPS: **0.00%**)
-     - **Resolusi**: DS03 2015–2017 cocok 100.0% dengan BPS resmi pre-KSA jika dan hanya jika dibobotkan dengan luas panen.
+     - 2015: $61.22\text{ ku/ha}$ (Selisih ke BPS terverifikasi: **0.00%**)
+     - 2016: $60.49\text{ ku/ha}$ (**DS03-derived, tanpa pembanding BPS**)
+     - 2017: $58.87\text{ ku/ha}$ (**DS03-derived, tanpa pembanding BPS**)
+     - **Resolusi**: Nilai 60.49 dan 58.87 adalah angka turunan agregasi internal DS03, bukan angka yang disalin dari tabel publikasi BPS resmi.
   5. Lonjakan padi ladang (+55.1%) pada 2019 terbukti akibat pencampuran pelaporan administratif (*reporting error*), bukan faktor biologis atau kadar air.
   6. Karena angka BPS KSA per kabupaten/kota 2018–2020 tidak tersedia publik, padi 2018–2020 **dikeluarkan dari panel regresi utama**.
 

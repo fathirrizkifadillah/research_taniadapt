@@ -1,7 +1,7 @@
 tahun,level,wilayah,produktivitas_ku_ha,judul_publikasi,tabel,halaman,sumber_halaman,sumber_halaman_verified,diisi_oleh,url_atau_file,catatan
-2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.3/5.1.12,245,Halaman 245,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Terverifikasi dari PDF resmi BPS JDA 2016
-2016,provinsi,JAWA BARAT,,,TIDAK TERSEDIA di publikasi BPS Jabar,,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Tidak ada tabel produktivitas pembanding resmi di JDA 2017
-2017,provinsi,JAWA BARAT,,,TIDAK TERSEDIA di publikasi BPS Jabar,,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Tidak ada tabel produktivitas pembanding resmi di JDA 2018
-2018,provinsi,JAWA BARAT,56.51,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,260,Halaman 260,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Metode KSA; versi lama di JDA 2019 mencatat 56.39
-2019,provinsi,JAWA BARAT,57.54,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,260,Halaman 260,true,Fathir Rizki Fadillah,https://jabar.bps.go.id/publication,Metode KSA; pembanding resmi pasca-patahan metodologi
-2020,provinsi,JAWA BARAT,,UNVERIFIED,UNVERIFIED,UNVERIFIED,UNVERIFIED,false,BELUM DIVERIFIKASI MANUSIA,https://jabar.bps.go.id/publication,Belum diverifikasi manusia
+2015,provinsi,JAWA BARAT,61.22,Provinsi Jawa Barat Dalam Angka 2016,Tabel 5.1.3/5.1.12,<HALAMAN_CETAK_2015>,Halaman cetak <HALAMAN_CETAK_2015>,true,Fathir Rizki Fadillah,<URL_ATAU_NAMA_PDF_DA2016>,Dihitung dari total sawah+ladang (produksi/luas panen); bukan satu sel tabel. Metode pra-KSA
+2016,provinsi,JAWA BARAT,,,,,TIDAK TERSEDIA di publikasi BPS Jabar,false,Fathir Rizki Fadillah,<URL_ATAU_NAMA_PDF_DA2017>,DA 2017 memuat data 2015; tidak ada angka 2016 pembanding resmi
+2017,provinsi,JAWA BARAT,,,,,TIDAK TERSEDIA di publikasi BPS Jabar,false,Fathir Rizki Fadillah,<URL_ATAU_NAMA_PDF_DA2018>,DA 2018 memuat data 2015; tidak ada angka 2017 pembanding resmi
+2018,provinsi,JAWA BARAT,56.51,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,<HALAMAN_CETAK_2018_2019>,Halaman cetak <HALAMAN_CETAK_2018_2019>,true,Fathir Rizki Fadillah,<URL_ATAU_NAMA_PDF_DA2020>,Versi revisi; DA 2019 mencatat 56.39. Metode KSA (belum dikonfirmasi tertulis di catatan teknis BPS)
+2019,provinsi,JAWA BARAT,57.54,Provinsi Jawa Barat Dalam Angka 2020,Tabel 5.1.1,<HALAMAN_CETAK_2018_2019>,Halaman cetak <HALAMAN_CETAK_2018_2019>,true,Fathir Rizki Fadillah,<URL_ATAU_NAMA_PDF_DA2020>,Metode KSA; tidak sebanding langsung dengan 2015
+2020,provinsi,JAWA BARAT,,,,,,false,,,Belum dibuka: perlu DA 2021
