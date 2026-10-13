@@ -117,7 +117,7 @@
           },
           "rule_status": {
             "type": "string",
-            "enum": ["VERIFIED_METHOD", "CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"]
+            "enum": ["VERIFIED_METHOD", "METHOD_UNCALIBRATED", "CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"]
           },
           "evidence_refs": {
             "type": "array",
@@ -169,6 +169,12 @@
     "action_ids": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "sensitif_terhadap_asumsi_tanah": {
+      "type": "boolean"
+    },
+    "asumsi_deplesi_awal_dr0": {
+      "type": "number"
     }
   },
   "if": {
@@ -184,12 +190,13 @@
         "minItems": 1,
         "contains": {
           "enum": [
+            "RULE_WATER_FAO56_DEPLETION",
+            "FAO56_RAW_DEPLETION",
             "FAO56_ET0_PM",
             "FAO56_KC_RICE",
             "FAO56_KC_MAIZE",
             "FAO56_KC_SOY",
-            "FAO56_KC_TOMATO",
-            "FAO56_RAW_DEPLETION"
+            "FAO56_KC_TOMATO"
           ]
         }
       }

@@ -140,13 +140,22 @@ def test_schema_if_then_accepts_stress_with_verified_evidence(engine_schema: dic
     jsonschema.validate(instance=verified_payload, schema=engine_schema, format_checker=jsonschema.FormatChecker())
 
 
-def test_padi_water_module_insufficient(valid_baseline_payload: dict):
-    """Test that rice water module enforces evidence_insufficient."""
-    rice_payload = valid_baseline_payload.copy()
-    rice_payload["crop"] = "padi"
-    rice_payload["status"] = "evidence_insufficient"
-    rice_payload["evidence_refs"] = ["FAO56_KC_RICE"]
-    assert rice_payload["status"] == "evidence_insufficient"
+def test_fao56_crop_p_and_zr_configs():
+    """Verify that p for soybean is 0.50 and tomato is 0.40 from config (regression check for bug p=0.55)."""
+    with open(RULES_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    rule = next(r for r in data["rules"] if r["id"] == "RULE_WATER_FAO56_DEPLETION")
+    crops = rule["config"]["crops"]
+    
+    assert crops["jagung"]["p_fraction"] == 0.55, "Corn p fraction must be 0.55"
+    assert crops["kedelai"]["p_fraction"] == 0.50, "Soybean p fraction must be 0.50 (not 0.55)"
+    assert crops["tomat"]["p_fraction"] == 0.40, "Tomato p fraction must be 0.40 (not 0.55)"
+    assert crops["padi"]["p_fraction"] == 0.20, "Rice p fraction must be 0.20"
+    
+    assert crops["jagung"]["zr_chosen_m"] == 1.0
+    assert crops["kedelai"]["zr_chosen_m"] == 0.8
+    assert crops["tomat"]["zr_chosen_m"] == 0.7
 
 
 def test_all_rules_in_rules_json_conform_to_contract(verified_evidence_ids: set[str]):
@@ -163,6 +172,6 @@ def test_all_rules_in_rules_json_conform_to_contract(verified_evidence_ids: set[
         if ev_id in verified_evidence_ids:
             assert status in ("VERIFIED", "VERIFIED_METHOD"), f"Rule {r['id']} has verified evidence_id {ev_id} but status is {status}"
         else:
-            assert status in ("CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"), (
+            assert status in ("METHOD_UNCALIBRATED", "CONVENTION_PENDING", "INSUFFICIENT", "DEPRECATED"), (
                 f"Rule {r['id']} lacks verified evidence_id ({ev_id}) but has status {status}"
             )

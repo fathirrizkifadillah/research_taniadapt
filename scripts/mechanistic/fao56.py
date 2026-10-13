@@ -92,9 +92,9 @@ SOIL_TEXTURE_TABLE19: Dict[str, Dict[str, float]] = {
 
 # Crop development stage lengths from FAO-56 Table 11 (pp. 104-108)
 CROP_STAGES_TABLE11: Dict[str, Dict[str, int]] = {
-    "jagung": {"ini": 20, "dev": 30, "mid": 40, "late": 20, "total": 110},
-    "kedelai": {"ini": 15, "dev": 25, "mid": 35, "late": 15, "total": 90},
-    "tomat": {"ini": 25, "dev": 30, "mid": 40, "late": 25, "total": 120},
+    "jagung": {"ini": 20, "dev": 35, "mid": 40, "late": 30, "total": 125}, # Table 11 p. 103: Nigeria (humid)
+    "kedelai": {"ini": 15, "dev": 15, "mid": 40, "late": 15, "total": 85},  # Table 11 p. 104: Tropics
+    "tomat": {"ini": 30, "dev": 40, "mid": 45, "late": 30, "total": 145},
     "padi": {"ini": 30, "dev": 30, "mid": 35, "late": 25, "total": 120},
 }
 
@@ -103,7 +103,7 @@ CROP_PARAMS_TABLE12_22: Dict[str, Dict[str, Any]] = {
     "jagung": {
         "kc_ini": 0.30, "kc_mid": 1.20, "kc_end": 0.35, "kc_end_range": [0.60, 0.35], # Table 12 p. 110: 0.60 (panen basah) s.d. 0.35 (panen kering di batang)
         "kc_end_harvest_assumption": "0.35 (asumsi panen kering di batang; 0.60 jika panen biji berkadar air tinggi)",
-        "zr_min": 0.3, "zr_max": 1.2, "p": 0.55,       # Table 22 p. 167
+        "zr_min": 0.3, "zr_max": 1.0, "p": 0.55,       # Table 22 p. 167 (zr_chosen = 1.0)
         "evidence_id_kc": "FAO56_KC_MAIZE",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
@@ -111,7 +111,7 @@ CROP_PARAMS_TABLE12_22: Dict[str, Dict[str, Any]] = {
     "kedelai": {
         "kc_ini": 0.40, "kc_mid": 1.15, "kc_end": 0.50, "kc_end_range": [0.50, 0.50], # Table 12 p. 110: nilai tunggal definitif
         "kc_end_harvest_assumption": "0.50 (kondisi panen polong kering standar)",
-        "zr_min": 0.3, "zr_max": 1.0, "p": 0.50,       # Table 22 p. 167
+        "zr_min": 0.3, "zr_max": 0.8, "p": 0.50,       # Table 22 p. 167 (zr_chosen = 0.8)
         "evidence_id_kc": "FAO56_KC_SOY",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
@@ -119,7 +119,7 @@ CROP_PARAMS_TABLE12_22: Dict[str, Dict[str, Any]] = {
     "tomat": {
         "kc_ini": 0.60, "kc_mid": 1.15, "kc_end": 0.80, "kc_end_range": [0.70, 0.90], # Table 12 p. 110: 0.70-0.80 processing; 0.80-0.90 fresh
         "kc_end_harvest_assumption": "0.80 (asumsi tomat konsumsi segar; 0.70 jika tomat olahan)",
-        "zr_min": 0.25, "zr_max": 1.0, "p": 0.40,      # Table 22 p. 167
+        "zr_min": 0.25, "zr_max": 0.7, "p": 0.40,      # Table 22 p. 167 (zr_chosen = 0.7)
         "evidence_id_kc": "FAO56_KC_TOMATO",
         "evidence_id_water": "FAO56_RAW_DEPLETION",
         "water_module_status": "VERIFIED"
@@ -230,9 +230,6 @@ def evaluate_fao56_water_stress(crop: str, dap: int, depletion_dr_mm: float, soi
     if depletion_dr_mm > raw_mm:
         stress_status = "kondisi_stres_abiotik"
         recommendation = "Irigasi replenishment segera diperlukan; deplesi melampaui batas air siap serap (Dr > RAW)."
-    elif depletion_dr_mm > 0.7 * raw_mm:
-        stress_status = "waspada_defisit_ringan"
-        recommendation = "Mendekati ambang batas RAW; jadwalkan penyiraman dalam 1-2 hari."
     else:
         stress_status = "normal"
         recommendation = "Lengas tanah mencukupi (Dr <= RAW); tidak memerlukan irigasi darurat."
