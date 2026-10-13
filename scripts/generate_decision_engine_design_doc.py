@@ -1,5 +1,9 @@
 """Generate Comprehensive Decision Engine Design, Formulas, and Implementation Blueprint in Indonesian (.docx).
 Location: context/to_fathir/TaniAdapt_Desain_Rumus_dan_Skema_Decision_Engine.docx
+Revised v2:
+- Fully includes all 5 commodities (Padi, Jagung, Kedelai, Cabai Merah & Rawit, Tomat)
+- Fixes confusing "SAFE / WARN" labeling for irrigation: clearly separates CROP STATUS from ACTION RECOMMENDATION
+- Explicitly differentiates horticulture operations (Cabai & Tomat: wiwil/pruning, periodic harvest, fungal LWD scouting) from field grain crops (Jagung & Kedelai)
 """
 from __future__ import annotations
 
@@ -13,7 +17,7 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-OUT_DOCX = PROJECT_ROOT / "context" / "to_fathir" / "TaniAdapt_Desain_Rumus_dan_Skema_Decision_Engine.docx"
+OUT_DOCX = PROJECT_ROOT / "context" / "to_fathir" / "TaniAdapt_Desain_Rumus_dan_Skema_Decision_Engine_v2.docx"
 OUT_DOCX.parent.mkdir(parents=True, exist_ok=True)
 
 NAVY = "1B365D"
@@ -90,11 +94,11 @@ def add_table_data(doc, headers, rows, widths):
             is_c = (c_idx == 0 or (c_idx == 1 and len(str(val)) <= 15))
             color_override = None
             val_str = str(val)
-            if any(k in val_str for k in ["VERIFIED", "Sangat Aman", "SAFE", "PASS", "100%", "Aktif", "Lulus"]):
+            if any(k in val_str for k in ["VERIFIED", "Sangat Dianjurkan", "Sangat Aman", "SAFE", "PASS", "100%", "Aktif", "Lulus"]):
                 color_override = "1B6E34"
-            elif any(k in val_str for k in ["CONVENTION", "Perlu Waspada", "WARN", "Waspada", "UNCALIBRATED"]):
+            elif any(k in val_str for k in ["CONVENTION", "Perlu Waspada", "WARN", "Waspada", "UNCALIBRATED", "Belum Perlu"]):
                 color_override = "B45309"
-            elif any(k in val_str for k in ["INSUFFICIENT", "Hindari", "DANGER", "DEPRECATED", "Ditolak", "Gagal", "stres"]):
+            elif any(k in val_str for k in ["INSUFFICIENT", "Hindari", "DANGER", "DEPRECATED", "Ditolak", "Gagal", "Cekaman"]):
                 color_override = "B91C1C"
             format_cell(cell, val, bold=(c_idx == 0), white=False, size=8.3, center=is_c, color_override=color_override)
             cell.width = Inches(widths[c_idx])
@@ -273,7 +277,7 @@ def build_design_doc():
     p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p_sub.paragraph_format.space_before = Pt(0)
     p_sub.paragraph_format.space_after = Pt(8)
-    r_sub = p_sub.add_run("Dokumen Desain Sistem Lengkap: Seluruh Persamaan Fisika FAO-56, Matriks Logika Jam Operasional,\nKontrak JSON Schema Draft 2020-12, dan Skema Integrasi Web Next.js")
+    r_sub = p_sub.add_run("Dokumen Desain Sistem Lengkap: Seluruh Persamaan Fisika FAO-56, Matriks Logika Jam Operasional,\nPembedaan Karakteristik 5 Komoditas (Padi, Jagung, Kedelai, Cabai Merah/Rawit, Tomat), dan Cetak Biru Web Next.js")
     r_sub.font.name = "Aptos"
     r_sub.font.size = Pt(10.5)
     r_sub.italic = True
@@ -329,9 +333,37 @@ def build_design_doc():
     )
 
     # =========================================================================
-    # BAB 2: DESAIN MATEMATIKA & FORMULA BIOFISIK MEKANISTIK
+    # BAB 2: PORTOFOLIO LENGKAP 5 KOMODITAS & PEMBEDAAN KARAKTERISTIK
     # =========================================================================
-    add_heading_1(doc, "BAB 2: DESAIN MATEMATIKA & FORMULA BIOFISIK MEKANISTIK")
+    add_heading_1(doc, "BAB 2: PORTOFOLIO LENGKAP 5 KOMODITAS & PEMBEDAAN KARAKTERISTIK")
+    
+    add_p(doc,
+        "Decision Engine TaniAdapt secara tegas membedakan sifat biologis, agronomis, dan perlakuan operasional antara tanaman pangan semusim (Padi, Jagung, Kedelai) dan tanaman hortikultura buah berkala (Cabai Merah, Cabai Rawit, Tomat). Sistem tidak menyeragamkan aturan ke dalam satu cetakan kaku.",
+        bold_prefix="Pembedaan Agronomis Komoditas: "
+    )
+
+    crop_detail_rows = [
+        ["1. Padi Sawah (Oryza sativa)", "Pangan Pokok Semusim", "Regim Tergenang (Ponded Wetland)", "30/30/35/25 (120 hari)", "Modul deplesi tanah TIDAK BERLAKU (INSUFFICIENT). Modul semprot, pupuk, dan panen aktif."],
+        ["2. Jagung Pipil (Zea mays)", "Pangan / Pakan Semusim", "Lahan Kering (Tanah Tak Jenuh)", "20/35/40/30 (125 hari)", "Modul air AKTIF PENUH (Zr=1.0 m, p=0.55). Panen biji kering lapangan (RH <= 75%)."],
+        ["3. Kedelai (Glycine max)", "Pangan Legum Semusim", "Lahan Kering (Tanah Tak Jenuh)", "15/15/40/15 (85 hari)", "Modul air AKTIF PENUH (Zr=0.8 m, p=0.50). Pemanenan polong tua kering."],
+        ["4. Cabai Merah Besar (Capsicum annuum)", "Hortikultura Buah Petik Berkala", "Lahan Kering / Bedengan Mulsa", "Siklus panen petik bertahap", "Sangat rentan patek/antraknosa (scouting LWD). Butuh perempelan tunas air (pruning/wiwil)."],
+        ["5. Cabai Rawit (Capsicum frutescens)", "Hortikultura Buah Petik Panjang", "Lahan Kering / Bedengan", "Siklus hidup panjang (6-12 bulan)", "Tajuk kompak, rentan rontok bunga saat terik radiasi ekstrem (>500 W/m²). Petik berkala."],
+        ["6. Tomat (Solanum lycopersicum)", "Hortikultura Buah Segar", "Lahan Kering / Bedengan", "30/40/45/30 (145 hari)", "Modul air AKTIF (Zr=0.7 m, p=0.40, Kc=0.80). Butuh wiwil tunas air & sanitasi luka pangkas."]
+    ]
+    add_table_data(doc, ["Komoditas Binaan", "Tipe Tanaman", "Regim Lingkungan Perakaran", "Panjang Siklus Tumbuh", "Perlakuan Khusus di Decision Engine"], crop_detail_rows, [1.4, 1.2, 1.3, 1.1, 2.0])
+
+    add_heading_2(doc, "Mengapa Cabai Merah dan Cabai Rawit Dibedakan?")
+    add_p(doc,
+        "1. Morfologi Tajuk & Kelembapan Mikro: Cabai Merah Besar memiliki tajuk kanopi yang lebih rimbun dan daun lebih lebar, sehingga kelembapan mikro di dalam kanopi bertahan lebih lama di pagi hari (risiko spora jamur antraknosa Colletotrichum gloeosporioides lebih tinggi). Cabai Rawit memiliki daun lebih kecil dan tajuk lebih terbuka.\n"
+        "2. Dinamika Pemanenan: Cabai Merah dipanen serentak per interval 7–10 hari begitu buah matang merah penuh; pemanenan saat hujan dilarang keras karena tangkai buah basah memicu pembusukan di karung pengiriman. Cabai Rawit memiliki interval pemanenan lebih fleksibel (dapat dipetik hijau atau merah) namun sangat sensitif terhadap cekaman air fajar yang menyebabkan kerontokan bunga muda.\n"
+        "3. Kerentanan Terik Siang: Cabai rawit di dataran rendah Jawa Barat (seperti Pantura) rentan mengalami gugur bunga jika terpapar radiasi surya > 500 W/m² bersamaan dengan VPD tinggi (> 15 hPa).",
+        bold_prefix="Karakteristik Cabai: "
+    )
+
+    # =========================================================================
+    # BAB 3: FORMULA BIOFISIK MEKANISTIK FAO-56 LENGKAP
+    # =========================================================================
+    add_heading_1(doc, "BAB 3: FORMULA BIOFISIK MEKANISTIK FAO-56 LENGKAP")
     add_p(doc, "Seluruh formula mekanistik di dalam Decision Engine mengacu secara murni pada dokumen rujukan internasional: FAO Irrigation and Drainage Paper 56 (Allen et al., 1998; URL: https://www.fao.org/4/x0490e).")
 
     add_heading_2(doc, "A. Komponen 1: Evapotranspirasi Acuan Penman-Monteith Harian (ET0)")
@@ -392,8 +424,9 @@ def build_design_doc():
 
     kc_rows = [
         ["Jagung Pipil (Grain)", "0.30", "1.20", "0.35 (kering) / 0.60 (basah)", "20 / 35 / 40 / 30 (125 hari)", "Tabel 12 Footnote 11: 0.35 panen biji kering di batang, 0.60 panen basah."],
-        ["Kedelai", "0.40", "1.15", "0.50", "15 / 15 / 40 / 15 (85 hari)", "Tabel 12 p. 110: nilai tunggal definitif panen polong kering; Tabel 11 Tropics."],
+        ["Kedelai", "0.40", "1.15", "0.50", "15 / 15 / 40 / 15 (85 hari)", "Tabel 12: nilai tunggal definitif panen polong kering; Tabel 11 Tropics."],
         ["Tomat", "0.60", "1.15", "0.80 (rentang 0.70–0.90)", "30 / 40 / 45 / 30 (145 hari)", "Tabel 12: 0.70 olahan industri, 0.80 konsumsi segar (titik tengah CONVENTION_PENDING)."],
+        ["Cabai Merah & Rawit", "UNVERIFIED", "UNVERIFIED", "UNVERIFIED", "Siklus petik bertahap", "Kc tropis lokal belum terdaftar di FAO-56 (sweet pepper tidak diekstrapolasi)."],
         ["Padi Sawah", "1.05", "1.20", "0.60 (kering) / 0.90 (genang)", "30 / 30 / 35 / 25 (120 hari)", "Tabel 12 mengasumsikan sawah tergenang; deplesi tanah TIDAK BERLAKU (INSUFFICIENT)."]
     ]
     add_table_data(doc, ["Komoditas", "Kc Awal", "Kc Tengah", "Kc Akhir", "Panjang Fase (hari)", "Dasar Bukti & Asumsi Panen"], kc_rows, [1.5, 0.8, 0.8, 1.3, 1.2, 1.6])
@@ -420,8 +453,8 @@ def build_design_doc():
         "   Dr(t) = Dr(t-1) - P_eff(t) + ETc(t)\n"
         "   Dengan batasan fisik: 0 <= Dr(t) <= TAW (air hujan melebihi TAW diasumsikan limpasan/perkolasi dalam).\n\n"
         "4. Kriteria Pengambilan Keputusan Irigasi:\n"
-        "   - Jika Dr > RAW : Status 'kondisi_stres_abiotik' -> SIRAM = Sangat Aman (Irigasi segera diperlukan).\n"
-        "   - Jika Dr <= RAW: Status 'normal' -> SIRAM = Perlu Waspada (Air tanah cukup, hemat air pompa).",
+        "   - Jika Dr > RAW : Status Tanaman = Cekaman Air (kondisi_stres_abiotik) -> Aksi SIRAM = Sangat Dianjurkan.\n"
+        "   - Jika Dr <= RAW: Status Tanaman = Normal (Air Cukup) -> Aksi SIRAM = Belum Perlu (Tahan/Hemat Air).",
         label="Formula Neraca Deplesi Lengas Tanah FAO-56 Bab 8"
     )
 
@@ -443,23 +476,35 @@ def build_design_doc():
     )
 
     # =========================================================================
-    # BAB 3: MATRIKS KEPUTUSAN JAM-JAMAN & LOGIKA OPERASIONAL
+    # BAB 4: MATRIKS KEPUTUSAN JAM-JAMAN & LOGIKA OPERASIONAL
     # =========================================================================
-    add_heading_1(doc, "BAB 3: MATRIKS KEPUTUSAN JAM-JAMAN (06.00–18.00 WIB) & TINDAKAN LAPANGAN")
+    add_heading_1(doc, "BAB 4: MATRIKS KEPUTUSAN JAM-JAMAN (06.00–18.00 WIB) & TINDAKAN LAPANGAN")
     
     add_p(doc,
-        "Decision Engine mengevaluasi kondisi cuaca harian dan per jam (06.00 s/d 18.00 WIB) untuk 5 tindakan operasional nyata lapangan menggunakan prinsip teraman (Worst-Of Aggregation).",
-        bold_prefix="Struktur Keputusan Lapangan: "
+        "PENTING: Di Decision Engine TaniAdapt, kita membedakan secara tegas antara STATUS KONDISI TANAMAN / CUACA dengan REKOMENDASI STATUS TINDAKAN OPERASIONAL PETANI:",
+        bold_prefix="Klarifikasi Pelabelan Aksi vs Kondisi Tanaman: "
+    )
+    add_p(doc,
+        "1. Pada Modul Irigasi (Siram):\n"
+        "   - Ketika kondisi tanaman Dr > RAW (tanah haus / stres cekaman air), maka status rekomendasi tindakan bagi petani adalah SANGAT AMAN / DIANJURKAN SEGERA MENYIRAM (label: Sangat Aman, lampu hijau pada tombol siram).\n"
+        "   - Ketika kondisi tanaman Dr <= RAW (air tanah masih mencukupi), maka status rekomendasi tindakan bagi petani adalah BELUM PERLU MENYIRAM / TAHAN (label: Perlu Waspada, lampu kuning agar hemat air dan solar pompa).\n"
+        "   - Ketika terjadi hujan aktif >= 3 mm, status tindakan menjadi HINDARI MENYIRAM (label: Hindari, lampu merah).\n"
+        "2. Pada Modul Tindakan Fisik Lainnya (Semprot, Pupuk, Panen, Pangkas):\n"
+        "   - Status 'Sangat Aman' berarti kondisi cuaca optimal untuk melakukan pekerjaan fisik tersebut.\n"
+        "   - Status 'Perlu Waspada' berarti ada parameter cuaca di zona transisi yang memerlukan penyesuaian teknik.\n"
+        "   - Status 'Hindari' berarti kondisi cuaca berbahaya bagi tanaman, lingkungan, atau efektivitas bahan."
     )
 
     action_matrix_rows = [
-        ["1. Siram (Irigasi)", "06.00 - 08.00 WIB", "Dr > RAW (stres)", "Dr <= RAW (cukup)", "Hujan aktif >= 3 mm", "FAO-56 Bab 8 (VERIFIED_METHOD). Padi sawah mengembalikan evidence_insufficient."],
-        ["2. Semprot (Pestisida)", "06.00 - 08.00 WIB", "Angin 3–12 km/j, T < 30°C", "Angin < 3 km/j (inversi) atau 12–15 km/j (transisi)", "Angin > 15 km/j atau Hujan >= 3 mm", "Menutup celah angin secara tegas: <3 inversi kabut racun, >15 spray drift bahaya."],
-        ["3. Pupuk (Pemupukan)", "07.00 - 09.00 WIB", "Tanah lembap, hujan 12h < 8 mm", "VPD > 15 hPa atau terik siang", "Prakiraan hujan 12h >= 8 mm", "Mencegah pupuk hanyut tererosi limpasan air hujan atau hangus terbakar radiasi."],
-        ["4. Panen (Pemanenan)", "08.00 - 12.00 WIB", "RH <= 75%, hujan = 0 mm", "RH 75–85% (zona transisi jemur)", "RH > 85% atau Hujan > 5 mm", "Menutup celah RH 75-85%: status WARN mengingatkan perlunya penjemuran segera."],
-        ["5. Rawat / Pangkas", "07.00 - 09.00 WIB", "Hujan 8h < 2 mm", "Kelembapan malam tinggi", "Prakiraan hujan 8h >= 2 mm", "Mencegah spora jamur menginfeksi luka pangkas sebelum mengering (membentuk kalus)."]
+        ["1. Siram (Irigasi)", "06.00 - 08.00 WIB", "Dr > RAW (tanah butuh air irigasi)", "Dr <= RAW (air tanah masih cukup)", "Hujan aktif >= 3 mm (air berlebih)", "FAO-56 Bab 8 (VERIFIED_METHOD). Jagung, kedelai, tomat aktif. Padi sawah mengembalikan evidence_insufficient."],
+        ["2. Semprot (Pestisida)", "06.00 - 08.00 WIB", "Angin 3–12 km/j, T < 30°C", "Angin < 3 km/j (inversi fajar) atau 12–15 km/j (transisi drift)", "Angin > 15 km/j atau Hujan >= 3 mm", "Menutup celah angin: <3 km/j partikel racun terperangkap, >15 km/j spray drift melayang ke tetangga."],
+        ["3. Pupuk (Pemupukan)", "07.00 - 09.00 WIB", "Tanah lembap, hujan 12h < 8 mm", "VPD > 15 hPa atau terik radiasi", "Prakiraan hujan 12h >= 8 mm", "Mencegah pupuk hanyut tererosi limpasan air hujan atau membakar daun saat stomata tertutup."],
+        ["4. Panen Pangan (Jagung/Kedelai)", "08.00 - 12.00 WIB", "RH <= 75%, hujan = 0 mm", "RH 75–85% (zona transisi jemur)", "RH > 85% atau Hujan > 5 mm", "Panen biji/polong kering. Menutup celah RH 75-85%: status WARN mengingatkan perlunya penjemuran segera."],
+        ["5. Panen Hortikultura (Cabai/Tomat)", "07.00 - 10.00 WIB", "Tanpa hujan, suhu sejuk pagi", "Embun daun masih basah", "Hujan aktif atau buah basah kuyup", "Pemanenan buah segar bertahap. Dilarang petik saat basah kuyup karena memicu busuk buah di wadah simpan."],
+        ["6. Rawat / Pangkas (Tomat/Cabai)", "07.00 - 09.00 WIB", "Hujan 8h < 2 mm, cuaca cerah", "Kelembapan malam tinggi", "Prakiraan hujan 8h >= 2 mm", "Perempelan tunas air (wiwil) tomat & cabai. Mencegah luka pangkas basah terinfeksi spora jamur."],
+        ["7. Pengamatan OPT (Cabai/Tomat)", "Pagi hari (06.00 WIB)", "RH malam normal < 90%", "Jumlah jam RH >= 90% >= 10 jam", "Kondisi basah terus-menerus", "Indikator Leaf Wetness Duration (LWD Sentelhas 2008, METHOD_UNCALIBRATED). Waspada patek/antraknosa."]
     ]
-    add_table_data(doc, ["Tindakan Lapangan", "Window Ideal", "Kondisi AMAN (SAFE)", "Kondisi WASPADA (WARN)", "Kondisi BAHAYA (DANGER)", "Dasar Biofisik & Aturan"], action_matrix_rows, [1.3, 1.2, 1.2, 1.3, 1.2, 1.8])
+    add_table_data(doc, ["Tindakan Lapangan", "Window Ideal", "Kondisi Disarankan (Sangat Aman)", "Kondisi Penyesuaian (Perlu Waspada)", "Kondisi Larangan (Hindari)", "Dasar Biofisik & Spesifikasi Tanaman"], action_matrix_rows, [1.4, 1.1, 1.2, 1.2, 1.1, 1.8])
 
     add_heading_2(doc, "Logika Penggabungan Teraman (Worst-Of Aggregation) per Jam")
     add_p(doc,
@@ -476,9 +521,9 @@ def build_design_doc():
     )
 
     # =========================================================================
-    # BAB 4: KONTRAK SKEMA JSON DRAFT 2020-12
+    # BAB 5: KONTRAK SKEMA JSON DRAFT 2020-12
     # =========================================================================
-    add_heading_1(doc, "BAB 4: KONTRAK SKEMA JSON DRAFT 2020-12 & INTEGRITAS DATA")
+    add_heading_1(doc, "BAB 5: KONTRAK SKEMA JSON DRAFT 2020-12 & INTEGRITAS DATA")
     
     add_p(doc,
         "Untuk menjamin bahwa Decision Engine tidak pernah menghasilkan format yang cacat atau mengarang angka di luar kontrak, keluaran engine diikat oleh JSON Schema Draft 2020-12 (schemas/engine_output.schema.json).",
@@ -500,9 +545,9 @@ def build_design_doc():
     )
 
     # =========================================================================
-    # BAB 5: SKEMA PENERAPAN DI WEB NEXT.JS (PHASE 13)
+    # BAB 6: SKEMA PENERAPAN DI WEB NEXT.JS (PHASE 13)
     # =========================================================================
-    add_heading_1(doc, "BAB 5: SKEMA PENERAPAN DI WEB NEXT.JS (CETAK BIRU PHASE 13)")
+    add_heading_1(doc, "BAB 6: SKEMA PENERAPAN DI WEB NEXT.JS (CETAK BIRU PHASE 13)")
 
     add_heading_2(doc, "A. Arsitektur Route Handler Server-Side (/api/advisory)")
     add_p(doc,
@@ -547,9 +592,9 @@ def build_design_doc():
     )
 
     # =========================================================================
-    # BAB 6: BUKTI PENGUJIAN OTOMATIS & INTEGRITAS SISTEM
+    # BAB 7: BUKTI PENGUJIAN OTOMATIS & INTEGRITAS SISTEM
     # =========================================================================
-    add_heading_1(doc, "BAB 6: BUKTI PENGUJIAN OTOMATIS & INTEGRITAS SISTEM")
+    add_heading_1(doc, "BAB 7: BUKTI PENGUJIAN OTOMATIS & INTEGRITAS SISTEM")
 
     test_summary_rows = [
         ["1. Pytest Python", "tests/test_engine_schema_and_rules.py", "11 / 11", "0", "PASS (100%)", "Validasi skema Draft 2020-12, if/then trigger rule, Example 36 parity, RH panen, hash parity."],
