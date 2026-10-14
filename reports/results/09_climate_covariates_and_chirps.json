@@ -22,11 +22,11 @@
   "chirps_r_per_unit_median": 0.7569,
   "max_signed_bias_mh_pct": 72.31,
   "five_key_findings": [
-    "ONI and DMI cover 120 months from 2015-2024.",
-    "CHIRPS benchmark coverage is 2016, 2020, and 2024 only.",
-    "Matched anomaly rows total N=936: 2016 N=312, 2020 N=312, 2024 N=312.",
-    "Pooled anomaly correlation is r=0.7102; median per-unit correlation is 0.7569 across 26 units.",
-    "Indramayu has two benchmark years and Depok one benchmark year; no missing unit-months are imputed."
+    "ONI dan DMI mencakup 120 bulan (2015-2024) mengidentifikasi episode ENSO dan IOD.",
+    "Cakupan benchmark CHIRPS hanya melayani tahun 2016, 2020, dan 2024.",
+    "Baris anomali valid berjumlah N=936: 2016 N=312, 2020 N=312, 2024 N=312.",
+    "Korelasi anomali pooled adalah r=0.7102; median korelasi per unit adalah 0.7569 (26 unit valid).",
+    "Indramayu memiliki 2 tahun benchmark dan Depok 1 tahun benchmark; tidak ada imputasi observasi hilang."
   ],
   "n_chirps_unit_months_by_year": {
     "2016": 312,
