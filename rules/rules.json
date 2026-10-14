@@ -36,6 +36,44 @@
           "taw_range_mm_m": [130.0, 180.0],
           "taw_source": "FAO-56 Bab 7, Tabel 19 (https://www.fao.org/4/x0490e)"
         },
+        "soil_classes": {
+          "sandy_loam": {
+            "name": "Sandy Loam",
+            "theta_fc_range": [0.18, 0.28],
+            "theta_wp_range": [0.06, 0.16],
+            "diff_range": [0.11, 0.15],
+            "taw_range_mm_m": [110.0, 150.0],
+            "theta_fc_chosen": 0.23,
+            "theta_wp_chosen": 0.10,
+            "taw_chosen_mm_m": 130.0,
+            "status": "CONVENTION_PENDING",
+            "note": "pilihan tim di dalam rentang FAO-56 Bab 7, Tabel 19; teks petani = PENDING_HUMAN"
+          },
+          "loam": {
+            "name": "Loam",
+            "theta_fc_range": [0.20, 0.30],
+            "theta_wp_range": [0.07, 0.17],
+            "diff_range": [0.13, 0.18],
+            "taw_range_mm_m": [130.0, 180.0],
+            "theta_fc_chosen": 0.27,
+            "theta_wp_chosen": 0.12,
+            "taw_chosen_mm_m": 150.0,
+            "status": "CONVENTION_PENDING",
+            "note": "pilihan tim di dalam rentang FAO-56 Bab 7, Tabel 19; teks petani = PENDING_HUMAN"
+          },
+          "silty_clay_loam": {
+            "name": "Silty Clay Loam",
+            "theta_fc_range": [0.30, 0.37],
+            "theta_wp_range": [0.17, 0.24],
+            "diff_range": [0.13, 0.18],
+            "taw_range_mm_m": [130.0, 180.0],
+            "theta_fc_chosen": 0.33,
+            "theta_wp_chosen": 0.18,
+            "taw_chosen_mm_m": 150.0,
+            "status": "CONVENTION_PENDING",
+            "note": "pilihan tim di dalam rentang FAO-56 Bab 7, Tabel 19; teks petani = PENDING_HUMAN"
+          }
+        },
         "crops": {
           "jagung": {
             "name": "Jagung Pipil / Grain Maize",
