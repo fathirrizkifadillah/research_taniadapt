@@ -82,7 +82,7 @@
             "kc_mid": 1.15,
             "kc_end_range": [0.70, 0.90],
             "kc_end_chosen": 0.80,
-            "kc_end_note": "pilihan tim (titik tengah rentang FAO-56 Bab 6, Tabel 12; https://www.fao.org/4/x0490e), status CONVENTION_PENDING",
+            "kc_end_note": "Tabel 12 FAO-56 tidak memiliki catatan kaki untuk Tomato; nilai 0.80 adalah pilihan tim (titik tengah rentang 0.70–0.90; https://www.fao.org/4/x0490e), status CONVENTION_PENDING",
             "kc_source": "FAO-56 Bab 6, Tabel 12 (https://www.fao.org/4/x0490e)",
             "stage_lengths_days": [30, 40, 45, 30],
             "total_days": 145,
@@ -103,7 +103,9 @@
           "p_adjustment": "Penyesuaian p terhadap ETc: p = p_Table22 + 0.04 * (5 - ETc); rumus belum diverifikasi manusia (nomor persamaan belum dikonfirmasi). Dari Example 36 terkonfirmasi: TAW = Eq. 82, RAW = Eq. 83 (https://www.fao.org/4/x0490e). Toleransi: p dapat turun 5-10% pada tanah halus dan naik 5-10% pada tanah kasar; dicatat sebagai batasan dan tidak dipakai sebagai koreksi otomatis.",
           "kc_climate_adjustment": "Nilai Kc_mid dan Kc_end tabel FAO-56 Bab 6, Tabel 12 berlaku untuk RHmin ≈ 45% dan angin ≈ 2 m/s; koreksi iklim (FAO-56 Eq. 62/65) belum diterapkan.",
           "dr0_assumption": "Kondisi awal deplesi Dr0 dijadikan input eksplisit (default Dr0 = 0, kapasitas lapang), ditandai sebagai asumsi.",
-          "soil_sensitivity": "Engine mengevaluasi sensitivitas TAW pada batas 130 mm/m dan 180 mm/m; jika keputusan berubah, flag sensitif_terhadap_asumsi_tanah diset true."
+          "soil_sensitivity": "Engine mengevaluasi sensitivitas TAW pada batas 130 mm/m dan 180 mm/m; jika keputusan berubah, flag sensitif_terhadap_asumsi_tanah diset true.",
+          "peff_assumption": "P_eff = P (limpasan permukaan diabaikan) adalah asumsi; status CONVENTION_PENDING.",
+          "ks_limitation": "Ks (koefisien stres air) tidak dimodelkan; proyeksi/simulasi dihentikan pada perlintasan RAW pertama (Dr > RAW)."
         }
       },
       "description": "Deplesi lengas zona perakaran (Dr) melampaui air siap serap (RAW = p * TAW) sesuai FAO-56 Bab 8, Tabel 19 & Tabel 22 (Eq. 82 & Eq. 83; https://www.fao.org/4/x0490e).",
@@ -293,8 +295,8 @@
       "status_label": "WARN",
       "crop_scope": ["cabai", "tomat"],
       "source_data": "forecast",
-      "description": "Jumlah jam per hari dengan kelembapan relatif (RH) >= 90% dari data cuaca jam-jaman (hourly) sebagai indikator durasi kebasahan daun (LWD). Ambang batas 10 jam berstatus CONVENTION_PENDING ('ambang ditetapkan tim, tanpa sumber').",
-      "notes": "Metode tercantum dalam jurnal (Sentelhas et al. 2008, Agric. For. Meteorol. 148(3):392–400), ambang belum dikalibrasi untuk Jawa Barat. Berstatus METHOD_UNCALIBRATED: aturan ini TIDAK boleh mengisi kondisi_stres_abiotik atau kondisi_mendukung_OPT level atas. Jika data per jam tidak tersedia -> evidence_insufficient."
+      "description": "Jumlah jam per hari dengan kelembapan relatif (RH) >= 90% dari data cuaca jam-jaman (hourly) sebagai estimator durasi lama basah daun (LWD). Sentelhas et al. (2008) mendukung RH >= 90% sebagai estimator lama basah daun, BUKAN ambang 10 jam atau deteksi spora/antraknosa. Ambang batas 10 jam berstatus CONVENTION_PENDING ('ambang ditetapkan tim, tanpa sumber'). Indikator kondisi lembap panjang yang mendukung jamur.",
+      "notes": "Metode estimator LWD tercantum dalam jurnal (Sentelhas et al. 2008, Agric. For. Meteorol. 148(3):392–400); ambang 10 jam ditetapkan tim tanpa sumber. Berstatus METHOD_UNCALIBRATED: aturan ini TIDAK boleh mengisi kondisi_stres_abiotik atau kondisi_mendukung_OPT level atas. Jika data per jam tidak tersedia -> evidence_insufficient."
     },
     {
       "id": "RULE_SPRAY_WIND_SAFE",
@@ -468,6 +470,23 @@
       "source_data": "forecast",
       "description": "Prakiraan hujan >= 2.0 mm dalam 8 jam ke depan meningkatkan risiko infeksi jamur pada luka pangkas yang belum membentuk kalus.",
       "notes": "aturan praktis ditetapkan tim, tanpa sumber ilmiah"
+    },
+    {
+      "id": "RULE_FERT_LOCKOUT_14D",
+      "action": "fertilizing",
+      "condition": {
+        "metric": "days_since_last_fertilization",
+        "operator": "<",
+        "threshold": 14
+      },
+      "unit": "hari",
+      "evidence_id": null,
+      "status": "CONVENTION_PENDING",
+      "status_label": "DANGER",
+      "crop_scope": ["all"],
+      "source_data": "logbook",
+      "description": "Penguncian pemupukan selama 14 hari pasca aplikasi pupuk untuk mencegah akumulasi kimia dan toksisitas garam.",
+      "notes": "ditetapkan tim, tanpa sumber"
     }
   ]
 }

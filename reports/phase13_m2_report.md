@@ -139,7 +139,7 @@ Kutipan verbatim langsung dari naskah resmi FAO-56 Bab 6 (`https://www.fao.org/4
 | :--- | :---: | :---: | :---: | :--- | :---: | :---: |
 | **Maize, Field (grain)** | 0,30 | 1,20 | 0,60–0,35 | Footnote 11: *"First value is for harvest at high moisture; second value is for harvest after drying in field."* | 0,30 / 1,20 / 0,35 (kering) & 0,60 (basah) | **0,00** |
 | **Soybeans** | 0,40 | 1,15 | 0,50 | Nilai tunggal panen polong kering standar | 0,40 / 1,15 / 0,50 | **0,00** |
-| **Tomato** | 0,60 | 1,15 | 0,70–0,90 | 0,70–0,80 tomat industri; 0,80–0,90 tomat segar konsumsi | 0,60 / 1,15 / 0,80 (pilihan tim titik tengah) | **0,00** |
+| **Tomato** | 0,60 | 1,15 | 0,70–0,90 | Tabel 12 tidak memiliki catatan kaki untuk Tomato; nilai 0,80 adalah titik tengah pilihan tim (`CONVENTION_PENDING`) | 0,60 / 1,15 / 0,80 (pilihan tim titik tengah) | **0,00** |
 
 *Catatan Batasan Iklim Ditambahkan ke Engine*: Nilai $K_{c,\text{mid}}$ dan $K_{c,\text{end}}$ pada Tabel 12 FAO-56 berlaku secara khusus untuk kondisi iklim sub-humid dengan kelembapan relatif minimum siang hari $RH_{\min} \approx 45\%$ dan kecepatan angin $u_2 \approx 2\text{ m/s}$. Formula koreksi iklim lokal (FAO-56 Eq. 62 & Eq. 65) belum diterapkan ke dalam engine saat ini.
 
